@@ -1,14 +1,14 @@
 
 use std::vec::Vec;
 
-enum TagTree<Leaf, Node, Edge> {
+pub enum TagTree<Leaf, Node, Edge> {
     Leaf(Leaf),
     Node(Node, Vec<(Edge, Box<TagTree<Leaf, Node, Edge>>)>)
 }
 
 impl<Leaf, Node, Edge> TagTree<Leaf, Node, Edge> {
 
-    fn fold_tag_tree<T, FL, FN, FE> (
+    pub fn fold_tag_tree<T, FL, FN, FE> (
         &self,
         ref reduce_leaf: FL,
         ref reduce_node: FN,
@@ -21,11 +21,11 @@ impl<Leaf, Node, Edge> TagTree<Leaf, Node, Edge> {
                 match self {
                     &TagTree::Leaf(ref leaf) => reduce_leaf(leaf),
                     &TagTree::Node(ref node, ref children) => {
-                        let subs = children.iter().map(|edgeChild| { 
-                            match edgeChild {
+                        let subs = children.iter().map(|edge_child| { 
+                            match edge_child {
                                 &(ref edge, box ref child) => {
-                                    let childT = child.fold_tag_tree(reduce_leaf, reduce_node, reduce_edge);    
-                                    reduce_edge(edge, childT)
+                                    let sub = child.fold_tag_tree(reduce_leaf, reduce_node, reduce_edge);    
+                                    reduce_edge(edge, sub)
                                 }
                             }
                         }).collect();
