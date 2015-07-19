@@ -18,4 +18,3 @@ git = "https://github.com/jmpspace/lc4"
 [dependencies.nphysics]
 features = [ "2df64" ]
 git = "https://github.com/sebcrozet/nphysics"
-branch = "rustup"

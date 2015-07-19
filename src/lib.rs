@@ -1,4 +1,6 @@
 
+#![feature(box_patterns)]
+
 pub mod tagtree;
 
 #[test]

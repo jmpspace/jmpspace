@@ -1,23 +1,36 @@
 
-use std::iter::{FromIterator, IteratorExt};
 use std::vec::Vec;
 
 enum TagTree<Leaf, Node, Edge> {
-  Leaf(Leaf),
-  Node(Node, Vec<(Edge, Box<TagTree<Leaf, Node, Edge>>)>)
+    Leaf(Leaf),
+    Node(Node, Vec<(Edge, Box<TagTree<Leaf, Node, Edge>>)>)
 }
 
-fn foldTagTree<Leaf, Node, Edge, T, FL, FN, FE> (
-  reduceLeaf: FL,
-  reduceNode: FN,
-  reduceEdge: FE,
-  tree: TagTree<Leaf, Node, Edge>) -> T 
-  where FL: Fn(Leaf) -> T, FN: Fn(Node, Vec<T>) -> T, FE: Fn(Edge, T) -> T 
-{
-  let y = |tree| { foldTagTree(reduceLeaf, reduceNode, reduceEdge, tree) };
-  let reduceChild = |(edge, child)| { reduceEdge(edge, y(child)) };
-  match tree {
-    TagTree::Leaf(leaf) => reduceLeaf(leaf),
-    TagTree::Node(node, subs) => reduceNode(node, subs.into_iter().map(reduceChild).from_iter())
-  }
+impl<Leaf, Node, Edge> TagTree<Leaf, Node, Edge> {
+
+    fn fold_tag_tree<T, FL, FN, FE> (
+        &self,
+        ref reduce_leaf: FL,
+        ref reduce_node: FN,
+        ref reduce_edge: FE) -> T
+        where 
+            FL: Fn(&Leaf) -> T, 
+            FN: Fn(&Node, Vec<T>) -> T, 
+            FE: Fn(&Edge, T) -> T 
+            {
+                match self {
+                    &TagTree::Leaf(ref leaf) => reduce_leaf(leaf),
+                    &TagTree::Node(ref node, ref children) => {
+                        let subs = children.iter().map(|edgeChild| { 
+                            match edgeChild {
+                                &(ref edge, box ref child) => {
+                                    let childT = child.fold_tag_tree(reduce_leaf, reduce_node, reduce_edge);    
+                                    reduce_edge(edge, childT)
+                                }
+                            }
+                        }).collect();
+                        reduce_node(node, subs)
+                    }
+                }
+            }
 }
