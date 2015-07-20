@@ -1,7 +1,8 @@
 
 #![feature(box_patterns)]
 
-pub mod tagtree;
+mod tagtree;
+mod ship;
 
 #[test]
 fn it_works() {
