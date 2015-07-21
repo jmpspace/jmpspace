@@ -1,41 +1,54 @@
 
-//use ncollide::shape::{Cuboid};
+use na::{Vec2};
+use ncollide::shape::{Cone, Cuboid};
+use nphysics::math::{Matrix, Point};
+use nphysics::object::{RigidBody};
 
-use constants::{VESSEL_DENSITY, FUEL_DENSITY, ENGINE_DENSITY};
+use constants::{VESSEL_DENSITY, FUELTANK_DENSITY, ENGINE_DENSITY};
 use tagtree;
 
 enum Part {
   Vessel { width: f64, length: f64 },
   FuelTank { width: f64, length: f64 },
-  Engine { width: f64, length: f64, group: i32 }
+  Engine { radius: f64, length: f64, group: i32 }
 }
 
 impl Part {
 
-    // refactor using shape math ?
+    /*
     fn mass (&self) -> f64 {
         match self {
             &Part::Vessel {width, length} => 
                 VESSEL_DENSITY * width * length,
             &Part::FuelTank {width, length} =>
-                FUEL_DENSITY * width * length,
-            &Part::Engine {width, length, group} =>
-                ENGINE_DENSITY * width * length * 0.5
+                FUELTANK_DENSITY * width * length,
+            &Part::Engine {radius, length, group} =>
+                ENGINE_DENSITY * radius * length * 0.5
         }
     }
+    */
 
-    fn geom (&self) {
+    fn object (&self) -> RigidBody {
         match self {
-            &Part::Vessel {width, length} => (),
-            &Part::FuelTank {width, length} => (),
-            &Part::Engine {width, length, group} => ()
+            &Part::Vessel {width, length} => {
+                let geom = Cuboid::new(Vec2::new(width, length));
+                RigidBody::new_dynamic(geom, VESSEL_DENSITY, 1.0, 1.0)
+            }
+            &Part::FuelTank {width, length} => {
+                let geom = Cuboid::new(Vec2::new(width, length));
+                RigidBody::new_dynamic(geom, FUELTANK_DENSITY, 1.0, 1.0)
+            }
+            &Part::Engine {radius, length, group} => {
+                let geom = Cone::new(length, radius);
+                RigidBody::new_dynamic(geom, ENGINE_DENSITY, 1.0, 1.0)
+            }
         }
     }
 }
 
 struct PartObjectCache {
     part: Part,
-    // geom: Shape,
+    object: RigidBody,
     mass: f64
 }
 

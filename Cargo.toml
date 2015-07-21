@@ -8,13 +8,10 @@ authors = ["John P Mayer <john.p.mayer.jr@gmail.com>"]
 name = "sim"
 path = "src/lib.rs"
 
-[[bin]]
-name = "sim"
-path = "src/sim.rs"
-
 [dependencies]
-#ncollide = "*"
-#websocket = "0.12.*"
+nalgebra = "*"
+ncollide = "*"
+websocket = "0.12.*"
 
 [dependencies.lc4]
 git = "https://github.com/jmpspace/lc4"
