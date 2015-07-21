@@ -2,9 +2,8 @@
 #![feature(box_patterns)]
 #![feature(box_syntax)]
 
-mod tagtree;
-mod ship;
+//extern crate ncollide;
 
-#[test]
-fn it_works() {
-}
+mod constants;
+mod ship;
+mod tagtree;

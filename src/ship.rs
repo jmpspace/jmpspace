@@ -1,10 +1,42 @@
 
+//use ncollide::shape::{Cuboid};
+
+use constants::{VESSEL_DENSITY, FUEL_DENSITY, ENGINE_DENSITY};
 use tagtree;
 
 enum Part {
   Vessel { width: f64, length: f64 },
   FuelTank { width: f64, length: f64 },
   Engine { width: f64, length: f64, group: i32 }
+}
+
+impl Part {
+
+    // refactor using shape math ?
+    fn mass (&self) -> f64 {
+        match self {
+            &Part::Vessel {width, length} => 
+                VESSEL_DENSITY * width * length,
+            &Part::FuelTank {width, length} =>
+                FUEL_DENSITY * width * length,
+            &Part::Engine {width, length, group} =>
+                ENGINE_DENSITY * width * length * 0.5
+        }
+    }
+
+    fn geom (&self) {
+        match self {
+            &Part::Vessel {width, length} => (),
+            &Part::FuelTank {width, length} => (),
+            &Part::Engine {width, length, group} => ()
+        }
+    }
+}
+
+struct PartObjectCache {
+    part: Part,
+    // geom: Shape,
+    mass: f64
 }
 
 struct Beam {

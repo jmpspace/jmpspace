@@ -12,6 +12,10 @@ path = "src/lib.rs"
 name = "sim"
 path = "src/sim.rs"
 
+[dependencies]
+#ncollide = "*"
+#websocket = "0.12.*"
+
 [dependencies.lc4]
 git = "https://github.com/jmpspace/lc4"
 
