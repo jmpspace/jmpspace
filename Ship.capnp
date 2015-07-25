@@ -1,5 +1,9 @@
 @0xd9391b243c2f5588;
 
+using Go = import "go.capnp";
+
+$Go.package("jmpspace");
+
 struct Part {
   union {
     vessel :group {
