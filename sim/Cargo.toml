@@ -13,7 +13,7 @@ nalgebra = "*"
 ncollide = "*"
 
 [dependencies.lc4]
-git = "https://github.com/jmpspace/lc4"
+path = "../lc4"
 
 [dependencies.nphysics]
 features = [ "2df64" ]
