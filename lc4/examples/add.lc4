@@ -1,0 +1,4 @@
+Main
+CONST R1, 1
+CONST R2, 1
+ADD R3, R1, R2
