@@ -1,0 +1,14 @@
+message Vessel {
+  required double width = 1;
+  required double length = 2;
+};
+message FuelTank {
+  required double radius = 1;
+  required double length = 2;
+};
+message Part {
+  oneof part {
+    Vessel vessel = 1;
+    FuelTank fuelTank = 2;
+  }
+}

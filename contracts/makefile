@@ -1,8 +1,10 @@
 
-all:
-	cargo build
-	capnp compile -ogo Ship.capnp
+all: src/*.proto
+	mkdir -p rust/src
+	protoc --rust_out rust/src src/*
+	mkdir -p go
+	protoc --go_out go src/*
 
 clean:
-	cargo clean
-	rm *.go 
+	rm -rf rust/src
+	rm -rf go
