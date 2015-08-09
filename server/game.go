@@ -15,7 +15,7 @@ func main() {
 
 	server := web.NewServer()
 
-	server.Get("/(.*)", http.FileServer(http.Dir("../client/site")))
+	server.Get("/(.*)", http.FileServer(http.Dir("client/site")))
 
 	server.Get("/chat", chatServer())
 	server.Get("/action", actionServer())
