@@ -6,9 +6,33 @@ message FuelTank {
   required double radius = 1;
   required double length = 2;
 };
+message Engine {
+  required double radius = 1;
+  required double length = 2;
+  required int32 group = 3;
+};
 message Part {
   oneof part {
     Vessel vessel = 1;
     FuelTank fuelTank = 2;
+    Engine engine = 3;
   }
+}
+
+message Beam {
+  required double length = 1;
+}
+
+message Attach { 
+  required int32 id = 1;
+  required double location = 2;
+  required double rotation = 3;
+  oneof attachment {
+    Beam beam = 4;
+    Part part = 5;
+  }
+}
+
+message Structure { 
+  repeated Attach structureElements = 1;
 }
