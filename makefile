@@ -15,3 +15,5 @@ client: contracts
 
 server: sim client contracts
 	$(MAKE) -C server
+
+.PHONY: contracts lc4 sim client server

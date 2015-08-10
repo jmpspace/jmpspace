@@ -1,5 +1,6 @@
 
 all: fmt
+	go get
 	go build
 
 fmt:
