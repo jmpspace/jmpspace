@@ -40,23 +40,23 @@ attitude ec = beam { r=10 } <|
 reverseL : Structure
 reverseL = beam { r=10 } <|
   [ ( { offset=10, theta=(-pi/2) }, 
-      part <| Engine {r=4, config=Reverse} ) ]
+      part <| Engine {r=4, config=1} ) ]
 
 reverseR : Structure
 reverseR = beam { r=10 } <|
   [ ( { offset=10, theta=(pi/2) }, 
-      part <| Engine {r=4, config=Reverse} ) ]
+      part <| Engine {r=4, config=1} ) ]
 
 mods : List (Attach, Structure)
 mods = 
   [ ({ offset=6, theta=(3*pi/2) }, reverseL)
   , ({ offset=6, theta=(pi/2) }, reverseR)
-  , ({ offset=42, theta=(3*pi/2) }, attitude TurnLeft)
-  , ({ offset=42, theta=(pi/2) }, attitude TurnRight)
+  , ({ offset=42, theta=(3*pi/2) }, attitude 3)
+  , ({ offset=42, theta=(pi/2) }, attitude 4)
   , ({ offset=0, theta=0 }, part <| Brain {r=7})
   , ({ offset=25, theta=0 }, part <| FuelTank {l=30,w=14})
   , ( { offset=50, theta=0 }, 
-      part <| Engine {r=13, config=Forward}) ]
+      part <| Engine {r=13, config=2}) ]
 
 simpleShip : Structure
 simpleShip = beam { r=50 } mods
@@ -64,15 +64,8 @@ simpleShip = beam { r=50 } mods
 startPos : MotionState
 startPos = { pos = { x = 0, y = 0, theta = 0 }, v = { x = 0, y = 0 }, omega = 0 }
 
-control : { x:Int, y:Int } -> List EngineConfig 
-control input = 
-  (if input.y < 0 then [ Reverse ] else []) ++
-  (if input.y > 0 then [ Forward ] else []) ++
-  (if input.x > 0 then [ TurnRight ] else []) ++
-  (if input.x < 0 then [ TurnLeft ] else [])
-
 engines : Signal (List EngineConfig) 
-engines = control <~ K.wasd
+engines = controlEngines <~ K.wasd
 
 brakes : Signal Bool
 brakes = K.isDown <| toCode 'x'

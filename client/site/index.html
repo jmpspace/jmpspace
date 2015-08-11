@@ -4,6 +4,12 @@
   </head>
   <body />
   <script>
-    Elm.fullscreen(Elm.Demo);
+   
+    var chat = new WebSocket("ws://" + location.host + "/chat");    
+    chat.onopen = function(e) { console.log("open",e) }
+    chat.onerror = function(e) { console.log("close",e) }
+    
+    var celestia = Elm.fullscreen(Elm.Demo);
+
   </script>
 </html>

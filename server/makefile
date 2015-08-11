@@ -1,9 +1,8 @@
 
-all: fmt
+all: server
+
+server: *.go
+	gofmt -w *go
 	go get
 	go build
 
-fmt:
-	gofmt -w *go
-
-.PHONY: fmt

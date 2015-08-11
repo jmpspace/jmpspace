@@ -1,9 +1,9 @@
 package main
 
 import (
-	"code.google.com/p/go.net/websocket"
 	"fmt"
-	"github.com/hoisie/web"
+	"golang.org/x/net/websocket"
+	"log"
 )
 
 func echo(ws *websocket.Conn) {
@@ -28,13 +28,7 @@ func echo(ws *websocket.Conn) {
 	fmt.Println("Finished    copying    websocket")
 }
 
-func upgradeWebsocketHandler(wsHandler websocket.Handler) interface{} {
-	return func(ctx *web.Context) {
-		wsHandler.ServeHTTP(ctx.ResponseWriter, ctx.Request)
-	}
-}
-
-func chatServer() interface{} {
+func chatServer() func(*websocket.Conn) {
 
 	broadcast := make(chan string)
 	register := make(chan (chan string))
@@ -95,6 +89,7 @@ func chatServer() interface{} {
 
 			var msg string
 			err := websocket.Message.Receive(ws, &msg)
+			log.Print("message=\"" + msg + "\"")
 			check(err)
 
 			broadcast <- msg
@@ -103,6 +98,6 @@ func chatServer() interface{} {
 
 	}
 
-	return upgradeWebsocketHandler(websocket.Handler(chatHandler))
+	return chatHandler
 
 }

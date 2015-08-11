@@ -47,10 +47,10 @@ spaceBlack (w,h) stuff = collage w h <|
 
 controlEngines : { x:Int, y:Int } -> List EngineConfig
 controlEngines input = 
-  (if input.y < 0 then [ Reverse ] else []) ++
-  (if input.y > 0 then [ Forward ] else []) ++
-  (if input.x > 0 then [ TurnRight ] else []) ++
-  (if input.x < 0 then [ TurnLeft ] else [])
+  (if input.y < 0 then [ 1 ] else []) ++
+  (if input.y > 0 then [ 2 ] else []) ++
+  (if input.x > 0 then [ 3 ] else []) ++
+  (if input.x < 0 then [ 4 ] else [])
 
 updateDict : comparable -> (v -> v) -> Dict comparable v -> Dict comparable v
 updateDict k f d =

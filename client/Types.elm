@@ -45,19 +45,10 @@ beam = Node
 part : Part -> Structure
 part = Leaf
 
-type EngineConfig = Disabled
-                  | Forward 
-                  | Reverse
-                  | TurnLeft 
-                  | TurnRight
+type alias EngineConfig = Int
 
 nextConfig : EngineConfig -> EngineConfig
-nextConfig e = case e of
-  Disabled  -> Forward
-  Forward   -> Reverse
-  Reverse   -> TurnLeft
-  TurnLeft  -> TurnRight
-  TurnRight -> Disabled
+nextConfig e = (e + 1) % 5
 
 type Part = Brain { r : Float }
           | FuelTank { l : Float, w : Float }

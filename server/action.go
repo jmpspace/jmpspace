@@ -1,15 +1,15 @@
 package main
 
 import (
-	"code.google.com/p/go.net/websocket"
 	"encoding/json"
+	"golang.org/x/net/websocket"
 )
 
 type gameAction struct {
 	u, v int
 }
 
-func actionServer() interface{} {
+func actionServer() func(*websocket.Conn) {
 
 	broadcast := make(chan string)
 	register := make(chan (chan string))
@@ -79,6 +79,6 @@ func actionServer() interface{} {
 
 	}
 
-	return upgradeWebsocketHandler(websocket.Handler(actionHandler))
+	return actionHandler
 
 }

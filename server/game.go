@@ -1,7 +1,8 @@
 package main
 
 import (
-	"github.com/hoisie/web"
+	"golang.org/x/net/websocket"
+	"log"
 	"net/http"
 )
 
@@ -13,13 +14,12 @@ func check(err error) {
 
 func main() {
 
-	server := web.NewServer()
+	http.Handle("/", http.FileServer(http.Dir("client/site")))
+	http.Handle("/chat", websocket.Handler(chatServer()))
+	http.Handle("/action", websocket.Handler(actionServer()))
 
-	server.Get("/(.*)", http.FileServer(http.Dir("client/site")))
+	log.Print("Starting server on port 8080")
 
-	server.Get("/chat", chatServer())
-	server.Get("/action", actionServer())
-
-	server.Run(":8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 
 }

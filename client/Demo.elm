@@ -24,6 +24,7 @@ module Demo where
 import Color exposing (..)
 import Dict exposing (Dict)
 import Dict as D
+import Json.Encode exposing (..)
 import Graphics.Collage exposing (..)
 import Graphics.Element exposing (..)
 import Signal exposing (..)
@@ -32,10 +33,11 @@ import Time exposing (..)
 
 import Physics exposing (..)
 
+import Converter exposing (..)
 import Draw exposing (drawEntity)
 import Control.State exposing (execState)
 import Step exposing (step)
-import GameInputs exposing (gameInputs)
+import GameInputs exposing (gameInputs, engines)
 import Types exposing (..)
 import Utils exposing (..)
 import Data.Vec2 exposing (..)
@@ -104,3 +106,6 @@ main = combineSElems outward <|
     --, (color white << asText << prepend "Ship4 " << toString << D.get 4 << .entities) <~ current
     ]
   ]
+
+port controls : Signal Value
+port controls = encodeControls <~ engines
