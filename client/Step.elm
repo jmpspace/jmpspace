@@ -91,7 +91,7 @@ updateModeTree n =
           Nothing -> case n of
               1 -> Just <| part <| Brain { r=10 }
               2 -> Just <| part <| FuelTank { l=20, w=10 }
-              3 -> Just <| part <| Engine { r=10, config=Forward }
+              3 -> Just <| part <| Engine { r=10, config=2 }
               4 -> Just <| beam { r=30 } []
               _ -> Nothing
           Just (Node {r} subs) -> case n of
