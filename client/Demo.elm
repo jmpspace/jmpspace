@@ -107,5 +107,5 @@ main = combineSElems outward <|
     ]
   ]
 
-port controls : Signal Value
-port controls = encodeControls <~ engines
+port controls : Signal String
+port controls = encode 0 << encodeControls <~ engines

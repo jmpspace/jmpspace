@@ -2,14 +2,21 @@
   <head>
     <script type="text/javascript" src="js/celestia.js"></script>
   </head>
-  <body />
+  <body></body>
   <script>
-   
+
     var chat = new WebSocket("ws://" + location.host + "/chat");    
-    chat.onopen = function(e) { console.log("open",e) }
-    chat.onerror = function(e) { console.log("close",e) }
-    
-    var celestia = Elm.fullscreen(Elm.Demo);
+    chat.onopen = function(e) { 
+
+
+      var celestia = Elm.fullscreen(Elm.Demo);
+      celestia.ports.controls.subscribe(function(e) {
+        console.log(e);
+        chat.send(e);
+      });
+
+    }
+
 
   </script>
 </html>
