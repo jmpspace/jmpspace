@@ -1,4 +1,7 @@
 
+# CLEAN THIS UP
+# https://stackoverflow.com/questions/11399983/makefile-w-protocol-buffer-and-automatic-dependency
+
 all: rust go
 
 rust/target/release/libcontracts.rlib: rust/src/*.rs
@@ -9,9 +12,12 @@ rust/src/%.rs: src/%.proto
 
 rust: rust/target/release/libcontracts.rlib
 
-go/src/%.pb.go: src/%.proto
-	protoc --go_out go src/*
+go/src/controls.pb.go: src/controls.proto
+	protoc --go_out go $<
 
-go: go/src/*.pb.go
+go/src/ship.pb.go: src/ship.proto
+	protoc --go_out go $<
+
+go: go/src/ship.pb.go go/src/controls.pb.go
 
 .PHONY: rust go
