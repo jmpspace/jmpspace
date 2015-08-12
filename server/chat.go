@@ -87,12 +87,13 @@ func chatServer() func(*websocket.Conn) {
 
 		for {
 
-			var msg string
-			err := websocket.Message.Receive(ws, &msg)
-			log.Print("message=\"" + msg + "\"")
+			var data []byte
+			err := websocket.Message.Receive(ws, &data)
+			log.Printf("message length=\"%d\"", len(data))
 			check(err)
 
-			broadcast <- msg
+			// got bytes now
+			//broadcast <- msg
 
 		}
 

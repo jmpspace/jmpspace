@@ -1,0 +1,16 @@
+
+package controls;
+
+message Unit {};
+
+message Active {
+  repeated int32 groups = 1;
+}
+
+message Controls {
+  oneof controls {
+    Unit brakes = 1;
+    Active active = 2;
+  }
+}
+

@@ -34,6 +34,7 @@ import Time exposing (..)
 import Physics exposing (..)
 
 import Converter exposing (..)
+import Contracts.Common
 import Draw exposing (drawEntity)
 import Control.State exposing (execState)
 import Step exposing (step)
@@ -107,5 +108,5 @@ main = combineSElems outward <|
     ]
   ]
 
-port controls : Signal String
-port controls = encode 0 << encodeControls <~ engines
+port controls : Signal Value
+port controls = marshalControls << makeContractControls <~ engines

@@ -1,22 +1,18 @@
 
 module Converter where
 
-import Json.Encode exposing (..)
+import Json.Encode exposing (Value)
 
+import Contracts.Common exposing (Bytes)
+import Contracts.Controls 
 import Types exposing (..)
 
-ctorField : String
-ctorField = "_ctor"
+import Native.Converter
 
-activeField : String
-activeField = "_active"
+makeContractControls : Controls -> Contracts.Controls.Controls
+makeContractControls c = case c of
+  Brakes -> Contracts.Controls.Controls_Brakes
+  Active groups -> Contracts.Controls.Controls_Active { groups = groups }
 
-encodeControls : Controls -> Value
-encodeControls c = 
-  case c of
-    Brakes -> object [ (ctorField, string "Brakes") ]
-    Active ecs -> object [
-      (ctorField, string "Active"),
-      (activeField, list <| List.map int ecs)
-      ]
-
+marshalControls : Contracts.Controls.Controls -> Value
+marshalControls = Native.Converter.marshalControls
