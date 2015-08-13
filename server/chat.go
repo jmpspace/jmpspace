@@ -1,7 +1,9 @@
 package main
 
 import (
+	"./contracts/controls"
 	"fmt"
+	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/websocket"
 	"log"
 )
@@ -89,9 +91,14 @@ func chatServer() func(*websocket.Conn) {
 
 			var data []byte
 			err := websocket.Message.Receive(ws, &data)
+			check(err)
 			log.Printf("message length=\"%d\"", len(data))
+
+			controls := &controls.Controls{}
+			err = proto.Unmarshal(data, controls)
 			check(err)
 
+			log.Print(controls.String())
 			// got bytes now
 			//broadcast <- msg
 

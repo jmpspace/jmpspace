@@ -12,12 +12,16 @@ rust/src/%.rs: src/%.proto
 
 rust: rust/target/release/libcontracts.rlib
 
-go/src/controls.pb.go: src/controls.proto
-	protoc --go_out go $<
+go/controls/controls.pb.go: src/controls.proto
+	cp $< .
+	protoc --go_out go/controls controls.proto
+	rm controls.proto
 
-go/src/ship.pb.go: src/ship.proto
-	protoc --go_out go $<
+go/ship/ship.pb.go: src/ship.proto
+	cp $< .
+	protoc --go_out go/ship ship.proto
+	rm ship.proto
 
-go: go/src/ship.pb.go go/src/controls.pb.go
+go: go/ship/ship.pb.go go/controls/controls.pb.go
 
 .PHONY: rust go
