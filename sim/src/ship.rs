@@ -105,24 +105,21 @@ struct Attach {
 
 type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
+struct WithDepth<T> {
+    depth: i32,
+    item: T
+}
+
 impl Structure {
 
-    fn part_masses(part: &Part) -> Vec<PointMass> {
-        // Performance ?
-        let mut v = Vec::new();
-        v.push(part.point_mass());
-        v
-    }
+    fn total_mass_iter (&self) -> f64 {
 
-    fn beam_masses<'a>(beam: &'a Beam, subs: Vec<&'a Vec<&'a PointMass>>) -> Vec<&'a PointMass> {
-        let mut v = Vec::new();
-        v.push(beam.point_mass());
-        // TODO push all
-        v
-    }
+        let mut work: Vec<WithDepth<&Structure>> = Vec::new();
 
-    fn attach_masses<'a>(attach: &'a Attach, subs: Vec<&'a PointMass>) -> Vec<&'a PointMass> {
-        subs
+        work.push(WithDepth{depth:0,item:self});
+
+        panic!("Not implemented")
+
     }
 
 }
