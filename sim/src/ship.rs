@@ -1,4 +1,5 @@
 
+use core::ops::Deref;
 use na::{Vec2};
 use ncollide::shape::{Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
@@ -112,13 +113,31 @@ struct WithDepth<T> {
 
 impl Structure {
 
-    fn total_mass_iter (&self) -> f64 {
+    fn mass(&self) -> f64 {
+
+        let mut total_mass: f64 = 0.0;
 
         let mut work: Vec<WithDepth<&Structure>> = Vec::new();
 
         work.push(WithDepth{depth:0,item:self});
 
-        panic!("Not implemented")
+        while let Some(ref curr_work) = work.pop() {
+
+            match curr_work.item {
+                &tagtree::TagTree::Leaf(ref part) => {
+                    total_mass += part.mass();
+                }
+                &tagtree::TagTree::Node(ref beam, ref attachments) => {
+                    total_mass += beam.mass();
+                    attachments.iter().fold((), |_, &(_,ref attachment)| {
+                        work.push(WithDepth{depth:curr_work.depth + 1, item: attachment.deref()});
+                    });
+                }
+            }
+
+        }
+
+        total_mass
 
     }
 
@@ -134,10 +153,14 @@ fn beam(length: f64, parts: Vec<(Attach, Box<Structure>)>) -> Structure {
  
 #[test]
 fn simple_structures () {
-    part(Part::Vessel { width: 2.0, length: 4.0 });
-    part(Part::FuelTank { radius: 1.0, length: 5.0});
-    part(Part::Engine { radius: 1.0, length: 2.0, group: 3});
-    beam(5.0, vec![]);
+    let p1 = part(Part::Vessel { width: 2.0, length: 4.0 });
+    let a1 = Attach{location: 2.0, rotation: 0.0};
+    let p2 = part(Part::FuelTank { radius: 1.0, length: 5.0});
+    let a2 = Attach{location: 8.0, rotation: 0.0};
+    let p3 = part(Part::Engine { radius: 1.0, length: 2.0, group: 3});
+    let a3 = Attach{location: 10.0, rotation: 0.0};
+    let b1 = beam(5.0, vec![(a1, box p1),(a2, box p2),(a3, box p3)]);
+    b1.mass();
 }
 
 #[test]
