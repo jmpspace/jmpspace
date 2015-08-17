@@ -1,6 +1,6 @@
 
 use core::ops::Deref;
-use na::{Vec2};
+use na::{Eye, Mat3, Vec2};
 use ncollide::shape::{Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
 
@@ -107,7 +107,7 @@ struct Attach {
 type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 struct WithDepth<T> {
-    depth: i32,
+    depth: usize,
     item: T
 }
 
@@ -138,6 +138,60 @@ impl Structure {
         }
 
         total_mass
+
+    }
+
+}
+
+// Opportunity to move into tagtree if Attach is a monoid
+struct StructureContextItem<'a> {
+    context: Mat3<f64>,
+    item: &'a Structure
+}
+
+struct StructureIter<'a> {
+    contexts: Vec<Mat3<f64>>,
+    work: Vec<WithDepth<&'a Structure>>
+}
+
+impl Structure {
+    pub fn iter(&self) -> StructureIter {
+        let work = vec!(WithDepth { depth: 0, item: self });
+        StructureIter { contexts: vec!(Eye::new_identity(3)), work: work }
+    }
+}
+
+impl<'a> Iterator for StructureIter<'a> {
+
+    type Item = StructureContextItem<'a>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+
+        match self.work.pop() {
+            None => { None }
+            Some(ref curr_work) => { 
+                let context = self.contexts[curr_work.depth];
+
+                match curr_work.item {
+                    &tagtree::TagTree::Leaf(_) => (),
+                    &tagtree::TagTree::Node(_, ref attachments) => {
+                        attachments.iter().fold((), |_, &(ref _attach, ref _attachment)| {
+                            let attach_transform: Mat3<f64> = panic!("implement");
+                            let next_context = context * attach_transform;
+                            let next_depth = curr_work.depth + 1;
+                            if self.contexts.len() < next_depth + 1 {
+                                self.contexts.push(next_context);
+                            } else {
+                                self.contexts[next_depth] = next_context;
+                            }
+                            // Something isn't right here! But I think it is.... test!!
+                        })
+                    }
+                }
+
+                Some(StructureContextItem { context: context, item: curr_work.item })
+            }
+        }
 
     }
 
