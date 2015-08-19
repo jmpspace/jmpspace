@@ -134,11 +134,10 @@ impl Structure {
     }
 
     fn point_masses(&self) -> Vec<PointMass> {
-        let mut result = Vec::new();
-        for item in self.iter() {
-            result.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
-        }
-        result
+        self.iter().fold(Vec::new(), |mut acc, item| {
+            acc.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
+            acc
+        })
     }
 
 }
