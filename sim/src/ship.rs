@@ -1,7 +1,8 @@
 
-use num::traits::One;
+use std::ops::Neg;
+use num::traits::{One, Zero};
 
-use na::{Iso2, Rot2, Vec1, Vec2};
+use na::{Iso2, Norm, Rot2, Translation, Vec1, Vec2};
 use ncollide::shape::{Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
 
@@ -17,6 +18,18 @@ enum Part {
 struct PointMass {
     center: Vec2<f64>,
     mass: f64
+}
+
+impl PointMass {
+
+    fn mass_contrib (&self) -> Vec2<f64> {
+        self.center * self.mass
+    }
+
+    fn moment_contrib (&self) -> f64 {
+        self.mass * self.center.sqnorm()
+    }
+
 }
 
 impl Part {
@@ -107,11 +120,6 @@ struct Attach {
 
 type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
-struct WithDepth<T> {
-    depth: usize,
-    item: T
-}
-
 impl Structure {
 
     fn mass(&self) -> f64 {
@@ -134,29 +142,53 @@ impl Structure {
     }
 
     fn point_masses(&self) -> Vec<PointMass> {
+        // This smells, could probably return an iterator?
         self.iter().fold(Vec::new(), |mut acc, item| {
             acc.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
             acc
         })
     }
 
+    fn center_of_mass(&self) -> Vec2<f64> {
+        self.point_masses().iter().fold(Vec2::zero(), |acc, pm| {
+            acc + pm.mass_contrib()
+        })
+    }
+
+    fn total_moment(&self) -> f64 {
+        let mut point_masses = self.point_masses();
+        let neg_center = self.center_of_mass().neg();
+        for mut pm in point_masses.iter_mut() {
+            pm.center.append_translation_mut(&neg_center);
+        }
+        point_masses.iter().fold(0.0, |acc, pm| {
+            acc + pm.moment_contrib()
+        })
+    }
 }
 
 // Opportunity to move into tagtree if Attach is a monoid
 struct StructureContextItem<'a> {
     context: Iso2<f64>,
-    structure: &'a Structure
+    structure: &'a Structure,
+}
+
+struct StructureWorkItem<'a> {
+    context: Iso2<f64>,
+    structure: &'a Structure,
 }
 
 struct StructureIter<'a> {
-    contexts: Vec<Iso2<f64>>,
-    work: Vec<WithDepth<&'a Structure>>
+    work: Vec<StructureWorkItem<'a>>,
 }
 
 impl Structure {
     pub fn iter(&self) -> StructureIter {
-        let work = vec!(WithDepth { depth: 0, item: self });
-        StructureIter { contexts: vec!(Iso2::one()), work: work }
+        let root_work_item = StructureWorkItem {
+            context: Iso2::one(),
+            structure: self,
+        };
+        StructureIter { work: vec!(root_work_item) }
     }
 }
 
@@ -169,28 +201,28 @@ impl<'a> Iterator for StructureIter<'a> {
         match self.work.pop() {
             None => { None }
             Some(ref curr_work) => { 
-                let context = self.contexts[curr_work.depth];
+                let context = curr_work.context;
 
-                match curr_work.item {
+                match curr_work.structure {
                     &tagtree::TagTree::Leaf(_) => {}
                     &tagtree::TagTree::Node(_, ref attachments) => {
+                        // This smells, should probably rewrite as a normal for loop
                         attachments.iter().fold((), |_, &(ref attach, ref attachment)| {
                             let trn = Vec2::new(attach.location, 0.0);
                             let rot = Rot2::new(Vec1::new(attach.rotation));
                             let iso = Iso2::new_with_rotmat(trn, rot);
                             let next_context = context * iso;
-                            let next_depth = curr_work.depth + 1;
-                            if self.contexts.len() < next_depth + 1 {
-                                self.contexts.push(next_context);
-                            } else {
-                                self.contexts[next_depth] = next_context;
-                            }
-                            self.work.push(WithDepth{depth: next_depth, item: &**attachment});
+                            let next_work = StructureWorkItem { 
+                                context: next_context, 
+                            structure: &**attachment
+                            };
+
+                            self.work.push(next_work);
                         })
                     }
                 }
 
-                Some(StructureContextItem { context: context, structure: curr_work.item })
+                Some(StructureContextItem { context: context, structure: curr_work.structure })
 
             }
         }
