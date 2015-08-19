@@ -4,9 +4,6 @@
 
 #![allow(dead_code)]
 
-#![feature(core)]
-extern crate core;
-
 extern crate nalgebra as na;
 extern crate ncollide;
 extern crate nphysics;

@@ -1,6 +1,5 @@
 
-use core::ops::Deref;
-use na::{Eye, Mat3, Vec2};
+use na::{Eye, Iso2, Mat3, Rot2, ToHomogeneous, Vec1, Vec2};
 use ncollide::shape::{Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
 
@@ -87,7 +86,7 @@ impl Beam {
         let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
         RigidBody::new_dynamic(geom, BEAM_DENSITY, 1.0, 1.0)
     }
-    
+
     fn mass (&self) -> f64 {
         self.length * BEAM_DENSITY
     }
@@ -117,21 +116,14 @@ impl Structure {
 
         let mut total_mass: f64 = 0.0;
 
-        let mut work: Vec<WithDepth<&Structure>> = Vec::new();
+        for item in self.iter() {
 
-        work.push(WithDepth{depth:0,item:self});
-
-        while let Some(ref curr_work) = work.pop() {
-
-            match curr_work.item {
+            match item.structure {
                 &tagtree::TagTree::Leaf(ref part) => {
                     total_mass += part.mass();
                 }
-                &tagtree::TagTree::Node(ref beam, ref attachments) => {
+                &tagtree::TagTree::Node(ref beam, _) => {
                     total_mass += beam.mass();
-                    attachments.iter().fold((), |_, &(_,ref attachment)| {
-                        work.push(WithDepth{depth:curr_work.depth + 1, item: attachment.deref()});
-                    });
                 }
             }
 
@@ -146,7 +138,7 @@ impl Structure {
 // Opportunity to move into tagtree if Attach is a monoid
 struct StructureContextItem<'a> {
     context: Mat3<f64>,
-    item: &'a Structure
+    structure: &'a Structure
 }
 
 struct StructureIter<'a> {
@@ -173,10 +165,13 @@ impl<'a> Iterator for StructureIter<'a> {
                 let context = self.contexts[curr_work.depth];
 
                 match curr_work.item {
-                    &tagtree::TagTree::Leaf(_) => (),
+                    &tagtree::TagTree::Leaf(_) => {}
                     &tagtree::TagTree::Node(_, ref attachments) => {
-                        attachments.iter().fold((), |_, &(ref _attach, ref _attachment)| {
-                            let attach_transform: Mat3<f64> = panic!("implement");
+                        attachments.iter().fold((), |_, &(ref attach, ref attachment)| {
+                            let trn = Vec2::new(attach.location, 0.0);
+                            let rot = Rot2::new(Vec1::new(attach.rotation));
+                            let iso = Iso2::new_with_rotmat(trn, rot);
+                            let attach_transform: Mat3<f64> = iso.to_homogeneous();
                             let next_context = context * attach_transform;
                             let next_depth = curr_work.depth + 1;
                             if self.contexts.len() < next_depth + 1 {
@@ -184,12 +179,13 @@ impl<'a> Iterator for StructureIter<'a> {
                             } else {
                                 self.contexts[next_depth] = next_context;
                             }
-                            // Something isn't right here! But I think it is.... test!!
+                            self.work.push(WithDepth{depth: next_depth, item: &**attachment});
                         })
                     }
                 }
 
-                Some(StructureContextItem { context: context, item: curr_work.item })
+                Some(StructureContextItem { context: context, structure: curr_work.item })
+
             }
         }
 
@@ -204,7 +200,7 @@ fn part(attrs: Part) -> Structure {
 fn beam(length: f64, parts: Vec<(Attach, Box<Structure>)>) -> Structure {
     tagtree::TagTree::Node(Beam {length: length}, parts)
 }
- 
+
 #[test]
 fn simple_structures () {
     let p1 = part(Part::Vessel { width: 2.0, length: 4.0 });
