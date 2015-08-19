@@ -1,5 +1,7 @@
 
-use na::{Eye, Iso2, Mat3, Rot2, ToHomogeneous, Vec1, Vec2};
+use num::traits::One;
+
+use na::{Iso2, Rot2, Vec1, Vec2};
 use ncollide::shape::{Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
 
@@ -113,43 +115,49 @@ struct WithDepth<T> {
 impl Structure {
 
     fn mass(&self) -> f64 {
-
-        let mut total_mass: f64 = 0.0;
-
-        for item in self.iter() {
-
-            match item.structure {
-                &tagtree::TagTree::Leaf(ref part) => {
-                    total_mass += part.mass();
-                }
-                &tagtree::TagTree::Node(ref beam, _) => {
-                    total_mass += beam.mass();
-                }
+        match self {
+            &tagtree::TagTree::Leaf(ref part) => {
+                part.mass()
             }
-
+            &tagtree::TagTree::Node(ref beam, _) => {
+                beam.mass()
+            }
         }
+    }
 
+    fn total_mass(&self) -> f64 {
+        let mut total_mass: f64 = 0.0;
+        for item in self.iter() {
+            total_mass += item.structure.mass();
+        }
         total_mass
+    }
 
+    fn point_masses(&self) -> Vec<PointMass> {
+        let mut result = Vec::new();
+        for item in self.iter() {
+            result.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
+        }
+        result
     }
 
 }
 
 // Opportunity to move into tagtree if Attach is a monoid
 struct StructureContextItem<'a> {
-    context: Mat3<f64>,
+    context: Iso2<f64>,
     structure: &'a Structure
 }
 
 struct StructureIter<'a> {
-    contexts: Vec<Mat3<f64>>,
+    contexts: Vec<Iso2<f64>>,
     work: Vec<WithDepth<&'a Structure>>
 }
 
 impl Structure {
     pub fn iter(&self) -> StructureIter {
         let work = vec!(WithDepth { depth: 0, item: self });
-        StructureIter { contexts: vec!(Eye::new_identity(3)), work: work }
+        StructureIter { contexts: vec!(Iso2::one()), work: work }
     }
 }
 
@@ -171,8 +179,7 @@ impl<'a> Iterator for StructureIter<'a> {
                             let trn = Vec2::new(attach.location, 0.0);
                             let rot = Rot2::new(Vec1::new(attach.rotation));
                             let iso = Iso2::new_with_rotmat(trn, rot);
-                            let attach_transform: Mat3<f64> = iso.to_homogeneous();
-                            let next_context = context * attach_transform;
+                            let next_context = context * iso;
                             let next_depth = curr_work.depth + 1;
                             if self.contexts.len() < next_depth + 1 {
                                 self.contexts.push(next_context);
