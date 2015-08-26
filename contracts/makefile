@@ -4,10 +4,10 @@
 
 all: rust go
 
-rust/target/release/libcontracts.rlib: rust/src/*.rs
-	(cd rust; cargo build --release)
+rust/target/release/libcontracts.rlib: rust/src/ship.rs rust/src/controls.rs
+	(cd rust; cargo build)
 
-rust/src/%.rs: src/%.proto
+rust/src/%.rs: src/ship.proto src/controls.proto
 	protoc --rust_out rust/src src/*
 
 rust: rust/target/release/libcontracts.rlib

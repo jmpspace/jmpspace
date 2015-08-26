@@ -1,5 +1,4 @@
 [package]
-
 name = "sim"
 version = "0.0.1"
 authors = ["John P Mayer <john.p.mayer.jr@gmail.com>"]
@@ -7,11 +6,15 @@ authors = ["John P Mayer <john.p.mayer.jr@gmail.com>"]
 [lib]
 name = "sim"
 path = "src/lib.rs"
+crate-type = ["dylib"]
 
 [dependencies]
 nalgebra = "*"
 ncollide = "*"
 num = "*"
+
+[dependencies.contracts]
+path = "../contracts/rust"
 
 [dependencies.lc4]
 path = "../lc4"

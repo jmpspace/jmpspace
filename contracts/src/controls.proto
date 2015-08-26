@@ -14,3 +14,13 @@ message Controls {
   }
 }
 
+message Build {
+  required int32 foo = 1;
+}
+
+message Action {
+  oneof action {
+    Controls controls = 1;
+    Build build = 2;
+  }
+}

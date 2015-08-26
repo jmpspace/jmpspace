@@ -12,6 +12,8 @@ It has these top-level messages:
 	Unit
 	Active
 	Controls
+	Build
+	Action
 */
 package controls
 
@@ -66,6 +68,46 @@ func (m *Controls) GetBrakes() *Unit {
 func (m *Controls) GetActive() *Active {
 	if m != nil {
 		return m.Active
+	}
+	return nil
+}
+
+type Build struct {
+	Foo              *int32 `protobuf:"varint,1,req,name=foo" json:"foo,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *Build) Reset()         { *m = Build{} }
+func (m *Build) String() string { return proto.CompactTextString(m) }
+func (*Build) ProtoMessage()    {}
+
+func (m *Build) GetFoo() int32 {
+	if m != nil && m.Foo != nil {
+		return *m.Foo
+	}
+	return 0
+}
+
+type Action struct {
+	Controls         *Controls `protobuf:"bytes,1,opt,name=controls" json:"controls,omitempty"`
+	Build            *Build    `protobuf:"bytes,2,opt,name=build" json:"build,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
+}
+
+func (m *Action) Reset()         { *m = Action{} }
+func (m *Action) String() string { return proto.CompactTextString(m) }
+func (*Action) ProtoMessage()    {}
+
+func (m *Action) GetControls() *Controls {
+	if m != nil {
+		return m.Controls
+	}
+	return nil
+}
+
+func (m *Action) GetBuild() *Build {
+	if m != nil {
+		return m.Build
 	}
 	return nil
 }
