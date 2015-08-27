@@ -14,6 +14,8 @@ func check(err error) {
 
 func main() {
 
+	hello_sim()
+
 	http.Handle("/", http.FileServer(http.Dir("client/site")))
 	http.Handle("/chat", websocket.Handler(chatServer()))
 	http.Handle("/action", websocket.Handler(actionServer()))

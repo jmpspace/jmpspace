@@ -12,3 +12,8 @@ extern crate num;
 mod constants;
 mod ship;
 mod tagtree;
+
+#[no_mangle]
+pub extern "C" fn hello_sim() {
+  println!("Hello, Rust Sim!");
+}

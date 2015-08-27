@@ -1,6 +1,9 @@
 package main
 
-// #include <sim.h>
+/*
+#cgo LDFLAGS: -L./lib -lsim
+#include "./include/sim.h"
+*/
 import "C"
 
 func hello_sim() {
