@@ -1,5 +1,5 @@
 
-package controls;
+package actions;
 
 message Unit {};
 

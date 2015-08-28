@@ -4,24 +4,24 @@
 
 all: rust go
 
-rust/target/release/libcontracts.rlib: rust/src/ship.rs rust/src/controls.rs
+rust/target/release/libcontracts.rlib: rust/src/ship.rs rust/src/actions.rs
 	(cd rust; cargo build)
 
-rust/src/%.rs: src/ship.proto src/controls.proto
+rust/src/%.rs: src/ship.proto src/actions.proto
 	protoc --rust_out rust/src src/*
 
 rust: rust/target/release/libcontracts.rlib
 
-go/controls/controls.pb.go: src/controls.proto
+go/actions/actions.pb.go: src/actions.proto
 	cp $< .
-	protoc --go_out go/controls controls.proto
-	rm controls.proto
+	protoc --go_out go/actions actions.proto
+	rm actions.proto
 
 go/ship/ship.pb.go: src/ship.proto
 	cp $< .
 	protoc --go_out go/ship ship.proto
 	rm ship.proto
 
-go: go/ship/ship.pb.go go/controls/controls.pb.go
+go: go/ship/ship.pb.go go/actions/actions.pb.go
 
 .PHONY: rust go

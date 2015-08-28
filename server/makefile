@@ -2,7 +2,7 @@ ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 all: server
 
-server: *.go
+server: *.go lib/*
 	gofmt -w *go
 	go get
 	go build -ldflags="-r $(ROOT_DIR)lib"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./contracts/controls"
+	"./contracts/actions"
 	"fmt"
 	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/websocket"
@@ -94,7 +94,7 @@ func chatServer() func(*websocket.Conn) {
 			check(err)
 			log.Printf("message length=\"%d\"", len(data))
 
-			controls := &controls.Controls{}
+			controls := &actions.Controls{}
 			err = proto.Unmarshal(data, controls)
 			check(err)
 

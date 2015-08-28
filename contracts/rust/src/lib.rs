@@ -1,4 +1,5 @@
 
 extern crate protobuf;
 
-mod ship;
+pub mod actions;
+pub mod ship;
