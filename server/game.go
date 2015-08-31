@@ -15,6 +15,8 @@ func check(err error) {
 func main() {
 
 	hello_sim()
+	sim := build_world(15)
+	world_snapshot(sim)
 
 	http.Handle("/", http.FileServer(http.Dir("client/site")))
 	http.Handle("/chat", websocket.Handler(chatServer()))
