@@ -14,8 +14,8 @@ func build_world(a int) *C.Sim {
 	return C.build_world(C.int(a))
 }
 
-func apply_command(sim *C.Sim, a int) {
-	C.apply_command(sim, C.int(a))
+func apply_action(sim *C.Sim, a int) {
+	C.apply_action(sim, C.int(a))
 }
 
 func world_snapshot(sim *C.Sim) {

@@ -8,7 +8,7 @@ struct SimImpl;
 typedef struct SimImpl* Sim;
 
 Sim* build_world(int a);
-void apply_command(Sim* sim, int a);
+void apply_action(Sim* sim, int a);
 void world_snapshot(Sim* sim);
 
 #endif

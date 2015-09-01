@@ -6,6 +6,7 @@
 
 extern crate nalgebra as na;
 extern crate ncollide;
+extern crate ncollide_entities;
 extern crate nphysics;
 extern crate num;
 
@@ -32,8 +33,8 @@ pub extern "C" fn build_world(a: i32) -> *mut sim::Sim {
 }
 
 #[no_mangle]
-pub extern "C" fn apply_command(sim: *mut sim::Sim, a: i32) {
-    // TODO deref world.a
+pub extern "C" fn apply_action(sim: *mut sim::Sim, a: i32) {
+    unsafe { (*sim).a = a }
     println!("Apply");
 }
 

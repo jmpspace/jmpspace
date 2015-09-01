@@ -1,8 +1,11 @@
 
+use std::boxed::Box;
 use std::ops::Neg;
+use std::sync::Arc;
 use num::traits::{One, Zero};
 
 use na::{Iso2, Norm, Rot2, Translation, Vec1, Vec2};
+use ncollide::inspection::{Repr2};
 use ncollide::shape::{Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
 
@@ -19,6 +22,9 @@ struct PointMass {
     center: Vec2<f64>,
     mass: f64
 }
+
+type Shape = Box<Repr2<f64>>;
+type ArcShape = Arc<Shape>;
 
 impl PointMass {
 
@@ -47,6 +53,22 @@ impl Part {
                 ENGINE_DENSITY * radius * length * 0.5
             }
         }
+    }
+
+
+    fn geometry (&self) -> ArcShape {
+        Arc::new(match self {
+            &Part::Vessel {width, length} => {
+                Box::new(Cuboid::new(Vec2::new(width, length))) as Shape
+            }
+            &Part::FuelTank {radius, length} => {
+                Box::new(Cylinder::new(length, radius)) as Shape
+            }
+            &Part::Engine {radius, length, group} => {
+                let _group = group;
+                Box::new(Cone::new(length, radius)) as Shape
+            }
+        })
     }
 
     fn object (&self) -> RigidBody {
@@ -165,6 +187,9 @@ impl Structure {
             acc + pm.moment_contrib()
         })
     }
+
+    // fn compound_shape(&self) -> Compound
+    // Compound::new(...)
 }
 
 // Opportunity to move into tagtree if Attach is a monoid
@@ -255,10 +280,14 @@ fn simple_structures () {
 fn simple_ships () {
     beam(8.0, vec![
          (Attach {location: 2.0, rotation: 0.0}, 
-          box part(Part::Vessel {width: 2.0, length: 4.0})),
-          (Attach {location: 6.0, rotation: 0.0},
-           box part(Part::FuelTank {radius: 1.0, length: 1.5})),
-           (Attach {location: 8.0, rotation: 0.0},
-            box part(Part::Engine {radius: 1.5, length: 0.5, group: 1}))
-           ]);
+          box part(Part::Vessel {width: 2.0, length: 4.0})
+         ),
+         (Attach {location: 6.0, rotation: 0.0},
+          box part(Part::FuelTank {radius: 1.0, length: 1.5})
+         ),
+         (Attach {location: 8.0, rotation: 0.0},
+          box part(Part::Engine {radius: 1.5, length: 0.5, group: 1})
+         )
+         ]
+        );
 }
