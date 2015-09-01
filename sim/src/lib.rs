@@ -6,7 +6,6 @@
 
 extern crate nalgebra as na;
 extern crate ncollide;
-extern crate ncollide_entities;
 extern crate nphysics;
 extern crate num;
 
