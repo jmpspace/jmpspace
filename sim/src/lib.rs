@@ -16,9 +16,6 @@ mod ship;
 mod tagtree;
 mod sim;
 
-//use contracts::actions::Action;
-use nphysics::world::World;
-
 #[no_mangle]
 pub extern "C" fn hello_sim() {
     println!("Hello, Rust Sim!");
@@ -26,8 +23,7 @@ pub extern "C" fn hello_sim() {
 
 #[no_mangle]
 pub extern "C" fn build_world(a: i32) -> *mut sim::Sim {
-    let world = World::new();
-    let mut sim = Box::new(sim::Sim { a: a, world: world });
+    let mut sim = Box::new(sim::Sim::new(a));
     &mut *sim
 }
 

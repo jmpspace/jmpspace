@@ -4,7 +4,7 @@ use std::ops::Neg;
 use std::sync::Arc;
 use num::traits::{One, Zero};
 
-use na::{Iso2, Norm, Rot2, Translation, Vec1, Vec2};
+use na::{Iso2, Mat1, Norm, Rot2, Translation, Vec1, Vec2};
 use ncollide::inspection::{Repr2};
 use ncollide::shape::{Compound, Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
@@ -210,6 +210,12 @@ impl Structure {
             acc.push((item.context, item.structure.geometry()));
         }
         Arc::new(Box::new(Compound::new(acc)))
+    }
+
+    fn rigid_body(&self) -> RigidBody {
+        let shape = self.compound_shape();
+        let mass_properties = Some((self.total_mass(), self.center_of_mass().to_pnt(), Mat1::new(self.total_moment())));
+        RigidBody::new(shape, mass_properties, 1.0, 1.0)
     }
 }
 
