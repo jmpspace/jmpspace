@@ -6,7 +6,7 @@ use num::traits::{One, Zero};
 
 use na::{Iso2, Norm, Rot2, Translation, Vec1, Vec2};
 use ncollide::inspection::{Repr2};
-use ncollide::shape::{Cone, Cuboid, Cylinder};
+use ncollide::shape::{Compound, Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
 
 use constants::*;
@@ -23,8 +23,8 @@ struct PointMass {
     mass: f64
 }
 
-type Shape = Box<Repr2<f64>>;
-type ArcShape = Arc<Shape>;
+type Shaped = Box<Repr2<f64>>;
+type ArcShaped = Arc<Shaped>;
 
 impl PointMass {
 
@@ -56,17 +56,17 @@ impl Part {
     }
 
 
-    fn geometry (&self) -> ArcShape {
+    fn geometry (&self) -> ArcShaped {
         Arc::new(match self {
             &Part::Vessel {width, length} => {
-                Box::new(Cuboid::new(Vec2::new(width, length))) as Shape
+                Box::new(Cuboid::new(Vec2::new(width, length))) as Shaped
             }
             &Part::FuelTank {radius, length} => {
-                Box::new(Cylinder::new(length, radius)) as Shape
+                Box::new(Cylinder::new(length, radius)) as Shaped
             }
             &Part::Engine {radius, length, group} => {
                 let _group = group;
-                Box::new(Cone::new(length, radius)) as Shape
+                Box::new(Cone::new(length, radius)) as Shaped
             }
         })
     }
@@ -119,6 +119,11 @@ struct Beam {
 
 impl Beam {
 
+    fn geometry (&self) -> ArcShaped {
+        let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
+        Arc::new(Box::new(geom))
+    }
+
     fn object (&self) -> RigidBody {
         let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
         RigidBody::new_dynamic(geom, BEAM_DENSITY, 1.0, 1.0)
@@ -151,6 +156,17 @@ impl Structure {
             }
             &tagtree::TagTree::Node(ref beam, _) => {
                 beam.mass()
+            }
+        }
+    }
+
+    fn geometry (&self) -> ArcShaped {
+        match self {
+            &tagtree::TagTree::Leaf(ref part) => {
+                part.geometry()
+            }
+            &tagtree::TagTree::Node(ref beam, _) => {
+                beam.geometry()
             }
         }
     }
@@ -188,8 +204,13 @@ impl Structure {
         })
     }
 
-    // fn compound_shape(&self) -> Compound
-    // Compound::new(...)
+    fn compound_shape(&self) -> ArcShaped {
+        let mut acc = Vec::<(Iso2<f64>,ArcShaped)>::new();
+        for item in self.iter() {
+            acc.push((item.context, item.structure.geometry()));
+        }
+        Arc::new(Box::new(Compound::new(acc)))
+    }
 }
 
 // Opportunity to move into tagtree if Attach is a monoid
