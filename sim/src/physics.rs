@@ -29,6 +29,8 @@ impl System for PhysicsSystem {
 
 impl Process for PhysicsSystem {
     fn process(&mut self, data: &mut DataHelper<JmpComponents, JmpServices>) {
-        self.world.step(data.services.dt)
+        for dt in data.services.dt.into_iter() {
+            self.world.step(dt)
+        }
     }
 }

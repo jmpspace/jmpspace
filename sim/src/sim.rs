@@ -11,13 +11,13 @@ components! {
 }
 
 pub struct JmpServices {
-    pub dt: f64
+    pub dt: Option<f64>
 }
 
 impl Default for JmpServices {
     fn default() -> Self {
         JmpServices {
-            dt: f64::default()
+            dt: None
         }
     }
 }
