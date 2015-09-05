@@ -9,6 +9,7 @@ path = "src/lib.rs"
 crate-type = ["dylib"]
 
 [dependencies]
+ecs = "*"
 nalgebra = "*"
 ncollide = "*"
 num = "*"

@@ -4,6 +4,8 @@
 
 #![allow(dead_code)]
 
+#[macro_use]
+extern crate ecs;
 extern crate nalgebra as na;
 extern crate ncollide;
 extern crate nphysics;
@@ -12,9 +14,10 @@ extern crate num;
 //extern crate contracts;
 
 mod constants;
+mod physics;
 mod ship;
-mod tagtree;
 mod sim;
+mod tagtree;
 
 #[no_mangle]
 pub extern "C" fn hello_sim() {
