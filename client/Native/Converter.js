@@ -8,8 +8,8 @@ Elm.Native.Converter.make = function(_elm) {
   var List = Elm.Native.List.make(_elm);
 
   var Proto;
-  dcodeIO.ProtoBuf.loadProtoFile("contracts/controls.proto", function(err, builder) {
-    Proto = builder.build("controls")
+  dcodeIO.ProtoBuf.loadProtoFile("contracts/actions.proto", function(err, builder) {
+    Proto = builder.build("actions")
   });
 
   var marshalControls = function(controls) {
