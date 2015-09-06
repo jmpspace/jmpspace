@@ -44,5 +44,9 @@ impl Sim {
 
     }
 
+    pub fn update(&mut self) {
+        self.world.update();
+    }
+
 }
 

@@ -18,6 +18,10 @@ func apply_action(sim *C.Sim, a int) {
 	C.apply_action(sim, C.int(a))
 }
 
-func world_snapshot(sim *C.Sim) {
-	C.world_snapshot(sim)
+func update_world(sim *C.Sim) {
+	C.update_world(sim)
+}
+
+func snapshot_world(sim *C.Sim) {
+	C.snapshot_world(sim)
 }

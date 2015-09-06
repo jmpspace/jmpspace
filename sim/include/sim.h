@@ -9,6 +9,7 @@ typedef struct SimImpl* Sim;
 
 Sim* build_world(int a);
 void apply_action(Sim* sim, int a);
-void world_snapshot(Sim* sim);
+void update_world(Sim* sim);
+void snapshot_world(Sim* sim);
 
 #endif

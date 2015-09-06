@@ -16,9 +16,10 @@ func main() {
 
 	hello_sim()
 	sim := build_world(15)
-	world_snapshot(sim)
+	snapshot_world(sim)
 	apply_action(sim, 10)
-	world_snapshot(sim)
+	update_world(sim)
+	snapshot_world(sim)
 
 	http.Handle("/", http.FileServer(http.Dir("client/site")))
 	http.Handle("/chat", websocket.Handler(chatServer()))

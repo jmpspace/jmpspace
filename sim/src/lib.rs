@@ -37,7 +37,13 @@ pub extern "C" fn apply_action(sim: *mut sim::Sim, a: i32) {
 }
 
 #[no_mangle]
-pub extern "C" fn world_snapshot(sim: *mut sim::Sim) {
+pub extern "C" fn update_world(sim: *mut sim::Sim) {
+    unsafe { (*sim).update() }
+    println!("Update");
+}
+
+#[no_mangle]
+pub extern "C" fn snapshot_world(sim: *mut sim::Sim) {
     let a = unsafe { (*sim).a };
     println!("Snapshot {}", a);
 }
