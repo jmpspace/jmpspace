@@ -5,7 +5,7 @@
 all: rust go
 
 rust/target/release/libcontracts.rlib: rust/src/ship.rs rust/src/actions.rs
-	(cd rust; cargo build)
+	(cd rust; cargo build; cargo doc)
 
 rust/src/%.rs: src/ship.proto src/actions.proto
 	protoc --rust_out rust/src src/*

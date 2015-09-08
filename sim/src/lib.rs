@@ -10,9 +10,12 @@ extern crate nalgebra as na;
 extern crate ncollide;
 extern crate nphysics;
 extern crate num;
+extern crate protobuf;
 
-//extern crate contracts;
+// JmpSpace dependencies
+extern crate contracts;
 
+// This crate
 mod constants;
 mod physics;
 mod ship;

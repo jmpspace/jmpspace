@@ -8,8 +8,10 @@ use na::{Iso2, Mat1, Norm, Rot2, Translation, Vec1, Vec2};
 use ncollide::inspection::{Repr2};
 use ncollide::shape::{Compound, Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
+use protobuf::repeated::RepeatedField;
 
 use constants::*;
+use contracts::ship as contracts;
 use tagtree;
 
 enum Part {
@@ -39,6 +41,32 @@ impl PointMass {
 }
 
 impl Part {
+
+    fn contract (&self) -> contracts::Part {
+        let mut part = contracts::Part::new();
+        match self {
+            &Part::Vessel { width, length } => {
+                let mut vessel = contracts::Vessel::new();
+                vessel.set_width(width);
+                vessel.set_length(length);
+                part.set_vessel(vessel);
+            }
+            &Part::FuelTank {radius, length} => {
+                let mut fueltank = contracts::FuelTank::new();
+                fueltank.set_radius(radius);
+                fueltank.set_length(length);
+                part.set_fuelTank(fueltank);
+            }
+            &Part::Engine {radius, length, group} => {
+                let mut engine= contracts::Engine::new();
+                engine.set_radius(radius);
+                engine.set_length(length);
+                engine.set_group(group);
+                part.set_engine(engine);
+            }
+        }
+        part
+    }
 
     fn mass (&self) -> f64 {
         match self {
@@ -119,6 +147,12 @@ struct Beam {
 
 impl Beam {
 
+    fn contract (&self) -> contracts::Beam {
+        let mut beam = contracts::Beam::new();
+        beam.set_length(self.length);
+        beam
+    }
+
     fn geometry (&self) -> ArcShaped {
         let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
         Arc::new(Box::new(geom))
@@ -140,6 +174,7 @@ impl Beam {
 
 }
 
+#[derive(Clone)]
 struct Attach {
     location: f64,
     rotation: f64
@@ -148,6 +183,39 @@ struct Attach {
 type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 impl Structure {
+
+    fn contract(&self) -> contracts::Structure {
+        let mut structure = contracts::Structure::new();
+        // performance!
+        let mut attachments: Vec<contracts::Attach> = Vec::new();
+        let mut counter = 0;
+        for item in self.attach_iter() {
+            let mut attach = contracts::Attach::new();
+            attach.set_identity(counter);
+            counter += 1;
+            for context in item.context.iter() {
+                attach.set_location(context.location);
+                attach.set_rotation(context.rotation);
+            }
+            attach.set_attachment(item.structure.contract_attachment());
+            attachments.push(attach)
+        }
+        structure.set_attachments(RepeatedField::from_vec(attachments));
+        structure
+    }
+
+    fn contract_attachment(&self) -> contracts::Attachment {
+        let mut attachment = contracts::Attachment::new();
+        match self {
+            &tagtree::TagTree::Leaf(ref part) => {
+                attachment.set_part(part.contract())
+            }
+            &tagtree::TagTree::Node(ref beam, _) => {
+                attachment.set_beam(beam.contract())
+            }
+        }
+        attachment
+    }
 
     fn mass(&self) -> f64 {
         match self {
@@ -173,7 +241,7 @@ impl Structure {
 
     fn total_mass(&self) -> f64 {
         let mut total_mass: f64 = 0.0;
-        for item in self.iter() {
+        for item in self.iso_iter() {
             total_mass += item.structure.mass();
         }
         total_mass
@@ -181,7 +249,7 @@ impl Structure {
 
     fn point_masses(&self) -> Vec<PointMass> {
         // This smells, could probably return an iterator?
-        self.iter().fold(Vec::new(), |mut acc, item| {
+        self.iso_iter().fold(Vec::new(), |mut acc, item| {
             acc.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
             acc
         })
@@ -206,7 +274,7 @@ impl Structure {
 
     fn compound_shape(&self) -> ArcShaped {
         let mut acc = Vec::<(Iso2<f64>,ArcShaped)>::new();
-        for item in self.iter() {
+        for item in self.iso_iter() {
             acc.push((item.context, item.structure.geometry()));
         }
         Arc::new(Box::new(Compound::new(acc)))
@@ -220,33 +288,47 @@ impl Structure {
 }
 
 // Opportunity to move into tagtree if Attach is a monoid
-struct StructureContextItem<'a> {
-    context: Iso2<f64>,
+struct StructureContextItem<'a, T> {
+    context: T,
     structure: &'a Structure,
 }
 
-struct StructureWorkItem<'a> {
-    context: Iso2<f64>,
+struct StructureWorkItem<'a, T> {
+    context: T,
     structure: &'a Structure,
 }
 
-struct StructureIter<'a> {
-    work: Vec<StructureWorkItem<'a>>,
+struct StructureIsoIter<'a> {
+    work: Vec<StructureWorkItem<'a, Iso2<f64>>>,
+}
+
+
+struct StructureAttachIter<'a> {
+    work: Vec<StructureWorkItem<'a, Option<Attach>>>,
 }
 
 impl Structure {
-    pub fn iter(&self) -> StructureIter {
+    pub fn iso_iter(&self) -> StructureIsoIter {
         let root_work_item = StructureWorkItem {
             context: Iso2::one(),
             structure: self,
         };
-        StructureIter { work: vec!(root_work_item) }
+        StructureIsoIter { work: vec!(root_work_item) }
+    }
+
+    // Not very DRY, not exactly sure where to abstract
+    pub fn attach_iter(&self) -> StructureAttachIter {
+        let root_work_item = StructureWorkItem {
+            context: None,
+            structure: self,
+        };
+        StructureAttachIter { work: vec!(root_work_item) }
     }
 }
 
-impl<'a> Iterator for StructureIter<'a> {
+impl<'a> Iterator for StructureIsoIter<'a> {
 
-    type Item = StructureContextItem<'a>;
+    type Item = StructureContextItem<'a, Iso2<f64>>;
 
     fn next(&mut self) -> Option<Self::Item> {
 
@@ -264,6 +346,46 @@ impl<'a> Iterator for StructureIter<'a> {
                             let rot = Rot2::new(Vec1::new(attach.rotation));
                             let iso = Iso2::new_with_rotmat(trn, rot);
                             let next_context = context * iso;
+                            let next_work = StructureWorkItem { 
+                                context: next_context, 
+                            structure: &**attachment
+                            };
+
+                            self.work.push(next_work);
+                        })
+                    }
+                }
+
+                Some(StructureContextItem { context: context, structure: curr_work.structure })
+
+            }
+        }
+
+    }
+
+}
+
+impl<'a> Iterator for StructureAttachIter<'a> {
+
+    type Item = StructureContextItem<'a, Option<Attach>>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+
+        match self.work.pop() {
+            None => { None }
+            Some(ref curr_work) => { 
+                let context = curr_work.context.clone();
+
+                match curr_work.structure {
+                    &tagtree::TagTree::Leaf(_) => {}
+                    &tagtree::TagTree::Node(_, ref attachments) => {
+                        // This smells, should probably rewrite as a normal for loop
+                        attachments.iter().fold((), |_, &(ref attach, ref attachment)| {
+                            //let trn = Vec2::new(attach.location, 0.0);
+                            //let rot = Rot2::new(Vec1::new(attach.rotation));
+                            //let iso = Iso2::new_with_rotmat(trn, rot);
+                            //let next_context = context * iso;
+                            let next_context = Some(attach.clone());
                             let next_work = StructureWorkItem { 
                                 context: next_context, 
                             structure: &**attachment

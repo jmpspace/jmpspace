@@ -14,6 +14,9 @@ nalgebra = "*"
 ncollide = "*"
 num = "*"
 
+[dependencies.protobuf]
+git = "https://github.com/stepancheg/rust-protobuf.git"
+
 [dependencies.contracts]
 path = "../contracts/rust"
 
