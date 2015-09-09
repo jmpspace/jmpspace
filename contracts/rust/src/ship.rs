@@ -1230,144 +1230,34 @@ impl ::std::fmt::Debug for Beam {
 }
 
 #[derive(Clone,Default)]
-pub struct Attachment {
-    // message fields
-    // message oneof groups
-    attachment: ::std::option::Option<Attachment_oneof_attachment>,
+pub struct Root {
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::std::cell::Cell<u32>,
 }
 
-#[derive(Clone,PartialEq)]
-pub enum Attachment_oneof_attachment {
-    beam(Beam),
-    part(Part),
-}
-
-impl Attachment {
-    pub fn new() -> Attachment {
+impl Root {
+    pub fn new() -> Root {
         ::std::default::Default::default()
     }
 
-    pub fn default_instance() -> &'static Attachment {
-        static mut instance: ::protobuf::lazy::Lazy<Attachment> = ::protobuf::lazy::Lazy {
+    pub fn default_instance() -> &'static Root {
+        static mut instance: ::protobuf::lazy::Lazy<Root> = ::protobuf::lazy::Lazy {
             lock: ::protobuf::lazy::ONCE_INIT,
-            ptr: 0 as *const Attachment,
+            ptr: 0 as *const Root,
         };
         unsafe {
             instance.get(|| {
-                Attachment {
-                    attachment: ::std::option::Option::None,
+                Root {
                     unknown_fields: ::protobuf::UnknownFields::new(),
                     cached_size: ::std::cell::Cell::new(0),
                 }
             })
         }
     }
-
-    // optional .ship.Beam beam = 1;
-
-    pub fn clear_beam(&mut self) {
-        self.attachment = ::std::option::Option::None;
-    }
-
-    pub fn has_beam(&self) -> bool {
-        match self.attachment {
-            ::std::option::Option::Some(Attachment_oneof_attachment::beam(..)) => true,
-            _ => false,
-        }
-    }
-
-    // Param is passed by value, moved
-    pub fn set_beam(&mut self, v: Beam) {
-        self.attachment = ::std::option::Option::Some(Attachment_oneof_attachment::beam(v))
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_beam<'a>(&'a mut self) -> &'a mut Beam {
-        if let ::std::option::Option::Some(Attachment_oneof_attachment::beam(_)) = self.attachment {
-        } else {
-            self.attachment = ::std::option::Option::Some(Attachment_oneof_attachment::beam(Beam::new()));
-        }
-        match self.attachment {
-            ::std::option::Option::Some(Attachment_oneof_attachment::beam(ref mut v)) => v,
-            _ => panic!(),
-        }
-    }
-
-    // Take field
-    pub fn take_beam(&mut self) -> Beam {
-        if self.has_beam() {
-            match self.attachment.take() {
-                ::std::option::Option::Some(Attachment_oneof_attachment::beam(v)) => v,
-                _ => panic!(),
-            }
-        } else {
-            Beam::new()
-        }
-    }
-
-    pub fn get_beam<'a>(&'a self) -> &'a Beam {
-        match self.attachment {
-            ::std::option::Option::Some(Attachment_oneof_attachment::beam(ref v)) => v,
-            _ => Beam::default_instance(),
-        }
-    }
-
-    // optional .ship.Part part = 2;
-
-    pub fn clear_part(&mut self) {
-        self.attachment = ::std::option::Option::None;
-    }
-
-    pub fn has_part(&self) -> bool {
-        match self.attachment {
-            ::std::option::Option::Some(Attachment_oneof_attachment::part(..)) => true,
-            _ => false,
-        }
-    }
-
-    // Param is passed by value, moved
-    pub fn set_part(&mut self, v: Part) {
-        self.attachment = ::std::option::Option::Some(Attachment_oneof_attachment::part(v))
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_part<'a>(&'a mut self) -> &'a mut Part {
-        if let ::std::option::Option::Some(Attachment_oneof_attachment::part(_)) = self.attachment {
-        } else {
-            self.attachment = ::std::option::Option::Some(Attachment_oneof_attachment::part(Part::new()));
-        }
-        match self.attachment {
-            ::std::option::Option::Some(Attachment_oneof_attachment::part(ref mut v)) => v,
-            _ => panic!(),
-        }
-    }
-
-    // Take field
-    pub fn take_part(&mut self) -> Part {
-        if self.has_part() {
-            match self.attachment.take() {
-                ::std::option::Option::Some(Attachment_oneof_attachment::part(v)) => v,
-                _ => panic!(),
-            }
-        } else {
-            Part::new()
-        }
-    }
-
-    pub fn get_part<'a>(&'a self) -> &'a Part {
-        match self.attachment {
-            ::std::option::Option::Some(Attachment_oneof_attachment::part(ref v)) => v,
-            _ => Part::default_instance(),
-        }
-    }
 }
 
-impl ::protobuf::Message for Attachment {
+impl ::protobuf::Message for Root {
     fn is_initialized(&self) -> bool {
         true
     }
@@ -1376,18 +1266,6 @@ impl ::protobuf::Message for Attachment {
         while !try!(is.eof()) {
             let (field_number, wire_type) = try!(is.read_tag_unpack());
             match field_number {
-                1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
-                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
-                    };
-                    self.attachment = ::std::option::Option::Some(Attachment_oneof_attachment::beam(try!(is.read_message())));
-                },
-                2 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
-                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
-                    };
-                    self.attachment = ::std::option::Option::Some(Attachment_oneof_attachment::part(try!(is.read_message())));
-                },
                 _ => {
                     let unknown = try!(is.read_unknown(wire_type));
                     self.mut_unknown_fields().add_value(field_number, unknown);
@@ -1401,38 +1279,12 @@ impl ::protobuf::Message for Attachment {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        if let ::std::option::Option::Some(ref v) = self.attachment {
-            match v {
-                &Attachment_oneof_attachment::beam(ref v) => {
-                    let len = v.compute_size();
-                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-                },
-                &Attachment_oneof_attachment::part(ref v) => {
-                    let len = v.compute_size();
-                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
-                },
-            };
-        };
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
-        if let ::std::option::Option::Some(ref v) = self.attachment {
-            match v {
-                &Attachment_oneof_attachment::beam(ref v) => {
-                    try!(os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
-                    try!(os.write_raw_varint32(v.get_cached_size()));
-                    try!(v.write_to_with_cached_sizes(os));
-                },
-                &Attachment_oneof_attachment::part(ref v) => {
-                    try!(os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited));
-                    try!(os.write_raw_varint32(v.get_cached_size()));
-                    try!(v.write_to_with_cached_sizes(os));
-                },
-            };
-        };
         try!(os.write_unknown_fields(self.get_unknown_fields()));
         ::std::result::Result::Ok(())
     }
@@ -1450,7 +1302,7 @@ impl ::protobuf::Message for Attachment {
     }
 
     fn type_id(&self) -> ::std::any::TypeId {
-        ::std::any::TypeId::of::<Attachment>()
+        ::std::any::TypeId::of::<Root>()
     }
 
     fn as_any(&self) -> &::std::any::Any {
@@ -1462,31 +1314,21 @@ impl ::protobuf::Message for Attachment {
     }
 }
 
-impl ::protobuf::MessageStatic for Attachment {
-    fn new() -> Attachment {
-        Attachment::new()
+impl ::protobuf::MessageStatic for Root {
+    fn new() -> Root {
+        Root::new()
     }
 
-    fn descriptor_static(_: ::std::option::Option<Attachment>) -> &'static ::protobuf::reflect::MessageDescriptor {
+    fn descriptor_static(_: ::std::option::Option<Root>) -> &'static ::protobuf::reflect::MessageDescriptor {
         static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
             lock: ::protobuf::lazy::ONCE_INIT,
             ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
         };
         unsafe {
             descriptor.get(|| {
-                let mut fields = ::std::vec::Vec::new();
-                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
-                    "beam",
-                    Attachment::has_beam,
-                    Attachment::get_beam,
-                ));
-                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
-                    "part",
-                    Attachment::has_part,
-                    Attachment::get_part,
-                ));
-                ::protobuf::reflect::MessageDescriptor::new::<Attachment>(
-                    "Attachment",
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<Root>(
+                    "Root",
                     fields,
                     file_descriptor_proto()
                 )
@@ -1495,22 +1337,19 @@ impl ::protobuf::MessageStatic for Attachment {
     }
 }
 
-impl ::protobuf::Clear for Attachment {
+impl ::protobuf::Clear for Root {
     fn clear(&mut self) {
-        self.clear_beam();
-        self.clear_part();
         self.unknown_fields.clear();
     }
 }
 
-impl ::std::cmp::PartialEq for Attachment {
-    fn eq(&self, other: &Attachment) -> bool {
-        self.attachment == other.attachment &&
+impl ::std::cmp::PartialEq for Root {
+    fn eq(&self, other: &Root) -> bool {
         self.unknown_fields == other.unknown_fields
     }
 }
 
-impl ::std::fmt::Debug for Attachment {
+impl ::std::fmt::Debug for Root {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         ::protobuf::text_format::fmt(self, f)
     }
@@ -1519,10 +1358,8 @@ impl ::std::fmt::Debug for Attachment {
 #[derive(Clone,Default)]
 pub struct Attach {
     // message fields
-    identity: ::std::option::Option<i32>,
     location: ::std::option::Option<f64>,
     rotation: ::std::option::Option<f64>,
-    attachment: ::protobuf::SingularPtrField<Attachment>,
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::std::cell::Cell<u32>,
@@ -1541,10 +1378,8 @@ impl Attach {
         unsafe {
             instance.get(|| {
                 Attach {
-                    identity: ::std::option::Option::None,
                     location: ::std::option::Option::None,
                     rotation: ::std::option::Option::None,
-                    attachment: ::protobuf::SingularPtrField::none(),
                     unknown_fields: ::protobuf::UnknownFields::new(),
                     cached_size: ::std::cell::Cell::new(0),
                 }
@@ -1552,26 +1387,7 @@ impl Attach {
         }
     }
 
-    // required int32 identity = 1;
-
-    pub fn clear_identity(&mut self) {
-        self.identity = ::std::option::Option::None;
-    }
-
-    pub fn has_identity(&self) -> bool {
-        self.identity.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_identity(&mut self, v: i32) {
-        self.identity = ::std::option::Option::Some(v);
-    }
-
-    pub fn get_identity<'a>(&self) -> i32 {
-        self.identity.unwrap_or(0)
-    }
-
-    // required double location = 2;
+    // required double location = 1;
 
     pub fn clear_location(&mut self) {
         self.location = ::std::option::Option::None;
@@ -1590,7 +1406,7 @@ impl Attach {
         self.location.unwrap_or(0.)
     }
 
-    // required double rotation = 3;
+    // required double rotation = 2;
 
     pub fn clear_rotation(&mut self) {
         self.rotation = ::std::option::Option::None;
@@ -1608,53 +1424,14 @@ impl Attach {
     pub fn get_rotation<'a>(&self) -> f64 {
         self.rotation.unwrap_or(0.)
     }
-
-    // required .ship.Attachment attachment = 4;
-
-    pub fn clear_attachment(&mut self) {
-        self.attachment.clear();
-    }
-
-    pub fn has_attachment(&self) -> bool {
-        self.attachment.is_some()
-    }
-
-    // Param is passed by value, moved
-    pub fn set_attachment(&mut self, v: Attachment) {
-        self.attachment = ::protobuf::SingularPtrField::some(v);
-    }
-
-    // Mutable pointer to the field.
-    // If field is not initialized, it is initialized with default value first.
-    pub fn mut_attachment<'a>(&'a mut self) -> &'a mut Attachment {
-        if self.attachment.is_none() {
-            self.attachment.set_default();
-        };
-        self.attachment.as_mut().unwrap()
-    }
-
-    // Take field
-    pub fn take_attachment(&mut self) -> Attachment {
-        self.attachment.take().unwrap_or_else(|| Attachment::new())
-    }
-
-    pub fn get_attachment<'a>(&'a self) -> &'a Attachment {
-        self.attachment.as_ref().unwrap_or_else(|| Attachment::default_instance())
-    }
 }
 
 impl ::protobuf::Message for Attach {
     fn is_initialized(&self) -> bool {
-        if self.identity.is_none() {
-            return false;
-        };
         if self.location.is_none() {
             return false;
         };
         if self.rotation.is_none() {
-            return false;
-        };
-        if self.attachment.is_none() {
             return false;
         };
         true
@@ -1665,32 +1442,18 @@ impl ::protobuf::Message for Attach {
             let (field_number, wire_type) = try!(is.read_tag_unpack());
             match field_number {
                 1 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
-                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
-                    };
-                    let tmp = try!(is.read_int32());
-                    self.identity = ::std::option::Option::Some(tmp);
-                },
-                2 => {
                     if wire_type != ::protobuf::wire_format::WireTypeFixed64 {
                         return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
                     };
                     let tmp = try!(is.read_double());
                     self.location = ::std::option::Option::Some(tmp);
                 },
-                3 => {
+                2 => {
                     if wire_type != ::protobuf::wire_format::WireTypeFixed64 {
                         return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
                     };
                     let tmp = try!(is.read_double());
                     self.rotation = ::std::option::Option::Some(tmp);
-                },
-                4 => {
-                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
-                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
-                    };
-                    let tmp = self.attachment.set_default();
-                    try!(is.merge_message(tmp))
                 },
                 _ => {
                     let unknown = try!(is.read_unknown(wire_type));
@@ -1705,18 +1468,11 @@ impl ::protobuf::Message for Attach {
     #[allow(unused_variables)]
     fn compute_size(&self) -> u32 {
         let mut my_size = 0;
-        for value in self.identity.iter() {
-            my_size += ::protobuf::rt::value_size(1, *value, ::protobuf::wire_format::WireTypeVarint);
-        };
         if self.location.is_some() {
             my_size += 9;
         };
         if self.rotation.is_some() {
             my_size += 9;
-        };
-        for value in self.attachment.iter() {
-            let len = value.compute_size();
-            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
         };
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
@@ -1724,19 +1480,11 @@ impl ::protobuf::Message for Attach {
     }
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
-        if let Some(v) = self.identity {
-            try!(os.write_int32(1, v));
-        };
         if let Some(v) = self.location {
-            try!(os.write_double(2, v));
+            try!(os.write_double(1, v));
         };
         if let Some(v) = self.rotation {
-            try!(os.write_double(3, v));
-        };
-        if let Some(v) = self.attachment.as_ref() {
-            try!(os.write_tag(4, ::protobuf::wire_format::WireTypeLengthDelimited));
-            try!(os.write_raw_varint32(v.get_cached_size()));
-            try!(v.write_to_with_cached_sizes(os));
+            try!(os.write_double(2, v));
         };
         try!(os.write_unknown_fields(self.get_unknown_fields()));
         ::std::result::Result::Ok(())
@@ -1780,11 +1528,6 @@ impl ::protobuf::MessageStatic for Attach {
         unsafe {
             descriptor.get(|| {
                 let mut fields = ::std::vec::Vec::new();
-                fields.push(::protobuf::reflect::accessor::make_singular_i32_accessor(
-                    "identity",
-                    Attach::has_identity,
-                    Attach::get_identity,
-                ));
                 fields.push(::protobuf::reflect::accessor::make_singular_f64_accessor(
                     "location",
                     Attach::has_location,
@@ -1794,11 +1537,6 @@ impl ::protobuf::MessageStatic for Attach {
                     "rotation",
                     Attach::has_rotation,
                     Attach::get_rotation,
-                ));
-                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
-                    "attachment",
-                    Attach::has_attachment,
-                    Attach::get_attachment,
                 ));
                 ::protobuf::reflect::MessageDescriptor::new::<Attach>(
                     "Attach",
@@ -1812,20 +1550,16 @@ impl ::protobuf::MessageStatic for Attach {
 
 impl ::protobuf::Clear for Attach {
     fn clear(&mut self) {
-        self.clear_identity();
         self.clear_location();
         self.clear_rotation();
-        self.clear_attachment();
         self.unknown_fields.clear();
     }
 }
 
 impl ::std::cmp::PartialEq for Attach {
     fn eq(&self, other: &Attach) -> bool {
-        self.identity == other.identity &&
         self.location == other.location &&
         self.rotation == other.rotation &&
-        self.attachment == other.attachment &&
         self.unknown_fields == other.unknown_fields
     }
 }
@@ -1837,9 +1571,868 @@ impl ::std::fmt::Debug for Attach {
 }
 
 #[derive(Clone,Default)]
+pub struct StructureNode {
+    // message fields
+    // message oneof groups
+    node: ::std::option::Option<StructureNode_oneof_node>,
+    link: ::std::option::Option<StructureNode_oneof_link>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::std::cell::Cell<u32>,
+}
+
+#[derive(Clone,PartialEq)]
+pub enum StructureNode_oneof_node {
+    beam(Beam),
+    part(Part),
+}
+
+#[derive(Clone,PartialEq)]
+pub enum StructureNode_oneof_link {
+    root(Root),
+    attach(Attach),
+}
+
+impl StructureNode {
+    pub fn new() -> StructureNode {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static StructureNode {
+        static mut instance: ::protobuf::lazy::Lazy<StructureNode> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const StructureNode,
+        };
+        unsafe {
+            instance.get(|| {
+                StructureNode {
+                    node: ::std::option::Option::None,
+                    link: ::std::option::Option::None,
+                    unknown_fields: ::protobuf::UnknownFields::new(),
+                    cached_size: ::std::cell::Cell::new(0),
+                }
+            })
+        }
+    }
+
+    // optional .ship.Beam beam = 1;
+
+    pub fn clear_beam(&mut self) {
+        self.node = ::std::option::Option::None;
+    }
+
+    pub fn has_beam(&self) -> bool {
+        match self.node {
+            ::std::option::Option::Some(StructureNode_oneof_node::beam(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_beam(&mut self, v: Beam) {
+        self.node = ::std::option::Option::Some(StructureNode_oneof_node::beam(v))
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_beam<'a>(&'a mut self) -> &'a mut Beam {
+        if let ::std::option::Option::Some(StructureNode_oneof_node::beam(_)) = self.node {
+        } else {
+            self.node = ::std::option::Option::Some(StructureNode_oneof_node::beam(Beam::new()));
+        }
+        match self.node {
+            ::std::option::Option::Some(StructureNode_oneof_node::beam(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_beam(&mut self) -> Beam {
+        if self.has_beam() {
+            match self.node.take() {
+                ::std::option::Option::Some(StructureNode_oneof_node::beam(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            Beam::new()
+        }
+    }
+
+    pub fn get_beam<'a>(&'a self) -> &'a Beam {
+        match self.node {
+            ::std::option::Option::Some(StructureNode_oneof_node::beam(ref v)) => v,
+            _ => Beam::default_instance(),
+        }
+    }
+
+    // optional .ship.Part part = 2;
+
+    pub fn clear_part(&mut self) {
+        self.node = ::std::option::Option::None;
+    }
+
+    pub fn has_part(&self) -> bool {
+        match self.node {
+            ::std::option::Option::Some(StructureNode_oneof_node::part(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_part(&mut self, v: Part) {
+        self.node = ::std::option::Option::Some(StructureNode_oneof_node::part(v))
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_part<'a>(&'a mut self) -> &'a mut Part {
+        if let ::std::option::Option::Some(StructureNode_oneof_node::part(_)) = self.node {
+        } else {
+            self.node = ::std::option::Option::Some(StructureNode_oneof_node::part(Part::new()));
+        }
+        match self.node {
+            ::std::option::Option::Some(StructureNode_oneof_node::part(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_part(&mut self) -> Part {
+        if self.has_part() {
+            match self.node.take() {
+                ::std::option::Option::Some(StructureNode_oneof_node::part(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            Part::new()
+        }
+    }
+
+    pub fn get_part<'a>(&'a self) -> &'a Part {
+        match self.node {
+            ::std::option::Option::Some(StructureNode_oneof_node::part(ref v)) => v,
+            _ => Part::default_instance(),
+        }
+    }
+
+    // optional .ship.Root root = 3;
+
+    pub fn clear_root(&mut self) {
+        self.link = ::std::option::Option::None;
+    }
+
+    pub fn has_root(&self) -> bool {
+        match self.link {
+            ::std::option::Option::Some(StructureNode_oneof_link::root(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_root(&mut self, v: Root) {
+        self.link = ::std::option::Option::Some(StructureNode_oneof_link::root(v))
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_root<'a>(&'a mut self) -> &'a mut Root {
+        if let ::std::option::Option::Some(StructureNode_oneof_link::root(_)) = self.link {
+        } else {
+            self.link = ::std::option::Option::Some(StructureNode_oneof_link::root(Root::new()));
+        }
+        match self.link {
+            ::std::option::Option::Some(StructureNode_oneof_link::root(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_root(&mut self) -> Root {
+        if self.has_root() {
+            match self.link.take() {
+                ::std::option::Option::Some(StructureNode_oneof_link::root(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            Root::new()
+        }
+    }
+
+    pub fn get_root<'a>(&'a self) -> &'a Root {
+        match self.link {
+            ::std::option::Option::Some(StructureNode_oneof_link::root(ref v)) => v,
+            _ => Root::default_instance(),
+        }
+    }
+
+    // optional .ship.Attach attach = 4;
+
+    pub fn clear_attach(&mut self) {
+        self.link = ::std::option::Option::None;
+    }
+
+    pub fn has_attach(&self) -> bool {
+        match self.link {
+            ::std::option::Option::Some(StructureNode_oneof_link::attach(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_attach(&mut self, v: Attach) {
+        self.link = ::std::option::Option::Some(StructureNode_oneof_link::attach(v))
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_attach<'a>(&'a mut self) -> &'a mut Attach {
+        if let ::std::option::Option::Some(StructureNode_oneof_link::attach(_)) = self.link {
+        } else {
+            self.link = ::std::option::Option::Some(StructureNode_oneof_link::attach(Attach::new()));
+        }
+        match self.link {
+            ::std::option::Option::Some(StructureNode_oneof_link::attach(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_attach(&mut self) -> Attach {
+        if self.has_attach() {
+            match self.link.take() {
+                ::std::option::Option::Some(StructureNode_oneof_link::attach(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            Attach::new()
+        }
+    }
+
+    pub fn get_attach<'a>(&'a self) -> &'a Attach {
+        match self.link {
+            ::std::option::Option::Some(StructureNode_oneof_link::attach(ref v)) => v,
+            _ => Attach::default_instance(),
+        }
+    }
+}
+
+impl ::protobuf::Message for StructureNode {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !try!(is.eof()) {
+            let (field_number, wire_type) = try!(is.read_tag_unpack());
+            match field_number {
+                1 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
+                    };
+                    self.node = ::std::option::Option::Some(StructureNode_oneof_node::beam(try!(is.read_message())));
+                },
+                2 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
+                    };
+                    self.node = ::std::option::Option::Some(StructureNode_oneof_node::part(try!(is.read_message())));
+                },
+                3 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
+                    };
+                    self.link = ::std::option::Option::Some(StructureNode_oneof_link::root(try!(is.read_message())));
+                },
+                4 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
+                    };
+                    self.link = ::std::option::Option::Some(StructureNode_oneof_link::attach(try!(is.read_message())));
+                },
+                _ => {
+                    let unknown = try!(is.read_unknown(wire_type));
+                    self.mut_unknown_fields().add_value(field_number, unknown);
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if let ::std::option::Option::Some(ref v) = self.node {
+            match v {
+                &StructureNode_oneof_node::beam(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &StructureNode_oneof_node::part(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+            };
+        };
+        if let ::std::option::Option::Some(ref v) = self.link {
+            match v {
+                &StructureNode_oneof_link::root(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &StructureNode_oneof_link::attach(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+            };
+        };
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if let ::std::option::Option::Some(ref v) = self.node {
+            match v {
+                &StructureNode_oneof_node::beam(ref v) => {
+                    try!(os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
+                    try!(os.write_raw_varint32(v.get_cached_size()));
+                    try!(v.write_to_with_cached_sizes(os));
+                },
+                &StructureNode_oneof_node::part(ref v) => {
+                    try!(os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited));
+                    try!(os.write_raw_varint32(v.get_cached_size()));
+                    try!(v.write_to_with_cached_sizes(os));
+                },
+            };
+        };
+        if let ::std::option::Option::Some(ref v) = self.link {
+            match v {
+                &StructureNode_oneof_link::root(ref v) => {
+                    try!(os.write_tag(3, ::protobuf::wire_format::WireTypeLengthDelimited));
+                    try!(os.write_raw_varint32(v.get_cached_size()));
+                    try!(v.write_to_with_cached_sizes(os));
+                },
+                &StructureNode_oneof_link::attach(ref v) => {
+                    try!(os.write_tag(4, ::protobuf::wire_format::WireTypeLengthDelimited));
+                    try!(os.write_raw_varint32(v.get_cached_size()));
+                    try!(v.write_to_with_cached_sizes(os));
+                },
+            };
+        };
+        try!(os.write_unknown_fields(self.get_unknown_fields()));
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields<'s>(&'s self) -> &'s ::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields<'s>(&'s mut self) -> &'s mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn type_id(&self) -> ::std::any::TypeId {
+        ::std::any::TypeId::of::<StructureNode>()
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for StructureNode {
+    fn new() -> StructureNode {
+        StructureNode::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<StructureNode>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
+                    "beam",
+                    StructureNode::has_beam,
+                    StructureNode::get_beam,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
+                    "part",
+                    StructureNode::has_part,
+                    StructureNode::get_part,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
+                    "root",
+                    StructureNode::has_root,
+                    StructureNode::get_root,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
+                    "attach",
+                    StructureNode::has_attach,
+                    StructureNode::get_attach,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<StructureNode>(
+                    "StructureNode",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for StructureNode {
+    fn clear(&mut self) {
+        self.clear_beam();
+        self.clear_part();
+        self.clear_root();
+        self.clear_attach();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::cmp::PartialEq for StructureNode {
+    fn eq(&self, other: &StructureNode) -> bool {
+        self.node == other.node &&
+        self.link == other.link &&
+        self.unknown_fields == other.unknown_fields
+    }
+}
+
+impl ::std::fmt::Debug for StructureNode {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+#[derive(Clone,Default)]
+pub struct EndMarker {
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::std::cell::Cell<u32>,
+}
+
+impl EndMarker {
+    pub fn new() -> EndMarker {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static EndMarker {
+        static mut instance: ::protobuf::lazy::Lazy<EndMarker> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const EndMarker,
+        };
+        unsafe {
+            instance.get(|| {
+                EndMarker {
+                    unknown_fields: ::protobuf::UnknownFields::new(),
+                    cached_size: ::std::cell::Cell::new(0),
+                }
+            })
+        }
+    }
+}
+
+impl ::protobuf::Message for EndMarker {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !try!(is.eof()) {
+            let (field_number, wire_type) = try!(is.read_tag_unpack());
+            match field_number {
+                _ => {
+                    let unknown = try!(is.read_unknown(wire_type));
+                    self.mut_unknown_fields().add_value(field_number, unknown);
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        try!(os.write_unknown_fields(self.get_unknown_fields()));
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields<'s>(&'s self) -> &'s ::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields<'s>(&'s mut self) -> &'s mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn type_id(&self) -> ::std::any::TypeId {
+        ::std::any::TypeId::of::<EndMarker>()
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for EndMarker {
+    fn new() -> EndMarker {
+        EndMarker::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<EndMarker>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let fields = ::std::vec::Vec::new();
+                ::protobuf::reflect::MessageDescriptor::new::<EndMarker>(
+                    "EndMarker",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for EndMarker {
+    fn clear(&mut self) {
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::cmp::PartialEq for EndMarker {
+    fn eq(&self, other: &EndMarker) -> bool {
+        self.unknown_fields == other.unknown_fields
+    }
+}
+
+impl ::std::fmt::Debug for EndMarker {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+#[derive(Clone,Default)]
+pub struct StructureData {
+    // message fields
+    // message oneof groups
+    structure: ::std::option::Option<StructureData_oneof_structure>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::std::cell::Cell<u32>,
+}
+
+#[derive(Clone,PartialEq)]
+pub enum StructureData_oneof_structure {
+    marker(EndMarker),
+    node(StructureNode),
+}
+
+impl StructureData {
+    pub fn new() -> StructureData {
+        ::std::default::Default::default()
+    }
+
+    pub fn default_instance() -> &'static StructureData {
+        static mut instance: ::protobuf::lazy::Lazy<StructureData> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const StructureData,
+        };
+        unsafe {
+            instance.get(|| {
+                StructureData {
+                    structure: ::std::option::Option::None,
+                    unknown_fields: ::protobuf::UnknownFields::new(),
+                    cached_size: ::std::cell::Cell::new(0),
+                }
+            })
+        }
+    }
+
+    // optional .ship.EndMarker marker = 1;
+
+    pub fn clear_marker(&mut self) {
+        self.structure = ::std::option::Option::None;
+    }
+
+    pub fn has_marker(&self) -> bool {
+        match self.structure {
+            ::std::option::Option::Some(StructureData_oneof_structure::marker(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_marker(&mut self, v: EndMarker) {
+        self.structure = ::std::option::Option::Some(StructureData_oneof_structure::marker(v))
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_marker<'a>(&'a mut self) -> &'a mut EndMarker {
+        if let ::std::option::Option::Some(StructureData_oneof_structure::marker(_)) = self.structure {
+        } else {
+            self.structure = ::std::option::Option::Some(StructureData_oneof_structure::marker(EndMarker::new()));
+        }
+        match self.structure {
+            ::std::option::Option::Some(StructureData_oneof_structure::marker(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_marker(&mut self) -> EndMarker {
+        if self.has_marker() {
+            match self.structure.take() {
+                ::std::option::Option::Some(StructureData_oneof_structure::marker(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            EndMarker::new()
+        }
+    }
+
+    pub fn get_marker<'a>(&'a self) -> &'a EndMarker {
+        match self.structure {
+            ::std::option::Option::Some(StructureData_oneof_structure::marker(ref v)) => v,
+            _ => EndMarker::default_instance(),
+        }
+    }
+
+    // optional .ship.StructureNode node = 2;
+
+    pub fn clear_node(&mut self) {
+        self.structure = ::std::option::Option::None;
+    }
+
+    pub fn has_node(&self) -> bool {
+        match self.structure {
+            ::std::option::Option::Some(StructureData_oneof_structure::node(..)) => true,
+            _ => false,
+        }
+    }
+
+    // Param is passed by value, moved
+    pub fn set_node(&mut self, v: StructureNode) {
+        self.structure = ::std::option::Option::Some(StructureData_oneof_structure::node(v))
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_node<'a>(&'a mut self) -> &'a mut StructureNode {
+        if let ::std::option::Option::Some(StructureData_oneof_structure::node(_)) = self.structure {
+        } else {
+            self.structure = ::std::option::Option::Some(StructureData_oneof_structure::node(StructureNode::new()));
+        }
+        match self.structure {
+            ::std::option::Option::Some(StructureData_oneof_structure::node(ref mut v)) => v,
+            _ => panic!(),
+        }
+    }
+
+    // Take field
+    pub fn take_node(&mut self) -> StructureNode {
+        if self.has_node() {
+            match self.structure.take() {
+                ::std::option::Option::Some(StructureData_oneof_structure::node(v)) => v,
+                _ => panic!(),
+            }
+        } else {
+            StructureNode::new()
+        }
+    }
+
+    pub fn get_node<'a>(&'a self) -> &'a StructureNode {
+        match self.structure {
+            ::std::option::Option::Some(StructureData_oneof_structure::node(ref v)) => v,
+            _ => StructureNode::default_instance(),
+        }
+    }
+}
+
+impl ::protobuf::Message for StructureData {
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !try!(is.eof()) {
+            let (field_number, wire_type) = try!(is.read_tag_unpack());
+            match field_number {
+                1 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
+                    };
+                    self.structure = ::std::option::Option::Some(StructureData_oneof_structure::marker(try!(is.read_message())));
+                },
+                2 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeLengthDelimited {
+                        return ::std::result::Result::Err(::protobuf::ProtobufError::WireError("unexpected wire type".to_string()));
+                    };
+                    self.structure = ::std::option::Option::Some(StructureData_oneof_structure::node(try!(is.read_message())));
+                },
+                _ => {
+                    let unknown = try!(is.read_unknown(wire_type));
+                    self.mut_unknown_fields().add_value(field_number, unknown);
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if let ::std::option::Option::Some(ref v) = self.structure {
+            match v {
+                &StructureData_oneof_structure::marker(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+                &StructureData_oneof_structure::node(ref v) => {
+                    let len = v.compute_size();
+                    my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+                },
+            };
+        };
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if let ::std::option::Option::Some(ref v) = self.structure {
+            match v {
+                &StructureData_oneof_structure::marker(ref v) => {
+                    try!(os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
+                    try!(os.write_raw_varint32(v.get_cached_size()));
+                    try!(v.write_to_with_cached_sizes(os));
+                },
+                &StructureData_oneof_structure::node(ref v) => {
+                    try!(os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited));
+                    try!(os.write_raw_varint32(v.get_cached_size()));
+                    try!(v.write_to_with_cached_sizes(os));
+                },
+            };
+        };
+        try!(os.write_unknown_fields(self.get_unknown_fields()));
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields<'s>(&'s self) -> &'s ::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields<'s>(&'s mut self) -> &'s mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn type_id(&self) -> ::std::any::TypeId {
+        ::std::any::TypeId::of::<StructureData>()
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        ::protobuf::MessageStatic::descriptor_static(None::<Self>)
+    }
+}
+
+impl ::protobuf::MessageStatic for StructureData {
+    fn new() -> StructureData {
+        StructureData::new()
+    }
+
+    fn descriptor_static(_: ::std::option::Option<StructureData>) -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
+                    "marker",
+                    StructureData::has_marker,
+                    StructureData::get_marker,
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_message_accessor(
+                    "node",
+                    StructureData::has_node,
+                    StructureData::get_node,
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<StructureData>(
+                    "StructureData",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+}
+
+impl ::protobuf::Clear for StructureData {
+    fn clear(&mut self) {
+        self.clear_marker();
+        self.clear_node();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::cmp::PartialEq for StructureData {
+    fn eq(&self, other: &StructureData) -> bool {
+        self.structure == other.structure &&
+        self.unknown_fields == other.unknown_fields
+    }
+}
+
+impl ::std::fmt::Debug for StructureData {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+#[derive(Clone,Default)]
 pub struct Structure {
     // message fields
-    attachments: ::protobuf::RepeatedField<Attach>,
+    attachments: ::protobuf::RepeatedField<StructureData>,
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::std::cell::Cell<u32>,
@@ -1866,28 +2459,28 @@ impl Structure {
         }
     }
 
-    // repeated .ship.Attach attachments = 1;
+    // repeated .ship.StructureData attachments = 1;
 
     pub fn clear_attachments(&mut self) {
         self.attachments.clear();
     }
 
     // Param is passed by value, moved
-    pub fn set_attachments(&mut self, v: ::protobuf::RepeatedField<Attach>) {
+    pub fn set_attachments(&mut self, v: ::protobuf::RepeatedField<StructureData>) {
         self.attachments = v;
     }
 
     // Mutable pointer to the field.
-    pub fn mut_attachments<'a>(&'a mut self) -> &'a mut ::protobuf::RepeatedField<Attach> {
+    pub fn mut_attachments<'a>(&'a mut self) -> &'a mut ::protobuf::RepeatedField<StructureData> {
         &mut self.attachments
     }
 
     // Take field
-    pub fn take_attachments(&mut self) -> ::protobuf::RepeatedField<Attach> {
+    pub fn take_attachments(&mut self) -> ::protobuf::RepeatedField<StructureData> {
         ::std::mem::replace(&mut self.attachments, ::protobuf::RepeatedField::new())
     }
 
-    pub fn get_attachments<'a>(&'a self) -> &'a [Attach] {
+    pub fn get_attachments<'a>(&'a self) -> &'a [StructureData] {
         &self.attachments
     }
 }
@@ -2028,111 +2621,133 @@ static file_descriptor_proto_data: &'static [u8] = &[
     0x32, 0x0c, 0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e, 0x45, 0x6e, 0x67, 0x69, 0x6e, 0x65, 0x48, 0x00,
     0x42, 0x06, 0x0a, 0x04, 0x70, 0x61, 0x72, 0x74, 0x22, 0x16, 0x0a, 0x04, 0x42, 0x65, 0x61, 0x6d,
     0x12, 0x0e, 0x0a, 0x06, 0x6c, 0x65, 0x6e, 0x67, 0x74, 0x68, 0x18, 0x01, 0x20, 0x02, 0x28, 0x01,
-    0x22, 0x52, 0x0a, 0x0a, 0x41, 0x74, 0x74, 0x61, 0x63, 0x68, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x1a,
-    0x0a, 0x04, 0x62, 0x65, 0x61, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x73,
-    0x68, 0x69, 0x70, 0x2e, 0x42, 0x65, 0x61, 0x6d, 0x48, 0x00, 0x12, 0x1a, 0x0a, 0x04, 0x70, 0x61,
-    0x72, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e,
-    0x50, 0x61, 0x72, 0x74, 0x48, 0x00, 0x42, 0x0c, 0x0a, 0x0a, 0x61, 0x74, 0x74, 0x61, 0x63, 0x68,
-    0x6d, 0x65, 0x6e, 0x74, 0x22, 0x64, 0x0a, 0x06, 0x41, 0x74, 0x74, 0x61, 0x63, 0x68, 0x12, 0x10,
-    0x0a, 0x08, 0x69, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x02, 0x28, 0x05,
-    0x12, 0x10, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x02,
-    0x28, 0x01, 0x12, 0x10, 0x0a, 0x08, 0x72, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03,
-    0x20, 0x02, 0x28, 0x01, 0x12, 0x24, 0x0a, 0x0a, 0x61, 0x74, 0x74, 0x61, 0x63, 0x68, 0x6d, 0x65,
-    0x6e, 0x74, 0x18, 0x04, 0x20, 0x02, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e,
-    0x41, 0x74, 0x74, 0x61, 0x63, 0x68, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0x2e, 0x0a, 0x09, 0x53, 0x74,
-    0x72, 0x75, 0x63, 0x74, 0x75, 0x72, 0x65, 0x12, 0x21, 0x0a, 0x0b, 0x61, 0x74, 0x74, 0x61, 0x63,
-    0x68, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x73,
-    0x68, 0x69, 0x70, 0x2e, 0x41, 0x74, 0x74, 0x61, 0x63, 0x68, 0x4a, 0x9e, 0x0b, 0x0a, 0x06, 0x12,
-    0x04, 0x01, 0x00, 0x2f, 0x01, 0x0a, 0x08, 0x0a, 0x01, 0x02, 0x12, 0x03, 0x01, 0x08, 0x0c, 0x0a,
-    0x0a, 0x0a, 0x02, 0x04, 0x00, 0x12, 0x04, 0x03, 0x00, 0x06, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04,
-    0x00, 0x01, 0x12, 0x03, 0x03, 0x08, 0x0e, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x00, 0x02, 0x00, 0x12,
-    0x03, 0x04, 0x02, 0x1c, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x00, 0x04, 0x12, 0x03, 0x04,
-    0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x00, 0x05, 0x12, 0x03, 0x04, 0x0b, 0x11,
-    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x00, 0x01, 0x12, 0x03, 0x04, 0x12, 0x17, 0x0a, 0x0c,
-    0x0a, 0x05, 0x04, 0x00, 0x02, 0x00, 0x03, 0x12, 0x03, 0x04, 0x1a, 0x1b, 0x0a, 0x0b, 0x0a, 0x04,
-    0x04, 0x00, 0x02, 0x01, 0x12, 0x03, 0x05, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02,
-    0x01, 0x04, 0x12, 0x03, 0x05, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x05,
-    0x12, 0x03, 0x05, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x01, 0x12, 0x03,
-    0x05, 0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x03, 0x12, 0x03, 0x05, 0x1b,
-    0x1c, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x01, 0x12, 0x04, 0x08, 0x00, 0x0b, 0x01, 0x0a, 0x0a, 0x0a,
-    0x03, 0x04, 0x01, 0x01, 0x12, 0x03, 0x08, 0x08, 0x10, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x01, 0x02,
-    0x00, 0x12, 0x03, 0x09, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x04, 0x12,
-    0x03, 0x09, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x05, 0x12, 0x03, 0x09,
-    0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x01, 0x12, 0x03, 0x09, 0x12, 0x18,
-    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x03, 0x12, 0x03, 0x09, 0x1b, 0x1c, 0x0a, 0x0b,
-    0x0a, 0x04, 0x04, 0x01, 0x02, 0x01, 0x12, 0x03, 0x0a, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
-    0x01, 0x02, 0x01, 0x04, 0x12, 0x03, 0x0a, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02,
-    0x01, 0x05, 0x12, 0x03, 0x0a, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x01, 0x01,
-    0x12, 0x03, 0x0a, 0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x01, 0x03, 0x12, 0x03,
-    0x0a, 0x1b, 0x1c, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x02, 0x12, 0x04, 0x0d, 0x00, 0x11, 0x01, 0x0a,
-    0x0a, 0x0a, 0x03, 0x04, 0x02, 0x01, 0x12, 0x03, 0x0d, 0x08, 0x0e, 0x0a, 0x0b, 0x0a, 0x04, 0x04,
-    0x02, 0x02, 0x00, 0x12, 0x03, 0x0e, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00,
-    0x04, 0x12, 0x03, 0x0e, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x05, 0x12,
-    0x03, 0x0e, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x01, 0x12, 0x03, 0x0e,
-    0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x03, 0x12, 0x03, 0x0e, 0x1b, 0x1c,
-    0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x02, 0x02, 0x01, 0x12, 0x03, 0x0f, 0x02, 0x1d, 0x0a, 0x0c, 0x0a,
-    0x05, 0x04, 0x02, 0x02, 0x01, 0x04, 0x12, 0x03, 0x0f, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
-    0x02, 0x02, 0x01, 0x05, 0x12, 0x03, 0x0f, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02,
-    0x01, 0x01, 0x12, 0x03, 0x0f, 0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x01, 0x03,
-    0x12, 0x03, 0x0f, 0x1b, 0x1c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x02, 0x02, 0x02, 0x12, 0x03, 0x10,
-    0x02, 0x1b, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x02, 0x04, 0x12, 0x03, 0x10, 0x02, 0x0a,
-    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x02, 0x05, 0x12, 0x03, 0x10, 0x0b, 0x10, 0x0a, 0x0c,
-    0x0a, 0x05, 0x04, 0x02, 0x02, 0x02, 0x01, 0x12, 0x03, 0x10, 0x11, 0x16, 0x0a, 0x0c, 0x0a, 0x05,
-    0x04, 0x02, 0x02, 0x02, 0x03, 0x12, 0x03, 0x10, 0x19, 0x1a, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x03,
-    0x12, 0x04, 0x13, 0x00, 0x19, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x03, 0x01, 0x12, 0x03, 0x13,
-    0x08, 0x0c, 0x0a, 0x0c, 0x0a, 0x04, 0x04, 0x03, 0x08, 0x00, 0x12, 0x04, 0x14, 0x02, 0x18, 0x03,
-    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x08, 0x00, 0x01, 0x12, 0x03, 0x14, 0x08, 0x0c, 0x0a, 0x0b,
-    0x0a, 0x04, 0x04, 0x03, 0x02, 0x00, 0x12, 0x03, 0x15, 0x04, 0x16, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
-    0x03, 0x02, 0x00, 0x06, 0x12, 0x03, 0x15, 0x04, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02,
-    0x00, 0x01, 0x12, 0x03, 0x15, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x00, 0x03,
-    0x12, 0x03, 0x15, 0x14, 0x15, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x03, 0x02, 0x01, 0x12, 0x03, 0x16,
-    0x04, 0x1a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x01, 0x06, 0x12, 0x03, 0x16, 0x04, 0x0c,
-    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x01, 0x01, 0x12, 0x03, 0x16, 0x0d, 0x15, 0x0a, 0x0c,
-    0x0a, 0x05, 0x04, 0x03, 0x02, 0x01, 0x03, 0x12, 0x03, 0x16, 0x18, 0x19, 0x0a, 0x0b, 0x0a, 0x04,
-    0x04, 0x03, 0x02, 0x02, 0x12, 0x03, 0x17, 0x04, 0x16, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02,
-    0x02, 0x06, 0x12, 0x03, 0x17, 0x04, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x02, 0x01,
-    0x12, 0x03, 0x17, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x02, 0x03, 0x12, 0x03,
-    0x17, 0x14, 0x15, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x04, 0x12, 0x04, 0x1b, 0x00, 0x1d, 0x01, 0x0a,
-    0x0a, 0x0a, 0x03, 0x04, 0x04, 0x01, 0x12, 0x03, 0x1b, 0x08, 0x0c, 0x0a, 0x0b, 0x0a, 0x04, 0x04,
-    0x04, 0x02, 0x00, 0x12, 0x03, 0x1c, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00,
-    0x04, 0x12, 0x03, 0x1c, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x05, 0x12,
-    0x03, 0x1c, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x01, 0x12, 0x03, 0x1c,
-    0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x03, 0x12, 0x03, 0x1c, 0x1b, 0x1c,
-    0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x05, 0x12, 0x04, 0x1f, 0x00, 0x24, 0x01, 0x0a, 0x0a, 0x0a, 0x03,
-    0x04, 0x05, 0x01, 0x12, 0x03, 0x1f, 0x08, 0x12, 0x0a, 0x0c, 0x0a, 0x04, 0x04, 0x05, 0x08, 0x00,
-    0x12, 0x04, 0x20, 0x02, 0x23, 0x03, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x05, 0x08, 0x00, 0x01, 0x12,
-    0x03, 0x20, 0x08, 0x12, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x05, 0x02, 0x00, 0x12, 0x03, 0x21, 0x04,
-    0x12, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x05, 0x02, 0x00, 0x06, 0x12, 0x03, 0x21, 0x04, 0x08, 0x0a,
-    0x0c, 0x0a, 0x05, 0x04, 0x05, 0x02, 0x00, 0x01, 0x12, 0x03, 0x21, 0x09, 0x0d, 0x0a, 0x0c, 0x0a,
-    0x05, 0x04, 0x05, 0x02, 0x00, 0x03, 0x12, 0x03, 0x21, 0x10, 0x11, 0x0a, 0x0b, 0x0a, 0x04, 0x04,
-    0x05, 0x02, 0x01, 0x12, 0x03, 0x22, 0x04, 0x12, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x05, 0x02, 0x01,
-    0x06, 0x12, 0x03, 0x22, 0x04, 0x08, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x05, 0x02, 0x01, 0x01, 0x12,
-    0x03, 0x22, 0x09, 0x0d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x05, 0x02, 0x01, 0x03, 0x12, 0x03, 0x22,
-    0x10, 0x11, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x06, 0x12, 0x04, 0x26, 0x00, 0x2b, 0x01, 0x0a, 0x0a,
-    0x0a, 0x03, 0x04, 0x06, 0x01, 0x12, 0x03, 0x26, 0x08, 0x0e, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x06,
-    0x02, 0x00, 0x12, 0x03, 0x27, 0x02, 0x1e, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x04,
-    0x12, 0x03, 0x27, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x05, 0x12, 0x03,
-    0x27, 0x0b, 0x10, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x01, 0x12, 0x03, 0x27, 0x11,
-    0x19, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x03, 0x12, 0x03, 0x27, 0x1c, 0x1d, 0x0a,
-    0x0b, 0x0a, 0x04, 0x04, 0x06, 0x02, 0x01, 0x12, 0x03, 0x28, 0x02, 0x1f, 0x0a, 0x0c, 0x0a, 0x05,
-    0x04, 0x06, 0x02, 0x01, 0x04, 0x12, 0x03, 0x28, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06,
-    0x02, 0x01, 0x05, 0x12, 0x03, 0x28, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x01,
-    0x01, 0x12, 0x03, 0x28, 0x12, 0x1a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x01, 0x03, 0x12,
-    0x03, 0x28, 0x1d, 0x1e, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x06, 0x02, 0x02, 0x12, 0x03, 0x29, 0x02,
-    0x1f, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x02, 0x04, 0x12, 0x03, 0x29, 0x02, 0x0a, 0x0a,
-    0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x02, 0x05, 0x12, 0x03, 0x29, 0x0b, 0x11, 0x0a, 0x0c, 0x0a,
-    0x05, 0x04, 0x06, 0x02, 0x02, 0x01, 0x12, 0x03, 0x29, 0x12, 0x1a, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
-    0x06, 0x02, 0x02, 0x03, 0x12, 0x03, 0x29, 0x1d, 0x1e, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x06, 0x02,
-    0x03, 0x12, 0x03, 0x2a, 0x02, 0x25, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x03, 0x04, 0x12,
-    0x03, 0x2a, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x03, 0x06, 0x12, 0x03, 0x2a,
-    0x0b, 0x15, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x03, 0x01, 0x12, 0x03, 0x2a, 0x16, 0x20,
-    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x03, 0x03, 0x12, 0x03, 0x2a, 0x23, 0x24, 0x0a, 0x0a,
-    0x0a, 0x02, 0x04, 0x07, 0x12, 0x04, 0x2d, 0x00, 0x2f, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x07,
-    0x01, 0x12, 0x03, 0x2d, 0x08, 0x11, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x07, 0x02, 0x00, 0x12, 0x03,
-    0x2e, 0x02, 0x22, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x00, 0x04, 0x12, 0x03, 0x2e, 0x02,
-    0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x00, 0x06, 0x12, 0x03, 0x2e, 0x0b, 0x11, 0x0a,
-    0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x00, 0x01, 0x12, 0x03, 0x2e, 0x12, 0x1d, 0x0a, 0x0c, 0x0a,
-    0x05, 0x04, 0x07, 0x02, 0x00, 0x03, 0x12, 0x03, 0x2e, 0x20, 0x21,
+    0x22, 0x06, 0x0a, 0x04, 0x52, 0x6f, 0x6f, 0x74, 0x22, 0x2c, 0x0a, 0x06, 0x41, 0x74, 0x74, 0x61,
+    0x63, 0x68, 0x12, 0x10, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01,
+    0x20, 0x02, 0x28, 0x01, 0x12, 0x10, 0x0a, 0x08, 0x72, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+    0x18, 0x02, 0x20, 0x02, 0x28, 0x01, 0x22, 0x93, 0x01, 0x0a, 0x0d, 0x53, 0x74, 0x72, 0x75, 0x63,
+    0x74, 0x75, 0x72, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1a, 0x0a, 0x04, 0x62, 0x65, 0x61, 0x6d,
+    0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e, 0x42, 0x65,
+    0x61, 0x6d, 0x48, 0x00, 0x12, 0x1a, 0x0a, 0x04, 0x70, 0x61, 0x72, 0x74, 0x18, 0x02, 0x20, 0x01,
+    0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e, 0x50, 0x61, 0x72, 0x74, 0x48, 0x00,
+    0x12, 0x1a, 0x0a, 0x04, 0x72, 0x6f, 0x6f, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a,
+    0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e, 0x52, 0x6f, 0x6f, 0x74, 0x48, 0x01, 0x12, 0x1e, 0x0a, 0x06,
+    0x61, 0x74, 0x74, 0x61, 0x63, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x73,
+    0x68, 0x69, 0x70, 0x2e, 0x41, 0x74, 0x74, 0x61, 0x63, 0x68, 0x48, 0x01, 0x42, 0x06, 0x0a, 0x04,
+    0x6e, 0x6f, 0x64, 0x65, 0x42, 0x06, 0x0a, 0x04, 0x6c, 0x69, 0x6e, 0x6b, 0x22, 0x0b, 0x0a, 0x09,
+    0x45, 0x6e, 0x64, 0x4d, 0x61, 0x72, 0x6b, 0x65, 0x72, 0x22, 0x64, 0x0a, 0x0d, 0x53, 0x74, 0x72,
+    0x75, 0x63, 0x74, 0x75, 0x72, 0x65, 0x44, 0x61, 0x74, 0x61, 0x12, 0x21, 0x0a, 0x06, 0x6d, 0x61,
+    0x72, 0x6b, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x73, 0x68, 0x69,
+    0x70, 0x2e, 0x45, 0x6e, 0x64, 0x4d, 0x61, 0x72, 0x6b, 0x65, 0x72, 0x48, 0x00, 0x12, 0x23, 0x0a,
+    0x04, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x73, 0x68,
+    0x69, 0x70, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x75, 0x72, 0x65, 0x4e, 0x6f, 0x64, 0x65,
+    0x48, 0x00, 0x42, 0x0b, 0x0a, 0x09, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x75, 0x72, 0x65, 0x22,
+    0x35, 0x0a, 0x09, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x75, 0x72, 0x65, 0x12, 0x28, 0x0a, 0x0b,
+    0x61, 0x74, 0x74, 0x61, 0x63, 0x68, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+    0x0b, 0x32, 0x13, 0x2e, 0x73, 0x68, 0x69, 0x70, 0x2e, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x75,
+    0x72, 0x65, 0x44, 0x61, 0x74, 0x61, 0x4a, 0xee, 0x0c, 0x0a, 0x06, 0x12, 0x04, 0x01, 0x00, 0x3c,
+    0x01, 0x0a, 0x08, 0x0a, 0x01, 0x02, 0x12, 0x03, 0x01, 0x08, 0x0c, 0x0a, 0x0a, 0x0a, 0x02, 0x04,
+    0x00, 0x12, 0x04, 0x03, 0x00, 0x06, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x00, 0x01, 0x12, 0x03,
+    0x03, 0x08, 0x0e, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x00, 0x02, 0x00, 0x12, 0x03, 0x04, 0x02, 0x1c,
+    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x00, 0x04, 0x12, 0x03, 0x04, 0x02, 0x0a, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x00, 0x02, 0x00, 0x05, 0x12, 0x03, 0x04, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x00, 0x02, 0x00, 0x01, 0x12, 0x03, 0x04, 0x12, 0x17, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00,
+    0x02, 0x00, 0x03, 0x12, 0x03, 0x04, 0x1a, 0x1b, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x00, 0x02, 0x01,
+    0x12, 0x03, 0x05, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x04, 0x12, 0x03,
+    0x05, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x05, 0x12, 0x03, 0x05, 0x0b,
+    0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x01, 0x12, 0x03, 0x05, 0x12, 0x18, 0x0a,
+    0x0c, 0x0a, 0x05, 0x04, 0x00, 0x02, 0x01, 0x03, 0x12, 0x03, 0x05, 0x1b, 0x1c, 0x0a, 0x0a, 0x0a,
+    0x02, 0x04, 0x01, 0x12, 0x04, 0x08, 0x00, 0x0b, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x01, 0x01,
+    0x12, 0x03, 0x08, 0x08, 0x10, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x01, 0x02, 0x00, 0x12, 0x03, 0x09,
+    0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x04, 0x12, 0x03, 0x09, 0x02, 0x0a,
+    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x05, 0x12, 0x03, 0x09, 0x0b, 0x11, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x01, 0x02, 0x00, 0x01, 0x12, 0x03, 0x09, 0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x01, 0x02, 0x00, 0x03, 0x12, 0x03, 0x09, 0x1b, 0x1c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x01,
+    0x02, 0x01, 0x12, 0x03, 0x0a, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x01, 0x04,
+    0x12, 0x03, 0x0a, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x01, 0x05, 0x12, 0x03,
+    0x0a, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x01, 0x01, 0x12, 0x03, 0x0a, 0x12,
+    0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x01, 0x02, 0x01, 0x03, 0x12, 0x03, 0x0a, 0x1b, 0x1c, 0x0a,
+    0x0a, 0x0a, 0x02, 0x04, 0x02, 0x12, 0x04, 0x0d, 0x00, 0x11, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04,
+    0x02, 0x01, 0x12, 0x03, 0x0d, 0x08, 0x0e, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x02, 0x02, 0x00, 0x12,
+    0x03, 0x0e, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x04, 0x12, 0x03, 0x0e,
+    0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x05, 0x12, 0x03, 0x0e, 0x0b, 0x11,
+    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x01, 0x12, 0x03, 0x0e, 0x12, 0x18, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x02, 0x02, 0x00, 0x03, 0x12, 0x03, 0x0e, 0x1b, 0x1c, 0x0a, 0x0b, 0x0a, 0x04,
+    0x04, 0x02, 0x02, 0x01, 0x12, 0x03, 0x0f, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02,
+    0x01, 0x04, 0x12, 0x03, 0x0f, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x01, 0x05,
+    0x12, 0x03, 0x0f, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x01, 0x01, 0x12, 0x03,
+    0x0f, 0x12, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x01, 0x03, 0x12, 0x03, 0x0f, 0x1b,
+    0x1c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x02, 0x02, 0x02, 0x12, 0x03, 0x10, 0x02, 0x1b, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x02, 0x02, 0x02, 0x04, 0x12, 0x03, 0x10, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x02, 0x02, 0x02, 0x05, 0x12, 0x03, 0x10, 0x0b, 0x10, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02,
+    0x02, 0x02, 0x01, 0x12, 0x03, 0x10, 0x11, 0x16, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x02, 0x02, 0x02,
+    0x03, 0x12, 0x03, 0x10, 0x19, 0x1a, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x03, 0x12, 0x04, 0x13, 0x00,
+    0x19, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x03, 0x01, 0x12, 0x03, 0x13, 0x08, 0x0c, 0x0a, 0x0c,
+    0x0a, 0x04, 0x04, 0x03, 0x08, 0x00, 0x12, 0x04, 0x14, 0x02, 0x18, 0x03, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x03, 0x08, 0x00, 0x01, 0x12, 0x03, 0x14, 0x08, 0x0c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x03,
+    0x02, 0x00, 0x12, 0x03, 0x15, 0x04, 0x16, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x00, 0x06,
+    0x12, 0x03, 0x15, 0x04, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x00, 0x01, 0x12, 0x03,
+    0x15, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x00, 0x03, 0x12, 0x03, 0x15, 0x14,
+    0x15, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x03, 0x02, 0x01, 0x12, 0x03, 0x16, 0x04, 0x1a, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x03, 0x02, 0x01, 0x06, 0x12, 0x03, 0x16, 0x04, 0x0c, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x03, 0x02, 0x01, 0x01, 0x12, 0x03, 0x16, 0x0d, 0x15, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03,
+    0x02, 0x01, 0x03, 0x12, 0x03, 0x16, 0x18, 0x19, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x03, 0x02, 0x02,
+    0x12, 0x03, 0x17, 0x04, 0x16, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x02, 0x06, 0x12, 0x03,
+    0x17, 0x04, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x02, 0x01, 0x12, 0x03, 0x17, 0x0b,
+    0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x03, 0x02, 0x02, 0x03, 0x12, 0x03, 0x17, 0x14, 0x15, 0x0a,
+    0x0a, 0x0a, 0x02, 0x04, 0x04, 0x12, 0x04, 0x1b, 0x00, 0x1d, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04,
+    0x04, 0x01, 0x12, 0x03, 0x1b, 0x08, 0x0c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x04, 0x02, 0x00, 0x12,
+    0x03, 0x1c, 0x02, 0x1d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x04, 0x12, 0x03, 0x1c,
+    0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x05, 0x12, 0x03, 0x1c, 0x0b, 0x11,
+    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x01, 0x12, 0x03, 0x1c, 0x12, 0x18, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x04, 0x02, 0x00, 0x03, 0x12, 0x03, 0x1c, 0x1b, 0x1c, 0x0a, 0x09, 0x0a, 0x02,
+    0x04, 0x05, 0x12, 0x03, 0x1f, 0x00, 0x0f, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x05, 0x01, 0x12, 0x03,
+    0x1f, 0x08, 0x0c, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x06, 0x12, 0x04, 0x21, 0x00, 0x24, 0x01, 0x0a,
+    0x0a, 0x0a, 0x03, 0x04, 0x06, 0x01, 0x12, 0x03, 0x21, 0x08, 0x0e, 0x0a, 0x0b, 0x0a, 0x04, 0x04,
+    0x06, 0x02, 0x00, 0x12, 0x03, 0x22, 0x02, 0x1f, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00,
+    0x04, 0x12, 0x03, 0x22, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x05, 0x12,
+    0x03, 0x22, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x01, 0x12, 0x03, 0x22,
+    0x12, 0x1a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x00, 0x03, 0x12, 0x03, 0x22, 0x1d, 0x1e,
+    0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x06, 0x02, 0x01, 0x12, 0x03, 0x23, 0x02, 0x1f, 0x0a, 0x0c, 0x0a,
+    0x05, 0x04, 0x06, 0x02, 0x01, 0x04, 0x12, 0x03, 0x23, 0x02, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
+    0x06, 0x02, 0x01, 0x05, 0x12, 0x03, 0x23, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02,
+    0x01, 0x01, 0x12, 0x03, 0x23, 0x12, 0x1a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x06, 0x02, 0x01, 0x03,
+    0x12, 0x03, 0x23, 0x1d, 0x1e, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x07, 0x12, 0x04, 0x26, 0x00, 0x2f,
+    0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x07, 0x01, 0x12, 0x03, 0x26, 0x08, 0x15, 0x0a, 0x0c, 0x0a,
+    0x04, 0x04, 0x07, 0x08, 0x00, 0x12, 0x04, 0x27, 0x02, 0x2a, 0x03, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
+    0x07, 0x08, 0x00, 0x01, 0x12, 0x03, 0x27, 0x08, 0x0c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x07, 0x02,
+    0x00, 0x12, 0x03, 0x28, 0x04, 0x12, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x00, 0x06, 0x12,
+    0x03, 0x28, 0x04, 0x08, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x00, 0x01, 0x12, 0x03, 0x28,
+    0x09, 0x0d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x00, 0x03, 0x12, 0x03, 0x28, 0x10, 0x11,
+    0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x07, 0x02, 0x01, 0x12, 0x03, 0x29, 0x04, 0x12, 0x0a, 0x0c, 0x0a,
+    0x05, 0x04, 0x07, 0x02, 0x01, 0x06, 0x12, 0x03, 0x29, 0x04, 0x08, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
+    0x07, 0x02, 0x01, 0x01, 0x12, 0x03, 0x29, 0x09, 0x0d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02,
+    0x01, 0x03, 0x12, 0x03, 0x29, 0x10, 0x11, 0x0a, 0x0c, 0x0a, 0x04, 0x04, 0x07, 0x08, 0x01, 0x12,
+    0x04, 0x2b, 0x02, 0x2e, 0x03, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x08, 0x01, 0x01, 0x12, 0x03,
+    0x2b, 0x08, 0x0c, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x07, 0x02, 0x02, 0x12, 0x03, 0x2c, 0x04, 0x12,
+    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x02, 0x06, 0x12, 0x03, 0x2c, 0x04, 0x08, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x07, 0x02, 0x02, 0x01, 0x12, 0x03, 0x2c, 0x09, 0x0d, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x07, 0x02, 0x02, 0x03, 0x12, 0x03, 0x2c, 0x10, 0x11, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x07,
+    0x02, 0x03, 0x12, 0x03, 0x2d, 0x04, 0x16, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x03, 0x06,
+    0x12, 0x03, 0x2d, 0x04, 0x0a, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x03, 0x01, 0x12, 0x03,
+    0x2d, 0x0b, 0x11, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x07, 0x02, 0x03, 0x03, 0x12, 0x03, 0x2d, 0x14,
+    0x15, 0x0a, 0x09, 0x0a, 0x02, 0x04, 0x08, 0x12, 0x03, 0x31, 0x00, 0x14, 0x0a, 0x0a, 0x0a, 0x03,
+    0x04, 0x08, 0x01, 0x12, 0x03, 0x31, 0x08, 0x11, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x09, 0x12, 0x04,
+    0x33, 0x00, 0x38, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x09, 0x01, 0x12, 0x03, 0x33, 0x08, 0x15,
+    0x0a, 0x0c, 0x0a, 0x04, 0x04, 0x09, 0x08, 0x00, 0x12, 0x04, 0x34, 0x02, 0x37, 0x03, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x09, 0x08, 0x00, 0x01, 0x12, 0x03, 0x34, 0x08, 0x11, 0x0a, 0x0b, 0x0a, 0x04,
+    0x04, 0x09, 0x02, 0x00, 0x12, 0x03, 0x35, 0x04, 0x19, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x09, 0x02,
+    0x00, 0x06, 0x12, 0x03, 0x35, 0x04, 0x0d, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x09, 0x02, 0x00, 0x01,
+    0x12, 0x03, 0x35, 0x0e, 0x14, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x09, 0x02, 0x00, 0x03, 0x12, 0x03,
+    0x35, 0x17, 0x18, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x09, 0x02, 0x01, 0x12, 0x03, 0x36, 0x04, 0x1b,
+    0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x09, 0x02, 0x01, 0x06, 0x12, 0x03, 0x36, 0x04, 0x11, 0x0a, 0x0c,
+    0x0a, 0x05, 0x04, 0x09, 0x02, 0x01, 0x01, 0x12, 0x03, 0x36, 0x12, 0x16, 0x0a, 0x0c, 0x0a, 0x05,
+    0x04, 0x09, 0x02, 0x01, 0x03, 0x12, 0x03, 0x36, 0x19, 0x1a, 0x0a, 0x0a, 0x0a, 0x02, 0x04, 0x0a,
+    0x12, 0x04, 0x3a, 0x00, 0x3c, 0x01, 0x0a, 0x0a, 0x0a, 0x03, 0x04, 0x0a, 0x01, 0x12, 0x03, 0x3a,
+    0x08, 0x11, 0x0a, 0x0b, 0x0a, 0x04, 0x04, 0x0a, 0x02, 0x00, 0x12, 0x03, 0x3b, 0x02, 0x29, 0x0a,
+    0x0c, 0x0a, 0x05, 0x04, 0x0a, 0x02, 0x00, 0x04, 0x12, 0x03, 0x3b, 0x02, 0x0a, 0x0a, 0x0c, 0x0a,
+    0x05, 0x04, 0x0a, 0x02, 0x00, 0x06, 0x12, 0x03, 0x3b, 0x0b, 0x18, 0x0a, 0x0c, 0x0a, 0x05, 0x04,
+    0x0a, 0x02, 0x00, 0x01, 0x12, 0x03, 0x3b, 0x19, 0x24, 0x0a, 0x0c, 0x0a, 0x05, 0x04, 0x0a, 0x02,
+    0x00, 0x03, 0x12, 0x03, 0x3b, 0x27, 0x28,
 ];
 
 static mut file_descriptor_proto_lazy: ::protobuf::lazy::Lazy<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::lazy::Lazy {

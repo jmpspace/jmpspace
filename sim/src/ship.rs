@@ -187,34 +187,36 @@ impl Structure {
     fn contract(&self) -> contracts::Structure {
         let mut structure = contracts::Structure::new();
         // performance!
-        let mut attachments: Vec<contracts::Attach> = Vec::new();
+        let mut data: Vec<contracts::StructureData> = Vec::new();
         let mut counter = 0;
         for item in self.attach_iter() {
-            let mut attach = contracts::Attach::new();
-            attach.set_identity(counter);
-            counter += 1;
-            for context in item.context.iter() {
-                attach.set_location(context.location);
-                attach.set_rotation(context.rotation);
+            match item {
+                StructureData::Marker => {
+                    data.push(contracts::EndMarker::New())
+                }
+                StructureData::Node(item) => {
+                    let mut node = contracts::StructureNode::new();
+                    counter += 1;
+                    item.context.set_link(node);
+                    item.structure.set_node(node);
+                    node.set_attachment(item.structure.contract_attachment());
+                    data.push(node)
+                }
             }
-            attach.set_attachment(item.structure.contract_attachment());
-            attachments.push(attach)
         }
-        structure.set_attachments(RepeatedField::from_vec(attachments));
+        structure.set_structure(RepeatedField::from_vec(data));
         structure
     }
 
-    fn contract_attachment(&self) -> contracts::Attachment {
-        let mut attachment = contracts::Attachment::new();
+    fn contract_node(&self, builder: &mut contracts::StructureNode) {
         match self {
             &tagtree::TagTree::Leaf(ref part) => {
-                attachment.set_part(part.contract())
+                builder.set_part(part.contract())
             }
             &tagtree::TagTree::Node(ref beam, _) => {
-                attachment.set_beam(beam.contract())
+                builder.set_beam(beam.contract())
             }
         }
-        attachment
     }
 
     fn mass(&self) -> f64 {
@@ -288,11 +290,6 @@ impl Structure {
 }
 
 // Opportunity to move into tagtree if Attach is a monoid
-struct StructureContextItem<'a, T> {
-    context: T,
-    structure: &'a Structure,
-}
-
 struct StructureWorkItem<'a, T> {
     context: T,
     structure: &'a Structure,
@@ -302,9 +299,27 @@ struct StructureIsoIter<'a> {
     work: Vec<StructureWorkItem<'a, Iso2<f64>>>,
 }
 
+enum StructureLink {
+    Root, Attach(Attach)
+}
+
+impl StructureLink {
+
+    fn contract_link(&self, builder: &mut contracts::StructureNode) {
+        match self {
+            StructureLink::Root => {
+                builder.set_root(contracts::Root::new())
+            }
+            StructureLink::Attach(attach) => {
+                builder.set_attach(attach)
+            }
+        }
+    }
+
+}
 
 struct StructureAttachIter<'a> {
-    work: Vec<StructureWorkItem<'a, Option<Attach>>>,
+    work: Vec<StructureWorkItem<'a, StructureLink>>,
 }
 
 impl Structure {
@@ -328,7 +343,7 @@ impl Structure {
 
 impl<'a> Iterator for StructureIsoIter<'a> {
 
-    type Item = StructureContextItem<'a, Iso2<f64>>;
+    type Item = StructureWorkItem<'a, Iso2<f64>>;
 
     fn next(&mut self) -> Option<Self::Item> {
 
@@ -356,7 +371,7 @@ impl<'a> Iterator for StructureIsoIter<'a> {
                     }
                 }
 
-                Some(StructureContextItem { context: context, structure: curr_work.structure })
+                Some(StructureWorkItem { context: context, structure: curr_work.structure })
 
             }
         }
@@ -365,9 +380,14 @@ impl<'a> Iterator for StructureIsoIter<'a> {
 
 }
 
+enum StructureData<T> {
+    Marker,
+    Node(T)
+}
+
 impl<'a> Iterator for StructureAttachIter<'a> {
 
-    type Item = StructureContextItem<'a, Option<Attach>>;
+    type Item = StructureData<StructureWorkItem<'a, Option<Attach>>>;
 
     fn next(&mut self) -> Option<Self::Item> {
 
@@ -388,15 +408,17 @@ impl<'a> Iterator for StructureAttachIter<'a> {
                             let next_context = Some(attach.clone());
                             let next_work = StructureWorkItem { 
                                 context: next_context, 
-                            structure: &**attachment
+                            structure: &**attachment,
                             };
 
-                            self.work.push(next_work);
+                            self.work.push(StructureData::Node(next_work));
                         })
                     }
                 }
 
-                Some(StructureContextItem { context: context, structure: curr_work.structure })
+                self.work.push(StructureData::Marker);
+
+                Some(StructureWorkItem { context: context, structure: curr_work.structure })
 
             }
         }

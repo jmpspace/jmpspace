@@ -14,8 +14,11 @@ It has these top-level messages:
 	Engine
 	Part
 	Beam
-	Attachment
+	Root
 	Attach
+	StructureNode
+	EndMarker
+	StructureData
 	Structure
 */
 package ship
@@ -155,48 +158,23 @@ func (m *Beam) GetLength() float64 {
 	return 0
 }
 
-type Attachment struct {
-	Beam             *Beam  `protobuf:"bytes,1,opt,name=beam" json:"beam,omitempty"`
-	Part             *Part  `protobuf:"bytes,2,opt,name=part" json:"part,omitempty"`
+type Root struct {
 	XXX_unrecognized []byte `json:"-"`
 }
 
-func (m *Attachment) Reset()         { *m = Attachment{} }
-func (m *Attachment) String() string { return proto.CompactTextString(m) }
-func (*Attachment) ProtoMessage()    {}
-
-func (m *Attachment) GetBeam() *Beam {
-	if m != nil {
-		return m.Beam
-	}
-	return nil
-}
-
-func (m *Attachment) GetPart() *Part {
-	if m != nil {
-		return m.Part
-	}
-	return nil
-}
+func (m *Root) Reset()         { *m = Root{} }
+func (m *Root) String() string { return proto.CompactTextString(m) }
+func (*Root) ProtoMessage()    {}
 
 type Attach struct {
-	Identity         *int32      `protobuf:"varint,1,req,name=identity" json:"identity,omitempty"`
-	Location         *float64    `protobuf:"fixed64,2,req,name=location" json:"location,omitempty"`
-	Rotation         *float64    `protobuf:"fixed64,3,req,name=rotation" json:"rotation,omitempty"`
-	Attachment       *Attachment `protobuf:"bytes,4,req,name=attachment" json:"attachment,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Location         *float64 `protobuf:"fixed64,1,req,name=location" json:"location,omitempty"`
+	Rotation         *float64 `protobuf:"fixed64,2,req,name=rotation" json:"rotation,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *Attach) Reset()         { *m = Attach{} }
 func (m *Attach) String() string { return proto.CompactTextString(m) }
 func (*Attach) ProtoMessage()    {}
-
-func (m *Attach) GetIdentity() int32 {
-	if m != nil && m.Identity != nil {
-		return *m.Identity
-	}
-	return 0
-}
 
 func (m *Attach) GetLocation() float64 {
 	if m != nil && m.Location != nil {
@@ -212,23 +190,88 @@ func (m *Attach) GetRotation() float64 {
 	return 0
 }
 
-func (m *Attach) GetAttachment() *Attachment {
+type StructureNode struct {
+	Beam             *Beam   `protobuf:"bytes,1,opt,name=beam" json:"beam,omitempty"`
+	Part             *Part   `protobuf:"bytes,2,opt,name=part" json:"part,omitempty"`
+	Root             *Root   `protobuf:"bytes,3,opt,name=root" json:"root,omitempty"`
+	Attach           *Attach `protobuf:"bytes,4,opt,name=attach" json:"attach,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *StructureNode) Reset()         { *m = StructureNode{} }
+func (m *StructureNode) String() string { return proto.CompactTextString(m) }
+func (*StructureNode) ProtoMessage()    {}
+
+func (m *StructureNode) GetBeam() *Beam {
 	if m != nil {
-		return m.Attachment
+		return m.Beam
+	}
+	return nil
+}
+
+func (m *StructureNode) GetPart() *Part {
+	if m != nil {
+		return m.Part
+	}
+	return nil
+}
+
+func (m *StructureNode) GetRoot() *Root {
+	if m != nil {
+		return m.Root
+	}
+	return nil
+}
+
+func (m *StructureNode) GetAttach() *Attach {
+	if m != nil {
+		return m.Attach
+	}
+	return nil
+}
+
+type EndMarker struct {
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *EndMarker) Reset()         { *m = EndMarker{} }
+func (m *EndMarker) String() string { return proto.CompactTextString(m) }
+func (*EndMarker) ProtoMessage()    {}
+
+type StructureData struct {
+	Marker           *EndMarker     `protobuf:"bytes,1,opt,name=marker" json:"marker,omitempty"`
+	Node             *StructureNode `protobuf:"bytes,2,opt,name=node" json:"node,omitempty"`
+	XXX_unrecognized []byte         `json:"-"`
+}
+
+func (m *StructureData) Reset()         { *m = StructureData{} }
+func (m *StructureData) String() string { return proto.CompactTextString(m) }
+func (*StructureData) ProtoMessage()    {}
+
+func (m *StructureData) GetMarker() *EndMarker {
+	if m != nil {
+		return m.Marker
+	}
+	return nil
+}
+
+func (m *StructureData) GetNode() *StructureNode {
+	if m != nil {
+		return m.Node
 	}
 	return nil
 }
 
 type Structure struct {
-	Attachments      []*Attach `protobuf:"bytes,1,rep,name=attachments" json:"attachments,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+	Attachments      []*StructureData `protobuf:"bytes,1,rep,name=attachments" json:"attachments,omitempty"`
+	XXX_unrecognized []byte           `json:"-"`
 }
 
 func (m *Structure) Reset()         { *m = Structure{} }
 func (m *Structure) String() string { return proto.CompactTextString(m) }
 func (*Structure) ProtoMessage()    {}
 
-func (m *Structure) GetAttachments() []*Attach {
+func (m *Structure) GetAttachments() []*StructureData {
 	if m != nil {
 		return m.Attachments
 	}

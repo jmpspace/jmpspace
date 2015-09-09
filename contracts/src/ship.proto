@@ -29,20 +29,33 @@ message Beam {
   required double length = 1;
 }
 
-message Attachment {
-  oneof attachment {
+message Root {};
+
+message Attach {
+  required double location = 1;
+  required double rotation = 2;
+}
+
+message StructureNode {
+  oneof node {
     Beam beam = 1;
     Part part = 2;
   }
+  oneof link {
+    Root root = 3;
+    Attach attach = 4;
+  }
 }
 
-message Attach { 
-  required int32 identity = 1;
-  required double location = 2;
-  required double rotation = 3;
-  required Attachment attachment = 4;
+message EndMarker {};
+
+message StructureData {
+  oneof structure {
+    EndMarker marker = 1;
+    StructureNode node = 2; 
+  }
 }
 
 message Structure { 
-  repeated Attach attachments = 1;
+  repeated StructureData attachments = 1;
 }
