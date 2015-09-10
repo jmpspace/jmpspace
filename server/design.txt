@@ -1,0 +1,57 @@
+
+Sim Manager
+  create simulation
+  create tick channel
+  spin up tick goroutine
+
+  create global action channel
+
+  create snapshot broadcast channel
+  create snapshot registration channel
+  spin up broadcaster
+
+  loop 
+    select
+      on tick
+        sim update world
+        sim take snapshot
+        sent snapshot to broadcast
+      on action
+        sim apply action
+
+Tick
+  loop
+    sleep
+    send to tick channel
+
+Broadcaster
+  create set of registered clients
+  loop
+    select
+      on broadcast
+        foreach registered client
+          send to client snapshot receiver
+      on register
+        add client snapshot receiver
+
+Client Handler
+  ws_recv Hello
+  ws_send Hello 
+  generate a random ship
+  register the ship with ECS
+  create action channel
+  spin up action reader goroutine
+  
+  loop
+    select
+      on action channel
+        add entity id information
+        send to global action channel
+      on snapshot channel
+        ws_send snapshot
+  
+Action Reader
+  loop
+    ws_recv Action
+    send to action channel
+
