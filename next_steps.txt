@@ -1,0 +1,17 @@
+
+crapships milestone
+  each connecting client gets a simple ship at random place
+  no snapshot optimization
+  actions to physics are connected
+  no cleanup
+
+  close the loop starting from client handler
+
+    start from client handler init
+    create a random ship and register with ECS
+    create an EntityProcess for snapshot
+    implement actions -> physics
+    implement thrust!
+    client structure deserialization
+    client world update from snapshot
+
