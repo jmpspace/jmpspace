@@ -180,35 +180,29 @@ struct Attach {
     rotation: f64
 }
 
+impl Attach {
+
+    fn contract(&self) -> contracts::Attach {
+        let mut attach = contracts::Attach::new();
+        attach.set_location(self.location);
+        attach.set_rotation(self.rotation);
+        attach
+    }
+
+}
+
 type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 impl Structure {
 
     fn contract(&self) -> contracts::Structure {
         let mut structure = contracts::Structure::new();
-        // performance!
-        let mut data: Vec<contracts::StructureData> = Vec::new();
-        let mut counter = 0;
-        for item in self.attach_iter() {
-            match item {
-                StructureData::Marker => {
-                    data.push(contracts::EndMarker::New())
-                }
-                StructureData::Node(item) => {
-                    let mut node = contracts::StructureNode::new();
-                    counter += 1;
-                    item.context.set_link(node);
-                    item.structure.set_node(node);
-                    node.set_attachment(item.structure.contract_attachment());
-                    data.push(node)
-                }
-            }
-        }
-        structure.set_structure(RepeatedField::from_vec(data));
+        let datas: RepeatedField<contracts::StructureData> = self.contract_iter().collect();
+        structure.set_attachments(datas);
         structure
     }
 
-    fn contract_node(&self, builder: &mut contracts::StructureNode) {
+    fn set_contract_node_for(&self, builder: &mut contracts::StructureNode) {
         match self {
             &tagtree::TagTree::Leaf(ref part) => {
                 builder.set_part(part.contract())
@@ -305,21 +299,21 @@ enum StructureLink {
 
 impl StructureLink {
 
-    fn contract_link(&self, builder: &mut contracts::StructureNode) {
+    fn set_link_for(&self, builder: &mut contracts::StructureNode) {
         match self {
-            StructureLink::Root => {
+            &StructureLink::Root => {
                 builder.set_root(contracts::Root::new())
             }
-            StructureLink::Attach(attach) => {
-                builder.set_attach(attach)
+            &StructureLink::Attach(ref attach) => {
+                builder.set_attach(attach.contract())
             }
         }
     }
 
 }
 
-struct StructureAttachIter<'a> {
-    work: Vec<StructureWorkItem<'a, StructureLink>>,
+struct StructureContractIter<'a> {
+    work: Vec<Option<StructureWorkItem<'a, Option<Attach>>>>,
 }
 
 impl Structure {
@@ -332,12 +326,12 @@ impl Structure {
     }
 
     // Not very DRY, not exactly sure where to abstract
-    pub fn attach_iter(&self) -> StructureAttachIter {
+    pub fn contract_iter(&self) -> StructureContractIter {
         let root_work_item = StructureWorkItem {
             context: None,
             structure: self,
         };
-        StructureAttachIter { work: vec!(root_work_item) }
+        StructureContractIter { work: vec!(Some(root_work_item)) }
     }
 }
 
@@ -385,16 +379,22 @@ enum StructureData<T> {
     Node(T)
 }
 
-impl<'a> Iterator for StructureAttachIter<'a> {
+impl<'a> Iterator for StructureContractIter<'a> {
 
-    type Item = StructureData<StructureWorkItem<'a, Option<Attach>>>;
+    type Item = contracts::StructureData;
 
     fn next(&mut self) -> Option<Self::Item> {
 
         match self.work.pop() {
             None => { None }
-            Some(ref curr_work) => { 
-                let context = curr_work.context.clone();
+            Some(None) => {
+                let mut marker_data = contracts::StructureData::new();
+                marker_data.set_marker(contracts::EndMarker::new());
+                Some(marker_data)
+            }
+            Some(Some(ref curr_work)) => { 
+                // After a leaf or all of a beam's children, so push on the stack first
+                self.work.push(None);
 
                 match curr_work.structure {
                     &tagtree::TagTree::Leaf(_) => {}
@@ -411,14 +411,20 @@ impl<'a> Iterator for StructureAttachIter<'a> {
                             structure: &**attachment,
                             };
 
-                            self.work.push(StructureData::Node(next_work));
+                            self.work.push(Some(next_work));
                         })
                     }
                 }
 
-                self.work.push(StructureData::Marker);
-
-                Some(StructureWorkItem { context: context, structure: curr_work.structure })
+                let mut data = contracts::StructureData::new();
+                let mut node = contracts::StructureNode::new();
+                curr_work.structure.set_contract_node_for(&mut node);
+                match curr_work.context {
+                    None => { node.set_root(contracts::Root::new()) }
+                    Some(ref attach) => { node.set_attach(attach.contract()) }
+                }
+                data.set_node(node);
+                Some(data)
 
             }
         }
