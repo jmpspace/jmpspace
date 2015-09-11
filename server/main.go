@@ -16,10 +16,41 @@ func main() {
 
 	hello_sim()
 	sim := build_world(15)
-	snapshot_world(sim)
-	apply_action(sim, 10)
-	update_world(sim)
-	snapshot_world(sim)
+	//snapshot_world(sim)
+	//apply_action(sim, 10)
+	//update_world(sim)
+	//snapshot_world(sim)
+
+	ticks := make(chan interface{})
+	actions := make(chan Action)
+	snapshots := make(chan Snapshot)
+
+	go func() {
+
+		for {
+
+			select {
+
+			case tick := <-ticks:
+				update_world(sim)
+				snapshot := snapshot_world(sim)
+				snapshots <- snapshot
+
+			case action := <-actions:
+				apply_action(sim, action)
+
+			}
+
+		}
+
+	}()
+
+	go func() {
+		for {
+			time.sleep(40)
+			ticks <- true
+		}
+	}()
 
 	http.Handle("/", http.FileServer(http.Dir("client/site")))
 	http.Handle("/action", websocket.Handler(actionServer()))

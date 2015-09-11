@@ -9,6 +9,15 @@ type gameAction struct {
 	u, v int
 }
 
+type Action struct{}
+type Snapshot struct{}
+
+type broadcastRegistration struct {
+	client   int
+	register bool
+	receiver chan Snapshot
+}
+
 func actionServer() func(*websocket.Conn) {
 
 	broadcast := make(chan string)
