@@ -10,6 +10,7 @@ crate-type = ["dylib"]
 
 [dependencies]
 ecs = "*"
+libc = "0.1.*"
 nalgebra = "*"
 ncollide = "*"
 num = "*"

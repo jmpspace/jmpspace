@@ -10,12 +10,12 @@ func hello_sim() {
 	C.hello_sim()
 }
 
-func build_world(a int) *C.Sim {
-	return C.build_world(C.int(a))
+func build_world() *C.Sim {
+	return C.build_world()
 }
 
-func apply_action(sim *C.Sim, a int) {
-	C.apply_action(sim, C.int(a))
+func apply_action(sim *C.Sim, buf []byte) int {
+	return int(C.apply_action(sim))
 }
 
 func update_world(sim *C.Sim) {

@@ -15,11 +15,7 @@ func check(err error) {
 func main() {
 
 	hello_sim()
-	sim := build_world(15)
-	//snapshot_world(sim)
-	//apply_action(sim, 10)
-	//update_world(sim)
-	//snapshot_world(sim)
+	sim := build_world()
 
 	ticks := make(chan interface{})
 	actions := make(chan Action)

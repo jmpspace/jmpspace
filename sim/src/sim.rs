@@ -2,6 +2,8 @@
 use ecs::{World};
 use ecs::world::{ServiceManager};
 
+use contracts::actions::Action;
+
 use physics::{PhysicsHandle, PhysicsSystem};
 
 components! {
@@ -31,21 +33,24 @@ systems! {
 }
 
 pub struct Sim {
-    pub a: i32,
     world: World<JmpSystems>
 }
 
 impl Sim {
 
-    pub fn new(a: i32) -> Sim {
+    pub fn new() -> Sim {
         
         let world = World::<JmpSystems>::new();
-        Sim { a: a, world: world }
+        Sim { world: world }
 
     }
 
     pub fn update(&mut self) {
         self.world.update();
+    }
+
+    pub fn apply(&mut self, action: &Action) {
+        println!("Apply {:?}", action);
     }
 
 }
