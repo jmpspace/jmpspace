@@ -27,7 +27,14 @@ mod tagtree;
 
 use libc::{uint8_t, size_t};
 use protobuf::core::Message;
+use std::ptr;
 use std::slice;
+
+#[repr(C)]
+pub struct Buffer {
+    length: size_t,
+    buf: *const uint8_t
+}
 
 #[no_mangle]
 pub extern "C" fn hello_sim() {
@@ -41,15 +48,21 @@ pub extern "C" fn build_world() -> *mut sim::Sim {
 }
 
 #[no_mangle]
+pub extern "C" fn update_world(sim: *mut sim::Sim) {
+    unsafe { (*sim).update() }
+    println!("Update");
+}
+
+#[no_mangle]
 pub extern "C" fn apply_action(sim: *mut sim::Sim, 
-                               buf: *const uint8_t, 
-                               len: size_t) -> i32 {
-    let length = len as usize;
+                               client: i32,
+                               buffer: Buffer) -> i32 {
+    let length = buffer.length as usize;
     let ref mut sim = unsafe { 
         Option::expect(sim.as_mut(), "Dereference sim")
     };
     let action_slice = unsafe { 
-        slice::from_raw_parts(buf, length)
+        slice::from_raw_parts(buffer.buf, length)
     };
     let mut action = contracts::actions::Action::new();
     if let Err(_) = action.merge_from_bytes(action_slice) {
@@ -57,17 +70,15 @@ pub extern "C" fn apply_action(sim: *mut sim::Sim,
         // TODO meaningful error codes in header file
         return 1;
     }
-    sim.apply(&action);
+    sim.apply(client, &action);
     return 0;
 }
 
 #[no_mangle]
-pub extern "C" fn update_world(sim: *mut sim::Sim) {
-    unsafe { (*sim).update() }
-    println!("Update");
-}
-
-#[no_mangle]
-pub extern "C" fn snapshot_world(sim: *mut sim::Sim) {
+pub extern "C" fn snapshot_world(sim: *mut sim::Sim) -> Buffer {
     println!("Snapshot {:?}", sim);
+    Buffer {
+        length: 0,
+        buf: ptr::null()
+    }
 }

@@ -3,6 +3,7 @@ use ecs::{World};
 use ecs::world::{ServiceManager};
 
 use contracts::actions::Action;
+use contracts::world::Snapshot;
 
 use physics::{PhysicsHandle, PhysicsSystem};
 
@@ -49,8 +50,12 @@ impl Sim {
         self.world.update();
     }
 
-    pub fn apply(&mut self, action: &Action) {
-        println!("Apply {:?}", action);
+    pub fn apply(&mut self, client: i32, action: &Action) {
+        println!("Apply {} {:?}", client, action);
+    }
+
+    pub fn snapshot(&self) -> Snapshot {
+        Snapshot::new()
     }
 
 }

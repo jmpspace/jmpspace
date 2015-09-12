@@ -1,29 +1,33 @@
 package main
 
 import (
-	"encoding/json"
 	"golang.org/x/net/websocket"
+	"math/rand"
 )
 
 type gameAction struct {
 	u, v int
 }
 
-type Action struct{}
-type Snapshot struct{}
+type Action struct {
+	client int
+	buf    []byte
+}
 
-type broadcastRegistration struct {
+type Snapshot struct {
+	buf []byte
+}
+
+type registration struct {
 	client   int
 	register bool
 	receiver chan Snapshot
 }
 
-func actionServer() func(*websocket.Conn) {
+func actionServer(actions chan Action, snapshots chan Snapshot) func(*websocket.Conn) {
 
-	broadcast := make(chan string)
-	register := make(chan (chan string))
-	unregister := make(chan (chan string))
-	listeners := make(map[(chan string)]bool)
+	registrations := make(chan registration)
+	listeners := make(map[int]registration)
 
 	go func() {
 
@@ -31,23 +35,18 @@ func actionServer() func(*websocket.Conn) {
 
 			select {
 
-			case rcv := <-register:
+			case registration := <-registrations:
 
-				listeners[rcv] = true
+				if registration.register {
+					listeners[registration.client] = registration
+				} else {
+					delete(listeners, registration.client)
+				}
 
-			case rcv := <-unregister:
+			case snapshot := <-snapshots:
 
-				delete(listeners, rcv)
-
-			case msg := <-broadcast:
-
-				//    TODO:    switch    on    adding    a    new    listener
-
-				var action gameAction
-
-				err := json.Unmarshal([]byte(msg), action)
-				if err != nil {
-					continue
+				for _, registration := range listeners {
+					registration.receiver <- snapshot
 				}
 
 			}
@@ -58,18 +57,27 @@ func actionServer() func(*websocket.Conn) {
 
 	actionHandler := func(ws *websocket.Conn) {
 
-		rcv := make(chan string)
+		client := rand.Int()
+		rcvSnapshot := make(chan Snapshot)
 
-		register <- rcv
+		registrations <- registration{
+			client:   client,
+			register: true,
+			receiver: rcvSnapshot}
 
-		defer func() { unregister <- rcv }()
+		defer func() {
+			registrations <- registration{
+				client:   client,
+				register: false,
+				receiver: rcvSnapshot}
+		}()
 
 		go func() {
 
 			for {
 
-				msg := <-rcv
-				err := websocket.Message.Send(ws, msg)
+				snapshot := <-rcvSnapshot
+				err := websocket.Message.Send(ws, snapshot.buf)
 				check(err)
 
 			}
@@ -78,11 +86,15 @@ func actionServer() func(*websocket.Conn) {
 
 		for {
 
-			var msg string
-			err := websocket.Message.Receive(ws, &msg)
+			var buf []byte
+			err := websocket.Message.Receive(ws, &buf)
 			check(err)
 
-			broadcast <- msg
+			action := Action{
+				client: client,
+				buf:    buf}
+
+			actions <- action
 
 		}
 

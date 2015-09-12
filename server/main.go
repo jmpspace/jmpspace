@@ -4,6 +4,7 @@ import (
 	"golang.org/x/net/websocket"
 	"log"
 	"net/http"
+	"time"
 )
 
 func check(err error) {
@@ -27,13 +28,13 @@ func main() {
 
 			select {
 
-			case tick := <-ticks:
+			case <-ticks:
 				update_world(sim)
-				snapshot := snapshot_world(sim)
-				snapshots <- snapshot
+				buf := snapshot_world(sim)
+				snapshots <- Snapshot{buf: buf}
 
 			case action := <-actions:
-				apply_action(sim, action)
+				apply_action(sim, action.client, action.buf)
 
 			}
 
@@ -43,13 +44,13 @@ func main() {
 
 	go func() {
 		for {
-			time.sleep(40)
-			ticks <- true
+			time.Sleep(50 * time.Millisecond)
+			ticks <- nil
 		}
 	}()
 
 	http.Handle("/", http.FileServer(http.Dir("client/site")))
-	http.Handle("/action", websocket.Handler(actionServer()))
+	http.Handle("/action", websocket.Handler(actionServer(actions, snapshots)))
 
 	log.Print("Starting server on port 8080")
 
