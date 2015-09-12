@@ -12,26 +12,26 @@ Elm.Native.Converter.make = function(_elm) {
     Proto = builder.build("actions")
   });
 
-  var marshalControls = function(controls) {
+  var marshalControls = function(elm_controls) {
     if (!Proto) {
       return undefined;
     }
-    var toEncode;
-    switch (controls.ctor) {
+    var action = new Proto.Action();
+    var controls = new Proto.Controls();
+    switch (elm_controls.ctor) {
       case "Controls_Brakes": 
-        toEncode = new Proto.Controls();
-        toEncode.setBrakes(new Proto.Unit());
+        controls.setBrakes(new Proto.Unit());
         break;
       case "Controls_Active":
-        toEncode = new Proto.Controls();
         var active = new Proto.Active();
-        active.setGroups(List.toArray(controls._0.groups));
-        toEncode.setActive(active);
+        active.setGroups(List.toArray(elm_controls._0.groups));
+        controls.setActive(active);
         break;
       default:
-        throw "Unknown Constructor" + ctor;
+        throw "Unknown Constructor" + elm_controls.ctor;
     }
-    return toEncode.toArrayBuffer();
+    action.setControls(controls)
+    return action.toArrayBuffer();
   };
 
   _elm.Native.Converter.values = {
