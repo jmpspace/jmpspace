@@ -15,6 +15,10 @@ func build_world() *C.Sim {
 	return C.build_world()
 }
 
+func connect_client(sim *C.Sim, client int) int {
+	return int(C.connect_client(sim, C.int(client)))
+}
+
 func apply_action(sim *C.Sim, client int, buf []byte) int {
 
 	cBuffer := C.struct_BufferImpl{
@@ -28,8 +32,8 @@ func apply_action(sim *C.Sim, client int, buf []byte) int {
 
 }
 
-func update_world(sim *C.Sim) {
-	C.update_world(sim)
+func update_world(sim *C.Sim) int {
+	return int(C.update_world(sim))
 }
 
 func snapshot_world(sim *C.Sim) []byte {

@@ -17,8 +17,9 @@ struct SimImpl;
 typedef struct SimImpl* Sim;
 
 Sim* build_world();
+int connect_client(Sim *sim, int client);
+int update_world(Sim *sim);
 int apply_action(Sim *sim, int client, Buffer buffer);
-void update_world(Sim *sim);
 Buffer snapshot_world(Sim *sim);
 
 #endif

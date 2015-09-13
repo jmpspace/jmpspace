@@ -46,6 +46,10 @@ impl Sim {
 
     }
 
+    pub fn connect(&mut self, client: i32) {
+        println!("Creating a client {}", client);
+    }
+
     pub fn update(&mut self) {
         self.world.update();
     }

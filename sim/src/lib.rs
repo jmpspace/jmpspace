@@ -48,9 +48,17 @@ pub extern "C" fn build_world() -> *mut sim::Sim {
 }
 
 #[no_mangle]
-pub extern "C" fn update_world(sim: *mut sim::Sim) {
+pub extern "C" fn connect_client(sim: *mut sim::Sim, client: i32) -> i32 {
+    unsafe { (*sim).connect(client) }
+    println!("Connect"); // TODO
+    0
+}
+
+#[no_mangle]
+pub extern "C" fn update_world(sim: *mut sim::Sim) -> i32 {
     unsafe { (*sim).update() }
-    println!("Update");
+    println!("Update"); // TODO
+    0
 }
 
 #[no_mangle]
@@ -71,12 +79,12 @@ pub extern "C" fn apply_action(sim: *mut sim::Sim,
         return 1;
     }
     sim.apply(client, &action);
-    return 0;
+    0
 }
 
 #[no_mangle]
 pub extern "C" fn snapshot_world(sim: *mut sim::Sim) -> Buffer {
-    println!("Snapshot {:?}", sim);
+    println!("Snapshot {:?}", sim); // TODO
     Buffer {
         length: 0,
         buf: ptr::null()
