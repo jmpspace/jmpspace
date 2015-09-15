@@ -195,7 +195,7 @@ pub type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 impl Structure {
 
-    fn contract(&self) -> contracts::Structure {
+    pub fn contract(&self) -> contracts::Structure {
         let mut structure = contracts::Structure::new();
         let datas: RepeatedField<contracts::StructureData> = self.contract_iter().collect();
         structure.set_attachments(datas);

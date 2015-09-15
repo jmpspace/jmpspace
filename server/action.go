@@ -24,7 +24,7 @@ type registration struct {
 	receiver chan Snapshot
 }
 
-func actionServer(actions chan Action, snapshots chan Snapshot) func(*websocket.Conn) {
+func actionServer(connects chan Connect, actions chan Action, snapshots chan Snapshot) func(*websocket.Conn) {
 
 	registrations := make(chan registration)
 	listeners := make(map[int]registration)
@@ -58,6 +58,15 @@ func actionServer(actions chan Action, snapshots chan Snapshot) func(*websocket.
 	actionHandler := func(ws *websocket.Conn) {
 
 		client := rand.Int()
+		finished := make(chan int)
+
+		connect := Connect{
+			client:   client,
+			finished: finished}
+
+		connects <- connect
+		<-finished // TODO capture entity value
+
 		rcvSnapshot := make(chan Snapshot)
 
 		registrations <- registration{

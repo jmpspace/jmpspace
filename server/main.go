@@ -13,11 +13,17 @@ func check(err error) {
 	}
 }
 
+type Connect struct {
+	client   int
+	finished chan int
+}
+
 func main() {
 
 	hello_sim()
 	sim := build_world()
 
+	connects := make(chan Connect)
 	ticks := make(chan interface{})
 	actions := make(chan Action)
 	snapshots := make(chan Snapshot)
@@ -27,6 +33,10 @@ func main() {
 		for {
 
 			select {
+
+			case connect := <-connects:
+				entity := connect_client(sim, connect.client)
+				connect.finished <- entity
 
 			case <-ticks:
 				update_world(sim)
@@ -50,7 +60,7 @@ func main() {
 	}()
 
 	http.Handle("/", http.FileServer(http.Dir("client/site")))
-	http.Handle("/action", websocket.Handler(actionServer(actions, snapshots)))
+	http.Handle("/action", websocket.Handler(actionServer(connects, actions, snapshots)))
 
 	log.Print("Starting server on port 8080")
 

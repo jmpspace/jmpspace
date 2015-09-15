@@ -1,6 +1,7 @@
 
 #![feature(box_patterns)]
 #![feature(box_syntax)]
+#![feature(convert)]
 
 #![feature(ptr_as_ref)]
 
@@ -86,8 +87,26 @@ pub extern "C" fn apply_action(sim: *mut sim::Sim,
 #[no_mangle]
 pub extern "C" fn snapshot_world(sim: *mut sim::Sim) -> Buffer {
     println!("Snapshot {:?}", sim); // TODO
+    let snapshot = unsafe { (*sim).snapshot() };
+    let mut snapshot_vec = box Vec::new();
+    if let Err(_) = snapshot.write_to_vec(&mut snapshot_vec) {
+        // TODO logging
+        // TODO meaningful error code
+        return Buffer {
+            length: 0,
+            buf: ptr::null()
+        }
+    }
+    let length = snapshot_vec.len() as size_t;
+    if length == 0 {
+        return Buffer {
+            length: 0,
+            buf: ptr::null()
+        }
+    }
+    let buf = snapshot_vec.as_mut_slice();
     Buffer {
-        length: 0,
-        buf: ptr::null()
+        length: length,
+        buf: &buf[0]
     }
 }

@@ -16,6 +16,10 @@
         chat.send(e);
       });
 
+      chat.onmessage = function(event) {
+        console.log(event)
+      }
+
     }
 
   </script>
