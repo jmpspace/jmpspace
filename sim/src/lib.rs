@@ -20,6 +20,7 @@ extern crate contracts;
 
 // This crate
 mod constants;
+mod demo;
 mod physics;
 mod ship;
 mod sim;
@@ -49,7 +50,7 @@ pub extern "C" fn build_world() -> *mut sim::Sim {
 
 #[no_mangle]
 pub extern "C" fn connect_client(sim: *mut sim::Sim, client: i32) -> i32 {
-    unsafe { (*sim).connect(client) }
+    let _ = unsafe { (*sim).connect(client) };
     println!("Connect"); // TODO
     0
 }

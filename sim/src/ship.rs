@@ -14,7 +14,7 @@ use constants::*;
 use contracts::ship as contracts;
 use tagtree;
 
-enum Part {
+pub enum Part {
     Vessel { width: f64, length: f64 },
     FuelTank { radius: f64, length: f64 },
     Engine { radius: f64, length: f64, group: i32 }
@@ -175,9 +175,9 @@ impl Beam {
 }
 
 #[derive(Clone)]
-struct Attach {
-    location: f64,
-    rotation: f64
+pub struct Attach {
+    pub location: f64,
+    pub rotation: f64
 }
 
 impl Attach {
@@ -191,7 +191,7 @@ impl Attach {
 
 }
 
-type Structure = tagtree::TagTree<Part,Beam,Attach>;
+pub type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 impl Structure {
 
@@ -276,7 +276,7 @@ impl Structure {
         Arc::new(Box::new(Compound::new(acc)))
     }
 
-    fn rigid_body(&self) -> RigidBody {
+    pub fn rigid_body(&self) -> RigidBody {
         let shape = self.compound_shape();
         let mass_properties = Some((self.total_mass(), self.center_of_mass().to_pnt(), Mat1::new(self.total_moment())));
         RigidBody::new(shape, mass_properties, 1.0, 1.0)
@@ -433,11 +433,25 @@ impl<'a> Iterator for StructureContractIter<'a> {
 
 }
 
-fn part(attrs: Part) -> Structure {
+// TODO should be macros?
+
+pub fn vessel(width: f64, length: f64) -> Part {
+    Part::Vessel { width: width, length: length }
+}
+
+pub fn fuel_tank(radius: f64, length: f64) -> Part {
+    Part::FuelTank { radius: radius, length: length}
+}
+
+pub fn engine(radius: f64, length: f64, group: i32) -> Part {
+    Part::Engine { radius: radius, length: length, group: group}
+}
+
+pub fn part(attrs: Part) -> Structure {
     tagtree::TagTree::Leaf(attrs)
 }
 
-fn beam(length: f64, parts: Vec<(Attach, Box<Structure>)>) -> Structure {
+pub fn beam(length: f64, parts: Vec<(Attach, Box<Structure>)>) -> Structure {
     tagtree::TagTree::Node(Beam {length: length}, parts)
 }
 
