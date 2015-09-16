@@ -111,3 +111,9 @@ pub extern "C" fn snapshot_world(sim: *mut sim::Sim) -> Buffer {
         buf: &buf[0]
     }
 }
+
+#[test]
+fn simple_ffi() {
+    let sim = build_world();
+    connect_client(sim, 121642);
+}
