@@ -110,3 +110,9 @@ impl Sim {
 
 }
 
+#[test]
+fn simple_sim () {
+    let mut sim = Sim::new();
+    let entity = sim.connect(0);
+    println!("Entity {}", entity);
+}

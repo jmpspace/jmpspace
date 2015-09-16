@@ -99,24 +99,6 @@ impl Part {
         })
     }
 
-    fn object (&self) -> RigidBody {
-        match self {
-            &Part::Vessel {width, length} => {
-                let geom = Cuboid::new(Vec2::new(width, length));
-                RigidBody::new_dynamic(geom, VESSEL_DENSITY, 1.0, 1.0)
-            }
-            &Part::FuelTank {radius, length} => {
-                let geom = Cylinder::new(length, radius);
-                RigidBody::new_dynamic(geom, FUELTANK_DENSITY, 1.0, 1.0)
-            }
-            &Part::Engine {radius, length, group} => {
-                let _group = group;
-                let geom = Cone::new(length, radius);
-                RigidBody::new_dynamic(geom, ENGINE_DENSITY, 1.0, 1.0)
-            }
-        }
-    }
-
     fn point_mass (&self) -> PointMass {
         PointMass { center: Vec2::new(0.0,0.0), mass: self.mass() }
     }
@@ -135,12 +117,6 @@ fn simple_parts () {
 
 }
 
-struct PartObjectCache {
-    part: Part,
-    object: RigidBody,
-    mass: f64
-}
-
 struct Beam {
     length: f64
 }
@@ -156,11 +132,6 @@ impl Beam {
     fn geometry (&self) -> ArcShaped {
         let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
         Arc::new(Box::new(geom))
-    }
-
-    fn object (&self) -> RigidBody {
-        let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
-        RigidBody::new_dynamic(geom, BEAM_DENSITY, 1.0, 1.0)
     }
 
     fn mass (&self) -> f64 {
@@ -279,7 +250,7 @@ impl Structure {
     pub fn rigid_body(&self) -> RigidBody {
         let shape = self.compound_shape();
         let mass_properties = Some((self.total_mass(), self.center_of_mass().to_pnt(), Mat1::new(self.total_moment())));
-        RigidBody::new(shape, mass_properties, 1.0, 1.0)
+        RigidBody::new(shape, mass_properties, 0.3, 0.6)
     }
 }
 
