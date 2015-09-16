@@ -14,7 +14,7 @@ func check(err error) {
 }
 
 type Connect struct {
-	client   int
+	client   int32
 	finished chan int
 }
 
@@ -35,17 +35,22 @@ func main() {
 			select {
 
 			case connect := <-connects:
+				log.Print("Starting connect")
 				entity := connect_client(sim, connect.client)
 				connect.finished <- entity
+				log.Print("Finished connect")
 
 			case <-ticks:
+				log.Print("Starting tick")
 				update_world(sim)
 				buf := snapshot_world(sim)
 				snapshots <- Snapshot{buf: buf}
+				log.Print("Finished tick")
 
 			case action := <-actions:
+				log.Print("Starting action")
 				apply_action(sim, action.client, action.buf)
-
+				log.Print("Finished action")
 			}
 
 		}
@@ -59,7 +64,7 @@ func main() {
 		}
 	}()
 
-	http.Handle("/", http.FileServer(http.Dir("client/site")))
+	http.Handle("/", http.FileServer(http.Dir("site")))
 	http.Handle("/action", websocket.Handler(actionServer(connects, actions, snapshots)))
 
 	log.Print("Starting server on port 8080")

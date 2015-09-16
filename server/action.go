@@ -10,7 +10,7 @@ type gameAction struct {
 }
 
 type Action struct {
-	client int
+	client int32
 	buf    []byte
 }
 
@@ -19,7 +19,7 @@ type Snapshot struct {
 }
 
 type registration struct {
-	client   int
+	client   int32
 	register bool
 	receiver chan Snapshot
 }
@@ -27,7 +27,7 @@ type registration struct {
 func actionServer(connects chan Connect, actions chan Action, snapshots chan Snapshot) func(*websocket.Conn) {
 
 	registrations := make(chan registration)
-	listeners := make(map[int]registration)
+	listeners := make(map[int32]registration)
 
 	go func() {
 
@@ -57,7 +57,7 @@ func actionServer(connects chan Connect, actions chan Action, snapshots chan Sna
 
 	actionHandler := func(ws *websocket.Conn) {
 
-		client := rand.Int()
+		client := rand.Int31()
 		finished := make(chan int)
 
 		connect := Connect{

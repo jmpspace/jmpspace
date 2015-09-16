@@ -5,5 +5,5 @@ all: server
 server: *.go lib/* include/*
 	gofmt -w *go
 	go get
-	go build -ldflags="-r $(ROOT_DIR)lib"
+	go build -gcflags "-N -l" -ldflags "-w -r $(ROOT_DIR)lib"
 

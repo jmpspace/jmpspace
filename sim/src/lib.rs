@@ -51,15 +51,15 @@ pub extern "C" fn build_world() -> *mut sim::Sim {
 
 #[no_mangle]
 pub extern "C" fn connect_client(sim: *mut sim::Sim, client: i32) -> i32 {
+    println!("Connect {:?} {}", sim, client); // TODO
     let _ = unsafe { (*sim).connect(client) };
-    println!("Connect"); // TODO
     0
 }
 
 #[no_mangle]
 pub extern "C" fn update_world(sim: *mut sim::Sim) -> i32 {
+    println!("Update {:?}", sim); // TODO
     unsafe { (*sim).update() }
-    println!("Update"); // TODO
     0
 }
 
@@ -98,6 +98,7 @@ pub extern "C" fn snapshot_world(sim: *mut sim::Sim) -> Buffer {
         }
     }
     let length = snapshot_vec.len() as size_t;
+    println!("Snapshot length {}", length);
     if length == 0 {
         return Buffer {
             length: 0,

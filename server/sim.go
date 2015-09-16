@@ -15,11 +15,11 @@ func build_world() *C.Sim {
 	return C.build_world()
 }
 
-func connect_client(sim *C.Sim, client int) int {
+func connect_client(sim *C.Sim, client int32) int {
 	return int(C.connect_client(sim, C.int(client)))
 }
 
-func apply_action(sim *C.Sim, client int, buf []byte) int {
+func apply_action(sim *C.Sim, client int32, buf []byte) int {
 
 	cBuffer := C.struct_BufferImpl{
 		length: C.size_t(len(buf)),

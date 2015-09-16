@@ -80,15 +80,20 @@ impl Sim {
     pub fn connect(&mut self, client: i32) -> u64 {
         println!("Creating a client {}", client);
         let ship = simple_ship();
+        println!("Created ship");
         let body = ship.rigid_body();
+        println!("Calculated ship body");
         let rb_handle = self.world.services.physics.world.add_body(body);
+        println!("Added body to physics, got handle");
         let physics_handle = PhysicsHandle { handle: rb_handle };
         let entity = self.world.create_entity(
             |entity: BuildData<JmpComponents>, data: &mut JmpComponents| {
                 data.structure.add(&entity, ship);
                 data.physics_handle.add(&entity, physics_handle);
             });
-        entity.id()
+        let id = entity.id();
+        println!("Created an entity {}", id);
+        id
     }
 
     pub fn update(&mut self) {
@@ -100,7 +105,6 @@ impl Sim {
     }
 
     pub fn snapshot(&mut self) -> Snapshot {
-        process!(self.world, snapshot);
         self.world.services.snapshot.clone().expect("Should see a snapshot")
     }
 
