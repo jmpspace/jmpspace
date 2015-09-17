@@ -7,7 +7,7 @@
   <body></body>
   <script>
 
-    var chat = new WebSocket("ws://" + location.host + "/action");    
+    var chat = new WebSocket("ws://" + location.hostname + ":8081/action");    
     chat.onopen = function(e) { 
 
       var celestia = Elm.fullscreen(Elm.Demo);

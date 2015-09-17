@@ -1,3 +1,5 @@
+#![feature(mpsc_select)]
+
 /// Simple WebSocket server with error handling. It is not necessary to setup logging, but doing
 /// so will allow you to see more details about the connection by using the RUST_LOG env variable.
 
@@ -6,8 +8,9 @@ extern crate rand;
 extern crate ws;
 
 // Possibly replace with an mio type of channel?
+use std::collections::HashMap;
 use std::sync::mpsc::channel;
-use std::sync::mpsc::{Sender as ThreadOut, Receiver as ThreadIn};
+use std::sync::mpsc::{Sender as ThreadOut};
 use std::thread;
 use ws::{listen, CloseCode, Handler, Handshake, Message, Sender, Result};
 
@@ -36,6 +39,7 @@ struct ActionHandler {
 impl Handler for ActionHandler {
 
     fn on_open(&mut self, _: Handshake) -> Result<()> {
+        println!("Opened client connection {}", self.client);
         let registration = Registration {
             client: self.client,
             register: true,
@@ -47,6 +51,7 @@ impl Handler for ActionHandler {
 
     fn on_message(&mut self, msg: Message) -> Result<()> {
         if let Message::Binary(buf) = msg {
+            println!("Receive binary message from client {} len {}", self.client, buf.len());
             let action = Action {
                 client: self.client,
                 buf: buf
@@ -56,7 +61,7 @@ impl Handler for ActionHandler {
         Ok(())
     }
 
-    fn on_close(&mut self, code: CloseCode, reason: &str) {
+    fn on_close(&mut self, _: CloseCode, _: &str) {
         let unregistration = Registration {
             client: self.client,
             register: false,
@@ -78,7 +83,7 @@ fn main () {
     let server = thread::Builder::new().name("server".to_string()).spawn(move || {
 
         // Listen on an address and call the closure for each connection
-        listen("0.0.0.0:3012", |out| { 
+        listen("0.0.0.0:8081", |out| { 
             let client: i32 = rand::random();
             ActionHandler {
                 client: client,
@@ -89,5 +94,36 @@ fn main () {
         }).unwrap()
 
     }).unwrap();
+
+    let mut clients = HashMap::new();
+
+    loop {
+
+        select! {
+            msg = registrations_out.recv() => {
+                let registration = msg.unwrap();
+                let client = registration.client;
+                if registration.register {
+                    println!("Registering {}", client);
+                    if let Some(_) = clients.insert(client, registration) {
+                        panic!("Collision registering client {}", client);
+                    }
+                } else {
+                    println!("Unregistering {}", client);
+                    if let None = clients.remove(&client) {
+                        panic!("Tried to remove non-existent client {}", client);
+                    }
+                }
+            },
+            msg = actions_out.recv() => {
+                let action = msg.unwrap();
+                let client = action.client;
+                println!("Actioning from {}", client);
+            }
+        }
+
+    }
+
+
 
 }
