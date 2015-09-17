@@ -5,6 +5,7 @@
 
 extern crate env_logger;
 extern crate rand;
+extern crate sim;
 extern crate ws;
 
 // Possibly replace with an mio type of channel?
@@ -74,8 +75,11 @@ impl Handler for ActionHandler {
 
 fn main () {
 
-    let (registrations_in, registrations_out) = channel();
+    let mut sim = sim::sim::Sim::new();
+
     let (actions_in, actions_out) = channel();
+    let (registrations_in, registrations_out) = channel();
+    let (ticks_in, ticks_out) = channel::<()>();
 
     // Setup logging
     env_logger::init().unwrap();
@@ -108,6 +112,7 @@ fn main () {
                     if let Some(_) = clients.insert(client, registration) {
                         panic!("Collision registering client {}", client);
                     }
+                    sim.connect(client);
                 } else {
                     println!("Unregistering {}", client);
                     if let None = clients.remove(&client) {
@@ -119,11 +124,15 @@ fn main () {
                 let action = msg.unwrap();
                 let client = action.client;
                 println!("Actioning from {}", client);
+                sim.apply_buf(client, action.buf);
+            },
+            msg = ticks_out.recv() => {
+                // don't care about the value (TODO delta_time)
+                println!("Got tick, updating and snapshotting");
+                let buf = sim.snapshot_buf();
             }
         }
 
     }
-
-
 
 }

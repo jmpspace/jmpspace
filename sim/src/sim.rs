@@ -2,6 +2,7 @@
 use ecs::{BuildData, DataHelper, EntityIter, ServiceManager, System, World};
 use ecs::system::entity::{EntityProcess, EntitySystem};
 use protobuf::repeated::RepeatedField;
+use protobuf::core::Message;
 
 use contracts::actions::Action;
 use contracts::ship as shipTracts; // TODO move out for this reason
@@ -96,16 +97,34 @@ impl Sim {
         id
     }
 
-    pub fn update(&mut self) {
-        self.world.update();
-    }
-
     pub fn apply(&mut self, client: i32, action: &Action) {
         println!("Apply {} {:?}", client, action);
     }
 
+    pub fn apply_buf(&mut self, client: i32, buf: Vec<u8>) -> i32 {
+        let mut action = Action::new();
+        if let Err(_) = action.merge_from_bytes(buf.as_slice()) {
+            // TODO logging
+            // TODO meaningful error codes in header file
+            return 1;
+        }
+        self.apply(client, &action);
+        0
+    }
+
     pub fn snapshot(&mut self) -> Snapshot {
+        self.world.update();
         self.world.services.snapshot.clone().expect("Should see a snapshot")
+    }
+
+    pub fn snapshot_buf(&mut self) -> Vec<u8> {
+        let snapshot = self.snapshot();
+        let mut snapshot_vec = Vec::new();
+        if let Err(_) = snapshot.write_to_vec(&mut snapshot_vec) {
+            // TODO logging
+            // TODO meaningful error code
+        }
+        snapshot_vec
     }
 
 }

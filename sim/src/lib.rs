@@ -24,7 +24,7 @@ mod constants;
 mod demo;
 mod physics;
 mod ship;
-mod sim;
+pub mod sim;
 mod tagtree;
 
 use libc::{uint8_t, size_t};
@@ -59,7 +59,6 @@ pub extern "C" fn connect_client(sim: *mut sim::Sim, client: i32) -> i32 {
 #[no_mangle]
 pub extern "C" fn update_world(sim: *mut sim::Sim) -> i32 {
     println!("Update {:?}", sim); // TODO
-    unsafe { (*sim).update() }
     0
 }
 
