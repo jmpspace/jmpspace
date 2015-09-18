@@ -15,10 +15,9 @@ use std::sync::mpsc::{Sender as ThreadOut};
 use std::thread;
 use ws::{listen, CloseCode, Handler, Handshake, Message, Sender, Result};
 
-struct Registration {
-    client: i32,
-    register: bool,
-    out: Option<Sender>
+enum Registration {
+    Register { client: i32, out: Sender },
+    Unregister { client: i32 }
 }
 
 struct Action {
@@ -41,10 +40,9 @@ impl Handler for ActionHandler {
 
     fn on_open(&mut self, _: Handshake) -> Result<()> {
         println!("Opened client connection {}", self.client);
-        let registration = Registration {
+        let registration = Registration::Register {
             client: self.client,
-            register: true,
-            out: Some(self.out.clone())
+            out: self.out.clone()
         };
         self.registrations.send(registration).unwrap();
         Ok(())
@@ -63,10 +61,8 @@ impl Handler for ActionHandler {
     }
 
     fn on_close(&mut self, _: CloseCode, _: &str) {
-        let unregistration = Registration {
+        let unregistration = Registration::Unregister {
             client: self.client,
-            register: false,
-            out: None
         };
         self.registrations.send(unregistration).unwrap();
     }
@@ -99,6 +95,15 @@ fn main () {
 
     }).unwrap();
 
+    let timer = thread::Builder::new().name("timer".to_string()).spawn(move || {
+
+        loop {
+            ticks_in.send(());
+            thread::sleep_ms(50); // TODO magic number
+        }
+
+    }).unwrap();
+
     let mut clients = HashMap::new();
 
     loop {
@@ -106,17 +111,19 @@ fn main () {
         select! {
             msg = registrations_out.recv() => {
                 let registration = msg.unwrap();
-                let client = registration.client;
-                if registration.register {
-                    println!("Registering {}", client);
-                    if let Some(_) = clients.insert(client, registration) {
-                        panic!("Collision registering client {}", client);
-                    }
+                match registration {
+                    Registration::Register{client, out} => {
+                        println!("Registering {}", client);
+                        if let Some(_) = clients.insert(client, out) {
+                            panic!("Collision registering client {}", client);
+                        }
                     sim.connect(client);
-                } else {
-                    println!("Unregistering {}", client);
-                    if let None = clients.remove(&client) {
-                        panic!("Tried to remove non-existent client {}", client);
+                    },
+                    Registration::Unregister{client} => {
+                        println!("Unregistering {}", client);
+                        if let None = clients.remove(&client) {
+                            panic!("Tried to remove non-existent client {}", client);
+                        }
                     }
                 }
             },
@@ -130,6 +137,10 @@ fn main () {
                 // don't care about the value (TODO delta_time)
                 println!("Got tick, updating and snapshotting");
                 let buf = sim.snapshot_buf();
+                for (client, out) in clients.iter() {
+                    let send_buf = buf.clone();
+                    out.send(Message::Binary(send_buf));
+                }
             }
         }
 

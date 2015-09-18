@@ -4,7 +4,6 @@ import (
 	"golang.org/x/net/websocket"
 	"log"
 	"net/http"
-	"time"
 )
 
 func check(err error) {
@@ -57,12 +56,14 @@ func main() {
 
 	}()
 
-	go func() {
-		for {
-			time.Sleep(50 * time.Millisecond)
-			ticks <- nil
-		}
-	}()
+	/*
+		go func() {
+			for {
+				time.Sleep(50 * time.Millisecond)
+				ticks <- nil
+			}
+		}()
+	*/
 
 	http.Handle("/", http.FileServer(http.Dir("site")))
 	http.Handle("/action", websocket.Handler(actionServer(connects, actions, snapshots)))
