@@ -35,6 +35,7 @@ import Physics exposing (..)
 
 import Converter exposing (..)
 import Contracts.Common
+import Contracts.World
 import Draw exposing (drawEntity)
 import Control.State exposing (execState)
 import Step exposing (step)
@@ -108,5 +109,12 @@ main = combineSElems outward <|
     ]
   ]
 
+-- TODO not actually value
 port controls : Signal Value
 port controls = marshalControls << makeContractControls <~ engines
+
+-- TODO not actually value
+port snapshots : Signal Value
+
+serverWorldState : Signal Contracts.World.Snapshot
+serverWorldState = unmarshalSnapshot <~ snapshots

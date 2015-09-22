@@ -17,6 +17,8 @@ use super::ship::Beam;
 use super::ship::Root;
 use super::ship::Attach;
 use super::ship::StructureNode;
+use super::ship::StructureLink;
+use super::ship::StructureTree;
 use super::ship::EndMarker;
 use super::ship::StructureData;
 use super::ship::Structure;

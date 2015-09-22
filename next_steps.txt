@@ -7,9 +7,10 @@ crapships milestone
 
   close the loop starting from client handler
 
-    start from client handler init
+    DONE start from client handler init
     create a random ship and register with ECS
-    create an EntityProcess for snapshot
+      TODO RANDOM
+    DONE create an EntityProcess for snapshot
     implement actions -> physics
     implement thrust!
     client structure deserialization

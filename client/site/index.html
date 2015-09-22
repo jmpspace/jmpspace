@@ -10,14 +10,25 @@
     var chat = new WebSocket("ws://" + location.hostname + ":8081/action");    
     chat.onopen = function(e) { 
 
-      var celestia = Elm.fullscreen(Elm.Demo);
-      celestia.ports.controls.subscribe(function(e) {
-        console.log("Sending buffer with",e.byteLength,"bytes");
-        chat.send(e);
-      });
+      var celestia = null;
+      
+      function start(snapshot) {
+        celestia = Elm.fullscreen(Elm.Demo, { snapshots : snapshot });
+        celestia.ports.controls.subscribe(function(e) {
+          console.log("Sending buffer with",e.byteLength,"bytes");
+          chat.send(e);
+        });
+      }
 
       chat.onmessage = function(event) {
-        console.log(event)
+        console.log(event);
+        if (celestia) {
+          celestia.ports.snapshots.send(event);
+        } 
+        else {
+          start(event);
+        }
+          
       }
 
     }

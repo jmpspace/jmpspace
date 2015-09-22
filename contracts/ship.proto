@@ -41,10 +41,18 @@ message StructureNode {
     Beam beam = 1;
     Part part = 2;
   }
+}
+
+message StructureLink {
   oneof link {
-    Root root = 3;
-    Attach attach = 4;
+    Root root = 1;
+    Attach attach = 2;
   }
+}
+
+message StructureTree {
+  required StructureNode node = 1;
+  required StructureLink link = 2;
 }
 
 message EndMarker {};
@@ -52,7 +60,7 @@ message EndMarker {};
 message StructureData {
   oneof structure {
     EndMarker marker = 1;
-    StructureNode node = 2; 
+    StructureTree tree = 2; 
   }
 }
 

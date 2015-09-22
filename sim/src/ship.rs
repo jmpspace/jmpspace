@@ -166,14 +166,8 @@ pub type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 impl Structure {
 
-    pub fn contract(&self) -> contracts::Structure {
-        let mut structure = contracts::Structure::new();
-        let datas: RepeatedField<contracts::StructureData> = self.contract_iter().collect();
-        structure.set_attachments(datas);
-        structure
-    }
-
-    fn set_contract_node_for(&self, builder: &mut contracts::StructureNode) {
+    pub fn node_contract(&self) -> contracts::StructureNode {
+        let mut builder = contracts::StructureNode::new();
         match self {
             &tagtree::TagTree::Leaf(ref part) => {
                 builder.set_part(part.contract())
@@ -182,6 +176,14 @@ impl Structure {
                 builder.set_beam(beam.contract())
             }
         }
+        builder
+    }
+
+    pub fn contract(&self) -> contracts::Structure {
+        let mut structure = contracts::Structure::new();
+        let datas: RepeatedField<contracts::StructureData> = self.contract_iter().collect();
+        structure.set_attachments(datas);
+        structure
     }
 
     fn mass(&self) -> f64 {
@@ -270,7 +272,8 @@ enum StructureLink {
 
 impl StructureLink {
 
-    fn set_link_for(&self, builder: &mut contracts::StructureNode) {
+    fn contract(&self) -> contracts::StructureLink {
+        let mut builder = contracts::StructureLink::new();
         match self {
             &StructureLink::Root => {
                 builder.set_root(contracts::Root::new())
@@ -279,12 +282,13 @@ impl StructureLink {
                 builder.set_attach(attach.contract())
             }
         }
+        builder
     }
 
 }
 
 struct StructureContractIter<'a> {
-    work: Vec<Option<StructureWorkItem<'a, Option<Attach>>>>,
+    work: Vec<Option<StructureWorkItem<'a, StructureLink>>>,
 }
 
 impl Structure {
@@ -299,7 +303,7 @@ impl Structure {
     // Not very DRY, not exactly sure where to abstract
     pub fn contract_iter(&self) -> StructureContractIter {
         let root_work_item = StructureWorkItem {
-            context: None,
+            context: StructureLink::Root,
             structure: self,
         };
         StructureContractIter { work: vec!(Some(root_work_item)) }
@@ -376,7 +380,7 @@ impl<'a> Iterator for StructureContractIter<'a> {
                             //let rot = Rot2::new(Vec1::new(attach.rotation));
                             //let iso = Iso2::new_with_rotmat(trn, rot);
                             //let next_context = context * iso;
-                            let next_context = Some(attach.clone());
+                            let next_context = StructureLink::Attach(attach.clone());
                             let next_work = StructureWorkItem { 
                                 context: next_context, 
                             structure: &**attachment,
@@ -388,13 +392,10 @@ impl<'a> Iterator for StructureContractIter<'a> {
                 }
 
                 let mut data = contracts::StructureData::new();
-                let mut node = contracts::StructureNode::new();
-                curr_work.structure.set_contract_node_for(&mut node);
-                match curr_work.context {
-                    None => { node.set_root(contracts::Root::new()) }
-                    Some(ref attach) => { node.set_attach(attach.contract()) }
-                }
-                data.set_node(node);
+                let mut tree = contracts::StructureTree::new();
+                tree.set_node(curr_work.structure.node_contract());
+                tree.set_link(curr_work.context.contract());
+                data.set_tree(tree);
                 Some(data)
 
             }

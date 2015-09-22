@@ -7,23 +7,33 @@ Elm.Native.Converter.make = function(_elm) {
 
   var List = Elm.Native.List.make(_elm);
 
-  var Proto;
+  var ActionsProto;
   dcodeIO.ProtoBuf.loadProtoFile("contracts/actions.proto", function(err, builder) {
-    Proto = builder.build("actions")
+    ActionsProto = builder.build("actions")
+  });
+  
+  var ShipProto;
+  dcodeIO.ProtoBuf.loadProtoFile("contracts/ship.proto", function(err, builder) {
+    ShipProto = builder.build("ship")
+  });
+
+  var WorldProto;
+  dcodeIO.ProtoBuf.loadProtoFile("contracts/world.proto", function(err, builder) {
+    WorldProto = builder.build("world")
   });
 
   var marshalControls = function(elm_controls) {
-    if (!Proto) {
+    if (!ActionsProto) {
       return undefined;
     }
-    var action = new Proto.Action();
-    var controls = new Proto.Controls();
+    var action = new ActionsProto.Action();
+    var controls = new ActionsProto.Controls();
     switch (elm_controls.ctor) {
       case "Controls_Brakes": 
         controls.setBrakes(new Proto.Unit());
         break;
       case "Controls_Active":
-        var active = new Proto.Active();
+        var active = new ActionsProto.Active();
         active.setGroups(List.toArray(elm_controls._0.groups));
         controls.setActive(active);
         break;
@@ -34,8 +44,16 @@ Elm.Native.Converter.make = function(_elm) {
     return action.toArrayBuffer();
   };
 
+  var unmarshalSnapshot = function(buffer) {
+    if (!ShipProto || !WorldProto) {
+      return undefined;
+    }
+    debugger;
+  };
+
   _elm.Native.Converter.values = {
-    marshalControls: marshalControls
+    marshalControls: marshalControls,
+    unmarshalSnapshot: unmarshalSnapshot 
   };
 
   return _elm.Native.Converter.values;
