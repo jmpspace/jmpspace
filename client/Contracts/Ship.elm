@@ -3,7 +3,7 @@ module Contracts.Ship where
 
 type alias Vessel = {
   width: Float,
-  lenght: Float
+  length: Float
 }
 
 type alias FuelTank = {
@@ -17,21 +17,32 @@ type alias Engine = {
   group: Int
 }
 
-type Part = Part_Vessel Vessel | Part_FuelTank FuelTank | Part_Engine Engine
+type Part = Part_vessel Vessel | Part_fuelTank FuelTank | Part_engine Engine
 
 type alias Beam = {
   length: Float
 }
 
-type Attachment = Attachment_Part Part | Attachment_Beam Beam
+type alias Root = {}
 
 type alias Attach = {
-  identity: Int,
   location: Float,
-  rotation: Float,
-  attachment: Attachment
+  rotation: Float
 }
-  
+
+type StructureNode = StructureNode_beam Beam | StructureNode_part Part
+
+type StructureLink = StructureLink_root Root | StructureLink_attach Attach
+
+type alias StructureTree = {
+  node: StructureNode,
+  link: StructureLink
+}
+
+type alias EndMarker = {}
+
+type StructureData = StructureData_marker EndMarker | StructureData_tree StructureTree
+
 type alias Structure = {
-  attachments: List Attachment
+  attachments: List StructureData
 }
