@@ -106,6 +106,7 @@ main = combineSElems outward <|
     --, (color white << asText << prepend "ModeKey " << toString) <~ current
     , (color white << asText << prepend "Build Part " << toString << .part << .build << .mode) <~ current
     --, (color white << asText << prepend "Ship4 " << toString << D.get 4 << .entities) <~ current
+    , (color white << asText << prepend "Snapshot: " << toString) <~ serverWorldState
     ]
   ]
 

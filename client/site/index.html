@@ -8,6 +8,7 @@
   <script>
 
     var chat = new WebSocket("ws://" + location.hostname + ":8081/action");    
+    chat.binaryType = "arraybuffer";
     chat.onopen = function(e) { 
 
       var celestia = null;

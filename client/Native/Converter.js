@@ -5,7 +5,10 @@ Elm.Native.Converter.make = function(_elm) {
   if (_elm.Native.Converter.values) 
     return _elm.Native.Converter.values;
 
-  var List = Elm.Native.List.make(_elm);
+  var NativeList = Elm.Native.List.make(_elm);
+  var List = Elm.List.make(_elm);
+  var Ship = Elm.Contracts.Ship.make(_elm);
+  var World = Elm.Contracts.World.make(_elm);
 
   var ActionsProto;
   dcodeIO.ProtoBuf.loadProtoFile("contracts/actions.proto", function(err, builder) {
@@ -29,12 +32,12 @@ Elm.Native.Converter.make = function(_elm) {
     var action = new ActionsProto.Action();
     var controls = new ActionsProto.Controls();
     switch (elm_controls.ctor) {
-      case "Controls_Brakes": 
-        controls.setBrakes(new Proto.Unit());
+      case "Controls_brakes": 
+        controls.setBrakes(new ActionsProto.Unit());
         break;
-      case "Controls_Active":
+      case "Controls_active":
         var active = new ActionsProto.Active();
-        active.setGroups(List.toArray(elm_controls._0.groups));
+        active.setGroups(NativeList.toArray(elm_controls._0.groups));
         controls.setActive(active);
         break;
       default:
@@ -44,11 +47,40 @@ Elm.Native.Converter.make = function(_elm) {
     return action.toArrayBuffer();
   };
 
-  var unmarshalSnapshot = function(buffer) {
+  var unmarshalSnapshot = function(messageEvent) {
     if (!ShipProto || !WorldProto) {
       return undefined;
     }
-    debugger;
+    var buffer = messageEvent.data;
+    var snapshot_contract = WorldProto.Snapshot.decode(buffer);
+
+    function convertStructureData(data_contract) {
+      switch (data_contract.structure) {
+        case "marker":
+          debugger;
+          break;
+        case "tree":
+          debugger;
+          break;
+        default:
+          debugger;
+      }
+    }
+
+    function convertStructure(structure_contract) {
+      return Ship.Structure(
+          A2(List.map,
+            convertStructureData,
+            NativeList.fromArray(
+              structure_contract.attachments)));
+
+    }
+    
+    return World.Snapshot(
+        A2(List.map, 
+          convertStructure, 
+          NativeList.fromArray(
+            snapshot_contract.ships)));
   };
 
   _elm.Native.Converter.values = {
