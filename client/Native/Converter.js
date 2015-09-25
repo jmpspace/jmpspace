@@ -10,24 +10,10 @@ Elm.Native.Converter.make = function(_elm) {
   var Ship = Elm.Contracts.Ship.make(_elm);
   var World = Elm.Contracts.World.make(_elm);
 
-  var ActionsProto;
-  dcodeIO.ProtoBuf.loadProtoFile("contracts/actions.proto", function(err, builder) {
-    ActionsProto = builder.build("actions")
-  });
-  
-  var ShipProto;
-  dcodeIO.ProtoBuf.loadProtoFile("contracts/ship.proto", function(err, builder) {
-    ShipProto = builder.build("ship")
-  });
-
-  var WorldProto;
-  dcodeIO.ProtoBuf.loadProtoFile("contracts/world.proto", function(err, builder) {
-    WorldProto = builder.build("world")
-  });
-
   var marshalControls = function(elm_controls) {
+    var ActionsProto = ProtoObj.ActionsProto;
     if (!ActionsProto) {
-      return undefined;
+      throw new Error("Protobuf is not loaded successfully");
     }
     var action = new ActionsProto.Action();
     var controls = new ActionsProto.Controls();
@@ -48,8 +34,10 @@ Elm.Native.Converter.make = function(_elm) {
   };
 
   var unmarshalSnapshot = function(messageEvent) {
+    var ShipProto = ProtoObj.ShipProto;
+    var WorldProto = ProtoObj.WorldProto;
     if (!ShipProto || !WorldProto) {
-      return undefined;
+      throw new Error("Protobuf is not loaded successfully");
     }
     var buffer = messageEvent.data;
     var snapshot_contract = WorldProto.Snapshot.decode(buffer);

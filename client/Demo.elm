@@ -117,5 +117,5 @@ port controls = marshalControls << makeContractControls <~ engines
 -- TODO not actually value
 port snapshots : Signal Value
 
-serverWorldState : Signal Contracts.World.Snapshot
-serverWorldState = unmarshalSnapshot <~ snapshots
+serverWorldState : Signal (List (Result String Structure))
+serverWorldState = (List.map reconstructStructure << .ships << unmarshalSnapshot) <~ snapshots
