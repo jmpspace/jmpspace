@@ -4,5 +4,5 @@ package world;
 import "ship.proto";
 
 message Snapshot {
-  repeated ship.Structure ships = 1;
+  repeated ship.Ship ships = 1;
 }

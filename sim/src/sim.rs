@@ -45,9 +45,13 @@ impl System for SnapshotProcess { type Components = JmpComponents; type Services
 impl EntityProcess for SnapshotProcess {
     fn process(&mut self, entities: EntityIter<JmpComponents>, data: &mut DataHelper<JmpComponents, JmpServices>) {
         let mut snapshot = Snapshot::new();
-        let mut ships: Vec<shipTracts::Structure> = Vec::new();
+        let mut ships: Vec<shipTracts::Ship> = Vec::new();
         for e in entities {
-            ships.push(data.structure[e].contract());
+            let mut ship = shipTracts::Ship::new();
+            ship.set_entityId(e.id());
+            let structure = data.structure[e].contract();
+            ship.set_structure(structure);
+            ships.push(ship);
         }
         println!("Serializing {} structures in snapshot", ships.len());
         snapshot.set_ships(RepeatedField::from_vec(ships));

@@ -67,3 +67,8 @@ message StructureData {
 message Structure { 
   repeated StructureData attachments = 1;
 }
+
+message Ship {
+  required uint64 entityId = 1;
+  required Structure structure = 2;
+}

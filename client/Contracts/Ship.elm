@@ -46,3 +46,8 @@ type StructureData = StructureData_marker EndMarker | StructureData_tree Structu
 type alias Structure = {
   attachments: List StructureData
 }
+
+type alias Ship = {
+  entityId: Int,
+  structure: Structure
+}

@@ -1,6 +1,8 @@
 
 module Converter where
 
+import Dict exposing (Dict)
+
 import Control.State exposing (..)
 import Json.Encode exposing (Value)
 
@@ -108,3 +110,12 @@ reconstructStructure structure =
                   reconstructNode node
 
   in evalState reconstructRoot structure.attachments
+
+reconstructEntities : List Ship -> Dict Int Types.Entity
+reconstructEntities ships =
+  let reduce : Ship -> Dict Int Types.Entity -> Dict Int Types.Entity
+      reduce ship entities = 
+        case reconstructStructure ship.structure of
+          Err _ -> entities
+          Ok structure -> Dict.insert ship.entityId structure entities
+  in List.foldl reduce Dict.empty ships

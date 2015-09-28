@@ -1,8 +1,8 @@
 
 module Contracts.World where
 
-import Contracts.Ship exposing (Structure)
+import Contracts.Ship exposing (Ship)
 
 type alias Snapshot = {
-  ships: List Structure
+  ships: List Ship
 }

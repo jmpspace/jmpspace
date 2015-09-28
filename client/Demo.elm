@@ -79,8 +79,14 @@ initialBuildMode = { entity = 4, stage = Place, absRotate = Nothing, placement =
 current : Signal GameState
 current = Signal.foldp (execState << step) initialState gameInputs
 
+currentMaskedByServer : Signal GameState
+currentMaskedByServer = 
+  let maskWithServer : GameState -> Dict Int Entity -> GameState
+      maskWithServer s structures = { s | entities <- structures }
+  in maskWithServer <~ current ~ serverWorldState
+
 withPhantom : Signal GameState
-withPhantom = addPhantom <~ current
+withPhantom = addPhantom <~ currentMaskedByServer
 
 {- Render the display -}
 
@@ -117,5 +123,5 @@ port controls = marshalControls << makeContractControls <~ engines
 -- TODO not actually value
 port snapshots : Signal Value
 
-serverWorldState : Signal (List (Result String Structure))
-serverWorldState = (List.map reconstructStructure << .ships << unmarshalSnapshot) <~ snapshots
+serverWorldState : Signal (Dict Int Entity)
+serverWorldState = (reconstructEntities << .ships << unmarshalSnapshot) <~ snapshots

@@ -138,10 +138,15 @@ Elm.Native.Converter.make = function(_elm) {
               structure_contract.attachments)));
 
     }
+
+    function convertShip(ship_contract) {
+      var structure = convertStructure(ship_contract.structure);
+      return A2(Ship.Ship, ship_contract.entityId, structure);
+    }
     
     return World.Snapshot(
         A2(List.map, 
-          convertStructure, 
+          convertShip, 
           NativeList.fromArray(
             snapshot_contract.ships)));
   };
