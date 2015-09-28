@@ -6,3 +6,10 @@ import "ship.proto";
 message Snapshot {
   repeated ship.Ship ships = 1;
 }
+
+message GameState {
+  oneof state {
+    uint64 focusEntityId = 1;
+    Snapshot snapshot = 2;
+  }
+}

@@ -6,7 +6,7 @@ use protobuf::core::Message;
 
 use contracts::actions::Action;
 use contracts::ship as shipTracts; // TODO move out for this reason
-use contracts::world::Snapshot;
+use contracts::world::{GameState, Snapshot};
 
 use demo::simple_ship;
 use ship::Structure;
@@ -82,7 +82,7 @@ impl Sim {
 
     }
 
-    pub fn connect(&mut self, client: i32) -> u64 {
+    pub fn connect(&mut self, client: i32) -> Vec<u8> {
         println!("Creating a client {}", client);
         let ship = simple_ship();
         println!("Created ship");
@@ -98,7 +98,14 @@ impl Sim {
             });
         let id = entity.id();
         println!("Created an entity {}", id);
-        id
+        let mut game_state = GameState::new();
+        game_state.set_focusEntityId(id);
+        let mut game_state_vec = Vec::new();
+        if let Err(_) = game_state.write_to_vec(&mut game_state_vec) {
+            // TODO logging
+            // TODO meaningful error code
+        }
+        game_state_vec
     }
 
     pub fn apply(&mut self, client: i32, action: &Action) {
@@ -122,13 +129,15 @@ impl Sim {
     }
 
     pub fn snapshot_buf(&mut self) -> Vec<u8> {
+        let mut game_state = GameState::new();
         let snapshot = self.snapshot();
-        let mut snapshot_vec = Vec::new();
-        if let Err(_) = snapshot.write_to_vec(&mut snapshot_vec) {
+        game_state.set_snapshot(snapshot);
+        let mut game_state_vec = Vec::new();
+        if let Err(_) = game_state.write_to_vec(&mut game_state_vec) {
             // TODO logging
             // TODO meaningful error code
         }
-        snapshot_vec
+        game_state_vec
     }
 
 }

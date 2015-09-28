@@ -121,7 +121,19 @@ port controls : Signal Value
 port controls = marshalControls << makeContractControls <~ engines
 
 -- TODO not actually value
+-- TODO rename in site/index.html
 port snapshots : Signal Value
 
-serverWorldState : Signal (Dict Int Entity)
-serverWorldState = (reconstructEntities << .ships << unmarshalSnapshot) <~ snapshots
+serverGameStateRaw : Signal Contracts.World.GameState
+serverGameStateRaw = unmarshalGameState snapshots
+
+serverGameState : Signal GameState
+serverGameState = 
+  let update gameStateContract state = 
+        case gameStateContract of
+          GameState_snapshot Snapshot -> state -- TODO implement
+          GameState_focusEntityId -> state -- TODO implement
+  in foldp update initialState serverGameStateRaw
+
+--serverWorldState : Signal (Dict Int Entity)
+--serverWorldState = (reconstructEntities << .ships << unmarshalSnapshot) <~ snapshots

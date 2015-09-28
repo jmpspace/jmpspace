@@ -33,14 +33,14 @@ Elm.Native.Converter.make = function(_elm) {
     return action.toArrayBuffer();
   };
 
-  var unmarshalSnapshot = function(messageEvent) {
+  var unmarshalGameState = function(messageEvent) {
     var ShipProto = ProtoObj.ShipProto;
     var WorldProto = ProtoObj.WorldProto;
     if (!ShipProto || !WorldProto) {
       throw new Error("Protobuf is not loaded successfully");
     }
     var buffer = messageEvent.data;
-    var snapshot_contract = WorldProto.Snapshot.decode(buffer);
+    var game_state_contract = WorldProto.GameState.decode(buffer);
 
     function convertVessel(vessel_contract) {
       var width = vessel_contract.width;
@@ -148,11 +148,30 @@ Elm.Native.Converter.make = function(_elm) {
       return A2(Ship.Ship, entityId, structure);
     }
     
-    return World.Snapshot(
-        A2(List.map, 
-          convertShip, 
-          NativeList.fromArray(
-            snapshot_contract.ships)));
+    function convertSnapshot(snapshot_contract) {
+      return World.Snapshot(
+          A2(List.map, 
+            convertShip, 
+            NativeList.fromArray(
+              snapshot_contract.ships)));
+    }
+
+    function convertGameState(game_state_contract) {
+      switch (game_state_contract.structure) {
+        case "structure":
+          var snapshot = convertSnapshot(game_state_contract.snapshot);
+          return World.GameState_snapshot(snapshot);
+        case "focusEntityId":
+          if (game_state_contract.focusEntityId.high > 0) {
+            throw new Error("Timebomb - entity ids are u64");
+          }
+          var focusEntityId = game_state_contract.focusEntityId.low;
+          return World.GameState_focusEntityId(focusEntityId);
+        default:
+          throw "unknown protocase";
+    }
+
+    return convertGameState(game_state_contract);
   };
 
   _elm.Native.Converter.values = {

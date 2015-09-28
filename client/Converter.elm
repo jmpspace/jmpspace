@@ -25,8 +25,8 @@ marshalControls : Controls -> Value
 marshalControls = Native.Converter.marshalControls
 
 -- TODO not actually value
-unmarshalSnapshot : Value -> Snapshot
-unmarshalSnapshot = Native.Converter.unmarshalSnapshot
+unmarshalGameState : Value -> GameState
+unmarshalGameState = Native.Converter.unmarshalGameState
 
 type alias Node = Contracts.Ship.StructureNode
 type alias Data = Contracts.Ship.StructureData
