@@ -140,8 +140,12 @@ Elm.Native.Converter.make = function(_elm) {
     }
 
     function convertShip(ship_contract) {
+      if (ship_contract.entityId.high > 0) {
+        throw new Error("Timebomb - entity ids are u64");
+      }
+      var entityId = ship_contract.entityId.low;
       var structure = convertStructure(ship_contract.structure);
-      return A2(Ship.Ship, ship_contract.entityId, structure);
+      return A2(Ship.Ship, entityId, structure);
     }
     
     return World.Snapshot(

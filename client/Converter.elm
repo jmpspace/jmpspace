@@ -11,6 +11,7 @@ import Contracts.Controls exposing (..)
 import Contracts.Ship exposing (..)
 import Contracts.World exposing (..)
 import Native.Converter
+import Physics exposing (genEntityCache)
 import Types exposing (part, beam)
 
 -- TODO no good reason for this, deprecate the original Controls form Types
@@ -117,5 +118,14 @@ reconstructEntities ships =
       reduce ship entities = 
         case reconstructStructure ship.structure of
           Err _ -> entities
-          Ok structure -> Dict.insert ship.entityId structure entities
+          Ok structure -> 
+            let motion =
+                  { pos = { x = 0.0, y = 0.0, theta = 0.0 }
+                  , v = { x = 0, y = 0.0 }
+                  , omega = 0.0 }
+                entity =
+                  { controls = Types.Active []
+                  , motion = motion
+                  , cache = genEntityCache structure }
+            in Dict.insert ship.entityId entity entities
   in List.foldl reduce Dict.empty ships
