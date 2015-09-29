@@ -35,7 +35,7 @@ import Physics exposing (..)
 
 import Converter exposing (..)
 import Contracts.Common
-import Contracts.World
+import Contracts.World exposing (..)
 import Draw exposing (drawEntity)
 import Control.State exposing (execState)
 import Step exposing (step)
@@ -80,10 +80,7 @@ current : Signal GameState
 current = Signal.foldp (execState << step) initialState gameInputs
 
 currentMaskedByServer : Signal GameState
-currentMaskedByServer = 
-  let maskWithServer : GameState -> Dict Int Entity -> GameState
-      maskWithServer s structures = { s | entities <- structures }
-  in maskWithServer <~ current ~ serverWorldState
+currentMaskedByServer = serverGameState
 
 withPhantom : Signal GameState
 withPhantom = addPhantom <~ currentMaskedByServer
@@ -112,7 +109,7 @@ main = combineSElems outward <|
     --, (color white << asText << prepend "ModeKey " << toString) <~ current
     , (color white << asText << prepend "Build Part " << toString << .part << .build << .mode) <~ current
     --, (color white << asText << prepend "Ship4 " << toString << D.get 4 << .entities) <~ current
-    , (color white << asText << prepend "Snapshot: " << toString) <~ serverWorldState
+    , (color white << asText << prepend "Snapshot: " << toString) <~ serverGameState
     ]
   ]
 
@@ -124,15 +121,15 @@ port controls = marshalControls << makeContractControls <~ engines
 -- TODO rename in site/index.html
 port snapshots : Signal Value
 
-serverGameStateRaw : Signal Contracts.World.GameState
-serverGameStateRaw = unmarshalGameState snapshots
+serverGameStateRaw : Signal GameUpdate
+serverGameStateRaw = unmarshalGameUpdate <~ snapshots
 
 serverGameState : Signal GameState
 serverGameState = 
   let update gameStateContract state = 
         case gameStateContract of
-          GameState_snapshot Snapshot -> state -- TODO implement
-          GameState_focusEntityId -> state -- TODO implement
+          Contracts.World.GameUpdate_snapshot snapshot -> state -- TODO implement
+          Contracts.World.GameUpdate_focusEntityId focusEntityId -> state -- TODO implement
   in foldp update initialState serverGameStateRaw
 
 --serverWorldState : Signal (Dict Int Entity)

@@ -33,14 +33,14 @@ Elm.Native.Converter.make = function(_elm) {
     return action.toArrayBuffer();
   };
 
-  var unmarshalGameState = function(messageEvent) {
+  var unmarshalGameUpdate = function(messageEvent) {
     var ShipProto = ProtoObj.ShipProto;
     var WorldProto = ProtoObj.WorldProto;
     if (!ShipProto || !WorldProto) {
       throw new Error("Protobuf is not loaded successfully");
     }
     var buffer = messageEvent.data;
-    var game_state_contract = WorldProto.GameState.decode(buffer);
+    var game_update_contract = WorldProto.GameUpdate.decode(buffer);
 
     function convertVessel(vessel_contract) {
       var width = vessel_contract.width;
@@ -156,27 +156,28 @@ Elm.Native.Converter.make = function(_elm) {
               snapshot_contract.ships)));
     }
 
-    function convertGameState(game_state_contract) {
-      switch (game_state_contract.structure) {
-        case "structure":
-          var snapshot = convertSnapshot(game_state_contract.snapshot);
-          return World.GameState_snapshot(snapshot);
+    function convertGameUpdate(game_update_contract) {
+      switch (game_update_contract.structure) {
+        case "snapshot":
+          var snapshot = convertSnapshot(game_update_contract.snapshot);
+          return World.GameUpdate_snapshot(snapshot);
         case "focusEntityId":
-          if (game_state_contract.focusEntityId.high > 0) {
+          if (game_update_contract.focusEntityId.high > 0) {
             throw new Error("Timebomb - entity ids are u64");
           }
-          var focusEntityId = game_state_contract.focusEntityId.low;
-          return World.GameState_focusEntityId(focusEntityId);
+          var focusEntityId = game_update_contract.focusEntityId.low;
+          return World.GameUpdate_focusEntityId(focusEntityId);
         default:
           throw "unknown protocase";
+      } 
     }
 
-    return convertGameState(game_state_contract);
+    return convertGameUpdate(game_update_contract);
   };
 
   _elm.Native.Converter.values = {
     marshalControls: marshalControls,
-    unmarshalSnapshot: unmarshalSnapshot 
+    unmarshalGameUpdate: unmarshalGameUpdate 
   };
 
   return _elm.Native.Converter.values;

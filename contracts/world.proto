@@ -7,7 +7,7 @@ message Snapshot {
   repeated ship.Ship ships = 1;
 }
 
-message GameState {
+message GameUpdate {
   oneof state {
     uint64 focusEntityId = 1;
     Snapshot snapshot = 2;

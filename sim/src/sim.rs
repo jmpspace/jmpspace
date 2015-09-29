@@ -6,7 +6,7 @@ use protobuf::core::Message;
 
 use contracts::actions::Action;
 use contracts::ship as shipTracts; // TODO move out for this reason
-use contracts::world::{GameState, Snapshot};
+use contracts::world::{GameUpdate, Snapshot};
 
 use demo::simple_ship;
 use ship::Structure;
@@ -98,7 +98,7 @@ impl Sim {
             });
         let id = entity.id();
         println!("Created an entity {}", id);
-        let mut game_state = GameState::new();
+        let mut game_state = GameUpdate::new();
         game_state.set_focusEntityId(id);
         let mut game_state_vec = Vec::new();
         if let Err(_) = game_state.write_to_vec(&mut game_state_vec) {
@@ -129,7 +129,7 @@ impl Sim {
     }
 
     pub fn snapshot_buf(&mut self) -> Vec<u8> {
-        let mut game_state = GameState::new();
+        let mut game_state = GameUpdate::new();
         let snapshot = self.snapshot();
         game_state.set_snapshot(snapshot);
         let mut game_state_vec = Vec::new();
