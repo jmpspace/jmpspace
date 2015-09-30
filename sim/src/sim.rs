@@ -98,14 +98,14 @@ impl Sim {
             });
         let id = entity.id();
         println!("Created an entity {}", id);
-        let mut game_state = GameUpdate::new();
-        game_state.set_focusEntityId(id);
-        let mut game_state_vec = Vec::new();
-        if let Err(_) = game_state.write_to_vec(&mut game_state_vec) {
+        let mut game_update = GameUpdate::new();
+        game_update.set_focusEntityId(id);
+        let mut game_update_vec = Vec::new();
+        if let Err(_) = game_update.write_to_vec(&mut game_update_vec) {
             // TODO logging
             // TODO meaningful error code
         }
-        game_state_vec
+        game_update_vec
     }
 
     pub fn apply(&mut self, client: i32, action: &Action) {
@@ -129,15 +129,15 @@ impl Sim {
     }
 
     pub fn snapshot_buf(&mut self) -> Vec<u8> {
-        let mut game_state = GameUpdate::new();
+        let mut game_update = GameUpdate::new();
         let snapshot = self.snapshot();
-        game_state.set_snapshot(snapshot);
-        let mut game_state_vec = Vec::new();
-        if let Err(_) = game_state.write_to_vec(&mut game_state_vec) {
+        game_update.set_snapshot(snapshot);
+        let mut game_update_vec = Vec::new();
+        if let Err(_) = game_update.write_to_vec(&mut game_update_vec) {
             // TODO logging
             // TODO meaningful error code
         }
-        game_state_vec
+        game_update_vec
     }
 
 }

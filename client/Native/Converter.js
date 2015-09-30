@@ -157,7 +157,7 @@ Elm.Native.Converter.make = function(_elm) {
     }
 
     function convertGameUpdate(game_update_contract) {
-      switch (game_update_contract.structure) {
+      switch (game_update_contract.update) {
         case "snapshot":
           var snapshot = convertSnapshot(game_update_contract.snapshot);
           return World.GameUpdate_snapshot(snapshot);
@@ -168,7 +168,7 @@ Elm.Native.Converter.make = function(_elm) {
           var focusEntityId = game_update_contract.focusEntityId.low;
           return World.GameUpdate_focusEntityId(focusEntityId);
         default:
-          throw "unknown protocase";
+          throw new Error("unknown protocase");
       } 
     }
 

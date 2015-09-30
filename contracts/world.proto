@@ -8,7 +8,7 @@ message Snapshot {
 }
 
 message GameUpdate {
-  oneof state {
+  oneof update {
     uint64 focusEntityId = 1;
     Snapshot snapshot = 2;
   }

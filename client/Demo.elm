@@ -128,8 +128,12 @@ serverGameState : Signal GameState
 serverGameState = 
   let update gameStateContract state = 
         case gameStateContract of
-          Contracts.World.GameUpdate_snapshot snapshot -> state -- TODO implement
-          Contracts.World.GameUpdate_focusEntityId focusEntityId -> state -- TODO implement
+          Contracts.World.GameUpdate_snapshot snapshot -> 
+            let entities = reconstructEntities snapshot.ships
+                cache = genGameStateCache state.focus entities
+            in { state | entities <- entities, cache <- cache } 
+          Contracts.World.GameUpdate_focusEntityId focusEntityId -> 
+            { state | focus <- focusEntityId }
   in foldp update initialState serverGameStateRaw
 
 --serverWorldState : Signal (Dict Int Entity)
