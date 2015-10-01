@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["John P Mayer Jr <john.p.mayer.jr@gmail.com>"]
 
 [dependencies]
+ecs = "*"
 env_logger = "0.3.*"
 rand = "*"
 ws = "0.2.*"

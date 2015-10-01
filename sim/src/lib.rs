@@ -3,8 +3,6 @@
 #![feature(box_syntax)]
 #![feature(convert)]
 
-#![feature(ptr_as_ref)]
-
 #![allow(dead_code)]
 
 #[macro_use]

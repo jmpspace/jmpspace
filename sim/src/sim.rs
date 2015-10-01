@@ -1,5 +1,5 @@
 
-use ecs::{BuildData, DataHelper, EntityIter, ServiceManager, System, World};
+use ecs::{BuildData, DataHelper, Entity, EntityIter, ServiceManager, System, World};
 use ecs::system::entity::{EntityProcess, EntitySystem};
 use protobuf::repeated::RepeatedField;
 use protobuf::core::Message;
@@ -82,7 +82,7 @@ impl Sim {
 
     }
 
-    pub fn connect(&mut self, client: i32) -> (u64, Vec<u8>) {
+    pub fn connect(&mut self, client: i32) -> (Entity, Vec<u8>) {
         println!("Creating a client {}", client);
         let ship = simple_ship();
         println!("Created ship");
@@ -105,14 +105,18 @@ impl Sim {
             // TODO logging
             // TODO meaningful error code
         }
-        (id, game_update_vec)
+        (entity, game_update_vec)
     }
 
-    pub fn apply(&mut self, entity: u64, action: &Action) {
-        println!("Apply {} {:?}", entity, action);
+    pub fn apply(&mut self, entity: Entity, action: &Action) {
+        println!("Apply {} {:?}", entity.id(), action);
+        if action.has_controls() {
+            let controls = action.get_controls();
+            self.world.modify_entity(entity, ());
+        }
     }
 
-    pub fn apply_buf(&mut self, entity: u64, buf: Vec<u8>) -> i32 {
+    pub fn apply_buf(&mut self, entity: Entity, buf: Vec<u8>) -> i32 {
         let mut action = Action::new();
         if let Err(_) = action.merge_from_bytes(buf.as_slice()) {
             // TODO logging
