@@ -21,14 +21,14 @@ pub enum Part {
     Engine { radius: f64, length: f64, group: i32 }
 }
 
-struct ThrustProfile {
-    force: Vec2<f64>,
-    torque: f64
+pub struct ThrustProfile {
+    pub force: Vec2<f64>,
+    pub torque: f64
 }
 
 impl ThrustProfile {
 
-    fn zero() -> ThrustProfile {
+    pub fn zero() -> ThrustProfile {
         ThrustProfile {
             force: Vec2::new(0.0,0.0),
             torque: 0.0
@@ -47,7 +47,7 @@ impl ThrustProfile {
         }
     }
 
-    fn add(&mut self, other: &ThrustProfile) {
+    pub fn add(&mut self, other: &ThrustProfile) {
         self.force = self.force.add(other.force);
         self.torque += other.torque;
     }
@@ -273,7 +273,7 @@ impl Structure {
         })
     }
 
-    fn thrust_profiles(&self) -> HashMap<i32, ThrustProfile> {
+    pub fn thrust_profiles(&self) -> HashMap<i32, ThrustProfile> {
         self.iso_iter().fold(HashMap::new(), |mut acc, item| {
             if let Some((group, ref thrust)) = item.structure.thrust() {
                 let contrib = ThrustProfile::from_thrust(item.context, thrust);

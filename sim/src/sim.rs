@@ -1,15 +1,16 @@
 
-use ecs::{BuildData, DataHelper, Entity, EntityIter, ServiceManager, System, World};
+use na::{Vec1};
+use ecs::{BuildData, DataHelper, Entity, EntityIter, EntityModifier, ServiceManager, System, World};
 use ecs::system::entity::{EntityProcess, EntitySystem};
 use protobuf::repeated::RepeatedField;
 use protobuf::core::Message;
 
-use contracts::actions::Action;
+use contracts::actions::{Action, Controls};
 use contracts::ship as shipTracts; // TODO move out for this reason
 use contracts::world::{GameUpdate, Snapshot};
 
 use demo::simple_ship;
-use ship::Structure;
+use ship::{Structure, ThrustProfile};
 use physics::{PhysicsHandle, PhysicsService, PhysicsSystem};
 
 components! {
@@ -18,6 +19,16 @@ components! {
         #[hot] physics_handle: PhysicsHandle
     }
 }
+
+struct ControlsModifier<'a> {
+    pub controls: &'a Controls
+}
+
+/*
+impl<'a> EntityModifier<JmpComponents> for ControlsModifier<'a> {
+    fn modify
+}
+*/
 
 pub struct JmpServices {
     pub dt: Option<f64>,
@@ -112,7 +123,27 @@ impl Sim {
         println!("Apply {} {:?}", entity.id(), action);
         if action.has_controls() {
             let controls = action.get_controls();
-            self.world.modify_entity(entity, ());
+            if controls.has_brakes() {
+                println!("I cut the brakes, wildcard!"); // TODO
+            }
+            if controls.has_active() {
+                let active_groups = controls.get_active().get_groups();
+                self.world.with_entity_data(&entity, |entity, data| {
+                    let profiles = data.structure[entity].thrust_profiles();
+                    // TODO formatting
+                    let net_profile = active_groups.iter().fold(ThrustProfile::zero(), |mut acc, group|
+                                                                {
+                                                                    if let Some(profile) = profiles.get(group) {
+                                                                        acc.add(profile)
+                                                                    }
+                                                                    acc
+                                                                });
+                    let ref mut body = data.physics_handle[entity].handle.borrow_mut();
+                    body.clear_forces();
+                    body.append_lin_force(net_profile.force);
+                    body.append_ang_force(Vec1::new(net_profile.torque));
+                });
+            }
         }
     }
 
