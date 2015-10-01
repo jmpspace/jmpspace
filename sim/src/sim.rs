@@ -82,7 +82,7 @@ impl Sim {
 
     }
 
-    pub fn connect(&mut self, client: i32) -> Vec<u8> {
+    pub fn connect(&mut self, client: i32) -> (u64, Vec<u8>) {
         println!("Creating a client {}", client);
         let ship = simple_ship();
         println!("Created ship");
@@ -105,21 +105,21 @@ impl Sim {
             // TODO logging
             // TODO meaningful error code
         }
-        game_update_vec
+        (id, game_update_vec)
     }
 
-    pub fn apply(&mut self, client: i32, action: &Action) {
-        println!("Apply {} {:?}", client, action);
+    pub fn apply(&mut self, entity: u64, action: &Action) {
+        println!("Apply {} {:?}", entity, action);
     }
 
-    pub fn apply_buf(&mut self, client: i32, buf: Vec<u8>) -> i32 {
+    pub fn apply_buf(&mut self, entity: u64, buf: Vec<u8>) -> i32 {
         let mut action = Action::new();
         if let Err(_) = action.merge_from_bytes(buf.as_slice()) {
             // TODO logging
             // TODO meaningful error codes in header file
             return 1;
         }
-        self.apply(client, &action);
+        self.apply(entity, &action);
         0
     }
 

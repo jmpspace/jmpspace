@@ -1,10 +1,11 @@
 
 use std::boxed::Box;
-use std::ops::Neg;
+use std::collections::HashMap;
+use std::ops::{Add, Neg};
 use std::sync::Arc;
 use num::traits::{One, Zero};
 
-use na::{Iso2, Mat1, Norm, Rot2, Translation, Vec1, Vec2};
+use na::{AbsoluteRotate, angle_between, Iso2, Mat1, Norm, Rot2, Translation, Vec1, Vec2};
 use ncollide::inspection::{Repr2};
 use ncollide::shape::{Compound, Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
@@ -18,6 +19,39 @@ pub enum Part {
     Vessel { width: f64, length: f64 },
     FuelTank { radius: f64, length: f64 },
     Engine { radius: f64, length: f64, group: i32 }
+}
+
+struct ThrustProfile {
+    force: Vec2<f64>,
+    torque: f64
+}
+
+impl ThrustProfile {
+
+    fn zero() -> ThrustProfile {
+        ThrustProfile {
+            force: Vec2::new(0.0,0.0),
+            torque: 0.0
+        }
+    }
+
+    fn from_thrust(context: Iso2<f64>, thrust: &Vec2<f64>) -> ThrustProfile {
+        let orientation = context.rotation;
+        let displacement = context.translation;
+        let force = orientation.absolute_rotate(thrust);
+        let theta = angle_between(&displacement, &force);
+        let torque = displacement.norm() * force.norm() * theta.sin();
+        ThrustProfile {
+            force: force,
+            torque: torque
+        }
+    }
+
+    fn add(&mut self, other: &ThrustProfile) {
+        self.force = self.force.add(other.force);
+        self.torque += other.torque;
+    }
+
 }
 
 struct PointMass {
@@ -101,6 +135,14 @@ impl Part {
 
     fn point_mass (&self) -> PointMass {
         PointMass { center: Vec2::new(0.0,0.0), mass: self.mass() }
+    }
+
+    fn thrust (&self) -> Option<(i32, Vec2<f64>)> { 
+        match self {
+            &Part::Engine {radius, length, group} =>
+                Some((group, Vec2::new(radius * length * ENGINE_THRUST, 0.0))),
+            _ => None
+        }
     }
 
 }
@@ -208,6 +250,13 @@ impl Structure {
         }
     }
 
+    fn thrust(&self) -> Option<(i32, Vec2<f64>)> {
+        match self {
+            &tagtree::TagTree::Leaf(ref part) => part.thrust(),
+            _ => None
+        }
+    }
+
     fn total_mass(&self) -> f64 {
         let mut total_mass: f64 = 0.0;
         for item in self.iso_iter() {
@@ -220,6 +269,17 @@ impl Structure {
         // This smells, could probably return an iterator?
         self.iso_iter().fold(Vec::new(), |mut acc, item| {
             acc.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
+            acc
+        })
+    }
+
+    fn thrust_profiles(&self) -> HashMap<i32, ThrustProfile> {
+        self.iso_iter().fold(HashMap::new(), |mut acc, item| {
+            if let Some((group, ref thrust)) = item.structure.thrust() {
+                let contrib = ThrustProfile::from_thrust(item.context, thrust);
+                let mut profile = acc.entry(group).or_insert(ThrustProfile::zero());
+                profile.add(&contrib);
+            }
             acc
         })
     }
