@@ -47,7 +47,14 @@ type alias Structure = {
   attachments: List StructureData
 }
 
+type alias PhysicsState = {
+  x: Float,
+  y: Float,
+  theta: Float
+}
+
 type alias Ship = {
   entityId: Int,
-  structure: Structure
+  structure: Structure,
+  physicsState: PhysicsState
 }

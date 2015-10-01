@@ -22,6 +22,7 @@ use super::ship::StructureTree;
 use super::ship::EndMarker;
 use super::ship::StructureData;
 use super::ship::Structure;
+use super::ship::PhysicsState;
 use super::ship::Ship;
 
 #[derive(Clone,Default)]

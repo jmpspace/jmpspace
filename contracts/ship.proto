@@ -68,7 +68,14 @@ message Structure {
   repeated StructureData attachments = 1;
 }
 
+message PhysicsState {
+  required double x = 1;
+  required double y = 2;
+  required double theta = 3;
+}
+
 message Ship {
   required uint64 entityId = 1;
   required Structure structure = 2;
+  required PhysicsState physicsState = 3;
 }

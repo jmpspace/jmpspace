@@ -1,5 +1,5 @@
 
-use na::{Vec1};
+use na::{Vec1, Rotation};
 use ecs::{BuildData, DataHelper, Entity, EntityIter, EntityModifier, ServiceManager, System, World};
 use ecs::system::entity::{EntityProcess, EntitySystem};
 use protobuf::repeated::RepeatedField;
@@ -62,6 +62,12 @@ impl EntityProcess for SnapshotProcess {
             ship.set_entityId(e.id());
             let structure = data.structure[e].contract();
             ship.set_structure(structure);
+            let ref body = data.physics_handle[e].handle.borrow();
+            let mut physicsState = shipTracts::PhysicsState::new();
+            physicsState.set_x(body.position().translation.x);
+            physicsState.set_y(body.position().translation.y);
+            physicsState.set_theta(body.position().rotation.rotation().x);
+            ship.set_physicsState(physicsState);
             ships.push(ship);
         }
         println!("Serializing {} structures in snapshot", ships.len());

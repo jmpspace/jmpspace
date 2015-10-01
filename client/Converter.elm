@@ -119,8 +119,8 @@ reconstructEntities ships =
         case reconstructStructure ship.structure of
           Err _ -> entities
           Ok structure -> 
-            let motion =
-                  { pos = { x = 0.0, y = 0.0, theta = 0.0 }
+            let motion = -- TODO
+                  { pos = { x = ship.physicsState.x, y = ship.physicsState.y, theta = ship.physicsState.theta }
                   , v = { x = 0, y = 0.0 }
                   , omega = 0.0 }
                 entity =

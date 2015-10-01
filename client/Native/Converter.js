@@ -139,13 +139,18 @@ Elm.Native.Converter.make = function(_elm) {
 
     }
 
+    function convertPhysicsState(physicsState_contract) {
+      return A3(Ship.PhysicsState, physicsState_contract.x, physicsState_contract.y, physicsState_contract.theta);
+    }
+
     function convertShip(ship_contract) {
       if (ship_contract.entityId.high > 0) {
         throw new Error("Timebomb - entity ids are u64");
       }
       var entityId = ship_contract.entityId.low;
       var structure = convertStructure(ship_contract.structure);
-      return A2(Ship.Ship, entityId, structure);
+      var physicsState = convertPhysicsState(ship_contract.physicsState);
+      return A3(Ship.Ship, entityId, structure, physicsState);
     }
     
     function convertSnapshot(snapshot_contract) {
