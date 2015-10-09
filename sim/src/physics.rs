@@ -36,6 +36,7 @@ impl System for PhysicsSystem {
 impl Process for PhysicsSystem {
     fn process(&mut self, data: &mut DataHelper<JmpComponents, JmpServices>) {
         for dt in data.services.dt.into_iter() {
+            println!("Physics step with dt={}", dt);
             data.services.physics.world.step(dt)
         }
     }

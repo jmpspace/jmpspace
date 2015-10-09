@@ -21,6 +21,7 @@ pub enum Part {
     Engine { radius: f64, length: f64, group: i32 }
 }
 
+#[derive(Debug)]
 pub struct ThrustProfile {
     pub force: Vec2<f64>,
     pub torque: f64

@@ -8,11 +8,25 @@ crapships milestone
   close the loop starting from client handler
 
     DONE start from client handler init
-    create a random ship and register with ECS
+    DONE create a random ship and register with ECS
       TODO RANDOM
     DONE create an EntityProcess for snapshot
+    DONE client structure deserialization
+    DONE client world update from snapshot
+
     implement actions -> physics
     implement thrust!
-    client structure deserialization
-    client world update from snapshot
 
+    pivot - reimplement thrust
+      move all physics into nphysics
+        individual mass / total mass / density?
+        center of mass
+        point thrust
+
+    pivot - smaller MVP
+      pre-programmed actions sent to client (same client no changes?)
+        loop forever a movie
+          reset
+          create 4 ships
+          each gets a different engine controls
+          let simulate for 1000 steps

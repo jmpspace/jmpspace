@@ -144,6 +144,7 @@ impl Sim {
                                                                     }
                                                                     acc
                                                                 });
+                    println!("Setting {}, {:?}", entity.id(), net_profile);
                     let ref mut body = data.physics_handle[entity].handle.borrow_mut();
                     body.clear_forces();
                     body.append_lin_force(net_profile.force);
@@ -165,6 +166,7 @@ impl Sim {
     }
 
     pub fn snapshot(&mut self) -> Snapshot {
+        self.world.services.dt = Some(0.050);
         self.world.update();
         self.world.services.snapshot.clone().expect("Should see a snapshot")
     }
