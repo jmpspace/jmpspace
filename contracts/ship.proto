@@ -1,6 +1,8 @@
 
 package ship;
 
+import "actions.proto";
+
 message Vessel {
   required double width = 1;
   required double length = 2;
@@ -72,10 +74,14 @@ message PhysicsState {
   required double x = 1;
   required double y = 2;
   required double theta = 3;
+  required double vx = 4;
+  required double vy = 5;
+  required double omega = 6;
 }
 
 message Ship {
   required uint64 entityId = 1;
   required Structure structure = 2;
   required PhysicsState physicsState = 3;
+  required actions.Active active = 4;
 }

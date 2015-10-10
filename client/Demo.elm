@@ -98,8 +98,9 @@ draw n gs =
 asText = leftAligned << fromString
 
 main : Signal Element
-main = combineSElems outward <|
-  [ spaceBlack <~ (.window <~ gameInputs) ~ (draw <~ (fst <~ timestamp gameInputs) ~ withPhantom)
+main = combineSElems down <|
+  --[ spaceBlack <~ (.window <~ gameInputs) ~ (draw <~ (fst <~ timestamp gameInputs) ~ withPhantom)
+  [ spaceBlack <~ (constant (500, 300)) ~ (draw <~ (fst <~ timestamp gameInputs) ~ withPhantom)
   , combineSElems down
     [ (color white << asText) <~ constant "Celestia"
     , (color white << asText) <~ constant "Use WASD to control your current ship, and X to brake"

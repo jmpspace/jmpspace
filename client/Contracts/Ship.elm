@@ -50,7 +50,10 @@ type alias Structure = {
 type alias PhysicsState = {
   x: Float,
   y: Float,
-  theta: Float
+  theta: Float,
+  vx: Float,
+  vy: Float,
+  omega: Float
 }
 
 type alias Ship = {

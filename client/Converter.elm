@@ -121,8 +121,8 @@ reconstructEntities ships =
           Ok structure -> 
             let motion = -- TODO
                   { pos = { x = ship.physicsState.x, y = ship.physicsState.y, theta = ship.physicsState.theta }
-                  , v = { x = 0, y = 0.0 }
-                  , omega = 0.0 }
+                  , v = { x = ship.physicsState.vx, y = ship.physicsState.vy }
+                  , omega = ship.physicsState.omega }
                 entity =
                   { controls = Types.Active []
                   , motion = motion

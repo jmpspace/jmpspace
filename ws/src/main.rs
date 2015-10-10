@@ -9,6 +9,8 @@ extern crate rand;
 extern crate sim;
 extern crate ws;
 
+mod constants;
+
 // Possibly replace with an mio type of channel?
 use ecs::{Entity};
 use std::collections::HashMap;
@@ -16,6 +18,8 @@ use std::sync::mpsc::channel;
 use std::sync::mpsc::{Sender as ThreadOut};
 use std::thread;
 use ws::{listen, CloseCode, Handler, Handshake, Message, Sender, Result};
+
+use constants::*;
 
 enum Registration {
     Register { client: i32, entity_id_in: ThreadOut<Entity>, out: Sender },
@@ -106,7 +110,7 @@ fn main () {
 
         loop {
             ticks_in.send(()).unwrap();
-            thread::sleep_ms(50); // TODO magic number
+            thread::sleep_ms(TICK_MILLIS);
         }
 
     }).unwrap();

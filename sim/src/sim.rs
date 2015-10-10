@@ -67,6 +67,9 @@ impl EntityProcess for SnapshotProcess {
             physicsState.set_x(body.position().translation.x);
             physicsState.set_y(body.position().translation.y);
             physicsState.set_theta(body.position().rotation.rotation().x);
+            physicsState.set_vx(body.lin_vel().x);
+            physicsState.set_vy(body.lin_vel().y);
+            physicsState.set_omega(body.ang_vel().x);
             ship.set_physicsState(physicsState);
             ships.push(ship);
         }

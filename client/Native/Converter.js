@@ -140,7 +140,7 @@ Elm.Native.Converter.make = function(_elm) {
     }
 
     function convertPhysicsState(physicsState_contract) {
-      return A3(Ship.PhysicsState, physicsState_contract.x, physicsState_contract.y, physicsState_contract.theta);
+      return A6(Ship.PhysicsState, physicsState_contract.x, physicsState_contract.y, physicsState_contract.theta, physicsState_contract.vx, physicsState_contract.vy, physicsState_contract.omega);
     }
 
     function convertShip(ship_contract) {
@@ -171,6 +171,7 @@ Elm.Native.Converter.make = function(_elm) {
             throw new Error("Timebomb - entity ids are u64");
           }
           var focusEntityId = game_update_contract.focusEntityId.low;
+          debugger;
           return World.GameUpdate_focusEntityId(focusEntityId);
         default:
           throw new Error("unknown protocase");
