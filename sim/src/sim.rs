@@ -5,7 +5,7 @@ use ecs::system::entity::{EntityProcess, EntitySystem};
 use protobuf::repeated::RepeatedField;
 use protobuf::core::Message;
 
-use contracts::actions::{Action, Controls};
+use contracts::actions::{Action, Active, Controls};
 use contracts::ship as shipTracts; // TODO move out for this reason
 use contracts::world::{GameUpdate, Snapshot};
 
@@ -16,7 +16,8 @@ use physics::{PhysicsHandle, PhysicsService, PhysicsSystem};
 components! {
     struct JmpComponents {
         #[cold] structure: Structure,
-        #[hot] physics_handle: PhysicsHandle
+        #[hot] physics_handle: PhysicsHandle,
+        #[hot] active_thrusters: Vec<i32>
     }
 }
 
@@ -63,14 +64,17 @@ impl EntityProcess for SnapshotProcess {
             let structure = data.structure[e].contract();
             ship.set_structure(structure);
             let ref body = data.physics_handle[e].handle.borrow();
-            let mut physicsState = shipTracts::PhysicsState::new();
-            physicsState.set_x(body.position().translation.x);
-            physicsState.set_y(body.position().translation.y);
-            physicsState.set_theta(body.position().rotation.rotation().x);
-            physicsState.set_vx(body.lin_vel().x);
-            physicsState.set_vy(body.lin_vel().y);
-            physicsState.set_omega(body.ang_vel().x);
-            ship.set_physicsState(physicsState);
+            let mut physics_state = shipTracts::PhysicsState::new();
+            physics_state.set_x(body.position().translation.x);
+            physics_state.set_y(body.position().translation.y);
+            physics_state.set_theta(body.position().rotation.rotation().x);
+            physics_state.set_vx(body.lin_vel().x);
+            physics_state.set_vy(body.lin_vel().y);
+            physics_state.set_omega(body.ang_vel().x);
+            ship.set_physicsState(physics_state);
+            let mut active = Active::new();
+            active.set_groups(data.active_thrusters[e].clone());
+            ship.set_active(active);
             ships.push(ship);
         }
         println!("Serializing {} structures in snapshot", ships.len());
@@ -84,7 +88,7 @@ systems! {
         physics: PhysicsSystem = PhysicsSystem::new(),
         snapshot: EntitySystem<SnapshotProcess> = EntitySystem::new(
             SnapshotProcess,
-            aspect!(<JmpComponents> all: [structure])
+            aspect!(<JmpComponents> all: [structure, active_thrusters])
             )
     }
 }
@@ -115,6 +119,7 @@ impl Sim {
             |entity: BuildData<JmpComponents>, data: &mut JmpComponents| {
                 data.structure.add(&entity, ship);
                 data.physics_handle.add(&entity, physics_handle);
+                data.active_thrusters.add(&entity, Vec::new());
             });
         let id = entity.id();
         println!("Created an entity {}", id);
@@ -134,10 +139,18 @@ impl Sim {
             let controls = action.get_controls();
             if controls.has_brakes() {
                 println!("I cut the brakes, wildcard!"); // TODO
+                self.world.with_entity_data(&entity, |entity, data| {
+                    data.active_thrusters[entity] = Vec::new();
+                });
             }
             if controls.has_active() {
                 let active_groups = controls.get_active().get_groups();
                 self.world.with_entity_data(&entity, |entity, data| {
+                    let mut active_thrusters = Vec::new();
+                    for group in active_groups {
+                        active_thrusters.push(*group);
+                    }
+                    data.active_thrusters[entity] = active_thrusters;
                     let profiles = data.structure[entity].thrust_profiles();
                     // TODO formatting
                     let net_profile = active_groups.iter().fold(ThrustProfile::zero(), |mut acc, group|

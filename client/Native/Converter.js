@@ -150,7 +150,9 @@ Elm.Native.Converter.make = function(_elm) {
       var entityId = ship_contract.entityId.low;
       var structure = convertStructure(ship_contract.structure);
       var physicsState = convertPhysicsState(ship_contract.physicsState);
-      return A3(Ship.Ship, entityId, structure, physicsState);
+      var active = ship_contract.active;
+      // TODO convert active to Elm List... duh
+      return A4(Ship.Ship, entityId, structure, physicsState, active);
     }
     
     function convertSnapshot(snapshot_contract) {

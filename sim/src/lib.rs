@@ -25,8 +25,5 @@ mod ship;
 pub mod sim;
 mod tagtree;
 
-use libc::{uint8_t, size_t};
 use protobuf::core::Message;
-use std::ptr;
-use std::slice;
 

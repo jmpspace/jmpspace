@@ -124,7 +124,7 @@ reconstructEntities ships =
                   , v = { x = ship.physicsState.vx, y = ship.physicsState.vy }
                   , omega = ship.physicsState.omega }
                 entity =
-                  { controls = Types.Active []
+                  { controls = Types.Active ship.active
                   , motion = motion
                   , cache = genEntityCache structure }
             in Dict.insert ship.entityId entity entities

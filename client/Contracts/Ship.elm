@@ -59,5 +59,6 @@ type alias PhysicsState = {
 type alias Ship = {
   entityId: Int,
   structure: Structure,
-  physicsState: PhysicsState
+  physicsState: PhysicsState,
+  active: List Int
 }
