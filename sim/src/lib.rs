@@ -24,6 +24,3 @@ mod physics;
 mod ship;
 pub mod sim;
 mod tagtree;
-
-use protobuf::core::Message;
-

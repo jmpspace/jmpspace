@@ -1,6 +1,6 @@
 
 use na::{Vec1, Rotation};
-use ecs::{BuildData, DataHelper, Entity, EntityIter, EntityModifier, ServiceManager, System, World};
+use ecs::{BuildData, DataHelper, Entity, EntityIter, ServiceManager, System, World};
 use ecs::system::entity::{EntityProcess, EntitySystem};
 use protobuf::repeated::RepeatedField;
 use protobuf::core::Message;
