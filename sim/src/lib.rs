@@ -19,8 +19,9 @@ extern crate contracts;
 
 // This crate
 mod constants;
-mod demo;
 mod physics;
+#[macro_use]
 mod ship;
+mod demo;
 pub mod sim;
 mod tagtree;

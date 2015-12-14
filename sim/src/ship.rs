@@ -160,8 +160,8 @@ fn simple_parts () {
 
 }
 
-struct Beam {
-    length: f64
+pub struct Beam {
+    pub length: f64
 }
 
 impl Beam {
@@ -466,26 +466,48 @@ impl<'a> Iterator for StructureContractIter<'a> {
 
 }
 
-// TODO should be macros?
-
-pub fn vessel(width: f64, length: f64) -> Part {
-    Part::Vessel { width: width, length: length }
+macro_rules! vessel {
+	($width:expr, $length:expr) => {
+		Part::Vessel { width: $width, length: $length }
+	}
 }
 
-pub fn fuel_tank(radius: f64, length: f64) -> Part {
-    Part::FuelTank { radius: radius, length: length}
+macro_rules! fuel_tank {
+	($radius:expr, $length:expr) => {
+		Part::FuelTank { radius: $radius, length: $length }
+	}
 }
 
-pub fn engine(radius: f64, length: f64, group: i32) -> Part {
-    Part::Engine { radius: radius, length: length, group: group}
+macro_rules! engine {
+	($radius:expr, $length:expr, $group:expr) => {
+		Part::Engine { radius: $radius, length: $length, group: $group }
+	}
 }
 
-pub fn part(attrs: Part) -> Structure {
-    tagtree::TagTree::Leaf(attrs)
+macro_rules! part {
+	($part:expr) => {
+		tagtree::TagTree::Leaf($part)
+	}
 }
 
-pub fn beam(length: f64, parts: Vec<(Attach, Box<Structure>)>) -> Structure {
-    tagtree::TagTree::Node(Beam {length: length}, parts)
+// TODO convert to repeated pattern and call vec internally?
+
+macro_rules! beam {
+	($length:expr, $parts:expr) => {
+		tagtree::TagTree::Node(Beam { length: $length }, $parts)
+	}
+}
+
+macro_rules! attach_part {
+	($location:expr, $rotation:expr, $part:expr) => {
+		(Attach { location: $location, rotation: $rotation }, box part!($part))
+	}
+}
+
+macro_rules! attach_tree {
+	($location:expr, $rotation:expr, $tree:expr) => {
+		(Attach { location: $location, rotation: $rotation }, box $tree)
+	}
 }
 
 #[test]
