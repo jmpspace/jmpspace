@@ -512,27 +512,27 @@ macro_rules! attach_tree {
 
 #[test]
 fn simple_structures () {
-    let p1 = part(Part::Vessel { width: 2.0, length: 4.0 });
+    let p1 = part!(Part::Vessel { width: 2.0, length: 4.0 });
     let a1 = Attach{location: 2.0, rotation: 0.0};
-    let p2 = part(Part::FuelTank { radius: 1.0, length: 5.0});
+    let p2 = part!(Part::FuelTank { radius: 1.0, length: 5.0});
     let a2 = Attach{location: 8.0, rotation: 0.0};
-    let p3 = part(Part::Engine { radius: 1.0, length: 2.0, group: 3});
+    let p3 = part!(Part::Engine { radius: 1.0, length: 2.0, group: 3});
     let a3 = Attach{location: 10.0, rotation: 0.0};
-    let b1 = beam(5.0, vec![(a1, box p1),(a2, box p2),(a3, box p3)]);
+    let b1 = beam!(5.0, vec![(a1, box p1),(a2, box p2),(a3, box p3)]);
     b1.mass();
 }
 
 #[test]
 fn simple_ships () {
-    beam(8.0, vec![
+    beam!(8.0, vec![
          (Attach {location: 2.0, rotation: 0.0}, 
-          box part(Part::Vessel {width: 2.0, length: 4.0})
+          box part!(Part::Vessel {width: 2.0, length: 4.0})
          ),
          (Attach {location: 6.0, rotation: 0.0},
-          box part(Part::FuelTank {radius: 1.0, length: 1.5})
+          box part!(Part::FuelTank {radius: 1.0, length: 1.5})
          ),
          (Attach {location: 8.0, rotation: 0.0},
-          box part(Part::Engine {radius: 1.5, length: 0.5, group: 1})
+          box part!(Part::Engine {radius: 1.5, length: 0.5, group: 1})
          )
          ]
         );
