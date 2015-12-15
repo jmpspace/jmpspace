@@ -10,7 +10,6 @@ use contracts::world::{Snapshot};
 
 use sim::{JmpComponents, JmpServices};
 
-// I guess move this out too... TODO
 pub struct SnapshotProcess;
 
 impl System for SnapshotProcess { type Components = JmpComponents; type Services = JmpServices; }
