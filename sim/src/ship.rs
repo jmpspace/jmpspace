@@ -9,6 +9,7 @@ use na::{AbsoluteRotate, angle_between, Iso2, Mat1, Norm, Rot2, Translation, Vec
 use ncollide::inspection::{Repr2};
 use ncollide::shape::{Compound, Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
+use nphysics::math::{Point, Vect};
 use protobuf::repeated::RepeatedField;
 
 use constants::*;
@@ -19,6 +20,14 @@ pub enum Part {
     Vessel { width: f64, length: f64 },
     FuelTank { radius: f64, length: f64 },
     Engine { radius: f64, length: f64, group: i32 }
+}
+
+// TODO convert the physics to use append_force_wrt_point
+
+#[derive(Debug)]
+pub struct Thrust {
+    pub point: Point,
+    pub force: Vect
 }
 
 #[derive(Debug)]
@@ -536,4 +545,13 @@ fn simple_ships () {
          )
          ]
         );
+}
+
+#[test]
+fn missile_thrust () {
+    let missile = beam!(10.0, vec![
+        attach_part!(0.0, 0.0, fuel_tank!(1.0, 2.0)),
+        attach_part!(10.0, 0.0, engine!(1.0, 2.0, 0))
+    ]);
+    missile.thrust_profiles();
 }
