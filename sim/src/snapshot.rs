@@ -5,7 +5,7 @@ use ecs::system::entity::{EntityProcess};
 use protobuf::repeated::RepeatedField;
 
 use contracts::actions::{Active};
-use contracts::ship::{PhysicsState, Ship}; // TODO move out for this reason
+use contracts::ship::{PhysicsState, Ship};
 use contracts::world::{Snapshot};
 
 use sim::{JmpComponents, JmpServices};
