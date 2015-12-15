@@ -393,7 +393,7 @@ impl<'a> Iterator for StructureIsoIter<'a> {
                             let next_context = context * iso;
                             let next_work = StructureWorkItem { 
                                 context: next_context, 
-                            structure: &**attachment
+								structure: &**attachment
                             };
 
                             self.work.push(next_work);

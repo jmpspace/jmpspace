@@ -20,6 +20,7 @@ extern crate contracts;
 // This crate
 mod constants;
 mod physics;
+mod snapshot;
 #[macro_use]
 mod ship;
 mod demo;

@@ -1,17 +1,16 @@
 
-use na::{Vec1, Rotation};
-use ecs::{BuildData, DataHelper, Entity, EntityIter, ServiceManager, System, World};
-use ecs::system::entity::{EntityProcess, EntitySystem};
-use protobuf::repeated::RepeatedField;
+use na::{Vec1};
+use ecs::{BuildData, Entity, ServiceManager, World};
+use ecs::system::entity::{EntitySystem};
 use protobuf::core::Message;
 
-use contracts::actions::{Action, Active, Controls};
-use contracts::ship as shipTracts; // TODO move out for this reason
+use contracts::actions::{Action, Controls};
 use contracts::world::{GameUpdate, Snapshot};
 
 use demo::simple_ship;
 use ship::{Structure, ThrustProfile};
 use physics::{PhysicsHandle, PhysicsService, PhysicsSystem};
+use snapshot::{SnapshotProcess};
 
 components! {
     struct JmpComponents {
@@ -48,40 +47,6 @@ impl Default for JmpServices {
 }
 
 impl ServiceManager for JmpServices {}
-
-// I guess move this out too... TODO
-pub struct SnapshotProcess;
-
-impl System for SnapshotProcess { type Components = JmpComponents; type Services = JmpServices; }
-
-impl EntityProcess for SnapshotProcess {
-    fn process(&mut self, entities: EntityIter<JmpComponents>, data: &mut DataHelper<JmpComponents, JmpServices>) {
-        let mut snapshot = Snapshot::new();
-        let mut ships: Vec<shipTracts::Ship> = Vec::new();
-        for e in entities {
-            let mut ship = shipTracts::Ship::new();
-            ship.set_entityId(e.id());
-            let structure = data.structure[e].contract();
-            ship.set_structure(structure);
-            let ref body = data.physics_handle[e].handle.borrow();
-            let mut physics_state = shipTracts::PhysicsState::new();
-            physics_state.set_x(body.position().translation.x);
-            physics_state.set_y(body.position().translation.y);
-            physics_state.set_theta(body.position().rotation.rotation().x);
-            physics_state.set_vx(body.lin_vel().x);
-            physics_state.set_vy(body.lin_vel().y);
-            physics_state.set_omega(body.ang_vel().x);
-            ship.set_physicsState(physics_state);
-            let mut active = Active::new();
-            active.set_groups(data.active_thrusters[e].clone());
-            ship.set_active(active);
-            ships.push(ship);
-        }
-        println!("Serializing {} structures in snapshot", ships.len());
-        snapshot.set_ships(RepeatedField::from_vec(ships));
-        data.services.snapshot = Some(snapshot);
-    }
-}
 
 systems! {
     struct JmpSystems<JmpComponents, JmpServices> {
