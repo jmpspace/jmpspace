@@ -1,0 +1,8 @@
+
+syntax = "proto2";
+
+package physics_server.session;
+
+message Challenge {
+  required int32 hello = 1;
+}
