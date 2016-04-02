@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'application'
 
-group               = 'testgrp'
+group               = 'spaceServer'
 version             = '0.2.0'
 status              = 'integration'
 description         = 'TODO - Pls. edit - Gradle bootstrap project for Quasar'
@@ -16,21 +16,21 @@ ext.junitVer        = '4.12'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
+def protobufVersion = '2.6.1' // quasar compatibility
+
 buildscript {
   repositories {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.google.protobuf:protobuf-java:3.0.0-beta-2'
     classpath 'com.google.protobuf:protobuf-gradle-plugin:0.7.6'
   }
 }
 
 protobuf {
-  version = "3.0.0-beta-2"
   protoc {
     // Download from repositories
-    artifact = 'com.google.protobuf:protoc:3.0.0-beta-2'
+    artifact = "com.google.protobuf:protoc:${protobufVersion}"
   }
 }
 
@@ -41,7 +41,7 @@ configurations {
 sourceSets {
   main {
     proto {
-      srcDir '../contracts/physics_server'
+      srcDir '../contracts/spaceServer'
     }
   }
 }
@@ -61,11 +61,13 @@ repositories {
 }
 
 dependencies {
-    compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
+  "com.google.protobuf:protobuf-java:${protobufVersion}"
 
-    quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+  compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
 
-    testCompile "junit:junit:$junitVer"
+  quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+
+  testCompile "junit:junit:$junitVer"
 }
 
 test {

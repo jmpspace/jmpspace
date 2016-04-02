@@ -10,6 +10,8 @@ import co.paralleluniverse.strands.channels.IntChannel;
 import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
 
+import spaceServer.session.Session;
+
 /**
  * Increasing-Echo Quasar Example
  *
