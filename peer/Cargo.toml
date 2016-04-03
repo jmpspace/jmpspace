@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["John P Mayer, Jr <john.p.mayer.jr@gmail.com>"]
 
 [dependencies]
-rotor-stream = {git="git://github.com/johnpmayer/rotor-stream", rev="eaa4c7b"}
+rotor-stream = "0.6.2"
