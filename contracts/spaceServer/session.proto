@@ -3,6 +3,26 @@ syntax = "proto2";
 
 package spaceServer.session;
 
-message Challenge {
-  required int32 hello = 1;
+message AuthCredential {
+  required string username = 1;
+  required string password = 2;
+}
+
+message AuthRequest {
+  required AuthCredential credential = 1;
+}
+
+message AuthFailure {
+  required string error = 1;
+}
+
+message AuthSuccess {
+  required int32 session = 1;
+}
+
+message AuthResponse {
+  oneof response {
+    AuthFailure failure = 1;
+    AuthSuccess success = 2;
+  }
 }

@@ -61,11 +61,13 @@ repositories {
 }
 
 dependencies {
+  compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
+  quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+
   "com.google.protobuf:protobuf-java:${protobufVersion}"
 
-  compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
-
-  quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+  compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5'
+  compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
 
   testCompile "junit:junit:$junitVer"
 }
@@ -95,7 +97,7 @@ tasks.withType(Test) {
     }
 }
 
-mainClassName = "testgrp.QuasarIncreasingEchoApp"
+mainClassName = "spaceServer.SpaceServer"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'
@@ -107,4 +109,4 @@ if (project.hasProperty('method')) {
     apply from: "gradle/agent.gradle"
 }
 
-defaultTasks 'test'
+defaultTasks 'run'
