@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'application'
 
-group               = 'spaceServer'
+group               = 'space_server'
 version             = '0.2.0'
 status              = 'integration'
 description         = 'TODO - Pls. edit - Gradle bootstrap project for Quasar'
@@ -41,7 +41,7 @@ configurations {
 sourceSets {
   main {
     proto {
-      srcDir '../contracts/spaceServer'
+      srcDir '../contracts/space_server'
     }
   }
 }
@@ -97,7 +97,7 @@ tasks.withType(Test) {
     }
 }
 
-mainClassName = "spaceServer.SpaceServer"
+mainClassName = "space_server.SpaceServer"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'

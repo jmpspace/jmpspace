@@ -1,4 +1,4 @@
-package spaceServer;
+package space_server;
 
 import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
@@ -27,7 +27,7 @@ class SpaceServer {
   static final int port = 3000; // TODO configure magic number
   static final SocketAddress addr = new InetSocketAddress(port);
 
-  static void handleClient(FiberSocketChannel clientChannel) {
+  static void handleClient(FiberSocketChannel clientChannel) throws SuspendExecution {
     logger.debug("Handling client channel");
     try {
       InputStream reader = Channels.newInputStream(clientChannel);
