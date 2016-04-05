@@ -170,9 +170,11 @@ impl ::protobuf::Message for AuthCredential {
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.username.as_ref() {
+            println!("writing the username");
             try!(os.write_string(1, &v));
         };
         if let Some(v) = self.password.as_ref() {
+            println!("writing the password");
             try!(os.write_string(2, &v));
         };
         try!(os.write_unknown_fields(self.get_unknown_fields()));
@@ -366,6 +368,7 @@ impl ::protobuf::Message for AuthRequest {
 
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
         if let Some(v) = self.credential.as_ref() {
+            println!("writing the credential");
             try!(os.write_tag(1, ::protobuf::wire_format::WireTypeLengthDelimited));
             try!(os.write_raw_varint32(v.get_cached_size()));
             try!(v.write_to_with_cached_sizes(os));

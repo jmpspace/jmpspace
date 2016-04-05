@@ -6,6 +6,8 @@ import co.paralleluniverse.fibers.io.FiberSocketChannel;
 import co.paralleluniverse.fibers.io.FiberServerSocketChannel;
 import co.paralleluniverse.strands.SuspendableRunnable;
 
+import com.google.protobuf.CodedInputStream;
+
 import java.io.InputStream;
 import java.io.IOException;
 import java.lang.InterruptedException;
@@ -31,12 +33,17 @@ class SpaceServer {
     logger.debug("Handling client channel");
     try {
       InputStream reader = Channels.newInputStream(clientChannel);
-      AuthRequest authReq = AuthRequest.parseFrom(reader);
-      AuthCredential authCred = authReq.getCredential();
-      String authUsername = authCred.getUsername();
-      String authPassword = authCred.getPassword();
+      CodedInputStream cis = CodedInputStream.newInstance(Channels.newInputStream(clientChannel));
+      int size = cis.readRawVarint32();
+      logger.info("Request size claims to be: " + size);
+      //AuthRequest authReq = AuthRequest.getDefaultInstance().getParserForType().parsePartialDelimitedFrom(reader);
+      //AuthRequest authReq = AuthRequest.parseFrom(reader);
+      //AuthCredential authCred = AuthCredential.parseDelimitedFrom(reader);
+      //AuthCredential authCred = authReq.getCredential();
+      //String authUsername = authCred.getUsername();
+      //String authPassword = authCred.getPassword();
       // TODO actually check something :-)
-      logger.info("Authenticated:" + authUsername + " (" + authPassword + ")");
+      //logger.info("Authenticated: '" + authUsername + "' ('" + authPassword + "')");
     }
     catch (IOException e) {
       e.printStackTrace();
