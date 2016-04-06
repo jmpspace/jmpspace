@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.lang.InterruptedException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.util.concurrent.ExecutionException;
 
@@ -32,12 +33,16 @@ class SpaceServer {
   static void handleClient(FiberSocketChannel clientChannel) throws SuspendExecution {
     logger.debug("Handling client channel");
     try {
-      InputStream reader = Channels.newInputStream(clientChannel);
-      CodedInputStream cis = CodedInputStream.newInstance(Channels.newInputStream(clientChannel));
-      int size = cis.readRawVarint32();
-      logger.info("Request size claims to be: " + size);
+      ByteBuffer lengthBuf = ByteBuffer.allocate(1);
+      long status = clientChannel.read(lengthBuf);
+      logger.info("Read " + status + " bytes");
+
+      //InputStream reader = Channels.newInputStream(clientChannel);
+      //CodedInputStream cis = CodedInputStream.newInstance(Channels.newInputStream(clientChannel));
+      //int size = cis.readRawVarint32();
+      //logger.info("Request size claims to be: " + lengthBuf.getLong());
       //AuthRequest authReq = AuthRequest.getDefaultInstance().getParserForType().parsePartialDelimitedFrom(reader);
-      //AuthRequest authReq = AuthRequest.parseFrom(reader);
+      //AuthRequest authReq = AuthRequest.parseFrom(cis);
       //AuthCredential authCred = AuthCredential.parseDelimitedFrom(reader);
       //AuthCredential authCred = authReq.getCredential();
       //String authUsername = authCred.getUsername();
