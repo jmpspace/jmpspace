@@ -1,7 +1,10 @@
 
+extern crate byteorder;
 extern crate protobuf;
 
 mod contracts;
+
+use byteorder::{BigEndian, WriteBytesExt};
 
 use contracts::space_server::session::{AuthCredential, AuthRequest};
 
@@ -25,9 +28,12 @@ fn main() {
     request.set_credential(credential);
     //sleep(Duration::new(5,0));
     println!("Writing message");
-    let size = request.compute_size();
+    let size = request.compute_size() as i32;
     println!("Request size is... {}",size);
-    stream.write(&[0xff]);
+    //stream.write(&[0xff]);
+    stream.write_i32::<BigEndian>(size);
+    let msgVec: Vec<u8> = request.write_to_bytes().unwrap();
+    stream.write(msgVec.as_slice());
     //let mut writer = CodedOutputStream::new(&mut stream);
     //writer.write_message(1, &request);
     //writer.write_raw_little_endian32(size).unwrap();

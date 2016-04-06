@@ -33,9 +33,15 @@ class SpaceServer {
   static void handleClient(FiberSocketChannel clientChannel) throws SuspendExecution {
     logger.debug("Handling client channel");
     try {
-      ByteBuffer lengthBuf = ByteBuffer.allocate(1);
-      long status = clientChannel.read(lengthBuf);
-      logger.info("Read " + status + " bytes");
+      ByteBuffer msgLengthBuf = ByteBuffer.allocate(4);
+      long status = clientChannel.read(msgLengthBuf);
+      logger.debug("Read: " + status + " bytes");
+      int msgLength = msgLengthBuf.getInt(0);
+      logger.debug("Message length is: " + msgLength);
+      ByteBuffer msgBuf = ByteBuffer.allocate(msgLength);
+      status = clientChannel.read(msgBuf);
+      logger.debug("Read: " + status + " bytes");
+      AuthRequest authReq = AuthRequest.parseFrom(msgBuf.array());
 
       //InputStream reader = Channels.newInputStream(clientChannel);
       //CodedInputStream cis = CodedInputStream.newInstance(Channels.newInputStream(clientChannel));
@@ -44,11 +50,11 @@ class SpaceServer {
       //AuthRequest authReq = AuthRequest.getDefaultInstance().getParserForType().parsePartialDelimitedFrom(reader);
       //AuthRequest authReq = AuthRequest.parseFrom(cis);
       //AuthCredential authCred = AuthCredential.parseDelimitedFrom(reader);
-      //AuthCredential authCred = authReq.getCredential();
-      //String authUsername = authCred.getUsername();
-      //String authPassword = authCred.getPassword();
+      AuthCredential authCred = authReq.getCredential();
+      String authUsername = authCred.getUsername();
+      String authPassword = authCred.getPassword();
       // TODO actually check something :-)
-      //logger.info("Authenticated: '" + authUsername + "' ('" + authPassword + "')");
+      logger.info("Authenticated: '" + authUsername + "' ('" + authPassword + "')");
     }
     catch (IOException e) {
       e.printStackTrace();
