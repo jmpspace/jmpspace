@@ -7,6 +7,8 @@ import co.paralleluniverse.fibers.io.FiberServerSocketChannel;
 import co.paralleluniverse.strands.SuspendableRunnable;
 
 import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Parser;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -15,6 +17,8 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
+import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ScatteringByteChannel;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.logging.log4j.Logger;
@@ -30,26 +34,29 @@ class SpaceServer {
   static final int port = 3000; // TODO configure magic number
   static final SocketAddress addr = new InetSocketAddress(port);
 
-  static void handleClient(FiberSocketChannel clientChannel) throws SuspendExecution {
-    logger.debug("Handling client channel");
-    try {
+  // interface GatheringScatteringByteChannel extends GatheringByteChannel, ScatteringByteChannel {}
+  // java complains about duck typing...
+
+  static class MessageStream {
+
+    public static <M> M readMessage(ScatteringByteChannel channel, Parser<M> parser) throws InvalidProtocolBufferException, IOException, SuspendExecution {
       ByteBuffer msgLengthBuf = ByteBuffer.allocate(4);
-      long status = clientChannel.read(msgLengthBuf);
+      long status = channel.read(msgLengthBuf);
       logger.debug("Read: " + status + " bytes");
       int msgLength = msgLengthBuf.getInt(0);
       logger.debug("Message length is: " + msgLength);
       ByteBuffer msgBuf = ByteBuffer.allocate(msgLength);
-      status = clientChannel.read(msgBuf);
+      status = channel.read(msgBuf);
       logger.debug("Read: " + status + " bytes");
-      AuthRequest authReq = AuthRequest.parseFrom(msgBuf.array());
+      return parser.parseFrom(msgBuf.array());
+    }
 
-      //InputStream reader = Channels.newInputStream(clientChannel);
-      //CodedInputStream cis = CodedInputStream.newInstance(Channels.newInputStream(clientChannel));
-      //int size = cis.readRawVarint32();
-      //logger.info("Request size claims to be: " + lengthBuf.getLong());
-      //AuthRequest authReq = AuthRequest.getDefaultInstance().getParserForType().parsePartialDelimitedFrom(reader);
-      //AuthRequest authReq = AuthRequest.parseFrom(cis);
-      //AuthCredential authCred = AuthCredential.parseDelimitedFrom(reader);
+  }
+
+  static void handleClient(FiberSocketChannel clientChannel) throws SuspendExecution {
+    logger.debug("Handling client channel");
+    try {
+      AuthRequest authReq = MessageStream.readMessage(clientChannel, AuthRequest.PARSER);
       AuthCredential authCred = authReq.getCredential();
       String authUsername = authCred.getUsername();
       String authPassword = authCred.getPassword();
