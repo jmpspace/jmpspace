@@ -12,6 +12,7 @@ sourceCompatibility = 1.8     // 1.7
 targetCompatibility = 1.8     // 1.7
 
 ext.quasarVer       = '0.7.3'
+ext.spacebaseVer    = '2.3-SNAPSHOT'
 ext.junitVer        = '4.12'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -53,16 +54,15 @@ configurations.all {
 }
 
 repositories {
-//    mavenLocal()
     mavenCentral()
-//    maven { url "https://oss.sonatype.org/content/repositories/releases" }
-//    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-//    maven { url 'https://maven.java.net/content/repositories/snapshots' }
+    maven { url "file:///maven-local/" }
 }
 
 dependencies {
   compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
   quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+
+  compile "co.paralleluniverse:spacebase-core:${spacebaseVer}${classifier}"
 
   "com.google.protobuf:protobuf-java:${protobufVersion}"
 

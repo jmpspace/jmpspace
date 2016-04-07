@@ -4,6 +4,8 @@ import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.io.FiberSocketChannel;
 import co.paralleluniverse.fibers.io.FiberServerSocketChannel;
+import co.paralleluniverse.spacebase.SpaceBase;
+import co.paralleluniverse.spacebase.SpaceBaseBuilder;
 import co.paralleluniverse.strands.SuspendableRunnable;
 
 import com.google.protobuf.CodedInputStream;
@@ -71,6 +73,12 @@ class SpaceServer {
   static public void main(String[] args) {
 
     logger.debug("Starting server fiber");
+
+    // FIXME: execution context, parallel or concurrent
+    SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
+    SpaceBase ambientBase = builder.build("ambient");
+    SpaceBase largeBase = builder.build("large");
+    SpaceBase smallBase = builder.build("small");
 
     Fiber serverFiber = new Fiber("SERVER", new SuspendableRunnable() {
       @Override public void run() throws SuspendExecution {
