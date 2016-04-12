@@ -1,5 +1,6 @@
 package space_server;
 
+import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
 import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.fibers.io.FiberSocketChannel;
@@ -11,6 +12,12 @@ import co.paralleluniverse.strands.SuspendableRunnable;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Parser;
+
+import io.undertow.server.session.InMemorySessionManager;
+import io.undertow.server.session.SessionAttachmentHandler;
+import io.undertow.server.session.SessionCookieConfig;
+import io.undertow.server.session.SessionManager;
+import io.undertow.Undertow;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -80,6 +87,7 @@ class SpaceServer {
     SpaceBase largeBase = builder.build("large");
     SpaceBase smallBase = builder.build("small");
 
+    /*
     Fiber serverFiber = new Fiber("SERVER", new SuspendableRunnable() {
       @Override public void run() throws SuspendExecution {
         try {
@@ -99,7 +107,20 @@ class SpaceServer {
         }
       }
     }).start();
+    */
 
+    final SessionManager sessionManager = new InMemorySessionManager("SESSION_MANAGER", 1, true);
+    final SessionCookieConfig sessionConfig = new SessionCookieConfig();
+    sessionConfig.setMaxAge(60);
+    final SessionAttachmentHandler sessionAttachmentHandler =
+          new SessionAttachmentHandler(sessionManager, sessionConfig);
+
+    Undertow server = Undertow.builder().addHttpListener(port, "localhost")
+           .setHandler(sessionAttachmentHandler.setNext(new AutoWebActorHandler())).build();
+
+    server.start();
+
+    /*
     try {
       serverFiber.join();
     } catch (ExecutionException e) {
@@ -107,6 +128,7 @@ class SpaceServer {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+    */
 
   }
 }
