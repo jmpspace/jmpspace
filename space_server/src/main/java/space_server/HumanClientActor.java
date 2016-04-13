@@ -20,31 +20,31 @@ public class HumanClientActor extends BasicActor<WebMessage, Void> {
   private SendPort<WebDataMessage> peer;
 
   @Override
-    protected final Void doRun() throws InterruptedException, SuspendExecution {
-      actors.add(self());
-      try {
-        //noinspection InfiniteLoopStatement
-        for (;;) {
-          final Object message = receive();
-          if (message instanceof WebStreamOpened) {
-            final WebStreamOpened msg = (WebStreamOpened) message;
-            watch(msg.getFrom()); // will call handleLifecycleMessage with ExitMessage when the session ends
+  protected final Void doRun() throws InterruptedException, SuspendExecution {
+    actors.add(self());
+    try {
+      //noinspection InfiniteLoopStatement
+      for (;;) {
+        final Object message = receive();
+        if (message instanceof WebStreamOpened) {
+          final WebStreamOpened msg = (WebStreamOpened) message;
+          watch(msg.getFrom()); // will call handleLifecycleMessage with ExitMessage when the session ends
 
-            SendPort<WebDataMessage> p = msg.getFrom();
-            if (msg instanceof HttpStreamOpened)
-              p = wrapAsSSE(p);
-            this.peer = p;
+          SendPort<WebDataMessage> p = msg.getFrom();
+          if (msg instanceof HttpStreamOpened)
+            p = wrapAsSSE(p);
+          this.peer = p;
 
-            //                    p.send(new WebDataMessage(self(), "Welcome. " + actors.size() + " listeners"));
-          } // -------- WebSocket message received --------
-          else if (message instanceof WebDataMessage) {
-            postMessage((WebDataMessage) message);
-          }
+          //                    p.send(new WebDataMessage(self(), "Welcome. " + actors.size() + " listeners"));
+        } // -------- WebSocket message received --------
+        else if (message instanceof WebDataMessage) {
+          postMessage((WebDataMessage) message);
         }
-      } finally {
-        actors.remove(self());
       }
+    } finally {
+      actors.remove(self());
     }
+  }
 
   private SendPort<WebDataMessage> wrapAsSSE(SendPort<WebDataMessage> actor) {
     return Channels.mapSend(actor, new Function<WebDataMessage, WebDataMessage>() {
@@ -66,10 +66,10 @@ public class HumanClientActor extends BasicActor<WebMessage, Void> {
   }
 
   @Override
-    protected final WebMessage handleLifecycleMessage(LifecycleMessage m) {
-      // while listeners might contain an SSE actor wrapped with Channels.map, the wrapped SendPort maintains the original actors hashCode and equals behavior
-      if (m instanceof ExitMessage)
-        actors.remove(((ExitMessage) m).getActor());
-      return super.handleLifecycleMessage(m);
-    }
+  protected final WebMessage handleLifecycleMessage(LifecycleMessage m) {
+    // while listeners might contain an SSE actor wrapped with Channels.map, the wrapped SendPort maintains the original actors hashCode and equals behavior
+    if (m instanceof ExitMessage)
+      actors.remove(((ExitMessage) m).getActor());
+    return super.handleLifecycleMessage(m);
+  }
 }

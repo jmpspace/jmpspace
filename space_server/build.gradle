@@ -74,6 +74,8 @@ dependencies {
 
   compile "co.paralleluniverse:spacebase-core:${spacebaseVer}${classifier}"
 
+  compile 'org.apache.commons:commons-lang3:3.0'
+
   "com.google.protobuf:protobuf-java:${protobufVersion}"
 
   compile "com.vividsolutions:jts:1.13"
