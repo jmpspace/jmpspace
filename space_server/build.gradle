@@ -56,9 +56,12 @@ configurations.all {
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url "file:///maven-local/" }
-    // maven { url "file:///G:/maven-local/" }
-    // maven { url "http://jmpspace.com.s3-website-us-east-1.amazonaws.com" }
+    String osName = System.getProperty("os.name").toLowerCase();
+    if (osName.contains("windows")) {
+        maven { url "file:///G:/maven-local/" }
+    } else {
+        maven { url "file:///maven-local/" }
+    }
 }
 
 dependencies {
