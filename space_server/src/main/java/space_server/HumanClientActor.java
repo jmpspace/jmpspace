@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@WebActor(httpUrlPatterns = {"/*"}, webSocketUrlPatterns = {"/ws"})
+@WebActor(webSocketUrlPatterns = {"/ws"})
 public class HumanClientActor extends BasicActor<WebMessage, Void> {
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =
@@ -26,30 +26,7 @@ public class HumanClientActor extends BasicActor<WebMessage, Void> {
         //noinspection InfiniteLoopStatement
         for (;;) {
           final Object message = receive();
-          if (message instanceof HttpRequest) {
-            final HttpRequest msg = (HttpRequest) message;
-            switch (msg.getRequestURI()) {
-              case "/":
-                msg.getFrom().send(HttpResponse.ok(self(), msg, "httpResponse").setContentType("text/html").build());
-                break;
-              case "/notfound":
-                msg.getFrom().send(HttpResponse.error(self(), msg, 404, "Not found").setContentType("text/plain").build());
-                break;
-              case "/die":
-                throw new RuntimeException("die");
-              case "/redirect":
-                msg.getFrom().send(HttpResponse.redirect(msg, "/foo").build());
-                break;
-              case "/ssepublish":
-                postMessage(new WebDataMessage(self(), msg.getStringBody()));
-                msg.getFrom().send(HttpResponse.ok(self(), msg, "").build());
-                break;
-              case "/ssechannel":
-                msg.getFrom().send(SSE.startSSE(self(), msg).build());
-                break;
-            }
-          } // -------- WebSocket/SSE opened --------
-          else if (message instanceof WebStreamOpened) {
+          if (message instanceof WebStreamOpened) {
             final WebStreamOpened msg = (WebStreamOpened) message;
             watch(msg.getFrom()); // will call handleLifecycleMessage with ExitMessage when the session ends
 
