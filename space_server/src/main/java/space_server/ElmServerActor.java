@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang3.concurrent.ConcurrentException;
 import org.apache.commons.lang3.concurrent.LazyInitializer;
 
-@WebActor(httpUrlPatterns = {"/*"})
+@WebActor(httpUrlPatterns = {"/index.html"})
 public class ElmServerActor extends BasicActor<WebMessage, Void> {
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =
@@ -48,12 +48,18 @@ public class ElmServerActor extends BasicActor<WebMessage, Void> {
       //noinspection InfiniteLoopStatement
       for (;;) {
         final Object message = receive();
+        System.out.println("elm server actor - received");
         if (message instanceof HttpRequest) {
           final HttpRequest msg = (HttpRequest) message;
           switch (msg.getRequestURI()) {
-            case "/":
+            case "/index.html":
               // FIXME: catch the ConcurrentException here, and return a 500 is there's a problem!
-              msg.getFrom().send(HttpResponse.ok(self(), msg, indexSource.get()).setContentType("text/html").build());
+              try {
+                msg.getFrom().send(HttpResponse.ok(self(), msg, indexSource.get()).setContentType("text/html").build());
+              } catch (ConcurrentException e) {
+                e.printStackTrace();
+                msg.getFrom().send(HttpResponse.error(self(), msg, 500, "Server error: " + e.getMessage()).setContentType("text/plain").build());
+              }
               break;
             default:
               msg.getFrom().send(HttpResponse.error(self(), msg, 404, "Not found").setContentType("text/plain").build());
@@ -61,12 +67,9 @@ public class ElmServerActor extends BasicActor<WebMessage, Void> {
           }
         }
       }
-    } catch (ConcurrentException e) {
-      e.printStackTrace();
     } finally {
       actors.remove(self());
     }
-    return null;
   }
 
   @Override

@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@WebActor(webSocketUrlPatterns = {"/ws"})
+@WebActor(httpUrlPatterns = {"/ws"}, webSocketUrlPatterns = {"/ws"})
 public class HumanClientActor extends BasicActor<WebMessage, Void> {
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =
@@ -26,6 +26,7 @@ public class HumanClientActor extends BasicActor<WebMessage, Void> {
       //noinspection InfiniteLoopStatement
       for (;;) {
         final Object message = receive();
+        System.out.println("human client actor - received");
         if (message instanceof WebStreamOpened) {
           final WebStreamOpened msg = (WebStreamOpened) message;
           watch(msg.getFrom()); // will call handleLifecycleMessage with ExitMessage when the session ends
