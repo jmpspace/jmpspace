@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-@WebActor(httpUrlPatterns = {"/ws"}, webSocketUrlPatterns = {"/ws"})
+@WebActor(webSocketUrlPatterns = {"/"})
 public class HumanClientActor extends BasicActor<WebMessage, Void> {
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =

@@ -1,15 +1,74 @@
+import Html exposing (..)
+import Html.App as Html
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import WebSocket
 
-module Main where
 
-import Html exposing (Html, text)
-import Task exposing (Task, andThen, succeed)
 
-import WsTasks exposing (open, relativeUri)
+main =
+  Html.program
+    { init = init
+    , view = view
+    , update = update
+    , subscriptions = subscriptions
+    }
 
-main : Html
-main = text <| WsTasks.relativeUri "/ws"
 
-port serverThread : Task String ()
-port serverThread =
-  WsTasks.open (WsTasks.relativeUri "/ws") 
-  `andThen` \_ -> succeed ()
+echoServer : String
+echoServer =
+  "ws://localhost:8001"
+
+
+
+-- MODEL
+
+
+type alias Model =
+  { input : String
+  , messages : List String
+  }
+
+
+init : (Model, Cmd Msg)
+init =
+  (Model "" [], Cmd.none)
+
+-- UPDATE
+
+type Msg
+  = Input String
+  | Send
+  | NewMessage String
+
+update : Msg -> Model -> (Model, Cmd Msg)
+update msg {input, messages} =
+  case msg of
+    Input newInput ->
+      (Model newInput messages, Cmd.none)
+
+    Send ->
+      (Model "" messages, WebSocket.send echoServer input)
+
+    NewMessage str ->
+      (Model input (str :: messages), Cmd.none)
+
+-- SUBSCRIPTIONS
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  WebSocket.listen echoServer NewMessage
+
+-- VIEW
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ input [onInput Input] []
+    , button [onClick Send] [text "Send"]
+    , div [] (List.map viewMessage (List.reverse model.messages))
+    ]
+
+viewMessage : String -> Html msg
+viewMessage msg =
+  div [] [ text msg ]

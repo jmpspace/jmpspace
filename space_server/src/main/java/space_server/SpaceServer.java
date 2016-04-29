@@ -40,7 +40,7 @@ class SpaceServer {
 
   static final Logger logger = LogManager.getLogger(SpaceServer.class.getName());
 
-  static final int port = 8000; // TODO configure magic number
+  static final int port = 8001; // TODO configure magic number
   static final SocketAddress addr = new InetSocketAddress(port);
 
   // interface GatheringScatteringByteChannel extends GatheringByteChannel, ScatteringByteChannel {}
