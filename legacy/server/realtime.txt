@@ -1,0 +1,26 @@
+
+https://groups.google.com/d/msg/mozilla.dev.media/pos7woJMimo/jgV-RIuQ-gEJ
+
+While I can't point you to any ready-made examples off the top of my 
+head (although I suspect they exist), the general information flow for 
+real-time server-based recording of a media stream would be something 
+along the lines of: 
+
+ 1. Browser retrieves a webpage with javascript in it. 
+ 2. Browser executes javascript, which: 
+     1. Gets a handle to the camera using getUserMedia, 
+     2. Creates an RTCPeerConnection 
+     3. Calls "createOffer" and "setLocalDescription" on the 
+        RTCPeerConnection 
+     4. Sends an request to the server containing the offer (in SDP format) 
+ 3. The server processes the offer SDP and generates its own answer SDP, 
+    which it returns to the browser in its response. 
+ 4. The javascript calls "setRemoteDescription" on the RTCPeerConnection 
+    to start the media flowing. 
+ 5. The server starts receiving DTLS/SRTP packets from the browser, 
+    which it then does whatever it wants to, up to and including storing 
+    in an easily readable format on a local hard drive. 
+
+
+Clearly, I've glossed over the details, but I hope that's enough to get 
+you in the right direction with a little more research on your end. 

@@ -1,23 +1,67 @@
 
 use std::boxed::Box;
-use std::ops::Neg;
+use std::collections::HashMap;
+use std::ops::{Add, Neg};
 use std::sync::Arc;
 use num::traits::{One, Zero};
 
-use na::{Iso2, Mat1, Norm, Rot2, Translation, Vec1, Vec2};
+use na::{AbsoluteRotate, angle_between, Iso2, Mat1, Norm, Rot2, Translation, Vec1, Vec2};
 use ncollide::inspection::{Repr2};
 use ncollide::shape::{Compound, Cone, Cuboid, Cylinder};
 use nphysics::object::{RigidBody};
+use nphysics::math::{Point, Vect};
 use protobuf::repeated::RepeatedField;
 
 use constants::*;
 use contracts::ship as contracts;
 use tagtree;
 
-enum Part {
+pub enum Part {
     Vessel { width: f64, length: f64 },
     FuelTank { radius: f64, length: f64 },
     Engine { radius: f64, length: f64, group: i32 }
+}
+
+// TODO convert the physics to use append_force_wrt_point
+
+#[derive(Debug)]
+pub struct Thrust {
+    pub point: Point,
+    pub force: Vect
+}
+
+#[derive(Debug)]
+pub struct ThrustProfile {
+    pub force: Vec2<f64>,
+    pub torque: f64
+}
+
+impl ThrustProfile {
+
+    pub fn zero() -> ThrustProfile {
+        ThrustProfile {
+            force: Vec2::new(0.0,0.0),
+            torque: 0.0
+        }
+    }
+
+    fn from_thrust(context: Iso2<f64>, thrust: &Vec2<f64>) -> ThrustProfile {
+        let orientation = context.rotation;
+        let displacement = context.translation;
+        let force = orientation.absolute_rotate(thrust);
+        let theta = angle_between(&displacement, &force);
+        let torque = displacement.norm() * force.norm() * theta.sin();
+        ThrustProfile {
+            force: force,
+            torque: torque
+        }
+    }
+
+    pub fn add(&mut self, other: &ThrustProfile) {
+        self.force = self.force.add(other.force);
+        self.torque += other.torque;
+    }
+
 }
 
 struct PointMass {
@@ -99,26 +143,16 @@ impl Part {
         })
     }
 
-    fn object (&self) -> RigidBody {
-        match self {
-            &Part::Vessel {width, length} => {
-                let geom = Cuboid::new(Vec2::new(width, length));
-                RigidBody::new_dynamic(geom, VESSEL_DENSITY, 1.0, 1.0)
-            }
-            &Part::FuelTank {radius, length} => {
-                let geom = Cylinder::new(length, radius);
-                RigidBody::new_dynamic(geom, FUELTANK_DENSITY, 1.0, 1.0)
-            }
-            &Part::Engine {radius, length, group} => {
-                let _group = group;
-                let geom = Cone::new(length, radius);
-                RigidBody::new_dynamic(geom, ENGINE_DENSITY, 1.0, 1.0)
-            }
-        }
-    }
-
     fn point_mass (&self) -> PointMass {
         PointMass { center: Vec2::new(0.0,0.0), mass: self.mass() }
+    }
+
+    fn thrust (&self) -> Option<(i32, Vec2<f64>)> { 
+        match self {
+            &Part::Engine {radius, length, group} =>
+                Some((group, Vec2::new(radius * length * ENGINE_THRUST, 0.0))),
+            _ => None
+        }
     }
 
 }
@@ -135,14 +169,8 @@ fn simple_parts () {
 
 }
 
-struct PartObjectCache {
-    part: Part,
-    object: RigidBody,
-    mass: f64
-}
-
-struct Beam {
-    length: f64
+pub struct Beam {
+    pub length: f64
 }
 
 impl Beam {
@@ -158,11 +186,6 @@ impl Beam {
         Arc::new(Box::new(geom))
     }
 
-    fn object (&self) -> RigidBody {
-        let geom = Cuboid::new(Vec2::new(BEAM_WIDTH, self.length));
-        RigidBody::new_dynamic(geom, BEAM_DENSITY, 1.0, 1.0)
-    }
-
     fn mass (&self) -> f64 {
         self.length * BEAM_DENSITY
     }
@@ -175,9 +198,9 @@ impl Beam {
 }
 
 #[derive(Clone)]
-struct Attach {
-    location: f64,
-    rotation: f64
+pub struct Attach {
+    pub location: f64,
+    pub rotation: f64
 }
 
 impl Attach {
@@ -191,18 +214,12 @@ impl Attach {
 
 }
 
-type Structure = tagtree::TagTree<Part,Beam,Attach>;
+pub type Structure = tagtree::TagTree<Part,Beam,Attach>;
 
 impl Structure {
 
-    fn contract(&self) -> contracts::Structure {
-        let mut structure = contracts::Structure::new();
-        let datas: RepeatedField<contracts::StructureData> = self.contract_iter().collect();
-        structure.set_attachments(datas);
-        structure
-    }
-
-    fn set_contract_node_for(&self, builder: &mut contracts::StructureNode) {
+    pub fn node_contract(&self) -> contracts::StructureNode {
+        let mut builder = contracts::StructureNode::new();
         match self {
             &tagtree::TagTree::Leaf(ref part) => {
                 builder.set_part(part.contract())
@@ -211,6 +228,14 @@ impl Structure {
                 builder.set_beam(beam.contract())
             }
         }
+        builder
+    }
+
+    pub fn contract(&self) -> contracts::Structure {
+        let mut structure = contracts::Structure::new();
+        let datas: RepeatedField<contracts::StructureData> = self.contract_iter().collect();
+        structure.set_attachments(datas);
+        structure
     }
 
     fn mass(&self) -> f64 {
@@ -235,6 +260,13 @@ impl Structure {
         }
     }
 
+    fn thrust(&self) -> Option<(i32, Vec2<f64>)> {
+        match self {
+            &tagtree::TagTree::Leaf(ref part) => part.thrust(),
+            _ => None
+        }
+    }
+
     fn total_mass(&self) -> f64 {
         let mut total_mass: f64 = 0.0;
         for item in self.iso_iter() {
@@ -247,6 +279,17 @@ impl Structure {
         // This smells, could probably return an iterator?
         self.iso_iter().fold(Vec::new(), |mut acc, item| {
             acc.push(PointMass{ center: item.context.translation, mass: item.structure.mass() });
+            acc
+        })
+    }
+
+    pub fn thrust_profiles(&self) -> HashMap<i32, ThrustProfile> {
+        self.iso_iter().fold(HashMap::new(), |mut acc, item| {
+            if let Some((group, ref thrust)) = item.structure.thrust() {
+                let contrib = ThrustProfile::from_thrust(item.context, thrust);
+                let mut profile = acc.entry(group).or_insert(ThrustProfile::zero());
+                profile.add(&contrib);
+            }
             acc
         })
     }
@@ -276,10 +319,10 @@ impl Structure {
         Arc::new(Box::new(Compound::new(acc)))
     }
 
-    fn rigid_body(&self) -> RigidBody {
+    pub fn rigid_body(&self) -> RigidBody {
         let shape = self.compound_shape();
         let mass_properties = Some((self.total_mass(), self.center_of_mass().to_pnt(), Mat1::new(self.total_moment())));
-        RigidBody::new(shape, mass_properties, 1.0, 1.0)
+        RigidBody::new(shape, mass_properties, 0.3, 0.6)
     }
 }
 
@@ -299,7 +342,8 @@ enum StructureLink {
 
 impl StructureLink {
 
-    fn set_link_for(&self, builder: &mut contracts::StructureNode) {
+    fn contract(&self) -> contracts::StructureLink {
+        let mut builder = contracts::StructureLink::new();
         match self {
             &StructureLink::Root => {
                 builder.set_root(contracts::Root::new())
@@ -308,12 +352,13 @@ impl StructureLink {
                 builder.set_attach(attach.contract())
             }
         }
+        builder
     }
 
 }
 
 struct StructureContractIter<'a> {
-    work: Vec<Option<StructureWorkItem<'a, Option<Attach>>>>,
+    work: Vec<Option<StructureWorkItem<'a, StructureLink>>>,
 }
 
 impl Structure {
@@ -328,7 +373,7 @@ impl Structure {
     // Not very DRY, not exactly sure where to abstract
     pub fn contract_iter(&self) -> StructureContractIter {
         let root_work_item = StructureWorkItem {
-            context: None,
+            context: StructureLink::Root,
             structure: self,
         };
         StructureContractIter { work: vec!(Some(root_work_item)) }
@@ -357,7 +402,7 @@ impl<'a> Iterator for StructureIsoIter<'a> {
                             let next_context = context * iso;
                             let next_work = StructureWorkItem { 
                                 context: next_context, 
-                            structure: &**attachment
+								structure: &**attachment
                             };
 
                             self.work.push(next_work);
@@ -405,7 +450,7 @@ impl<'a> Iterator for StructureContractIter<'a> {
                             //let rot = Rot2::new(Vec1::new(attach.rotation));
                             //let iso = Iso2::new_with_rotmat(trn, rot);
                             //let next_context = context * iso;
-                            let next_context = Some(attach.clone());
+                            let next_context = StructureLink::Attach(attach.clone());
                             let next_work = StructureWorkItem { 
                                 context: next_context, 
                             structure: &**attachment,
@@ -417,13 +462,10 @@ impl<'a> Iterator for StructureContractIter<'a> {
                 }
 
                 let mut data = contracts::StructureData::new();
-                let mut node = contracts::StructureNode::new();
-                curr_work.structure.set_contract_node_for(&mut node);
-                match curr_work.context {
-                    None => { node.set_root(contracts::Root::new()) }
-                    Some(ref attach) => { node.set_attach(attach.contract()) }
-                }
-                data.set_node(node);
+                let mut tree = contracts::StructureTree::new();
+                tree.set_node(curr_work.structure.node_contract());
+                tree.set_link(curr_work.context.contract());
+                data.set_tree(tree);
                 Some(data)
 
             }
@@ -433,38 +475,83 @@ impl<'a> Iterator for StructureContractIter<'a> {
 
 }
 
-fn part(attrs: Part) -> Structure {
-    tagtree::TagTree::Leaf(attrs)
+macro_rules! vessel {
+	($width:expr, $length:expr) => {
+		Part::Vessel { width: $width, length: $length }
+	}
 }
 
-fn beam(length: f64, parts: Vec<(Attach, Box<Structure>)>) -> Structure {
-    tagtree::TagTree::Node(Beam {length: length}, parts)
+macro_rules! fuel_tank {
+	($radius:expr, $length:expr) => {
+		Part::FuelTank { radius: $radius, length: $length }
+	}
+}
+
+macro_rules! engine {
+	($radius:expr, $length:expr, $group:expr) => {
+		Part::Engine { radius: $radius, length: $length, group: $group }
+	}
+}
+
+macro_rules! part {
+	($part:expr) => {
+		tagtree::TagTree::Leaf($part)
+	}
+}
+
+// TODO convert to repeated pattern and call vec internally?
+
+macro_rules! beam {
+	($length:expr, $parts:expr) => {
+		tagtree::TagTree::Node(Beam { length: $length }, $parts)
+	}
+}
+
+macro_rules! attach_part {
+	($location:expr, $rotation:expr, $part:expr) => {
+		(Attach { location: $location, rotation: $rotation }, box part!($part))
+	}
+}
+
+macro_rules! attach_tree {
+	($location:expr, $rotation:expr, $tree:expr) => {
+		(Attach { location: $location, rotation: $rotation }, box $tree)
+	}
 }
 
 #[test]
 fn simple_structures () {
-    let p1 = part(Part::Vessel { width: 2.0, length: 4.0 });
+    let p1 = part!(Part::Vessel { width: 2.0, length: 4.0 });
     let a1 = Attach{location: 2.0, rotation: 0.0};
-    let p2 = part(Part::FuelTank { radius: 1.0, length: 5.0});
+    let p2 = part!(Part::FuelTank { radius: 1.0, length: 5.0});
     let a2 = Attach{location: 8.0, rotation: 0.0};
-    let p3 = part(Part::Engine { radius: 1.0, length: 2.0, group: 3});
+    let p3 = part!(Part::Engine { radius: 1.0, length: 2.0, group: 3});
     let a3 = Attach{location: 10.0, rotation: 0.0};
-    let b1 = beam(5.0, vec![(a1, box p1),(a2, box p2),(a3, box p3)]);
+    let b1 = beam!(5.0, vec![(a1, box p1),(a2, box p2),(a3, box p3)]);
     b1.mass();
 }
 
 #[test]
 fn simple_ships () {
-    beam(8.0, vec![
+    beam!(8.0, vec![
          (Attach {location: 2.0, rotation: 0.0}, 
-          box part(Part::Vessel {width: 2.0, length: 4.0})
+          box part!(Part::Vessel {width: 2.0, length: 4.0})
          ),
          (Attach {location: 6.0, rotation: 0.0},
-          box part(Part::FuelTank {radius: 1.0, length: 1.5})
+          box part!(Part::FuelTank {radius: 1.0, length: 1.5})
          ),
          (Attach {location: 8.0, rotation: 0.0},
-          box part(Part::Engine {radius: 1.5, length: 0.5, group: 1})
+          box part!(Part::Engine {radius: 1.5, length: 0.5, group: 1})
          )
          ]
         );
+}
+
+#[test]
+fn missile_thrust () {
+    let missile = beam!(10.0, vec![
+        attach_part!(0.0, 0.0, fuel_tank!(1.0, 2.0)),
+        attach_part!(10.0, 0.0, engine!(1.0, 2.0, 0))
+    ]);
+    missile.thrust_profiles();
 }

@@ -13,7 +13,7 @@ fn print_proc(cpu: &CPU) -> () {
   let low = max(0, cpu.pc as i32 - radius) as usize;
   let high = min(cpu.pc as i32 + radius + 1, cpu.memory.len() as i32) as usize;
   println!("{} {}", low, high);
-  for i in (low .. high) {
+  for i in low..high {
     println!("{} {:#04x} {}", if i == cpu.pc as usize {"*"} else {" "}, i, cpu.memory[i]);
   }
 }

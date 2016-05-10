@@ -1,0 +1,9 @@
+[package]
+name = "peer"
+version = "0.1.0"
+authors = ["John P Mayer, Jr <john.p.mayer.jr@gmail.com>"]
+
+[dependencies]
+byteorder = "0.5.*"
+protobuf = "1.0.*"
+rotor-stream = "0.6.*"

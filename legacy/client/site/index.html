@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="text/javascript" src="lib/Long.min.js"></script>
+    <script type="text/javascript" src="lib/ByteBufferAB.min.js"></script>
+    <script type="text/javascript" src="lib/ProtoBuf.min.js"></script>
+    <script type="text/javascript" src="js/celestia.js"></script>
+  </head>
+  <body></body>
+  <script>
+
+    // GLOBAL
+    ProtoObj = {};
+
+    function start_app() {
+
+      var chat = new WebSocket("ws://" + location.hostname + ":8081/action");    
+      chat.binaryType = "arraybuffer";
+      chat.onopen = function(e) { 
+
+        var celestia = null;
+
+        function start(snapshot) {
+          celestia = Elm.fullscreen(Elm.Demo, { snapshots : snapshot });
+          celestia.ports.controls.subscribe(function(e) {
+            console.log("Sending buffer with",e.byteLength,"bytes");
+            chat.send(e);
+          });
+        }
+
+
+
+        chat.onmessage = function(event) {
+          console.log(event);
+          if (celestia) {
+            celestia.ports.snapshots.send(event);
+          } 
+          else {
+            start(event);
+          }
+
+        }
+
+      }
+
+    }
+
+    function checkAllLoaded() {
+      if (ProtoObj.ActionsProto && ProtoObj.ShipProto && ProtoObj.WorldProto) {
+        start_app();
+      }
+    }
+
+    dcodeIO.ProtoBuf.loadProtoFile("contracts/actions.proto", function(err, builder) {
+      ProtoObj.ActionsProto = builder.build("actions")
+      checkAllLoaded();
+    });
+
+    dcodeIO.ProtoBuf.loadProtoFile("contracts/ship.proto", function(err, builder) {
+      ProtoObj.ShipProto = builder.build("ship")
+      checkAllLoaded();
+    });
+
+    dcodeIO.ProtoBuf.loadProtoFile("contracts/world.proto", function(err, builder) {
+      ProtoObj.WorldProto = builder.build("world")
+      checkAllLoaded();
+    });
+
+  </script>
+</html>

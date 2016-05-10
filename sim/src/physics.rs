@@ -10,16 +10,22 @@ pub struct PhysicsHandle {
     pub handle: RigidBodyHandle
 }
 
-pub struct PhysicsSystem {
-    world: World
+pub struct PhysicsService {
+    pub world: World
 }
 
-impl PhysicsSystem {
-
-    pub fn new() -> PhysicsSystem {
-        PhysicsSystem { world: World::new() }
+impl PhysicsService {
+    pub fn new() -> PhysicsService {
+        PhysicsService { world: World::new() }
     }
+}
 
+pub struct PhysicsSystem;
+
+impl PhysicsSystem {
+    pub fn new() -> PhysicsSystem {
+        PhysicsSystem
+    }
 }
 
 impl System for PhysicsSystem {
@@ -30,7 +36,8 @@ impl System for PhysicsSystem {
 impl Process for PhysicsSystem {
     fn process(&mut self, data: &mut DataHelper<JmpComponents, JmpServices>) {
         for dt in data.services.dt.into_iter() {
-            self.world.step(dt)
+            println!("Physics step with dt={}", dt);
+            data.services.physics.world.step(dt)
         }
     }
 }

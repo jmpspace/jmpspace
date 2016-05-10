@@ -1,5 +1,5 @@
 
-all: server
+all: server ws
 
 contracts:
 	$(MAKE) -C contracts
@@ -15,6 +15,9 @@ client: contracts
 
 server: sim client contracts
 	$(MAKE) -C server
+
+ws: sim client contracts
+	$(MAKE) -C ws
 
 run:
 	./run.sh

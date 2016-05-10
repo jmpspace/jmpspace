@@ -1,0 +1,126 @@
+apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'application'
+
+group               = 'space_server'
+version             = '0.2.0'
+status              = 'integration'
+description         = 'TODO - Pls. edit - Gradle bootstrap project for Quasar'
+
+ext.classifier      = ':jdk8' // ':'
+sourceCompatibility = 1.8     // 1.7
+targetCompatibility = 1.8     // 1.7
+
+ext.quasarVer       = '0.7.4'
+ext.spacebaseVer    = '2.3-SNAPSHOT'
+ext.junitVer        = '4.12'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+def protobufVersion = '2.6.1' // quasar compatibility
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.7.6'
+  }
+}
+
+protobuf {
+  protoc {
+    // Download from repositories
+    artifact = "com.google.protobuf:protoc:${protobufVersion}"
+  }
+}
+
+configurations {
+    quasar
+}
+
+sourceSets {
+  main {
+    proto {
+      srcDir '../contracts/space_server'
+    }
+  }
+}
+
+configurations.all {
+  resolutionStrategy {
+    failOnVersionConflict()
+  }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    String osName = System.getProperty("os.name").toLowerCase();
+    if (osName.contains("windows")) {
+        maven { url "file:///D:/maven-local/" }
+    } else {
+        maven { url "file:///maven-local/" }
+    }
+}
+
+dependencies {
+  compile "co.paralleluniverse:quasar-core:${quasarVer}${classifier}"
+  quasar "co.paralleluniverse:quasar-core:${quasarVer}${classifier}@jar"
+
+  compile "co.paralleluniverse:comsat-actors-api:0.7.0"
+  compile "co.paralleluniverse:comsat-actors-undertow:0.7.0"
+  // compile "co.paralleluniverse:comsat-test-utils:0.7.0"
+
+  compile "co.paralleluniverse:spacebase-core:${spacebaseVer}${classifier}"
+
+  compile 'org.apache.commons:commons-lang3:3.0'
+
+  "com.google.protobuf:protobuf-java:${protobufVersion}"
+
+  compile "com.vividsolutions:jts:1.13"
+
+  compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5'
+  compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+
+  testCompile "junit:junit:$junitVer"
+}
+
+test {
+    beforeTest { desc ->
+        logger.quiet("Running test: " + desc)
+    }
+
+    afterTest { desc, result ->
+        if(result.resultType == TestResult.ResultType.FAILURE) {
+            logger.quiet("Failed test ${desc.name} [${desc.className}] with exception: ${result.exception}")
+            if(result.exception != null) {
+                result.exception.printStackTrace()
+            }
+        }
+    }
+}
+
+tasks.withType(Test) {
+    useJUnit()
+    // systemProperty 'co.paralleluniverse.fibers.verifyInstrumentation', 'true'
+
+    jvmArgs "-Xmx2048m"
+    doLast() {
+        println "file://" + getReports().getHtml().getDestination() + "/index.html"
+    }
+}
+
+mainClassName = "space_server.SpaceServer"
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
+}
+
+if (project.hasProperty('method')) {
+    apply from: "gradle/${project.getProperty('method')}.gradle"
+} else {
+    apply from: "gradle/agent.gradle"
+}
+
+defaultTasks 'compileJava'
