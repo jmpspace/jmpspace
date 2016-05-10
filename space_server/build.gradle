@@ -58,7 +58,7 @@ repositories {
     mavenCentral()
     String osName = System.getProperty("os.name").toLowerCase();
     if (osName.contains("windows")) {
-        maven { url "file:///G:/maven-local/" }
+        maven { url "file:///D:/maven-local/" }
     } else {
         maven { url "file:///maven-local/" }
     }
@@ -123,4 +123,4 @@ if (project.hasProperty('method')) {
     apply from: "gradle/agent.gradle"
 }
 
-defaultTasks 'run'
+defaultTasks 'compileJava'
