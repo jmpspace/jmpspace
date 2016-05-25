@@ -11,7 +11,7 @@ ext.classifier      = ':jdk8' // ':'
 sourceCompatibility = 1.8     // 1.7
 targetCompatibility = 1.8     // 1.7
 
-ext.quasarVer       = '0.7.4'
+ext.quasarVer       = '0.7.5'
 ext.spacebaseVer    = '2.3-SNAPSHOT'
 ext.junitVer        = '4.12'
 
