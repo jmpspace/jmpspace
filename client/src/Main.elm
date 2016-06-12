@@ -2,16 +2,12 @@ import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
--- Need to get around native issues
-
-import Native.Binary.ArrayBuffer
 import Binary.ArrayBuffer
-
 import WebSocket
 import WebSocket.LowLevel
 
---import Native.Shim
+import SpaceServer.Session
+
 
 main =
   Html.program
@@ -26,39 +22,50 @@ echoServer : String
 echoServer =
   "ws://localhost:8001"
 
-
+type SessionState
+  = Unauthenticated
+  | LoggedIn SpaceServer.Session.LoginResponse
 
 -- MODEL
 
-
 type alias Model =
   { input : String
+  , sessionState : SessionState
   , messages : List WebSocket.MessageData
   }
 
 
 init : (Model, Cmd Msg)
 init =
-  (Model "" [], Cmd.none)
+  (Model "" Unauthenticated [], Cmd.none)
 
 -- UPDATE
 
 type Msg
   = Input String
   | Send
+  | SendBinary
   | NewMessage WebSocket.MessageData
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg {input, messages} =
+update msg ({input, sessionState, messages} as model) =
   case msg of
     Input newInput ->
-      (Model newInput messages, Cmd.none)
+      ({model | input = newInput}, Cmd.none)
 
     Send ->
-      (Model "" messages, WebSocket.send echoServer input)
+      let
+        messageData = WebSocket.LowLevel.String input
+      in ({model | input = ""}, WebSocket.send echoServer messageData)
+
+    SendBinary ->
+      let
+        buffer = Binary.ArrayBuffer.new 10
+        messageData = WebSocket.LowLevel.ArrayBuffer buffer
+      in ({model | input = ""}, WebSocket.send echoServer messageData)
 
     NewMessage messageData ->
-      (Model input (messageData :: messages), Cmd.none)
+      ({model | messages = messageData :: messages}, Cmd.none)
 
 -- SUBSCRIPTIONS
 
@@ -73,12 +80,13 @@ view model =
   div []
     [ input [onInput Input] []
     , button [onClick Send] [text "Send"]
+    , button [onClick SendBinary] [text "SendBinary"]
     , div [] (List.map viewMessage (List.reverse model.messages))
     ]
 
 viewMessage : WebSocket.MessageData -> Html msg
 viewMessage msg = case msg of
   (WebSocket.LowLevel.String str) ->
-    div [] [ text str ]
-  (WebSocket.LowLevel.ArrayBuffer _) ->
-    div [] [ text "ArrayBuffer" ]
+    div [] [ text <| "String: " ++ str ]
+  (WebSocket.LowLevel.ArrayBuffer buf) ->
+    div [] [ text <| "ArrayBuffer with length in bytes: " ++ toString  (Binary.ArrayBuffer.byteLength buf)]

@@ -1,28 +1,34 @@
 
 syntax = "proto2";
 
-package spaceServer.session;
+package session;
 
-message AuthCredential {
-  required string username = 1;
-  required string password = 2;
+option java_package = "SpaceServer";
+
+message LoginRequest {
+
 }
 
-message AuthRequest {
-  required AuthCredential credential = 1;
+message LoginResponse {
+  required int32 playerId = 1;
+  required string playerName = 2;
 }
 
-message AuthFailure {
+message ChangeNameRequest {
+  required string newPlayerName = 1;
+}
+
+message ChangeNameSuccess {
+  required string newPlayerName = 1;
+}
+
+message ChangeNameFailure {
   required string error = 1;
 }
 
-message AuthSuccess {
-  required int32 session = 1;
-}
-
-message AuthResponse {
+message ChangeNameResponse {
   oneof response {
-    AuthFailure failure = 1;
-    AuthSuccess success = 2;
+    ChangeNameSuccess success = 1;
+    ChangeNameFailure failure = 2;
   }
 }

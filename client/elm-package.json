@@ -7,7 +7,7 @@
         "src",
         "binary/src",
         "websocket/src",
-        "contracts/space-server"
+        "space_server"
     ],
     "native-modules": true,
     "exposed-modules": [],

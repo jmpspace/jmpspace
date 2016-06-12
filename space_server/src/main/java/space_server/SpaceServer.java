@@ -33,8 +33,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import spaceServer.session.Session.AuthCredential;
-import spaceServer.session.Session.AuthRequest;
+import SpaceServer.Session.*;
 
 class SpaceServer {
 
@@ -42,40 +41,6 @@ class SpaceServer {
 
   static final int port = 8001; // TODO configure magic number
   static final SocketAddress addr = new InetSocketAddress(port);
-
-  // interface GatheringScatteringByteChannel extends GatheringByteChannel, ScatteringByteChannel {}
-  // java complains about duck typing...
-
-  static class MessageStream {
-
-    public static <M> M readMessage(ScatteringByteChannel channel, Parser<M> parser) throws InvalidProtocolBufferException, IOException, SuspendExecution {
-      ByteBuffer msgLengthBuf = ByteBuffer.allocate(4);
-      long status = channel.read(msgLengthBuf);
-      logger.debug("Read: " + status + " bytes");
-      int msgLength = msgLengthBuf.getInt(0);
-      logger.debug("Message length is: " + msgLength);
-      ByteBuffer msgBuf = ByteBuffer.allocate(msgLength);
-      status = channel.read(msgBuf);
-      logger.debug("Read: " + status + " bytes");
-      return parser.parseFrom(msgBuf.array());
-    }
-
-  }
-
-  static void handleClient(FiberSocketChannel clientChannel) throws SuspendExecution {
-    logger.debug("Handling client channel");
-    try {
-      AuthRequest authReq = MessageStream.readMessage(clientChannel, AuthRequest.PARSER);
-      AuthCredential authCred = authReq.getCredential();
-      String authUsername = authCred.getUsername();
-      String authPassword = authCred.getPassword();
-      // TODO actually check something :-)
-      logger.info("Authenticated: '" + authUsername + "' ('" + authPassword + "')");
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
 
   static public void main(String[] args) {
 
@@ -86,29 +51,7 @@ class SpaceServer {
     SpaceBase ambientBase = builder.build("ambient");
     SpaceBase largeBase = builder.build("large");
     SpaceBase smallBase = builder.build("small");
-
-    /*
-    Fiber serverFiber = new Fiber("SERVER", new SuspendableRunnable() {
-      @Override public void run() throws SuspendExecution {
-        try {
-          logger.debug("Opening and binding server channel");
-          FiberServerSocketChannel serverChannel = FiberServerSocketChannel.open().bind(addr);
-
-          logger.debug("Starting accept loop");
-          while (true) {
-            logger.debug("Waiting for next client");
-            FiberSocketChannel clientChannel = serverChannel.accept();
-            logger.debug("Accepted client channel");
-            handleClient(clientChannel);
-          }
-        }
-        catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    }).start();
-    */
-
+    
     final SessionManager sessionManager = new InMemorySessionManager("SESSION_MANAGER", 1, true);
     final SessionCookieConfig sessionConfig = new SessionCookieConfig();
     sessionConfig.setMaxAge(60);
@@ -119,16 +62,6 @@ class SpaceServer {
            .setHandler(sessionAttachmentHandler.setNext(new AutoWebActorHandler())).build();
 
     server.start();
-
-    /*
-    try {
-      serverFiber.join();
-    } catch (ExecutionException e) {
-      e.printStackTrace();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    */
 
   }
 }
