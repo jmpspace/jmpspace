@@ -2,9 +2,16 @@ import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+
+-- Need to get around native issues
+
+import Native.Binary.ArrayBuffer
+import Binary.ArrayBuffer
+
 import WebSocket
+import WebSocket.LowLevel
 
-
+--import Native.Shim
 
 main =
   Html.program
@@ -26,7 +33,7 @@ echoServer =
 
 type alias Model =
   { input : String
-  , messages : List String
+  , messages : List WebSocket.MessageData
   }
 
 
@@ -39,7 +46,7 @@ init =
 type Msg
   = Input String
   | Send
-  | NewMessage String
+  | NewMessage WebSocket.MessageData
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg {input, messages} =
@@ -50,8 +57,8 @@ update msg {input, messages} =
     Send ->
       (Model "" messages, WebSocket.send echoServer input)
 
-    NewMessage str ->
-      (Model input (str :: messages), Cmd.none)
+    NewMessage messageData ->
+      (Model input (messageData :: messages), Cmd.none)
 
 -- SUBSCRIPTIONS
 
@@ -69,6 +76,9 @@ view model =
     , div [] (List.map viewMessage (List.reverse model.messages))
     ]
 
-viewMessage : String -> Html msg
-viewMessage msg =
-  div [] [ text msg ]
+viewMessage : WebSocket.MessageData -> Html msg
+viewMessage msg = case msg of
+  (WebSocket.LowLevel.String str) ->
+    div [] [ text str ]
+  (WebSocket.LowLevel.ArrayBuffer _) ->
+    div [] [ text "ArrayBuffer" ]

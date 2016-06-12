@@ -1,0 +1,6 @@
+[submodule "client/binary"]
+	path = client/binary
+	url = https://github.com/johnpmayer/binary
+[submodule "client/websocket"]
+	path = client/websocket
+	url = https://github.com/johnpmayer/websocket

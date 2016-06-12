@@ -123,4 +123,4 @@ if (project.hasProperty('method')) {
     apply from: "gradle/agent.gradle"
 }
 
-defaultTasks 'compileJava'
+defaultTasks 'run'
