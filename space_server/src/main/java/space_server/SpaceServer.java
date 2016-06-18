@@ -33,7 +33,7 @@ import java.util.concurrent.ExecutionException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import SpaceServer.Session.*;
+import SpaceServer.Session;
 
 class SpaceServer {
 
