@@ -42,6 +42,7 @@ class SpaceServer {
     Undertow server = Undertow.builder().addHttpListener(port, "localhost")
            .setHandler(sessionAttachmentHandler.setNext(new AutoWebActorHandler())).build();
 
+
     server.start();
 
   }

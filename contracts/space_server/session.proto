@@ -3,10 +3,11 @@ syntax = "proto2";
 
 package session;
 
-option java_package = "SpaceServer";
+option java_package = "com.jmpspace.contracts.SpaceServer";
 
 message LoginRequest {
-
+  required string playerName = 1;
+  required string playerPassword = 2;
 }
 
 message LoginResponse {
