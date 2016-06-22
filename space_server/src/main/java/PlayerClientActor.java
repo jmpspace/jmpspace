@@ -1,4 +1,4 @@
-package space_server;
+package com.jmpspace.server;
 
 import co.paralleluniverse.actors.*;
 import co.paralleluniverse.comsat.webactors.*;
@@ -11,13 +11,17 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @WebActor(webSocketUrlPatterns = {"/"})
-public class HumanClientActor extends BasicActor<WebMessage, Void> {
+public class PlayerClientActor extends BasicActor<WebMessage, Void> {
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =
     Collections.newSetFromMap(new ConcurrentHashMap<ActorRef<WebMessage>, Boolean>());
 
   // The client representation of this actor
   private SendPort<WebDataMessage> peer;
+
+  public class PlayerClientState {
+    
+  }
 
   @Override
   protected final Void doRun() throws InterruptedException, SuspendExecution {

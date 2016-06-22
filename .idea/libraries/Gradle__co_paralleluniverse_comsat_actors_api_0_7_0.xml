@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: co.paralleluniverse:comsat-actors-api:0.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/da680a4244a32339b77bc0309293b36291ad058/comsat-actors-api-0.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,17 +1,8 @@
-package space_server;
+package com.jmpspace.server;
 
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
-import co.paralleluniverse.fibers.Fiber;
-import co.paralleluniverse.fibers.SuspendExecution;
-import co.paralleluniverse.fibers.io.FiberSocketChannel;
-import co.paralleluniverse.fibers.io.FiberServerSocketChannel;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
-import co.paralleluniverse.strands.SuspendableRunnable;
-
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Parser;
 
 import io.undertow.server.session.InMemorySessionManager;
 import io.undertow.server.session.SessionAttachmentHandler;
@@ -19,21 +10,11 @@ import io.undertow.server.session.SessionCookieConfig;
 import io.undertow.server.session.SessionManager;
 import io.undertow.Undertow;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.lang.InterruptedException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.GatheringByteChannel;
-import java.nio.channels.ScatteringByteChannel;
-import java.util.concurrent.ExecutionException;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
-import SpaceServer.Session;
 
 class SpaceServer {
 

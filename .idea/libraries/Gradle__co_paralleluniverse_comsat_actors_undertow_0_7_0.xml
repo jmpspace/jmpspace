@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: co.paralleluniverse:comsat-actors-undertow:0.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/2feff2a961f4c74c9caa106d7de36dc568927cb3/comsat-actors-undertow-0.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/83472031bdb3203f999b5bb853d36ac4fa9e360f/comsat-actors-undertow-0.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: co.paralleluniverse:spacebase-core:2.3-SNAPSHOT:jdk8">
+    <CLASSES>
+      <root url="jar://D:/maven-local/co/paralleluniverse/spacebase-core/2.3-SNAPSHOT/spacebase-core-2.3-SNAPSHOT-jdk8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
