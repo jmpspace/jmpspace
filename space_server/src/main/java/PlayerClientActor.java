@@ -10,15 +10,17 @@ import com.jmpspace.contracts.SpaceServer.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.ByteBuffer;
 import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 @WebActor(webSocketUrlPatterns = {"/"})
 public class PlayerClientActor extends BasicActor<WebMessage, Void> {
 
-  static final Logger logger = LogManager.getLogger(SpaceServer.class.getName());
+  static final Logger logger = LogManager.getLogger(PlayerClientActor.class.getName());
+
+  static final ConcurrentMap<String, ActorRef<WebMessage>> activePlayerNames = new ConcurrentHashMap<String, ActorRef<WebMessage>>();
 
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =
@@ -48,7 +50,19 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
         switch (state) {
           case Unauthenticated:
             Session.LoginRequest request = Session.LoginRequest.parseFrom(buf);
-            logger.info(String.format("Logging in: %s %s"), request.getPlayerName(), request.getPlayerPassword());
+            String requestedPlayerName = request.getPlayerName();
+            Session.LoginResponse.Builder response = Session.LoginResponse.newBuilder();
+            ActorRef<WebMessage> existingPlayer = activePlayerNames.putIfAbsent(requestedPlayerName, self());
+            if (existingPlayer != null) {
+              String error = String.format("Requested player name '%s' is already active", requestedPlayerName);
+              logger.debug(error);
+              response.setFailure(Session.LoginFailure.newBuilder().setError(error));
+            } else {
+              logger.info(String.format("Logging in: %s"), request.getPlayerName());
+              // TODO: player ID will be needed soon
+              response.setSuccess(Session.LoginSuccess.newBuilder().setPlayerId(0).setPlayerName(requestedPlayerName));
+            }
+            postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
             break;
         }
 

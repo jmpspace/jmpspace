@@ -1,0 +1,9 @@
+
+syntax = "proto2";
+
+package server;
+
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
+import "session.proto";
+

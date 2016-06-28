@@ -1,1 +1,5 @@
 elm make src/Main.elm
+outputFile="./index.html"
+
+sed 's#/\* SHIM Native.BinaryArrayBuffer \*/#var _johnpmayer$jmpspace$Native_Binary_ArrayBuffer = _johnpmayer$binary$Native_Binary_ArrayBuffer#' -i $outputFile
+sed 's#/\* SHIM Native.WebSocket \*/#var _johnpmayer$jmpspace$Native_WebSocket = _elm_lang$websocket$Native_WebSocket#' -i $outputFile

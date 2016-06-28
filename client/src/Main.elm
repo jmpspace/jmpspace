@@ -22,50 +22,42 @@ echoServer : String
 echoServer =
   "ws://localhost:8001"
 
-type SessionState
-  = Unauthenticated
-  | LoggedIn SpaceServer.Session.LoginResponse
+type alias ActiveState =
+  { userName: String
+  }
 
 -- MODEL
 
-type alias Model =
-  { input : String
-  , sessionState : SessionState
-  , messages : List WebSocket.MessageData
-  }
-
+type Model
+  = Unauthenticated String
+  | LoggedIn ActiveState
 
 init : (Model, Cmd Msg)
 init =
-  (Model "" Unauthenticated [], Cmd.none)
+  (Unauthenticated "", Cmd.none)
 
 -- UPDATE
 
 type Msg
-  = Input String
-  | Send
-  | SendBinary
+  = UsernameInput String
+  | LoginSubmit
+  | LoginResponse
   | NewMessage WebSocket.MessageData
 
 update : Msg -> Model -> (Model, Cmd Msg)
-update msg ({input, sessionState, messages} as model) =
-  case msg of
-    Input newInput ->
-      ({model | input = newInput}, Cmd.none)
-
-    Send ->
-      let
-        messageData = WebSocket.LowLevel.String input
-      in ({model | input = ""}, WebSocket.send echoServer messageData)
-
-    SendBinary ->
-      let
-        buffer = Binary.ArrayBuffer.new 10
-        messageData = WebSocket.LowLevel.ArrayBuffer buffer
-      in ({model | input = ""}, WebSocket.send echoServer messageData)
-
-    NewMessage messageData ->
-      ({model | messages = messageData :: messages}, Cmd.none)
+update msg model =
+  case model of
+    Unauthenticated username ->
+      case msg of
+        UsernameInput newUsername -> (Unauthenticated newUsername, Cmd.none)
+        LoginSubmit ->
+          let
+            request = SpaceServer.Session.LoginRequest username
+            msg = SpaceServer.Session.encodeLoginRequest << SpaceServer.Session.marshalLoginRequest <| request
+          in (model, WebSocket.send echoServer <| WebSocket.LowLevel.ArrayBuffer msg)
+        _ -> (model, Cmd.none)
+    LoggedIn loginResponse ->
+      (model, Cmd.none)
 
 -- SUBSCRIPTIONS
 
@@ -77,16 +69,18 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
+  case model of
+    Unauthenticated username -> loginView
+    LoggedIn activeState -> activeView activeState
+
+loginView : Html Msg
+loginView =
   div []
-    [ input [onInput Input] []
-    , button [onClick Send] [text "Send"]
-    , button [onClick SendBinary] [text "SendBinary"]
-    , div [] (List.map viewMessage (List.reverse model.messages))
+    [ input [onInput UsernameInput] []
+    , button [onClick LoginSubmit] [text "Login"]
     ]
 
-viewMessage : WebSocket.MessageData -> Html msg
-viewMessage msg = case msg of
-  (WebSocket.LowLevel.String str) ->
-    div [] [ text <| "String: " ++ str ]
-  (WebSocket.LowLevel.ArrayBuffer buf) ->
-    div [] [ text <| "ArrayBuffer with length in bytes: " ++ toString  (Binary.ArrayBuffer.byteLength buf)]
+activeView : ActiveState -> Html Msg
+activeView {userName} =
+  div []
+    [ ]

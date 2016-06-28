@@ -6,30 +6,21 @@ package session;
 option java_package = "com.jmpspace.contracts.SpaceServer";
 
 message LoginRequest {
-  required string playerName = 1;
-  required string playerPassword = 2;
+    required string playerName = 1;
+}
+
+message LoginSuccess {
+    required int32 playerId = 1;
+    required string playerName = 2;
+}
+
+message LoginFailure {
+    required string error = 1;
 }
 
 message LoginResponse {
-  required int32 playerId = 1;
-  required string playerName = 2;
-}
-
-message ChangeNameRequest {
-  required string newPlayerName = 1;
-}
-
-message ChangeNameSuccess {
-  required string newPlayerName = 1;
-}
-
-message ChangeNameFailure {
-  required string error = 1;
-}
-
-message ChangeNameResponse {
   oneof response {
-    ChangeNameSuccess success = 1;
-    ChangeNameFailure failure = 2;
+    LoginSuccess success = 1;
+    LoginFailure failure = 2;
   }
 }
