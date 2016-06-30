@@ -6,6 +6,7 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.channels.SendPort;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.jmpspace.contracts.SpaceServer.Server;
 import com.jmpspace.contracts.SpaceServer.Session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +15,8 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static com.jmpspace.server.PlayerClientActor.PlayerClientState.LoggedIn;
 
 @WebActor(webSocketUrlPatterns = {"/"})
 public class PlayerClientActor extends BasicActor<WebMessage, Void> {
@@ -30,7 +33,8 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
   private SendPort<WebDataMessage> peer;
 
   enum PlayerClientState {
-    Unauthenticated
+    Unauthenticated,
+    LoggedIn
   }
 
   class PlayerClientStateModel {
@@ -47,24 +51,51 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
 
       try {
 
-        switch (state) {
-          case Unauthenticated:
-            Session.LoginRequest request = Session.LoginRequest.parseFrom(buf);
-            String requestedPlayerName = request.getPlayerName();
-            Session.LoginResponse.Builder response = Session.LoginResponse.newBuilder();
-            ActorRef<WebMessage> existingPlayer = activePlayerNames.putIfAbsent(requestedPlayerName, self());
-            if (existingPlayer != null) {
-              String error = String.format("Requested player name '%s' is already active", requestedPlayerName);
-              logger.debug(error);
-              response.setFailure(Session.LoginFailure.newBuilder().setError(error));
-            } else {
-              logger.info(String.format("Logging in: %s"), request.getPlayerName());
-              // TODO: player ID will be needed soon
-              response.setSuccess(Session.LoginSuccess.newBuilder().setPlayerId(0).setPlayerName(requestedPlayerName));
-            }
-            postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
-            break;
+        Server.Request request = Server.Request.parseFrom(buf);
+        Server.Response.Builder response = Server.Response.newBuilder();
+
+        if (request.getRequestCase() == Server.Request.RequestCase.SESSIONSTATE) {
+          Session.SessionStateResponse.Builder sessionStateResponse = Session.SessionStateResponse.newBuilder();
+          switch (state) {
+            case Unauthenticated:
+              sessionStateResponse.setUnauthenticated(Session.SessionStateUnauthenticated.newBuilder());
+              break;
+            case LoggedIn:
+              sessionStateResponse.setActive(Session.SessionStateActive.newBuilder());
+              break;
+          }
+        } else {
+
+          switch (state) {
+            case Unauthenticated:
+
+              switch (request.getRequestCase()) {
+                case LOGIN:
+                  Session.LoginRequest loginRequest = request.getLogin();
+                  String requestedPlayerName = loginRequest.getPlayerName();
+                  Session.LoginResponse.Builder loginResponse = Session.LoginResponse.newBuilder();
+                  ActorRef<WebMessage> existingPlayer = activePlayerNames.putIfAbsent(requestedPlayerName, self());
+                  if (existingPlayer != null) {
+                    String error = String.format("Requested player name '%s' is already active", requestedPlayerName);
+                    logger.debug(error);
+                    loginResponse.setFailure(Session.LoginFailure.newBuilder().setError(error));
+                  } else {
+                    logger.info(String.format("Logging in: %s", loginRequest.getPlayerName()));
+                    // TODO: player ID will be needed soon
+                    loginResponse.setSuccess(Session.LoginSuccess.newBuilder().setPlayerId(0).setPlayerName(requestedPlayerName));
+                    state = LoggedIn;
+                  }
+                  response.setLogin(loginResponse);
+              }
+              break;
+            case LoggedIn:
+              switch (request.getRequestCase()) {
+              }
+          }
+
         }
+
+        postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
 
       } catch (InvalidProtocolBufferException e) {
         logger.error("Failed to parse something probably", e);

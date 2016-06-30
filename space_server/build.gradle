@@ -111,7 +111,7 @@ tasks.withType(Test) {
     }
 }
 
-mainClassName = "space_server.SpaceServer"
+mainClassName = "com.jmpspace.server.SpaceServer"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.12'

@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb89400c-00e0-4499-a06c-78949033a7e9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/client.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/contracts/contracts.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/contracts/space_server/server.proto" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/space_server.iml" afterPath="$PROJECT_DIR$/.idea/modules/space_server.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/generate_contracts" afterPath="$PROJECT_DIR$/client/generate_contracts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/makeElm" afterPath="$PROJECT_DIR$/client/makeElm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/Main.elm" afterPath="$PROJECT_DIR$/client/src/Main.elm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contracts/space_server/server.proto" afterPath="$PROJECT_DIR$/contracts/space_server/server.proto" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contracts/space_server/session.proto" afterPath="$PROJECT_DIR$/contracts/space_server/session.proto" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/space_server/build.gradle" afterPath="$PROJECT_DIR$/space_server/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java" afterPath="$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java" />
     </list>
     <ignored path="jmpspace.iws" />
@@ -50,8 +47,40 @@
       <file leaf-file-name="PlayerClientActor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+            <state relative-caret-position="1175">
+              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/space_server/build.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="128">
+              <caret line="108" column="14" selection-start-line="108" selection-start-column="14" selection-end-line="108" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitmodules" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitmodules">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -60,9 +89,180 @@
       <file leaf-file-name="Session.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/com/jmpspace/contracts/SpaceServer/Session.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="29342">
+              <caret line="1727" column="5" selection-start-line="1727" selection-start-column="5" selection-end-line="1727" selection-end-column="5" />
+              <folding>
+                <element signature="e#1254#1255#0" expanded="true" />
+                <element signature="e#1290#1291#0" expanded="true" />
+                <element signature="e#1352#1353#0" expanded="true" />
+                <element signature="e#1388#1389#0" expanded="true" />
+                <element signature="e#1564#1565#0" expanded="true" />
+                <element signature="e#1603#1604#0" expanded="true" />
+                <element signature="e#4051#4052#0" expanded="true" />
+                <element signature="e#4078#4079#0" expanded="true" />
+                <element signature="e#9510#9511#0" expanded="true" />
+                <element signature="e#9561#9562#0" expanded="true" />
+                <element signature="e#9918#9919#0" expanded="true" />
+                <element signature="e#9956#9957#0" expanded="true" />
+                <element signature="e#10072#10073#0" expanded="true" />
+                <element signature="e#10131#10132#0" expanded="true" />
+                <element signature="e#11891#11892#0" expanded="true" />
+                <element signature="e#11920#11921#0" expanded="true" />
+                <element signature="e#13989#13990#0" expanded="true" />
+                <element signature="e#14025#14026#0" expanded="true" />
+                <element signature="e#14095#14096#0" expanded="true" />
+                <element signature="e#14131#14132#0" expanded="true" />
+                <element signature="e#14307#14308#0" expanded="true" />
+                <element signature="e#14346#14347#0" expanded="true" />
+                <element signature="e#16874#16875#0" expanded="true" />
+                <element signature="e#16901#16902#0" expanded="true" />
+                <element signature="e#22485#22486#0" expanded="true" />
+                <element signature="e#22536#22537#0" expanded="true" />
+                <element signature="e#22893#22894#0" expanded="true" />
+                <element signature="e#22931#22932#0" expanded="true" />
+                <element signature="e#23047#23048#0" expanded="true" />
+                <element signature="e#23106#23107#0" expanded="true" />
+                <element signature="e#24962#24963#0" expanded="true" />
+                <element signature="e#24991#24992#0" expanded="true" />
+                <element signature="e#27001#27002#0" expanded="true" />
+                <element signature="e#27037#27038#0" expanded="true" />
+                <element signature="e#27098#27099#0" expanded="true" />
+                <element signature="e#27134#27135#0" expanded="true" />
+                <element signature="e#27310#27311#0" expanded="true" />
+                <element signature="e#27349#27350#0" expanded="true" />
+                <element signature="e#29787#29788#0" expanded="true" />
+                <element signature="e#29814#29815#0" expanded="true" />
+                <element signature="e#35227#35228#0" expanded="true" />
+                <element signature="e#35278#35279#0" expanded="true" />
+                <element signature="e#35635#35636#0" expanded="true" />
+                <element signature="e#35673#35674#0" expanded="true" />
+                <element signature="e#35789#35790#0" expanded="true" />
+                <element signature="e#35848#35849#0" expanded="true" />
+                <element signature="e#37596#37597#0" expanded="true" />
+                <element signature="e#37625#37626#0" expanded="true" />
+                <element signature="e#40625#40626#0" expanded="true" />
+                <element signature="e#40661#40662#0" expanded="true" />
+                <element signature="e#40724#40725#0" expanded="true" />
+                <element signature="e#40760#40761#0" expanded="true" />
+                <element signature="e#40936#40937#0" expanded="true" />
+                <element signature="e#40975#40976#0" expanded="true" />
+                <element signature="e#44955#44956#0" expanded="true" />
+                <element signature="e#44982#44983#0" expanded="true" />
+                <element signature="e#45313#45314#0" expanded="true" />
+                <element signature="e#45349#45350#0" expanded="true" />
+                <element signature="e#45716#45717#0" expanded="true" />
+                <element signature="e#45751#45752#0" expanded="true" />
+                <element signature="e#46082#46083#0" expanded="true" />
+                <element signature="e#46121#46122#0" expanded="true" />
+                <element signature="e#47231#47232#0" expanded="true" />
+                <element signature="e#47270#47271#0" expanded="true" />
+                <element signature="e#54269#54270#0" expanded="true" />
+                <element signature="e#54320#54321#0" expanded="true" />
+                <element signature="e#54677#54678#0" expanded="true" />
+                <element signature="e#54715#54716#0" expanded="true" />
+                <element signature="e#54884#54885#0" expanded="true" />
+                <element signature="e#54943#54944#0" expanded="true" />
+                <element signature="e#57665#57666#0" expanded="true" />
+                <element signature="e#57694#57695#0" expanded="true" />
+                <element signature="e#59292#59293#0" expanded="true" />
+                <element signature="e#59335#59336#0" expanded="true" />
+                <element signature="e#65397#65398#0" expanded="true" />
+                <element signature="e#65440#65441#0" expanded="true" />
+                <element signature="e#72028#72029#0" expanded="true" />
+                <element signature="e#72064#72065#0" expanded="true" />
+                <element signature="e#72119#72120#0" expanded="true" />
+                <element signature="e#72155#72156#0" expanded="true" />
+                <element signature="e#72331#72332#0" expanded="true" />
+                <element signature="e#72370#72371#0" expanded="true" />
+                <element signature="e#74981#74982#0" expanded="true" />
+                <element signature="e#75008#75009#0" expanded="true" />
+                <element signature="e#75241#75242#0" expanded="true" />
+                <element signature="e#75303#75304#0" expanded="true" />
+                <element signature="e#76330#76331#0" expanded="true" />
+                <element signature="e#76360#76361#0" expanded="true" />
+                <element signature="e#82001#82002#0" expanded="true" />
+                <element signature="e#82052#82053#0" expanded="true" />
+                <element signature="e#82409#82410#0" expanded="true" />
+                <element signature="e#82447#82448#0" expanded="true" />
+                <element signature="e#82638#82639#0" expanded="true" />
+                <element signature="e#82697#82698#0" expanded="true" />
+                <element signature="e#85814#85815#0" expanded="true" />
+                <element signature="e#85880#85881#0" expanded="true" />
+                <element signature="e#89536#89537#0" expanded="true" />
+                <element signature="e#89572#89573#0" expanded="true" />
+                <element signature="e#89627#89628#0" expanded="true" />
+                <element signature="e#89663#89664#0" expanded="true" />
+                <element signature="e#89839#89840#0" expanded="true" />
+                <element signature="e#89878#89879#0" expanded="true" />
+                <element signature="e#92631#92632#0" expanded="true" />
+                <element signature="e#92658#92659#0" expanded="true" />
+                <element signature="e#92869#92870#0" expanded="true" />
+                <element signature="e#92931#92932#0" expanded="true" />
+                <element signature="e#93027#93028#0" expanded="true" />
+                <element signature="e#93057#93058#0" expanded="true" />
+                <element signature="e#93262#93263#0" expanded="true" />
+                <element signature="e#93324#93325#0" expanded="true" />
+                <element signature="e#100400#100401#0" expanded="true" />
+                <element signature="e#100451#100452#0" expanded="true" />
+                <element signature="e#100808#100809#0" expanded="true" />
+                <element signature="e#100846#100847#0" expanded="true" />
+                <element signature="e#101109#101110#0" expanded="true" />
+                <element signature="e#101168#101169#0" expanded="true" />
+                <element signature="e#104574#104575#0" expanded="true" />
+                <element signature="e#104640#104641#0" expanded="true" />
+                <element signature="e#104744#104745#0" expanded="true" />
+                <element signature="e#104778#104779#0" expanded="true" />
+                <element signature="e#105401#105402#0" expanded="true" />
+                <element signature="e#105467#105468#0" expanded="true" />
+                <element signature="e#108912#108913#0" expanded="true" />
+                <element signature="e#108948#108949#0" expanded="true" />
+                <element signature="e#109003#109004#0" expanded="true" />
+                <element signature="e#109039#109040#0" expanded="true" />
+                <element signature="e#109215#109216#0" expanded="true" />
+                <element signature="e#109254#109255#0" expanded="true" />
+                <element signature="e#111860#111861#0" expanded="true" />
+                <element signature="e#111887#111888#0" expanded="true" />
+                <element signature="e#112100#112101#0" expanded="true" />
+                <element signature="e#112162#112163#0" expanded="true" />
+                <element signature="e#113149#113150#0" expanded="true" />
+                <element signature="e#113174#113175#0" expanded="true" />
+                <element signature="e#118800#118801#0" expanded="true" />
+                <element signature="e#118851#118852#0" expanded="true" />
+                <element signature="e#119208#119209#0" expanded="true" />
+                <element signature="e#119246#119247#0" expanded="true" />
+                <element signature="e#119432#119433#0" expanded="true" />
+                <element signature="e#119491#119492#0" expanded="true" />
+                <element signature="e#122563#122564#0" expanded="true" />
+                <element signature="e#122629#122630#0" expanded="true" />
+                <element signature="e#126554#126555#0" expanded="true" />
+                <element signature="e#126590#126591#0" expanded="true" />
+                <element signature="e#126646#126647#0" expanded="true" />
+                <element signature="e#126682#126683#0" expanded="true" />
+                <element signature="e#126858#126859#0" expanded="true" />
+                <element signature="e#126897#126898#0" expanded="true" />
+                <element signature="e#130723#130724#0" expanded="true" />
+                <element signature="e#130750#130751#0" expanded="true" />
+                <element signature="e#131074#131075#0" expanded="true" />
+                <element signature="e#131110#131111#0" expanded="true" />
+                <element signature="e#131470#131471#0" expanded="true" />
+                <element signature="e#131505#131506#0" expanded="true" />
+                <element signature="e#131797#131798#0" expanded="true" />
+                <element signature="e#131836#131837#0" expanded="true" />
+                <element signature="e#132791#132792#0" expanded="true" />
+                <element signature="e#132830#132831#0" expanded="true" />
+                <element signature="e#139910#139911#0" expanded="true" />
+                <element signature="e#139961#139962#0" expanded="true" />
+                <element signature="e#140318#140319#0" expanded="true" />
+                <element signature="e#140356#140357#0" expanded="true" />
+                <element signature="e#140525#140526#0" expanded="true" />
+                <element signature="e#140584#140585#0" expanded="true" />
+                <element signature="e#144988#144989#0" expanded="true" />
+                <element signature="e#145031#145032#0" expanded="true" />
+                <element signature="e#150358#150359#0" expanded="true" />
+                <element signature="e#150401#150402#0" expanded="true" />
+                <element signature="e#157826#157827#0" expanded="true" />
+                <element signature="e#157853#157854#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,8 +270,18 @@
       <file leaf-file-name="Main.elm" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/Main.elm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+            <state relative-caret-position="359">
+              <caret line="73" column="79" selection-start-line="73" selection-start-column="79" selection-end-line="73" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.elm" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/space_server/SpaceServer/Server.elm">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="30" column="18" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -87,64 +297,81 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="session.proto" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/contracts/space_server/session.proto">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Session.elm" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/space_server/SpaceServer/Session.elm">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="60" column="18" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="generate_contracts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/generate_contracts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Generate-Contracts.ps1" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/Generate-Contracts.ps1">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="155" selection-start-line="0" selection-start-column="117" selection-end-line="0" selection-end-column="155" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SpaceServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/space_server/src/main/java/SpaceServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="42" column="45" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="log4j2.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/space_server/src/main/resources/log4j2.xml">
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/com/jmpspace/contracts/SpaceServer/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="34">
+              <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+              <folding>
+                <element signature="e#2035#2036#0" expanded="true" />
+                <element signature="e#2071#2072#0" expanded="true" />
+                <element signature="e#2121#2122#0" expanded="true" />
+                <element signature="e#2157#2158#0" expanded="true" />
+                <element signature="e#2333#2334#0" expanded="true" />
+                <element signature="e#2372#2373#0" expanded="true" />
+                <element signature="e#5119#5120#0" expanded="true" />
+                <element signature="e#5223#5224#0" expanded="true" />
+                <element signature="e#6148#6149#0" expanded="true" />
+                <element signature="e#6175#6176#0" expanded="true" />
+                <element signature="e#6497#6498#0" expanded="true" />
+                <element signature="e#6533#6534#0" expanded="true" />
+                <element signature="e#6894#6895#0" expanded="true" />
+                <element signature="e#6929#6930#0" expanded="true" />
+                <element signature="e#7239#7240#0" expanded="true" />
+                <element signature="e#7277#7278#0" expanded="true" />
+                <element signature="e#8298#8299#0" expanded="true" />
+                <element signature="e#8336#8337#0" expanded="true" />
+                <element signature="e#15121#15122#0" expanded="true" />
+                <element signature="e#15172#15173#0" expanded="true" />
+                <element signature="e#15529#15530#0" expanded="true" />
+                <element signature="e#15567#15568#0" expanded="true" />
+                <element signature="e#15734#15735#0" expanded="true" />
+                <element signature="e#15793#15794#0" expanded="true" />
+                <element signature="e#19995#19996#0" expanded="true" />
+                <element signature="e#20037#20038#0" expanded="true" />
+                <element signature="e#25705#25706#0" expanded="true" />
+                <element signature="e#25747#25748#0" expanded="true" />
+                <element signature="e#32598#32599#0" expanded="true" />
+                <element signature="e#32634#32635#0" expanded="true" />
+                <element signature="e#32685#32686#0" expanded="true" />
+                <element signature="e#32721#32722#0" expanded="true" />
+                <element signature="e#32897#32898#0" expanded="true" />
+                <element signature="e#32936#32937#0" expanded="true" />
+                <element signature="e#35704#35705#0" expanded="true" />
+                <element signature="e#35809#35810#0" expanded="true" />
+                <element signature="e#36742#36743#0" expanded="true" />
+                <element signature="e#36769#36770#0" expanded="true" />
+                <element signature="e#37096#37097#0" expanded="true" />
+                <element signature="e#37132#37133#0" expanded="true" />
+                <element signature="e#37495#37496#0" expanded="true" />
+                <element signature="e#37530#37531#0" expanded="true" />
+                <element signature="e#37845#37846#0" expanded="true" />
+                <element signature="e#37884#37885#0" expanded="true" />
+                <element signature="e#38918#38919#0" expanded="true" />
+                <element signature="e#38957#38958#0" expanded="true" />
+                <element signature="e#45785#45786#0" expanded="true" />
+                <element signature="e#45836#45837#0" expanded="true" />
+                <element signature="e#46193#46194#0" expanded="true" />
+                <element signature="e#46231#46232#0" expanded="true" />
+                <element signature="e#46400#46401#0" expanded="true" />
+                <element signature="e#46459#46460#0" expanded="true" />
+                <element signature="e#50700#50701#0" expanded="true" />
+                <element signature="e#50743#50744#0" expanded="true" />
+                <element signature="e#56473#56474#0" expanded="true" />
+                <element signature="e#56516#56517#0" expanded="true" />
+                <element signature="e#62238#62239#0" expanded="true" />
+                <element signature="e#62265#62266#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -381,7 +608,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$/space_server" value="1466560376497" />
+        <entry key="$PROJECT_DIR$/space_server" value="1467169665122" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -519,17 +746,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/space_server/build.gradle" />
         <option value="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java" />
         <option value="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/HumanClientActor.java" />
         <option value="$PROJECT_DIR$/space_server/src/main/java/HumanClientActor.java" />
         <option value="$PROJECT_DIR$/space_server/src/main/java/SpaceServer.java" />
+        <option value="$PROJECT_DIR$/client/makeElm" />
+        <option value="$PROJECT_DIR$/client/generate_contracts" />
         <option value="$PROJECT_DIR$/contracts/space_server/session.proto" />
         <option value="$PROJECT_DIR$/contracts/space_server/server.proto" />
-        <option value="$PROJECT_DIR$/client/makeElm" />
-        <option value="$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java" />
-        <option value="$PROJECT_DIR$/client/generate_contracts" />
         <option value="$PROJECT_DIR$/client/src/Main.elm" />
+        <option value="$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java" />
+        <option value="$PROJECT_DIR$/space_server/build.gradle" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -587,8 +815,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -597,135 +823,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="generated" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="proto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SpaceServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contracts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contracts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="space_server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -734,7 +836,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15888616" />
     <property name="project.structure.side.proportion" value="0.2551724" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/space_server/build.gradle" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="75" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="82" />
@@ -751,6 +853,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="755" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="external.system.task.project.file.to.start" value="$PROJECT_DIR$/space_server/build.gradle" />
   </component>
   <component name="RunManager" selected="Bash.Run Elm Compiler">
     <configuration default="false" name="SpaceServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -765,7 +868,10 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="space_server" />
       <envs />
-      <method />
+      <method>
+        <option name="Make" enabled="false" />
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="Space Server Gradle Compile Java" run_configuration_type="BashConfigurationType" />
+      </method>
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -918,7 +1024,46 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="false" name="Space Server Gradle Compile Java" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="C:\Program Files\Git\bin\bash.exe" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\John\src\jmpspace\space_server" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\John\src\jmpspace\space_server\gradlew" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="false" name="Space Server Gradle Run" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="C:\Program Files\Git\bin\bash.exe" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\John\src\jmpspace\space_server" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\John\src\jmpspace\space_server\gradlew" />
+      <option name="PARAMETERS" value="run" />
+      <module name="" />
+      <envs />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="false" name="Run Elm Compiler" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="C:\Program Files\Git\bin\bash.exe" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\John\src\jmpspace\client" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\John\src\jmpspace\client\makeElm" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="false" name="Run Elm Compiler With Generate" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="C:\Program Files\Git\bin\bash.exe" />
       <option name="WORKING_DIRECTORY" value="C:\Users\John\src\jmpspace\client" />
@@ -945,10 +1090,13 @@
         <option name="Make" enabled="false" />
       </method>
     </configuration>
-    <list size="3">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Application.SpaceServer" />
-      <item index="1" class="java.lang.String" itemvalue="Bash.Run Elm Compiler" />
-      <item index="2" class="java.lang.String" itemvalue="Bash.Generate Elm Contracts" />
+      <item index="1" class="java.lang.String" itemvalue="Bash.Space Server Gradle Compile Java" />
+      <item index="2" class="java.lang.String" itemvalue="Bash.Space Server Gradle Run" />
+      <item index="3" class="java.lang.String" itemvalue="Bash.Run Elm Compiler" />
+      <item index="4" class="java.lang.String" itemvalue="Bash.Run Elm Compiler With Generate" />
+      <item index="5" class="java.lang.String" itemvalue="Bash.Generate Elm Contracts" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -970,15 +1118,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36619717" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38894907" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15511727" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -986,7 +1134,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38894907" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38786566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1024,36 +1172,30 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/Actor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5253">
+          <caret line="371" column="32" selection-start-line="371" selection-start-column="32" selection-end-line="371" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/space_server/src/main/java/SpaceServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="442">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="20" column="39" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/Main.elm">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/space_server/SpaceServer/Session.elm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1069,7 +1211,7 @@
         <state relative-caret-position="442">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1078,7 +1220,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1094,7 +1238,7 @@
         <state relative-caret-position="442">
           <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1103,32 +1247,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/Actor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5253">
-          <caret line="371" column="32" selection-start-line="371" selection-start-column="32" selection-end-line="371" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/SpaceServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1150,7 +1271,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,7 +1282,7 @@
         <state relative-caret-position="408">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1208,13 +1331,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/nio/ByteBuffer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1233,13 +1349,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contracts/space_server/server.proto">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1282,7 +1391,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="157" selection-start-line="7" selection-start-column="77" selection-end-line="7" selection-end-column="157" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1297,17 +1405,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/client/Main.elm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/client/Main.elm" />
     <entry file="file://$PROJECT_DIR$/space_server/src/main/resources/log4j2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1320,17 +1421,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/SpaceServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="42" column="45" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1350,30 +1440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/com/jmpspace/contracts/SpaceServer/Session.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/space_server/SpaceServer/Session.elm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="60" column="18" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/websocket/src/WebSocket.elm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1382,10 +1448,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/Main.elm">
+    <entry file="file://$PROJECT_DIR$/contracts/space_server/session.proto">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+        <state relative-caret-position="204">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contracts/space_server/server.proto">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/space_server/SpaceServer/Session.elm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="90" column="11" selection-start-line="90" selection-start-column="11" selection-end-line="90" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/space_server/SpaceServer/Server.elm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="30" column="18" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1398,10 +1488,298 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contracts/space_server/session.proto">
+    <entry file="file://$PROJECT_DIR$/client/src/Main.elm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="359">
+          <caret line="73" column="79" selection-start-line="73" selection-start-column="79" selection-end-line="73" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/PlayerClientActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1175">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/com/jmpspace/contracts/SpaceServer/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <folding>
+            <element signature="e#2035#2036#0" expanded="true" />
+            <element signature="e#2071#2072#0" expanded="true" />
+            <element signature="e#2121#2122#0" expanded="true" />
+            <element signature="e#2157#2158#0" expanded="true" />
+            <element signature="e#2333#2334#0" expanded="true" />
+            <element signature="e#2372#2373#0" expanded="true" />
+            <element signature="e#5119#5120#0" expanded="true" />
+            <element signature="e#5223#5224#0" expanded="true" />
+            <element signature="e#6148#6149#0" expanded="true" />
+            <element signature="e#6175#6176#0" expanded="true" />
+            <element signature="e#6497#6498#0" expanded="true" />
+            <element signature="e#6533#6534#0" expanded="true" />
+            <element signature="e#6894#6895#0" expanded="true" />
+            <element signature="e#6929#6930#0" expanded="true" />
+            <element signature="e#7239#7240#0" expanded="true" />
+            <element signature="e#7277#7278#0" expanded="true" />
+            <element signature="e#8298#8299#0" expanded="true" />
+            <element signature="e#8336#8337#0" expanded="true" />
+            <element signature="e#15121#15122#0" expanded="true" />
+            <element signature="e#15172#15173#0" expanded="true" />
+            <element signature="e#15529#15530#0" expanded="true" />
+            <element signature="e#15567#15568#0" expanded="true" />
+            <element signature="e#15734#15735#0" expanded="true" />
+            <element signature="e#15793#15794#0" expanded="true" />
+            <element signature="e#19995#19996#0" expanded="true" />
+            <element signature="e#20037#20038#0" expanded="true" />
+            <element signature="e#25705#25706#0" expanded="true" />
+            <element signature="e#25747#25748#0" expanded="true" />
+            <element signature="e#32598#32599#0" expanded="true" />
+            <element signature="e#32634#32635#0" expanded="true" />
+            <element signature="e#32685#32686#0" expanded="true" />
+            <element signature="e#32721#32722#0" expanded="true" />
+            <element signature="e#32897#32898#0" expanded="true" />
+            <element signature="e#32936#32937#0" expanded="true" />
+            <element signature="e#35704#35705#0" expanded="true" />
+            <element signature="e#35809#35810#0" expanded="true" />
+            <element signature="e#36742#36743#0" expanded="true" />
+            <element signature="e#36769#36770#0" expanded="true" />
+            <element signature="e#37096#37097#0" expanded="true" />
+            <element signature="e#37132#37133#0" expanded="true" />
+            <element signature="e#37495#37496#0" expanded="true" />
+            <element signature="e#37530#37531#0" expanded="true" />
+            <element signature="e#37845#37846#0" expanded="true" />
+            <element signature="e#37884#37885#0" expanded="true" />
+            <element signature="e#38918#38919#0" expanded="true" />
+            <element signature="e#38957#38958#0" expanded="true" />
+            <element signature="e#45785#45786#0" expanded="true" />
+            <element signature="e#45836#45837#0" expanded="true" />
+            <element signature="e#46193#46194#0" expanded="true" />
+            <element signature="e#46231#46232#0" expanded="true" />
+            <element signature="e#46400#46401#0" expanded="true" />
+            <element signature="e#46459#46460#0" expanded="true" />
+            <element signature="e#50700#50701#0" expanded="true" />
+            <element signature="e#50743#50744#0" expanded="true" />
+            <element signature="e#56473#56474#0" expanded="true" />
+            <element signature="e#56516#56517#0" expanded="true" />
+            <element signature="e#62238#62239#0" expanded="true" />
+            <element signature="e#62265#62266#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/SpaceServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/com/jmpspace/contracts/SpaceServer/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29342">
+          <caret line="1727" column="5" selection-start-line="1727" selection-start-column="5" selection-end-line="1727" selection-end-column="5" />
+          <folding>
+            <element signature="e#1254#1255#0" expanded="true" />
+            <element signature="e#1290#1291#0" expanded="true" />
+            <element signature="e#1352#1353#0" expanded="true" />
+            <element signature="e#1388#1389#0" expanded="true" />
+            <element signature="e#1564#1565#0" expanded="true" />
+            <element signature="e#1603#1604#0" expanded="true" />
+            <element signature="e#4051#4052#0" expanded="true" />
+            <element signature="e#4078#4079#0" expanded="true" />
+            <element signature="e#9510#9511#0" expanded="true" />
+            <element signature="e#9561#9562#0" expanded="true" />
+            <element signature="e#9918#9919#0" expanded="true" />
+            <element signature="e#9956#9957#0" expanded="true" />
+            <element signature="e#10072#10073#0" expanded="true" />
+            <element signature="e#10131#10132#0" expanded="true" />
+            <element signature="e#11891#11892#0" expanded="true" />
+            <element signature="e#11920#11921#0" expanded="true" />
+            <element signature="e#13989#13990#0" expanded="true" />
+            <element signature="e#14025#14026#0" expanded="true" />
+            <element signature="e#14095#14096#0" expanded="true" />
+            <element signature="e#14131#14132#0" expanded="true" />
+            <element signature="e#14307#14308#0" expanded="true" />
+            <element signature="e#14346#14347#0" expanded="true" />
+            <element signature="e#16874#16875#0" expanded="true" />
+            <element signature="e#16901#16902#0" expanded="true" />
+            <element signature="e#22485#22486#0" expanded="true" />
+            <element signature="e#22536#22537#0" expanded="true" />
+            <element signature="e#22893#22894#0" expanded="true" />
+            <element signature="e#22931#22932#0" expanded="true" />
+            <element signature="e#23047#23048#0" expanded="true" />
+            <element signature="e#23106#23107#0" expanded="true" />
+            <element signature="e#24962#24963#0" expanded="true" />
+            <element signature="e#24991#24992#0" expanded="true" />
+            <element signature="e#27001#27002#0" expanded="true" />
+            <element signature="e#27037#27038#0" expanded="true" />
+            <element signature="e#27098#27099#0" expanded="true" />
+            <element signature="e#27134#27135#0" expanded="true" />
+            <element signature="e#27310#27311#0" expanded="true" />
+            <element signature="e#27349#27350#0" expanded="true" />
+            <element signature="e#29787#29788#0" expanded="true" />
+            <element signature="e#29814#29815#0" expanded="true" />
+            <element signature="e#35227#35228#0" expanded="true" />
+            <element signature="e#35278#35279#0" expanded="true" />
+            <element signature="e#35635#35636#0" expanded="true" />
+            <element signature="e#35673#35674#0" expanded="true" />
+            <element signature="e#35789#35790#0" expanded="true" />
+            <element signature="e#35848#35849#0" expanded="true" />
+            <element signature="e#37596#37597#0" expanded="true" />
+            <element signature="e#37625#37626#0" expanded="true" />
+            <element signature="e#40625#40626#0" expanded="true" />
+            <element signature="e#40661#40662#0" expanded="true" />
+            <element signature="e#40724#40725#0" expanded="true" />
+            <element signature="e#40760#40761#0" expanded="true" />
+            <element signature="e#40936#40937#0" expanded="true" />
+            <element signature="e#40975#40976#0" expanded="true" />
+            <element signature="e#44955#44956#0" expanded="true" />
+            <element signature="e#44982#44983#0" expanded="true" />
+            <element signature="e#45313#45314#0" expanded="true" />
+            <element signature="e#45349#45350#0" expanded="true" />
+            <element signature="e#45716#45717#0" expanded="true" />
+            <element signature="e#45751#45752#0" expanded="true" />
+            <element signature="e#46082#46083#0" expanded="true" />
+            <element signature="e#46121#46122#0" expanded="true" />
+            <element signature="e#47231#47232#0" expanded="true" />
+            <element signature="e#47270#47271#0" expanded="true" />
+            <element signature="e#54269#54270#0" expanded="true" />
+            <element signature="e#54320#54321#0" expanded="true" />
+            <element signature="e#54677#54678#0" expanded="true" />
+            <element signature="e#54715#54716#0" expanded="true" />
+            <element signature="e#54884#54885#0" expanded="true" />
+            <element signature="e#54943#54944#0" expanded="true" />
+            <element signature="e#57665#57666#0" expanded="true" />
+            <element signature="e#57694#57695#0" expanded="true" />
+            <element signature="e#59292#59293#0" expanded="true" />
+            <element signature="e#59335#59336#0" expanded="true" />
+            <element signature="e#65397#65398#0" expanded="true" />
+            <element signature="e#65440#65441#0" expanded="true" />
+            <element signature="e#72028#72029#0" expanded="true" />
+            <element signature="e#72064#72065#0" expanded="true" />
+            <element signature="e#72119#72120#0" expanded="true" />
+            <element signature="e#72155#72156#0" expanded="true" />
+            <element signature="e#72331#72332#0" expanded="true" />
+            <element signature="e#72370#72371#0" expanded="true" />
+            <element signature="e#74981#74982#0" expanded="true" />
+            <element signature="e#75008#75009#0" expanded="true" />
+            <element signature="e#75241#75242#0" expanded="true" />
+            <element signature="e#75303#75304#0" expanded="true" />
+            <element signature="e#76330#76331#0" expanded="true" />
+            <element signature="e#76360#76361#0" expanded="true" />
+            <element signature="e#82001#82002#0" expanded="true" />
+            <element signature="e#82052#82053#0" expanded="true" />
+            <element signature="e#82409#82410#0" expanded="true" />
+            <element signature="e#82447#82448#0" expanded="true" />
+            <element signature="e#82638#82639#0" expanded="true" />
+            <element signature="e#82697#82698#0" expanded="true" />
+            <element signature="e#85814#85815#0" expanded="true" />
+            <element signature="e#85880#85881#0" expanded="true" />
+            <element signature="e#89536#89537#0" expanded="true" />
+            <element signature="e#89572#89573#0" expanded="true" />
+            <element signature="e#89627#89628#0" expanded="true" />
+            <element signature="e#89663#89664#0" expanded="true" />
+            <element signature="e#89839#89840#0" expanded="true" />
+            <element signature="e#89878#89879#0" expanded="true" />
+            <element signature="e#92631#92632#0" expanded="true" />
+            <element signature="e#92658#92659#0" expanded="true" />
+            <element signature="e#92869#92870#0" expanded="true" />
+            <element signature="e#92931#92932#0" expanded="true" />
+            <element signature="e#93027#93028#0" expanded="true" />
+            <element signature="e#93057#93058#0" expanded="true" />
+            <element signature="e#93262#93263#0" expanded="true" />
+            <element signature="e#93324#93325#0" expanded="true" />
+            <element signature="e#100400#100401#0" expanded="true" />
+            <element signature="e#100451#100452#0" expanded="true" />
+            <element signature="e#100808#100809#0" expanded="true" />
+            <element signature="e#100846#100847#0" expanded="true" />
+            <element signature="e#101109#101110#0" expanded="true" />
+            <element signature="e#101168#101169#0" expanded="true" />
+            <element signature="e#104574#104575#0" expanded="true" />
+            <element signature="e#104640#104641#0" expanded="true" />
+            <element signature="e#104744#104745#0" expanded="true" />
+            <element signature="e#104778#104779#0" expanded="true" />
+            <element signature="e#105401#105402#0" expanded="true" />
+            <element signature="e#105467#105468#0" expanded="true" />
+            <element signature="e#108912#108913#0" expanded="true" />
+            <element signature="e#108948#108949#0" expanded="true" />
+            <element signature="e#109003#109004#0" expanded="true" />
+            <element signature="e#109039#109040#0" expanded="true" />
+            <element signature="e#109215#109216#0" expanded="true" />
+            <element signature="e#109254#109255#0" expanded="true" />
+            <element signature="e#111860#111861#0" expanded="true" />
+            <element signature="e#111887#111888#0" expanded="true" />
+            <element signature="e#112100#112101#0" expanded="true" />
+            <element signature="e#112162#112163#0" expanded="true" />
+            <element signature="e#113149#113150#0" expanded="true" />
+            <element signature="e#113174#113175#0" expanded="true" />
+            <element signature="e#118800#118801#0" expanded="true" />
+            <element signature="e#118851#118852#0" expanded="true" />
+            <element signature="e#119208#119209#0" expanded="true" />
+            <element signature="e#119246#119247#0" expanded="true" />
+            <element signature="e#119432#119433#0" expanded="true" />
+            <element signature="e#119491#119492#0" expanded="true" />
+            <element signature="e#122563#122564#0" expanded="true" />
+            <element signature="e#122629#122630#0" expanded="true" />
+            <element signature="e#126554#126555#0" expanded="true" />
+            <element signature="e#126590#126591#0" expanded="true" />
+            <element signature="e#126646#126647#0" expanded="true" />
+            <element signature="e#126682#126683#0" expanded="true" />
+            <element signature="e#126858#126859#0" expanded="true" />
+            <element signature="e#126897#126898#0" expanded="true" />
+            <element signature="e#130723#130724#0" expanded="true" />
+            <element signature="e#130750#130751#0" expanded="true" />
+            <element signature="e#131074#131075#0" expanded="true" />
+            <element signature="e#131110#131111#0" expanded="true" />
+            <element signature="e#131470#131471#0" expanded="true" />
+            <element signature="e#131505#131506#0" expanded="true" />
+            <element signature="e#131797#131798#0" expanded="true" />
+            <element signature="e#131836#131837#0" expanded="true" />
+            <element signature="e#132791#132792#0" expanded="true" />
+            <element signature="e#132830#132831#0" expanded="true" />
+            <element signature="e#139910#139911#0" expanded="true" />
+            <element signature="e#139961#139962#0" expanded="true" />
+            <element signature="e#140318#140319#0" expanded="true" />
+            <element signature="e#140356#140357#0" expanded="true" />
+            <element signature="e#140525#140526#0" expanded="true" />
+            <element signature="e#140584#140585#0" expanded="true" />
+            <element signature="e#144988#144989#0" expanded="true" />
+            <element signature="e#145031#145032#0" expanded="true" />
+            <element signature="e#150358#150359#0" expanded="true" />
+            <element signature="e#150401#150402#0" expanded="true" />
+            <element signature="e#157826#157827#0" expanded="true" />
+            <element signature="e#157853#157854#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="108" column="14" selection-start-line="108" selection-start-column="14" selection-end-line="108" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitmodules">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
           <folding />
         </state>
       </provider>

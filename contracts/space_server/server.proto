@@ -7,3 +7,16 @@ option java_package = "com.jmpspace.contracts.SpaceServer";
 
 import "session.proto";
 
+message Request {
+  oneof request {
+    session.SessionStateRequest sessionState = 1;
+    session.LoginRequest login = 2;
+  }
+}
+
+message Response {
+  oneof response {
+    session.SessionStateResponse sessionState = 1;
+    session.LoginResponse login = 2;
+  }
+}

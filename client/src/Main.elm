@@ -7,7 +7,7 @@ import WebSocket
 import WebSocket.LowLevel
 
 import SpaceServer.Session
-
+import SpaceServer.Server
 
 main =
   Html.program
@@ -22,48 +22,67 @@ echoServer : String
 echoServer =
   "ws://localhost:8001"
 
+type alias UnauthenticatedState =
+  { username: String
+  , loginFailed: Bool
+  }
+
 type alias ActiveState =
-  { userName: String
+  { username: String
   }
 
 -- MODEL
 
 type Model
-  = Unauthenticated String
+  = Unauthenticated UnauthenticatedState
   | LoggedIn ActiveState
 
 init : (Model, Cmd Msg)
 init =
-  (Unauthenticated "", Cmd.none)
+  (Unauthenticated <| UnauthenticatedState "" False, Cmd.none)
 
 -- UPDATE
 
 type Msg
-  = UsernameInput String
+  = NoOp
+  | UsernameInput String
   | LoginSubmit
   | LoginResponse
-  | NewMessage WebSocket.MessageData
+  | ServerMessage SpaceServer.Server.Response
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  case model of
-    Unauthenticated username ->
-      case msg of
-        UsernameInput newUsername -> (Unauthenticated newUsername, Cmd.none)
-        LoginSubmit ->
-          let
-            request = SpaceServer.Session.LoginRequest username
-            msg = SpaceServer.Session.encodeLoginRequest << SpaceServer.Session.marshalLoginRequest <| request
-          in (model, WebSocket.send echoServer <| WebSocket.LowLevel.ArrayBuffer msg)
+  case (model, msg) of
+    (Unauthenticated state, UsernameInput newUsername) ->
+      (Unauthenticated { state | username = newUsername }, Cmd.none)
+    (Unauthenticated {username}, LoginSubmit) ->
+      let
+        loginRequest = SpaceServer.Session.LoginRequest username
+        msg =
+          loginRequest |>
+          SpaceServer.Server.Request_oneof_request_login >>
+          SpaceServer.Server.Request >>
+          SpaceServer.Server.marshalRequest >>
+          SpaceServer.Server.encodeRequest
+      in (model, WebSocket.send echoServer <| WebSocket.LowLevel.ArrayBuffer msg)
+    (Unauthenticated state, ServerMessage {response}) ->
+      case response of
+        SpaceServer.Server.Response_oneof_response_login {response} ->
+          case response of
+            SpaceServer.Session.LoginResponse_oneof_response_failure failure ->
+              (Unauthenticated { state | loginFailed = True }, Cmd.none)
+            SpaceServer.Session.LoginResponse_oneof_response_success success ->
+              (LoggedIn { username = success.playerName}, Cmd.none)
         _ -> (model, Cmd.none)
-    LoggedIn loginResponse ->
-      (model, Cmd.none)
+    _ -> (model, Cmd.none)
 
 -- SUBSCRIPTIONS
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  WebSocket.listen echoServer NewMessage
+  WebSocket.listen echoServer (\messageData -> case messageData of
+    WebSocket.LowLevel.ArrayBuffer buf -> buf |> SpaceServer.Server.decodeResponse >> SpaceServer.Server.unmarshalResponse >> ServerMessage
+    _ -> NoOp)
 
 -- VIEW
 
@@ -81,6 +100,4 @@ loginView =
     ]
 
 activeView : ActiveState -> Html Msg
-activeView {userName} =
-  div []
-    [ ]
+activeView {username} = text <| "Logged in as " ++ username

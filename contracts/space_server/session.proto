@@ -5,17 +5,29 @@ package session;
 
 option java_package = "com.jmpspace.contracts.SpaceServer";
 
+message SessionStateRequest {}
+
+message SessionStateUnauthenticated {}
+message SessionStateActive {}
+
+message SessionStateResponse {
+  oneof response {
+    SessionStateUnauthenticated unauthenticated = 1;
+    SessionStateActive active = 2;
+  }
+}
+
 message LoginRequest {
-    required string playerName = 1;
+  required string playerName = 1;
 }
 
 message LoginSuccess {
-    required int32 playerId = 1;
-    required string playerName = 2;
+  required int32 playerId = 1;
+  required string playerName = 2;
 }
 
 message LoginFailure {
-    required string error = 1;
+  required string error = 1;
 }
 
 message LoginResponse {
