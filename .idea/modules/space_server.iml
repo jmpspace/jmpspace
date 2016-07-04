@@ -9,8 +9,8 @@
       <sourceFolder url="file://$MODULE_DIR$/../../space_server/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../space_server/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/../../space_server/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../space_server/build/generated/source/proto/main/java" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../space_server/.gradle" />
-      <excludeFolder url="file://$MODULE_DIR$/../../space_server/build" />
       <excludeFolder url="file://$MODULE_DIR$/../../space_server/build/classes" />
       <excludeFolder url="file://$MODULE_DIR$/../../space_server/build/dependency-cache" />
     </content>

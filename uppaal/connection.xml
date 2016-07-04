@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>
+// Disasters
+chan disconnect;
+
+// Normal
+chan sessionState;
+chan unauthenticated;</declaration><template><name x="5" y="5">ClientElmApp</name><parameter>const int timeoutThreshold</parameter><declaration>// Place local declarations here.
+
+clock responseTimeout;
+int error;</declaration><location id="id0" x="-776" y="-784"><name x="-840" y="-752">Unauthenticated</name></location><location id="id1" x="-632" y="-1024"><name x="-608" y="-1064">UnknownWaiting</name></location><location id="id2" x="-816" y="-1184"><name x="-848" y="-1224">Unknown</name></location><init ref="id2"/><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="-960" y="-952">responseTimeout &lt;= timeoutThreshold</label><label kind="synchronisation" x="-824" y="-928">unauthenticated?</label></transition><transition><source ref="id1"/><target ref="id2"/><label kind="guard" x="-1024" y="-1104">responseTimeout &gt; timeoutThreshold</label><label kind="assignment" x="-848" y="-1080">error = 1</label><nail x="-760" y="-1088"/></transition><transition><source ref="id2"/><target ref="id1"/><label kind="synchronisation" x="-672" y="-1184">sessionState!</label><label kind="assignment" x="-672" y="-1208">responseTimeout = 0</label><nail x="-688" y="-1168"/></transition></template><template><name>ServerActor</name><declaration>
+</declaration><location id="id3" x="-1120" y="-608"></location><location id="id4" x="-936" y="-632"><name x="-946" y="-662">NoKnowledge</name></location><init ref="id4"/><transition><source ref="id3"/><target ref="id4"/><label kind="synchronisation" x="-1080" y="-560">unauthenticated!</label><nail x="-1024" y="-568"/></transition><transition><source ref="id4"/><target ref="id3"/><label kind="synchronisation" x="-1128" y="-696">sessionState?</label><nail x="-1040" y="-656"/></transition></template><template><name>Disasters</name><location id="id5" x="-504" y="-168"></location><init ref="id5"/><transition><source ref="id5"/><target ref="id5"/><label kind="synchronisation" x="-320" y="-192">disconnect!</label><nail x="-344" y="-272"/><nail x="-336" y="-24"/></transition></template><system>// Place template instantiations here.
+Client = ClientElmApp(30);
+Server = ServerActor();
+
+// List one or more processes to be composed into a system.
+system Client, Server;</system></nta>
