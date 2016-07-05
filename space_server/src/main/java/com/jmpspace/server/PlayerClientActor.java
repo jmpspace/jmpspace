@@ -189,10 +189,14 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
   protected final WebMessage handleLifecycleMessage(LifecycleMessage m) {
     // while listeners might contain an SSE actor wrapped with Channels.map, the wrapped SendPort maintains the original actors hashCode and equals behavior
     if (m instanceof ExitMessage) {
+      logger.info("Exit");
       actors.remove(((ExitMessage) m).getActor());
       if (clientState.state == LoggedIn && clientState.playerName != null) {
         activePlayerNames.remove(clientState.playerName);
       }
+    }
+    if (m instanceof ShutdownMessage) {
+      logger.info("Shutdown");
     }
     return super.handleLifecycleMessage(m);
   }

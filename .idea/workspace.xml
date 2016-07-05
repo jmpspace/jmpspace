@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb89400c-00e0-4499-a06c-78949033a7e9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/uppaal/uppaal.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/space_server.iml" afterPath="$PROJECT_DIR$/.idea/modules/space_server.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/Main.elm" afterPath="$PROJECT_DIR$/client/src/Main.elm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contracts/space_server/server.proto" afterPath="$PROJECT_DIR$/contracts/space_server/server.proto" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contracts/space_server/session.proto" afterPath="$PROJECT_DIR$/contracts/space_server/session.proto" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/space_server/build.gradle" afterPath="$PROJECT_DIR$/space_server/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java" afterPath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java" afterPath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java" afterPath="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java" />
     </list>
     <ignored path="jmpspace.iws" />
@@ -47,80 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlayerClientActor.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="139" column="7" selection-start-line="139" selection-start-column="7" selection-end-line="139" selection-end-column="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebSocketOpened.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebSocketOpened.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebStreamOpened.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebStreamOpened.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebDataMessage.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebDataMessage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebMessage.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebMessage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#1559#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1487#1488#0" expanded="false" />
-                <element signature="e#1555#1556#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerSessionListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SpaceServer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
+            <state relative-caret-position="663">
+              <caret line="39" column="92" selection-start-line="39" selection-start-column="92" selection-end-line="39" selection-end-column="92" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,21 +51,74 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionAttachmentHandler.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionAttachmentHandler.java">
+      <file leaf-file-name="InMemorySessionManager.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/InMemorySessionManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+            <state relative-caret-position="947">
+              <caret line="527" column="0" selection-start-line="527" selection-start-column="0" selection-end-line="527" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SessionManager.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionManager.java">
+      <file leaf-file-name="SessionListeners.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionListeners.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="96" column="49" selection-start-line="96" selection-start-column="49" selection-end-line="96" selection-end-column="49" />
+            <state relative-caret-position="182">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerSessionListener.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActorRef.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/ActorRef.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1712">
+              <caret line="167" column="16" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
+              <folding>
+                <element signature="e#6655#6656#0" expanded="true" />
+                <element signature="e#6712#6713#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebActor.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebActor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Session.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/Session.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="461">
+              <caret line="174" column="16" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionListener.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -151,12 +127,22 @@
       <file leaf-file-name="AutoWebActorHandler.java" pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/83472031bdb3203f999b5bb853d36ac4fa9e360f/comsat-actors-undertow-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/undertow/AutoWebActorHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+            <state relative-caret-position="148">
+              <caret line="107" column="65" selection-start-line="107" selection-start-column="65" selection-end-line="107" selection-end-column="65" />
               <folding>
                 <element signature="e#1371#1372#0" expanded="true" />
                 <element signature="e#1403#1404#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebActorHandler.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/83472031bdb3203f999b5bb853d36ac4fa9e360f/comsat-actors-undertow-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/undertow/WebActorHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -551,9 +537,9 @@
         <option value="$PROJECT_DIR$/space_server/build.gradle" />
         <option value="$PROJECT_DIR$/client/src/Main.elm" />
         <option value="$PROJECT_DIR$/client/index.html" />
-        <option value="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java" />
         <option value="$PROJECT_DIR$/client/space_server/SpaceServer/Server.elm" />
         <option value="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java" />
+        <option value="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java" />
         <option value="$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java" />
       </list>
     </option>
@@ -567,7 +553,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="973" />
+    <option name="width" value="1207" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -809,7 +795,7 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/space_server/src/main/java" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
-  <component name="RunManager" selected="Application.Run SpaceServer">
+  <component name="RunManager" selected="Bash.Space Server Gradle Compile Java">
     <configuration default="false" name="Run SpaceServer" type="Application" factoryName="Application" singleton="true" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.jmpspace.server.SpaceServer" />
       <option name="VM_PARAMETERS" value="-Dco.paralleluniverse.fibers.verifyInstrumentation -javaagent:C:\Users\John\.gradle\caches\modules-2\files-2.1\co.paralleluniverse\quasar-core\0.7.5\8521294c1b50957e1f60b112d511131869eea97c\quasar-core-0.7.5-jdk8.jar" />
@@ -1071,24 +1057,24 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="973" height="1047" extended-state="0" />
-    <editor active="false" />
+    <frame x="-7" y="0" width="1207" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39234972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5497268" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.49726176" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25021797" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38688526" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3726776" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1096,6 +1082,29 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32932165" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23825137" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24860023" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24945295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3704918" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.proto" />
@@ -1113,7 +1122,27 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java</url>
+          <line>191</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java</url>
+          <line>198</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java</url>
+          <line>27</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1126,79 +1155,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/SpaceServer/Session.java" />
-    <entry file="file://$PROJECT_DIR$/space_server/gradlew">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/build/generated/source/proto/main/java/SpaceServer/Session.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/nio/ByteBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="992" column="13" selection-start-line="992" selection-start-column="13" selection-end-line="992" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="5435" column="29" selection-start-line="5435" selection-start-column="29" selection-end-line="5435" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/ActorRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/Set.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="224" column="12" selection-start-line="224" selection-start-column="12" selection-end-line="224" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/2.6.1/cf47bfc6a10f85d14bc4c078a48d163b5903a291/protobuf-java-2.6.1-sources.jar!/com/google/protobuf/AbstractMessageLite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/2.6.1/cf47bfc6a10f85d14bc4c078a48d163b5903a291/protobuf-java-2.6.1-sources.jar!/com/google/protobuf/ByteString.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/Actor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5253">
-          <caret line="371" column="32" selection-start-line="371" selection-start-column="32" selection-end-line="371" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/Make-Elm.ps1">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="157" selection-start-line="7" selection-start-column="77" selection-end-line="7" selection-end-column="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/makeElm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/client/Main.elm" />
     <entry file="file://$PROJECT_DIR$/space_server/src/main/resources/log4j2.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1406,30 +1362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionCookieConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="154" column="15" selection-start-line="154" selection-start-column="15" selection-end-line="154" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/InMemorySessionManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="56" column="61" selection-start-line="56" selection-start-column="61" selection-end-line="56" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionListeners.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="37" column="29" selection-start-line="37" selection-start-column="29" selection-end-line="37" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/util/Map.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
@@ -1454,57 +1386,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionAttachmentHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/83472031bdb3203f999b5bb853d36ac4fa9e360f/comsat-actors-undertow-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/undertow/AutoWebActorHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
-          <folding>
-            <element signature="e#1371#1372#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="70" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebDataMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
           <folding>
             <element signature="e#0#1559#0" expanded="false" />
             <element signature="imports" expanded="false" />
@@ -1514,10 +1399,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebStreamOpened.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/behaviors/ActorMessage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/behaviors/FromMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebDataMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1525,18 +1426,181 @@
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebSocketOpened.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_91/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="270" column="29" selection-start-line="270" selection-start-column="29" selection-end-line="270" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebStreamOpened.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
+          <folding>
+            <element signature="e#966#967#0" expanded="false" />
+            <element signature="e#994#995#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionAttachmentHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="25" column="55" selection-start-line="25" selection-start-column="55" selection-end-line="25" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/ShutdownMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/ExitMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/LifecycleMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/Actor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="748" column="52" selection-start-line="748" selection-start-column="52" selection-end-line="748" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/util/Sessions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="52" column="26" selection-start-line="52" selection-start-column="26" selection-end-line="52" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionCookieConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1823">
+          <caret line="153" column="31" selection-start-line="153" selection-start-column="31" selection-end-line="153" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerClientActor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="139" column="7" selection-start-line="139" selection-start-column="7" selection-end-line="139" selection-end-column="7" />
+        <state relative-caret-position="408">
+          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="95" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/SpaceServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="92" selection-start-line="39" selection-start-column="92" selection-end-line="39" selection-end-column="92" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/83472031bdb3203f999b5bb853d36ac4fa9e360f/comsat-actors-undertow-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/undertow/AutoWebActorHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="107" column="65" selection-start-line="107" selection-start-column="65" selection-end-line="107" selection-end-column="65" />
+          <folding>
+            <element signature="e#1371#1372#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="174" column="16" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/InMemorySessionManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="947">
+          <caret line="527" column="0" selection-start-line="527" selection-start-column="0" selection-end-line="527" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionListeners.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.undertow/undertow-core/1.3.19.Final/366a59e75202555013f0f086817f0cda66ee57c5/undertow-core-1.3.19.Final-sources.jar!/io/undertow/server/session/SessionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-undertow/0.7.0/83472031bdb3203f999b5bb853d36ac4fa9e360f/comsat-actors-undertow-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/undertow/WebActorHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/comsat-actors-api/0.7.0/491c3437862dc31c4058d7b114258ae7031fd2cd/comsat-actors-api-0.7.0-sources.jar!/co/paralleluniverse/comsat/webactors/WebActor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/co.paralleluniverse/quasar-actors/0.7.4/1f41638f87d6be877041912393331ea35d286f41/quasar-actors-0.7.4-sources.jar!/co/paralleluniverse/actors/ActorRef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1712">
+          <caret line="167" column="16" selection-start-line="167" selection-start-column="16" selection-end-line="167" selection-end-column="16" />
+          <folding>
+            <element signature="e#6655#6656#0" expanded="true" />
+            <element signature="e#6712#6713#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/space_server/src/main/java/com/jmpspace/server/PlayerSessionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>

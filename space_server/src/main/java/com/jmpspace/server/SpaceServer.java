@@ -1,6 +1,7 @@
 package com.jmpspace.server;
 
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
+import co.paralleluniverse.comsat.webactors.undertow.WebActorHandler;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
 import io.undertow.Undertow;
@@ -32,6 +33,8 @@ class SpaceServer {
     sessionConfig.setMaxAge(60);
     final SessionAttachmentHandler sessionAttachmentHandler =
           new SessionAttachmentHandler(sessionManager, sessionConfig);
+
+    sessionManager.registerSessionListener(new PlayerSessionListener());
 
     Undertow server = Undertow.builder().addHttpListener(port, "localhost")
            .setHandler(sessionAttachmentHandler.setNext(new AutoWebActorHandler())).build();
