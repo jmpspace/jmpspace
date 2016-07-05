@@ -40,11 +40,15 @@ configurations {
 }
 
 sourceSets {
-  main {
-    proto {
-      srcDir '../contracts/space_server'
+    main {
+        proto {
+            srcDir '../contracts/space_server'
+        }
     }
-  }
+}
+
+protobuf {
+    generatedFilesBaseDir = "$projectDir/src/generated"
 }
 
 configurations.all {
@@ -109,6 +113,10 @@ tasks.withType(Test) {
     doLast() {
         println "file://" + getReports().getHtml().getDestination() + "/index.html"
     }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
 }
 
 mainClassName = "com.jmpspace.server.SpaceServer"

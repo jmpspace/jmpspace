@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/contracts/contracts.iml" filepath="$PROJECT_DIR$/contracts/contracts.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/space_server.iml" filepath="$PROJECT_DIR$/.idea/modules/space_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/uppaal/uppaal.iml" filepath="$PROJECT_DIR$/uppaal/uppaal.iml" />
     </modules>
   </component>
 </project>

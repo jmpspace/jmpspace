@@ -3,11 +3,21 @@ import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Binary.ArrayBuffer
-import WebSocket
-import WebSocket.LowLevel
+import WebSocket exposing (listen, send)
+import WebSocket.LowLevel exposing (MessageData(..))
 
-import SpaceServer.Session
-import SpaceServer.Server
+import SpaceServer.Session exposing
+  ( LoginRequest
+  , SessionStateRequest
+  )
+import SpaceServer.Server exposing
+  ( Request
+  , Request_oneof_request(..)
+  , Response_oneof_response(..)
+  , decodeResponse
+  , encodeRequest
+  , marshalRequest
+  , unmarshalResponse )
 
 main =
   Html.program
@@ -19,8 +29,7 @@ main =
 
 
 echoServer : String
-echoServer =
-  "ws://localhost:8001"
+echoServer = "ws://localhost:8001"
 
 type alias UnauthenticatedState =
   { username: String
@@ -34,12 +43,15 @@ type alias ActiveState =
 -- MODEL
 
 type Model
-  = Unauthenticated UnauthenticatedState
+  = Unknown
+  | Unauthenticated UnauthenticatedState
   | LoggedIn ActiveState
 
 init : (Model, Cmd Msg)
 init =
-  (Unauthenticated <| UnauthenticatedState "" False, Cmd.none)
+  let
+    cmd = SessionStateRequest |> Request_oneof_request_sessionState >> sendRequest
+  in (Unknown, cmd)
 
 -- UPDATE
 
@@ -50,38 +62,48 @@ type Msg
   | LoginResponse
   | ServerMessage SpaceServer.Server.Response
 
+unexpectedMessage : Msg -> Model -> (Model, Cmd Msg)
+unexpectedMessage msg model = Debug.log ("Unexpected message" ++ toString msg) (model, Cmd.none)
+
+sendRequest : Request_oneof_request -> Cmd msg
+sendRequest =
+  Request >>
+  marshalRequest >>
+  encodeRequest >>
+  ArrayBuffer >>
+  send echoServer
+
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case (model, msg) of
+    (Unknown, ServerMessage {response}) ->
+      case response of
+        Response_oneof_response_unauthenticated _ ->
+          (Unauthenticated { username = "", loginFailed = False }, Cmd.none)
+        Response_oneof_response_loggedIn { playerId, playerName } ->
+          (LoggedIn { username = playerName}, Cmd.none)
+        --_ -> unexpectedMessage msg model
     (Unauthenticated state, UsernameInput newUsername) ->
       (Unauthenticated { state | username = newUsername }, Cmd.none)
     (Unauthenticated {username}, LoginSubmit) ->
       let
-        loginRequest = SpaceServer.Session.LoginRequest username
-        msg =
-          loginRequest |>
-          SpaceServer.Server.Request_oneof_request_login >>
-          SpaceServer.Server.Request >>
-          SpaceServer.Server.marshalRequest >>
-          SpaceServer.Server.encodeRequest
-      in (model, WebSocket.send echoServer <| WebSocket.LowLevel.ArrayBuffer msg)
+        cmd = (LoginRequest username) |> Request_oneof_request_login >> sendRequest
+      in (model, cmd)
     (Unauthenticated state, ServerMessage {response}) ->
       case response of
-        SpaceServer.Server.Response_oneof_response_login {response} ->
-          case response of
-            SpaceServer.Session.LoginResponse_oneof_response_failure failure ->
-              (Unauthenticated { state | loginFailed = True }, Cmd.none)
-            SpaceServer.Session.LoginResponse_oneof_response_success success ->
-              (LoggedIn { username = success.playerName}, Cmd.none)
-        _ -> (model, Cmd.none)
-    _ -> (model, Cmd.none)
+        Response_oneof_response_unauthenticated _ ->
+          (Unauthenticated { state | loginFailed = True }, Cmd.none)
+        Response_oneof_response_loggedIn { playerId, playerName } ->
+          (LoggedIn { username = playerName}, Cmd.none)
+        --_ -> unexpectedMessage msg model
+    _ -> unexpectedMessage msg model
 
 -- SUBSCRIPTIONS
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  WebSocket.listen echoServer (\messageData -> case messageData of
-    WebSocket.LowLevel.ArrayBuffer buf -> buf |> SpaceServer.Server.decodeResponse >> SpaceServer.Server.unmarshalResponse >> ServerMessage
+  listen echoServer (\messageData -> case messageData of
+    ArrayBuffer buf -> buf |> decodeResponse >> unmarshalResponse >> ServerMessage
     _ -> NoOp)
 
 -- VIEW
@@ -89,6 +111,7 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
   case model of
+    Unknown -> text "Contacting server (initializing session state)"
     Unauthenticated username -> loginView
     LoggedIn activeState -> activeView activeState
 

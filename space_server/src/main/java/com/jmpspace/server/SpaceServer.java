@@ -3,25 +3,19 @@ package com.jmpspace.server;
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
-
+import io.undertow.Undertow;
 import io.undertow.server.session.InMemorySessionManager;
 import io.undertow.server.session.SessionAttachmentHandler;
 import io.undertow.server.session.SessionCookieConfig;
 import io.undertow.server.session.SessionManager;
-import io.undertow.Undertow;
-
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 class SpaceServer {
 
-  static final Logger logger = LogManager.getLogger(SpaceServer.class.getName());
+  private static final Logger logger = LogManager.getLogger(SpaceServer.class.getName());
 
-  static final int port = 8001; // TODO configure magic number
-  static final SocketAddress addr = new InetSocketAddress(port);
+  private static final int port = 8001; // TODO configure magic number
 
   static public void main(String[] args) {
 

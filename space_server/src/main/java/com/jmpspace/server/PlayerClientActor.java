@@ -18,12 +18,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static com.jmpspace.server.PlayerClientActor.PlayerClientState.LoggedIn;
 
+//@SuppressWarnings("WeakerAccess")
 @WebActor(webSocketUrlPatterns = {"/"})
 public class PlayerClientActor extends BasicActor<WebMessage, Void> {
 
-  static final Logger logger = LogManager.getLogger(PlayerClientActor.class.getName());
+  private static final Logger logger = LogManager.getLogger(PlayerClientActor.class.getName());
 
-  static final ConcurrentMap<String, ActorRef<WebMessage>> activePlayerNames = new ConcurrentHashMap<String, ActorRef<WebMessage>>();
+  private static final ConcurrentMap<String, ActorRef<WebMessage>> activePlayerNames = new ConcurrentHashMap<>();
 
   // There is one actor for each client
   private static final Set<ActorRef<WebMessage>> actors =
@@ -37,9 +38,11 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
     LoggedIn
   }
 
-  class PlayerClientStateModel {
+  private class PlayerClientStateModel {
 
     private PlayerClientState state = PlayerClientState.Unauthenticated;
+    private String playerName = null;
+    private int playerId = -1; // TODO: faking it
 
     void handleMessage(WebDataMessage message) throws InterruptedException, SuspendExecution {
       if (!message.isBinary()) {
@@ -51,57 +54,91 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
 
       try {
 
+        boolean isResponseBuilt = false;
         Server.Request request = Server.Request.parseFrom(buf);
         Server.Response.Builder response = Server.Response.newBuilder();
 
         if (request.getRequestCase() == Server.Request.RequestCase.SESSIONSTATE) {
-          Session.SessionStateResponse.Builder sessionStateResponse = Session.SessionStateResponse.newBuilder();
+
+          // Disregarding state, session state requests are always answered as disconnects / refreshes can happen
+
           switch (state) {
             case Unauthenticated:
-              sessionStateResponse.setUnauthenticated(Session.SessionStateUnauthenticated.newBuilder());
+              response.setUnauthenticated(Session.Unauthenticated.newBuilder());
+              isResponseBuilt = true;
               break;
             case LoggedIn:
-              sessionStateResponse.setActive(Session.SessionStateActive.newBuilder());
+              response.setLoggedIn(Session.LoggedIn
+                      .newBuilder()
+                      .setPlayerName(playerName)
+                      .setPlayerId(playerId));
+              isResponseBuilt = true;
               break;
           }
+
         } else {
 
           switch (state) {
-            case Unauthenticated:
 
+            case Unauthenticated:
               switch (request.getRequestCase()) {
+
+                case SESSIONSTATE:
+                  break;
                 case LOGIN:
                   Session.LoginRequest loginRequest = request.getLogin();
                   String requestedPlayerName = loginRequest.getPlayerName();
-                  Session.LoginResponse.Builder loginResponse = Session.LoginResponse.newBuilder();
                   ActorRef<WebMessage> existingPlayer = activePlayerNames.putIfAbsent(requestedPlayerName, self());
                   if (existingPlayer != null) {
                     String error = String.format("Requested player name '%s' is already active", requestedPlayerName);
                     logger.debug(error);
-                    loginResponse.setFailure(Session.LoginFailure.newBuilder().setError(error));
+                    response.setUnauthenticated(Session.Unauthenticated.newBuilder().setError(error));
+                    isResponseBuilt = true;
                   } else {
                     logger.info(String.format("Logging in: %s", loginRequest.getPlayerName()));
-                    // TODO: player ID will be needed soon
-                    loginResponse.setSuccess(Session.LoginSuccess.newBuilder().setPlayerId(0).setPlayerName(requestedPlayerName));
+                    playerName = requestedPlayerName;
+                    playerId = -1; // TODO: faking it
+                    response.setLoggedIn(Session.LoggedIn
+                            .newBuilder()
+                            .setPlayerName(playerName)
+                            .setPlayerId(playerId));
+                    isResponseBuilt = true;
                     state = LoggedIn;
                   }
-                  response.setLogin(loginResponse);
+                  break;
+
+                case LOGOUT:
+                  break;
+                case REQUEST_NOT_SET:
+                  break;
               }
               break;
+
             case LoggedIn:
               switch (request.getRequestCase()) {
+                case SESSIONSTATE:
+                  break;
+                case LOGIN:
+                  break;
+                case LOGOUT:
+                  break;
+                case REQUEST_NOT_SET:
+                  break;
               }
+              break;
+
           }
 
         }
 
-        postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
+        if (isResponseBuilt) {
+          postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
+        }
 
       } catch (InvalidProtocolBufferException e) {
         logger.error("Failed to parse something probably", e);
       }
 
-      //postMessage(message);
     }
 
   }
@@ -123,13 +160,12 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
           final WebSocketOpened msg = (WebSocketOpened) message;
           watch(msg.getFrom()); // will call handleLifecycleMessage with ExitMessage when the session ends
 
-          SendPort<WebDataMessage> p = msg.getFrom();
-          this.peer = p;
+          this.peer = msg.getFrom();
 
           // hello message can go here
         }
         else if (message instanceof WebDataMessage) {
-          logger.debug("Just a regular message");
+          logger.debug("Web data message");
           final WebDataMessage msg = (WebDataMessage) message;
           clientState.handleMessage(msg);
         }
@@ -143,7 +179,7 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
     if (peer != null)
       peer.send(webDataMessage);
     if (webDataMessage.getFrom().equals(peer))
-      for (final SendPort actor : actors)
+      for (final SendPort<WebMessage> actor : actors)
         if (actor != self())
           //noinspection unchecked
           actor.send(webDataMessage);
@@ -152,8 +188,12 @@ public class PlayerClientActor extends BasicActor<WebMessage, Void> {
   @Override
   protected final WebMessage handleLifecycleMessage(LifecycleMessage m) {
     // while listeners might contain an SSE actor wrapped with Channels.map, the wrapped SendPort maintains the original actors hashCode and equals behavior
-    if (m instanceof ExitMessage)
+    if (m instanceof ExitMessage) {
       actors.remove(((ExitMessage) m).getActor());
+      if (clientState.state == LoggedIn && clientState.playerName != null) {
+        activePlayerNames.remove(clientState.playerName);
+      }
+    }
     return super.handleLifecycleMessage(m);
   }
 }
