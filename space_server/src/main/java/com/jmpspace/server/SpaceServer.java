@@ -12,6 +12,9 @@ import io.undertow.server.session.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class SpaceServer {
 
   private static final Logger logger = LogManager.getLogger(SpaceServer.class.getName());
@@ -28,16 +31,21 @@ class SpaceServer {
     SpaceBase largeBase = builder.build("large");
     SpaceBase smallBase = builder.build("small");
     
-    final SessionManager sessionManager = new InMemorySessionManager("SESSION_MANAGER", 1, true);
+    final SessionManager sessionManager = new InMemorySessionManager("SESSION_MANAGER", 100, true);
     final SessionCookieConfig sessionConfig = new SessionCookieConfig();
-    sessionConfig.setMaxAge(60);
+    sessionConfig.setMaxAge(60 * 5);
     final SessionAttachmentHandler sessionAttachmentHandler =
           new SessionAttachmentHandler(sessionManager, sessionConfig);
 
-    sessionManager.registerSessionListener(new PlayerSessionListener());
+//    sessionManager.registerSessionListener(new PlayerSessionListener());
+
+//    Map<Class<?>, Object[]> classParams = new HashMap<Class<?>, Object[]>();
+//    classParams.put(PlayerClientActor.class, {});
+
+    AutoWebActorHandler handler = new AutoWebActorHandler();
 
     Undertow server = Undertow.builder().addHttpListener(port, "localhost")
-           .setHandler(sessionAttachmentHandler.setNext(new AutoWebActorHandler())).build();
+           .setHandler(sessionAttachmentHandler.setNext(handler)).build();
 
 
     server.start();

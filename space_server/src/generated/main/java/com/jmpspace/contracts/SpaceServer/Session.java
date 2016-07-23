@@ -338,6 +338,15 @@ public final class Session {
      */
     com.google.protobuf.ByteString
         getPlayerNameBytes();
+
+    /**
+     * <code>required bool forceLogin = 2;</code>
+     */
+    boolean hasForceLogin();
+    /**
+     * <code>required bool forceLogin = 2;</code>
+     */
+    boolean getForceLogin();
   }
   /**
    * Protobuf type {@code session.LoginRequest}
@@ -395,6 +404,11 @@ public final class Session {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
               playerName_ = bs;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              forceLogin_ = input.readBool();
               break;
             }
           }
@@ -479,8 +493,24 @@ public final class Session {
       }
     }
 
+    public static final int FORCELOGIN_FIELD_NUMBER = 2;
+    private boolean forceLogin_;
+    /**
+     * <code>required bool forceLogin = 2;</code>
+     */
+    public boolean hasForceLogin() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required bool forceLogin = 2;</code>
+     */
+    public boolean getForceLogin() {
+      return forceLogin_;
+    }
+
     private void initFields() {
       playerName_ = "";
+      forceLogin_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -489,6 +519,10 @@ public final class Session {
       if (isInitialized == 0) return false;
 
       if (!hasPlayerName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasForceLogin()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -502,6 +536,9 @@ public final class Session {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeBytes(1, getPlayerNameBytes());
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, forceLogin_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -514,6 +551,10 @@ public final class Session {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(1, getPlayerNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, forceLogin_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -634,6 +675,8 @@ public final class Session {
         super.clear();
         playerName_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
+        forceLogin_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -666,6 +709,10 @@ public final class Session {
           to_bitField0_ |= 0x00000001;
         }
         result.playerName_ = playerName_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.forceLogin_ = forceLogin_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -687,12 +734,19 @@ public final class Session {
           playerName_ = other.playerName_;
           onChanged();
         }
+        if (other.hasForceLogin()) {
+          setForceLogin(other.getForceLogin());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasPlayerName()) {
+          
+          return false;
+        }
+        if (!hasForceLogin()) {
           
           return false;
         }
@@ -790,6 +844,38 @@ public final class Session {
   }
   bitField0_ |= 0x00000001;
         playerName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean forceLogin_ ;
+      /**
+       * <code>required bool forceLogin = 2;</code>
+       */
+      public boolean hasForceLogin() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bool forceLogin = 2;</code>
+       */
+      public boolean getForceLogin() {
+        return forceLogin_;
+      }
+      /**
+       * <code>required bool forceLogin = 2;</code>
+       */
+      public Builder setForceLogin(boolean value) {
+        bitField0_ |= 0x00000002;
+        forceLogin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool forceLogin = 2;</code>
+       */
+      public Builder clearForceLogin() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        forceLogin_ = false;
         onChanged();
         return this;
       }
@@ -2199,11 +2285,12 @@ public final class Session {
   static {
     java.lang.String[] descriptorData = {
       "\n\rsession.proto\022\007session\"\025\n\023SessionState" +
-      "Request\"\"\n\014LoginRequest\022\022\n\nplayerName\030\001 " +
-      "\002(\t\"\017\n\rLogoutRequest\" \n\017Unauthenticated\022" +
-      "\r\n\005error\030\001 \001(\t\"0\n\010LoggedIn\022\020\n\010playerId\030\001" +
-      " \002(\005\022\022\n\nplayerName\030\002 \002(\tB$\n\"com.jmpspace" +
-      ".contracts.SpaceServer"
+      "Request\"6\n\014LoginRequest\022\022\n\nplayerName\030\001 " +
+      "\002(\t\022\022\n\nforceLogin\030\002 \002(\010\"\017\n\rLogoutRequest" +
+      "\" \n\017Unauthenticated\022\r\n\005error\030\001 \001(\t\"0\n\010Lo" +
+      "ggedIn\022\020\n\010playerId\030\001 \002(\005\022\022\n\nplayerName\030\002" +
+      " \002(\tB$\n\"com.jmpspace.contracts.SpaceServ" +
+      "er"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2228,7 +2315,7 @@ public final class Session {
     internal_static_session_LoginRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_session_LoginRequest_descriptor,
-        new java.lang.String[] { "PlayerName", });
+        new java.lang.String[] { "PlayerName", "ForceLogin", });
     internal_static_session_LogoutRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_session_LogoutRequest_fieldAccessorTable = new

@@ -1,5 +1,8 @@
-elm make src/Main.elm
+elm make src/Main.elm --yes
 outputFile="./index.html"
 
-sed 's#/\* SHIM Native.BinaryArrayBuffer \*/#var _johnpmayer$jmpspace$Native_Binary_ArrayBuffer = _johnpmayer$binary$Native_Binary_ArrayBuffer#' -i $outputFile
-sed 's#/\* SHIM Native.WebSocket \*/#var _johnpmayer$jmpspace$Native_WebSocket = _elm_lang$websocket$Native_WebSocket#' -i $outputFile
+tmp=$(mktemp)
+
+cat $outputFile | sed 's#/\* SHIM Native.BinaryArrayBuffer \*/#var _johnpmayer$jmpspace$Native_Binary_ArrayBuffer = _johnpmayer$binary$Native_Binary_ArrayBuffer#' | sed 's#/\* SHIM Native.WebSocket \*/#var _johnpmayer$jmpspace$Native_WebSocket = _elm_lang$websocket$Native_WebSocket#' > $tmp
+
+mv $tmp $outputFile

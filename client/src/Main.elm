@@ -33,6 +33,7 @@ echoServer = "ws://localhost:8001"
 
 type alias UnauthenticatedState =
   { username: String
+  , error: Maybe String
   , loginFailed: Bool
   }
 
@@ -59,6 +60,7 @@ type Msg
   = NoOp
   | UsernameInput String
   | LoginSubmit
+  | LoginForce
   | LoginResponse
   | ServerMessage SpaceServer.Server.Response
 
@@ -78,8 +80,8 @@ update msg model =
   case (model, msg) of
     (Unknown, ServerMessage {response}) ->
       case response of
-        Response_oneof_response_unauthenticated _ ->
-          (Unauthenticated { username = "", loginFailed = False }, Cmd.none)
+        Response_oneof_response_unauthenticated {error} ->
+          (Unauthenticated { username = "", loginFailed = False, error = error }, Cmd.none)
         Response_oneof_response_loggedIn { playerId, playerName } ->
           (LoggedIn { username = playerName}, Cmd.none)
         --_ -> unexpectedMessage msg model
@@ -87,12 +89,16 @@ update msg model =
       (Unauthenticated { state | username = newUsername }, Cmd.none)
     (Unauthenticated {username}, LoginSubmit) ->
       let
-        cmd = (LoginRequest username) |> Request_oneof_request_login >> sendRequest
+        cmd = (LoginRequest username False) |> Request_oneof_request_login >> sendRequest
       in (model, cmd)
+    (Unauthenticated {username}, LoginForce) ->
+          let
+            cmd = (LoginRequest username True) |> Request_oneof_request_login >> sendRequest
+          in (model, cmd)
     (Unauthenticated state, ServerMessage {response}) ->
       case response of
-        Response_oneof_response_unauthenticated _ ->
-          (Unauthenticated { state | loginFailed = True }, Cmd.none)
+        Response_oneof_response_unauthenticated {error} ->
+          (Unauthenticated { state | loginFailed = True, error = error }, Cmd.none)
         Response_oneof_response_loggedIn { playerId, playerName } ->
           (LoggedIn { username = playerName}, Cmd.none)
         --_ -> unexpectedMessage msg model
@@ -112,14 +118,16 @@ view : Model -> Html Msg
 view model =
   case model of
     Unknown -> text "Contacting server (initializing session state)"
-    Unauthenticated username -> loginView
+    Unauthenticated state -> loginView state
     LoggedIn activeState -> activeView activeState
 
-loginView : Html Msg
-loginView =
+loginView : UnauthenticatedState -> Html Msg
+loginView state =
   div []
-    [ input [onInput UsernameInput] []
+    [ text <| toString state.error
+    , input [onInput UsernameInput] []
     , button [onClick LoginSubmit] [text "Login"]
+    , button [onClick LoginForce] [text "Force Login"]
     ]
 
 activeView : ActiveState -> Html Msg
