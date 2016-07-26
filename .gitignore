@@ -1,3 +1,4 @@
 rust-protobuf
 protobuf-2.6.1*
 /out
+/.idea/workspace.xml
