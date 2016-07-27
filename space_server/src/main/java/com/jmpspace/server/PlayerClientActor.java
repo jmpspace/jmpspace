@@ -163,6 +163,10 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
 
                 case LOGOUT:
                   break;
+                case PING:
+                  response.setUnauthenticated(Session.Unauthenticated.newBuilder().setError("Unauthenticated ping"));
+                  isResponseBuilt = true;
+                  break;
                 case REQUEST_NOT_SET:
                   break;
               }
@@ -180,6 +184,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
                   request.getPing();
                   response.setPong(Session.Pong.newBuilder());
                   isResponseBuilt = true;
+                  break;
                 case REQUEST_NOT_SET:
                   break;
               }
