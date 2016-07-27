@@ -1,13 +1,16 @@
+import Binary.ArrayBuffer
 import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Binary.ArrayBuffer
+import Platform.Sub exposing (batch)
+import Time exposing (every, second)
 import WebSocket exposing (listen, send)
 import WebSocket.LowLevel exposing (MessageData(..))
 
 import SpaceServer.Session exposing
   ( LoginRequest
+  , Ping
   , SessionStateRequest
   )
 import SpaceServer.Server exposing
@@ -63,6 +66,7 @@ type Msg
   | LoginForce
   | LoginResponse
   | ServerMessage SpaceServer.Server.Response
+  | PingTick
 
 unexpectedMessage : Msg -> Model -> (Model, Cmd Msg)
 unexpectedMessage msg model = Debug.log ("Unexpected message" ++ toString msg) (model, Cmd.none)
@@ -84,7 +88,7 @@ update msg model =
           (Unauthenticated { username = "", loginFailed = False, error = error }, Cmd.none)
         Response_oneof_response_loggedIn { playerId, playerName } ->
           (LoggedIn { username = playerName}, Cmd.none)
-        --_ -> unexpectedMessage msg model
+        _ -> unexpectedMessage msg model
     (Unauthenticated state, UsernameInput newUsername) ->
       (Unauthenticated { state | username = newUsername }, Cmd.none)
     (Unauthenticated {username}, LoginSubmit) ->
@@ -101,16 +105,30 @@ update msg model =
           (Unauthenticated { state | loginFailed = True, error = error }, Cmd.none)
         Response_oneof_response_loggedIn { playerId, playerName } ->
           (LoggedIn { username = playerName}, Cmd.none)
-        --_ -> unexpectedMessage msg model
+        _ -> unexpectedMessage msg model
+    (LoggedIn state, ServerMessage {response}) ->
+      case response of
+        Response_oneof_response_unauthenticated {error} ->
+          (Unauthenticated { username = state.username, loginFailed = True, error = error }, Cmd.none)
+        Response_oneof_response_pong _ ->
+          (model, Cmd.none)
+        _ -> unexpectedMessage msg model
+    (LoggedIn _, PingTick) ->
+      (model, Ping |> Request_oneof_request_ping >> sendRequest)
+
     _ -> unexpectedMessage msg model
 
 -- SUBSCRIPTIONS
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-  listen echoServer (\messageData -> case messageData of
-    ArrayBuffer buf -> buf |> decodeResponse >> unmarshalResponse >> ServerMessage
-    _ -> NoOp)
+  let
+    socketSub = listen echoServer (\messageData -> case messageData of
+      ArrayBuffer buf -> buf |> decodeResponse >> unmarshalResponse >> ServerMessage
+      _ -> NoOp)
+  in case model of
+    LoggedIn _ -> batch [socketSub, every (5 * second) (\_ -> PingTick)]
+    _ -> socketSub
 
 -- VIEW
 

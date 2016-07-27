@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.jmpspace.server.PlayerClientActor.PlayerClientState.LoggedIn;
+import static io.undertow.websockets.core.WebSocketFrameType.PING;
 
 //@SuppressWarnings("WeakerAccess")
 @WebActor(webSocketUrlPatterns = {"/"})
@@ -175,6 +176,10 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
                   break;
                 case LOGOUT:
                   break;
+                case PING:
+                  request.getPing();
+                  response.setPong(Session.Pong.newBuilder());
+                  isResponseBuilt = true;
                 case REQUEST_NOT_SET:
                   break;
               }
@@ -230,7 +235,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
             activePlayers.remove(clientState.playerName);
             logger.info("Notifying client of kick");
             Server.Response.Builder response = Server.Response.newBuilder();
-            response.setUnauthenticated(Session.Unauthenticated.newBuilder());
+            response.setUnauthenticated(Session.Unauthenticated.newBuilder().setError("Forced off"));
             postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
             logger.info("Notifying forcing actor to retry");
             ((ForceLogoff) message).forcingActor.send(new ForceLogoffComplete());

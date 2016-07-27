@@ -12,6 +12,7 @@ message Request {
     session.SessionStateRequest sessionState = 1;
     session.LoginRequest login = 2;
     session.LogoutRequest logout = 3;
+    session.Ping ping = 4;
   }
 }
 
@@ -19,5 +20,6 @@ message Response {
   oneof response {
     session.Unauthenticated unauthenticated = 1;
     session.LoggedIn loggedIn = 2;
+    session.Pong pong = 3;
   }
 }

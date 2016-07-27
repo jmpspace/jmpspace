@@ -27,3 +27,6 @@ message LoggedIn {
   required string playerName = 2;
 }
 
+message Ping {}
+
+message Pong {}

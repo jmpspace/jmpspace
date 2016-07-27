@@ -50,6 +50,19 @@ public final class Server {
      * <code>optional .session.LogoutRequest logout = 3;</code>
      */
     com.jmpspace.contracts.SpaceServer.Session.LogoutRequestOrBuilder getLogoutOrBuilder();
+
+    /**
+     * <code>optional .session.Ping ping = 4;</code>
+     */
+    boolean hasPing();
+    /**
+     * <code>optional .session.Ping ping = 4;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Session.Ping getPing();
+    /**
+     * <code>optional .session.Ping ping = 4;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Session.PingOrBuilder getPingOrBuilder();
   }
   /**
    * Protobuf type {@code server.Request}
@@ -142,6 +155,19 @@ public final class Server {
               requestCase_ = 3;
               break;
             }
+            case 34: {
+              com.jmpspace.contracts.SpaceServer.Session.Ping.Builder subBuilder = null;
+              if (requestCase_ == 4) {
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Session.Ping) request_).toBuilder();
+              }
+              request_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Session.Ping.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Session.Ping) request_);
+                request_ = subBuilder.buildPartial();
+              }
+              requestCase_ = 4;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -189,6 +215,7 @@ public final class Server {
       SESSIONSTATE(1),
       LOGIN(2),
       LOGOUT(3),
+      PING(4),
       REQUEST_NOT_SET(0);
       private int value = 0;
       private RequestCase(int value) {
@@ -199,6 +226,7 @@ public final class Server {
           case 1: return SESSIONSTATE;
           case 2: return LOGIN;
           case 3: return LOGOUT;
+          case 4: return PING;
           case 0: return REQUEST_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -293,6 +321,32 @@ public final class Server {
       return com.jmpspace.contracts.SpaceServer.Session.LogoutRequest.getDefaultInstance();
     }
 
+    public static final int PING_FIELD_NUMBER = 4;
+    /**
+     * <code>optional .session.Ping ping = 4;</code>
+     */
+    public boolean hasPing() {
+      return requestCase_ == 4;
+    }
+    /**
+     * <code>optional .session.Ping ping = 4;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Session.Ping getPing() {
+      if (requestCase_ == 4) {
+         return (com.jmpspace.contracts.SpaceServer.Session.Ping) request_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance();
+    }
+    /**
+     * <code>optional .session.Ping ping = 4;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Session.PingOrBuilder getPingOrBuilder() {
+      if (requestCase_ == 4) {
+         return (com.jmpspace.contracts.SpaceServer.Session.Ping) request_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance();
+    }
+
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
@@ -323,6 +377,9 @@ public final class Server {
       if (requestCase_ == 3) {
         output.writeMessage(3, (com.jmpspace.contracts.SpaceServer.Session.LogoutRequest) request_);
       }
+      if (requestCase_ == 4) {
+        output.writeMessage(4, (com.jmpspace.contracts.SpaceServer.Session.Ping) request_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -343,6 +400,10 @@ public final class Server {
       if (requestCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, (com.jmpspace.contracts.SpaceServer.Session.LogoutRequest) request_);
+      }
+      if (requestCase_ == 4) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, (com.jmpspace.contracts.SpaceServer.Session.Ping) request_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -512,6 +573,13 @@ public final class Server {
             result.request_ = logoutBuilder_.build();
           }
         }
+        if (requestCase_ == 4) {
+          if (pingBuilder_ == null) {
+            result.request_ = request_;
+          } else {
+            result.request_ = pingBuilder_.build();
+          }
+        }
         result.bitField0_ = to_bitField0_;
         result.requestCase_ = requestCase_;
         onBuilt();
@@ -540,6 +608,10 @@ public final class Server {
           }
           case LOGOUT: {
             mergeLogout(other.getLogout());
+            break;
+          }
+          case PING: {
+            mergePing(other.getPing());
             break;
           }
           case REQUEST_NOT_SET: {
@@ -999,6 +1071,141 @@ public final class Server {
         return logoutBuilder_;
       }
 
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Session.Ping, com.jmpspace.contracts.SpaceServer.Session.Ping.Builder, com.jmpspace.contracts.SpaceServer.Session.PingOrBuilder> pingBuilder_;
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public boolean hasPing() {
+        return requestCase_ == 4;
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.Ping getPing() {
+        if (pingBuilder_ == null) {
+          if (requestCase_ == 4) {
+            return (com.jmpspace.contracts.SpaceServer.Session.Ping) request_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance();
+        } else {
+          if (requestCase_ == 4) {
+            return pingBuilder_.getMessage();
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public Builder setPing(com.jmpspace.contracts.SpaceServer.Session.Ping value) {
+        if (pingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          request_ = value;
+          onChanged();
+        } else {
+          pingBuilder_.setMessage(value);
+        }
+        requestCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public Builder setPing(
+          com.jmpspace.contracts.SpaceServer.Session.Ping.Builder builderForValue) {
+        if (pingBuilder_ == null) {
+          request_ = builderForValue.build();
+          onChanged();
+        } else {
+          pingBuilder_.setMessage(builderForValue.build());
+        }
+        requestCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public Builder mergePing(com.jmpspace.contracts.SpaceServer.Session.Ping value) {
+        if (pingBuilder_ == null) {
+          if (requestCase_ == 4 &&
+              request_ != com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance()) {
+            request_ = com.jmpspace.contracts.SpaceServer.Session.Ping.newBuilder((com.jmpspace.contracts.SpaceServer.Session.Ping) request_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            request_ = value;
+          }
+          onChanged();
+        } else {
+          if (requestCase_ == 4) {
+            pingBuilder_.mergeFrom(value);
+          }
+          pingBuilder_.setMessage(value);
+        }
+        requestCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public Builder clearPing() {
+        if (pingBuilder_ == null) {
+          if (requestCase_ == 4) {
+            requestCase_ = 0;
+            request_ = null;
+            onChanged();
+          }
+        } else {
+          if (requestCase_ == 4) {
+            requestCase_ = 0;
+            request_ = null;
+          }
+          pingBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.Ping.Builder getPingBuilder() {
+        return getPingFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.PingOrBuilder getPingOrBuilder() {
+        if ((requestCase_ == 4) && (pingBuilder_ != null)) {
+          return pingBuilder_.getMessageOrBuilder();
+        } else {
+          if (requestCase_ == 4) {
+            return (com.jmpspace.contracts.SpaceServer.Session.Ping) request_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .session.Ping ping = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Session.Ping, com.jmpspace.contracts.SpaceServer.Session.Ping.Builder, com.jmpspace.contracts.SpaceServer.Session.PingOrBuilder> 
+          getPingFieldBuilder() {
+        if (pingBuilder_ == null) {
+          if (!(requestCase_ == 4)) {
+            request_ = com.jmpspace.contracts.SpaceServer.Session.Ping.getDefaultInstance();
+          }
+          pingBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Session.Ping, com.jmpspace.contracts.SpaceServer.Session.Ping.Builder, com.jmpspace.contracts.SpaceServer.Session.PingOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Session.Ping) request_,
+                  getParentForChildren(),
+                  isClean());
+          request_ = null;
+        }
+        requestCase_ = 4;
+        return pingBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:server.Request)
     }
 
@@ -1039,6 +1246,19 @@ public final class Server {
      * <code>optional .session.LoggedIn loggedIn = 2;</code>
      */
     com.jmpspace.contracts.SpaceServer.Session.LoggedInOrBuilder getLoggedInOrBuilder();
+
+    /**
+     * <code>optional .session.Pong pong = 3;</code>
+     */
+    boolean hasPong();
+    /**
+     * <code>optional .session.Pong pong = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Session.Pong getPong();
+    /**
+     * <code>optional .session.Pong pong = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder getPongOrBuilder();
   }
   /**
    * Protobuf type {@code server.Response}
@@ -1118,6 +1338,19 @@ public final class Server {
               responseCase_ = 2;
               break;
             }
+            case 26: {
+              com.jmpspace.contracts.SpaceServer.Session.Pong.Builder subBuilder = null;
+              if (responseCase_ == 3) {
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Session.Pong) response_).toBuilder();
+              }
+              response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Session.Pong.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
+                response_ = subBuilder.buildPartial();
+              }
+              responseCase_ = 3;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1164,6 +1397,7 @@ public final class Server {
         implements com.google.protobuf.Internal.EnumLite {
       UNAUTHENTICATED(1),
       LOGGEDIN(2),
+      PONG(3),
       RESPONSE_NOT_SET(0);
       private int value = 0;
       private ResponseCase(int value) {
@@ -1173,6 +1407,7 @@ public final class Server {
         switch (value) {
           case 1: return UNAUTHENTICATED;
           case 2: return LOGGEDIN;
+          case 3: return PONG;
           case 0: return RESPONSE_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -1241,6 +1476,32 @@ public final class Server {
       return com.jmpspace.contracts.SpaceServer.Session.LoggedIn.getDefaultInstance();
     }
 
+    public static final int PONG_FIELD_NUMBER = 3;
+    /**
+     * <code>optional .session.Pong pong = 3;</code>
+     */
+    public boolean hasPong() {
+      return responseCase_ == 3;
+    }
+    /**
+     * <code>optional .session.Pong pong = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Session.Pong getPong() {
+      if (responseCase_ == 3) {
+         return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
+    }
+    /**
+     * <code>optional .session.Pong pong = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder getPongOrBuilder() {
+      if (responseCase_ == 3) {
+         return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
+    }
+
     private void initFields() {
     }
     private byte memoizedIsInitialized = -1;
@@ -1268,6 +1529,9 @@ public final class Server {
       if (responseCase_ == 2) {
         output.writeMessage(2, (com.jmpspace.contracts.SpaceServer.Session.LoggedIn) response_);
       }
+      if (responseCase_ == 3) {
+        output.writeMessage(3, (com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1284,6 +1548,10 @@ public final class Server {
       if (responseCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, (com.jmpspace.contracts.SpaceServer.Session.LoggedIn) response_);
+      }
+      if (responseCase_ == 3) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, (com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1446,6 +1714,13 @@ public final class Server {
             result.response_ = loggedInBuilder_.build();
           }
         }
+        if (responseCase_ == 3) {
+          if (pongBuilder_ == null) {
+            result.response_ = response_;
+          } else {
+            result.response_ = pongBuilder_.build();
+          }
+        }
         result.bitField0_ = to_bitField0_;
         result.responseCase_ = responseCase_;
         onBuilt();
@@ -1470,6 +1745,10 @@ public final class Server {
           }
           case LOGGEDIN: {
             mergeLoggedIn(other.getLoggedIn());
+            break;
+          }
+          case PONG: {
+            mergePong(other.getPong());
             break;
           }
           case RESPONSE_NOT_SET: {
@@ -1794,6 +2073,141 @@ public final class Server {
         return loggedInBuilder_;
       }
 
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Session.Pong, com.jmpspace.contracts.SpaceServer.Session.Pong.Builder, com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder> pongBuilder_;
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public boolean hasPong() {
+        return responseCase_ == 3;
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.Pong getPong() {
+        if (pongBuilder_ == null) {
+          if (responseCase_ == 3) {
+            return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
+        } else {
+          if (responseCase_ == 3) {
+            return pongBuilder_.getMessage();
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public Builder setPong(com.jmpspace.contracts.SpaceServer.Session.Pong value) {
+        if (pongBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          pongBuilder_.setMessage(value);
+        }
+        responseCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public Builder setPong(
+          com.jmpspace.contracts.SpaceServer.Session.Pong.Builder builderForValue) {
+        if (pongBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          pongBuilder_.setMessage(builderForValue.build());
+        }
+        responseCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public Builder mergePong(com.jmpspace.contracts.SpaceServer.Session.Pong value) {
+        if (pongBuilder_ == null) {
+          if (responseCase_ == 3 &&
+              response_ != com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance()) {
+            response_ = com.jmpspace.contracts.SpaceServer.Session.Pong.newBuilder((com.jmpspace.contracts.SpaceServer.Session.Pong) response_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          if (responseCase_ == 3) {
+            pongBuilder_.mergeFrom(value);
+          }
+          pongBuilder_.setMessage(value);
+        }
+        responseCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public Builder clearPong() {
+        if (pongBuilder_ == null) {
+          if (responseCase_ == 3) {
+            responseCase_ = 0;
+            response_ = null;
+            onChanged();
+          }
+        } else {
+          if (responseCase_ == 3) {
+            responseCase_ = 0;
+            response_ = null;
+          }
+          pongBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.Pong.Builder getPongBuilder() {
+        return getPongFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder getPongOrBuilder() {
+        if ((responseCase_ == 3) && (pongBuilder_ != null)) {
+          return pongBuilder_.getMessageOrBuilder();
+        } else {
+          if (responseCase_ == 3) {
+            return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .session.Pong pong = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Session.Pong, com.jmpspace.contracts.SpaceServer.Session.Pong.Builder, com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder> 
+          getPongFieldBuilder() {
+        if (pongBuilder_ == null) {
+          if (!(responseCase_ == 3)) {
+            response_ = com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
+          }
+          pongBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Session.Pong, com.jmpspace.contracts.SpaceServer.Session.Pong.Builder, com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Session.Pong) response_,
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        responseCase_ = 3;
+        return pongBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:server.Response)
     }
 
@@ -1824,15 +2238,17 @@ public final class Server {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014server.proto\022\006server\032\rsession.proto\"\234\001" +
+      "\n\014server.proto\022\006server\032\rsession.proto\"\273\001" +
       "\n\007Request\0224\n\014sessionState\030\001 \001(\0132\034.sessio" +
       "n.SessionStateRequestH\000\022&\n\005login\030\002 \001(\0132\025" +
       ".session.LoginRequestH\000\022(\n\006logout\030\003 \001(\0132" +
-      "\026.session.LogoutRequestH\000B\t\n\007request\"r\n\010" +
-      "Response\0223\n\017unauthenticated\030\001 \001(\0132\030.sess" +
-      "ion.UnauthenticatedH\000\022%\n\010loggedIn\030\002 \001(\0132" +
-      "\021.session.LoggedInH\000B\n\n\010responseB$\n\"com." +
-      "jmpspace.contracts.SpaceServer"
+      "\026.session.LogoutRequestH\000\022\035\n\004ping\030\004 \001(\0132" +
+      "\r.session.PingH\000B\t\n\007request\"\221\001\n\010Response" +
+      "\0223\n\017unauthenticated\030\001 \001(\0132\030.session.Unau" +
+      "thenticatedH\000\022%\n\010loggedIn\030\002 \001(\0132\021.sessio" +
+      "n.LoggedInH\000\022\035\n\004pong\030\003 \001(\0132\r.session.Pon" +
+      "gH\000B\n\n\010responseB$\n\"com.jmpspace.contract",
+      "s.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1852,13 +2268,13 @@ public final class Server {
     internal_static_server_Request_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_server_Request_descriptor,
-        new java.lang.String[] { "SessionState", "Login", "Logout", "Request", });
+        new java.lang.String[] { "SessionState", "Login", "Logout", "Ping", "Request", });
     internal_static_server_Response_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_server_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_server_Response_descriptor,
-        new java.lang.String[] { "Unauthenticated", "LoggedIn", "Response", });
+        new java.lang.String[] { "Unauthenticated", "LoggedIn", "Pong", "Response", });
     com.jmpspace.contracts.SpaceServer.Session.getDescriptor();
   }
 
