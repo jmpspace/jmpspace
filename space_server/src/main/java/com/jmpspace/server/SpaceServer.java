@@ -25,12 +25,6 @@ class SpaceServer {
 
     logger.debug("Starting server fiber");
 
-    // FIXME: execution context, parallel or concurrent
-    SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
-    SpaceBase ambientBase = builder.build("ambient");
-    SpaceBase largeBase = builder.build("large");
-    SpaceBase smallBase = builder.build("small");
-    
     final SessionManager sessionManager = new InMemorySessionManager("SESSION_MANAGER", 100, true);
     final SessionCookieConfig sessionConfig = new SessionCookieConfig();
     sessionConfig.setMaxAge(60 * 5);

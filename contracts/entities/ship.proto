@@ -3,6 +3,8 @@ package ship;
 
 import "actions.proto";
 
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
 message Vessel {
   required double width = 1;
   required double length = 2;

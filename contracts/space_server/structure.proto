@@ -1,0 +1,44 @@
+
+syntax = "proto2";
+
+package structure;
+
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
+message Armor {
+  required double width = 1;
+  required double length = 2;
+}
+
+message Engine {
+  required double radius = 1;
+  required double length = 2;
+  required int32 group = 3;
+};
+
+message Platform {
+  required double width = 1;
+  required double length = 2;
+  required bool pressurized = 3;
+}
+
+message Part {
+  oneof part {
+    Armor armor = 1;
+    Engine engine = 2;
+    Platform platform = 3;
+  }
+}
+
+// TODO: assess serialization costs of recursive messages
+
+message Attachment {
+  required int32 orientation = 1;
+  required int32 offset = 2;
+  required StructureNode node = 3;
+}
+
+message StructureNode {
+  required Part part = 1;
+  repeated Attachment attachments = 2;
+}

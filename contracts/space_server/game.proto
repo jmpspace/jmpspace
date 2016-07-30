@@ -1,0 +1,24 @@
+
+syntax = "proto2";
+
+package game;
+
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
+message GameRequest {
+  oneof request {
+    Spawn spawn = 1;
+  }
+}
+
+message Spawn {}
+
+message GameResponse {
+  oneof response {
+    Spawned spawned = 1;
+    Died died = 2;
+  }
+}
+
+message Spawned {}
+message Died {}
