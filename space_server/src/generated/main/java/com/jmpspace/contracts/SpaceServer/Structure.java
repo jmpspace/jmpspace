@@ -2679,8 +2679,8 @@ public final class Structure {
     // @@protoc_insertion_point(class_scope:structure.Part)
   }
 
-  public interface AttachmentOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:structure.Attachment)
+  public interface AttachmentDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:structure.AttachmentData)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2700,17 +2700,503 @@ public final class Structure {
      * <code>required int32 offset = 2;</code>
      */
     int getOffset();
+  }
+  /**
+   * Protobuf type {@code structure.AttachmentData}
+   */
+  public static final class AttachmentData extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:structure.AttachmentData)
+      AttachmentDataOrBuilder {
+    // Use AttachmentData.newBuilder() to construct.
+    private AttachmentData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AttachmentData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AttachmentData defaultInstance;
+    public static AttachmentData getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AttachmentData getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AttachmentData(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              orientation_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              offset_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.jmpspace.contracts.SpaceServer.Structure.internal_static_structure_AttachmentData_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.jmpspace.contracts.SpaceServer.Structure.internal_static_structure_AttachmentData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.class, com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AttachmentData> PARSER =
+        new com.google.protobuf.AbstractParser<AttachmentData>() {
+      public AttachmentData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AttachmentData(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AttachmentData> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int ORIENTATION_FIELD_NUMBER = 1;
+    private int orientation_;
+    /**
+     * <code>required int32 orientation = 1;</code>
+     */
+    public boolean hasOrientation() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 orientation = 1;</code>
+     */
+    public int getOrientation() {
+      return orientation_;
+    }
+
+    public static final int OFFSET_FIELD_NUMBER = 2;
+    private int offset_;
+    /**
+     * <code>required int32 offset = 2;</code>
+     */
+    public boolean hasOffset() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 offset = 2;</code>
+     */
+    public int getOffset() {
+      return offset_;
+    }
+
+    private void initFields() {
+      orientation_ = 0;
+      offset_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasOrientation()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, orientation_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, offset_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, orientation_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, offset_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Structure.AttachmentData prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code structure.AttachmentData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:structure.AttachmentData)
+        com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.jmpspace.contracts.SpaceServer.Structure.internal_static_structure_AttachmentData_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.jmpspace.contracts.SpaceServer.Structure.internal_static_structure_AttachmentData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.class, com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder.class);
+      }
+
+      // Construct using com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        orientation_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        offset_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.jmpspace.contracts.SpaceServer.Structure.internal_static_structure_AttachmentData_descriptor;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Structure.AttachmentData getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance();
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Structure.AttachmentData build() {
+        com.jmpspace.contracts.SpaceServer.Structure.AttachmentData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Structure.AttachmentData buildPartial() {
+        com.jmpspace.contracts.SpaceServer.Structure.AttachmentData result = new com.jmpspace.contracts.SpaceServer.Structure.AttachmentData(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.orientation_ = orientation_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.offset_ = offset_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.jmpspace.contracts.SpaceServer.Structure.AttachmentData) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.Structure.AttachmentData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Structure.AttachmentData other) {
+        if (other == com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance()) return this;
+        if (other.hasOrientation()) {
+          setOrientation(other.getOrientation());
+        }
+        if (other.hasOffset()) {
+          setOffset(other.getOffset());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasOrientation()) {
+          
+          return false;
+        }
+        if (!hasOffset()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.jmpspace.contracts.SpaceServer.Structure.AttachmentData parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.Structure.AttachmentData) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int orientation_ ;
+      /**
+       * <code>required int32 orientation = 1;</code>
+       */
+      public boolean hasOrientation() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 orientation = 1;</code>
+       */
+      public int getOrientation() {
+        return orientation_;
+      }
+      /**
+       * <code>required int32 orientation = 1;</code>
+       */
+      public Builder setOrientation(int value) {
+        bitField0_ |= 0x00000001;
+        orientation_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 orientation = 1;</code>
+       */
+      public Builder clearOrientation() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        orientation_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int offset_ ;
+      /**
+       * <code>required int32 offset = 2;</code>
+       */
+      public boolean hasOffset() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 offset = 2;</code>
+       */
+      public int getOffset() {
+        return offset_;
+      }
+      /**
+       * <code>required int32 offset = 2;</code>
+       */
+      public Builder setOffset(int value) {
+        bitField0_ |= 0x00000002;
+        offset_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 offset = 2;</code>
+       */
+      public Builder clearOffset() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        offset_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:structure.AttachmentData)
+    }
+
+    static {
+      defaultInstance = new AttachmentData(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:structure.AttachmentData)
+  }
+
+  public interface AttachmentOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:structure.Attachment)
+      com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required .structure.StructureNode node = 3;</code>
+     * <code>required .structure.AttachmentData data = 1;</code>
+     */
+    boolean hasData();
+    /**
+     * <code>required .structure.AttachmentData data = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Structure.AttachmentData getData();
+    /**
+     * <code>required .structure.AttachmentData data = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder getDataOrBuilder();
+
+    /**
+     * <code>required .structure.StructureNode node = 2;</code>
      */
     boolean hasNode();
     /**
-     * <code>required .structure.StructureNode node = 3;</code>
+     * <code>required .structure.StructureNode node = 2;</code>
      */
     com.jmpspace.contracts.SpaceServer.Structure.StructureNode getNode();
     /**
-     * <code>required .structure.StructureNode node = 3;</code>
+     * <code>required .structure.StructureNode node = 2;</code>
      */
     com.jmpspace.contracts.SpaceServer.Structure.StructureNodeOrBuilder getNodeOrBuilder();
   }
@@ -2766,19 +3252,22 @@ public final class Structure {
               }
               break;
             }
-            case 8: {
+            case 10: {
+              com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = data_.toBuilder();
+              }
+              data_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(data_);
+                data_ = subBuilder.buildPartial();
+              }
               bitField0_ |= 0x00000001;
-              orientation_ = input.readInt32();
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              offset_ = input.readInt32();
-              break;
-            }
-            case 26: {
+            case 18: {
               com.jmpspace.contracts.SpaceServer.Structure.StructureNode.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
                 subBuilder = node_.toBuilder();
               }
               node_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Structure.StructureNode.PARSER, extensionRegistry);
@@ -2786,7 +3275,7 @@ public final class Structure {
                 subBuilder.mergeFrom(node_);
                 node_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               break;
             }
           }
@@ -2829,60 +3318,50 @@ public final class Structure {
     }
 
     private int bitField0_;
-    public static final int ORIENTATION_FIELD_NUMBER = 1;
-    private int orientation_;
+    public static final int DATA_FIELD_NUMBER = 1;
+    private com.jmpspace.contracts.SpaceServer.Structure.AttachmentData data_;
     /**
-     * <code>required int32 orientation = 1;</code>
+     * <code>required .structure.AttachmentData data = 1;</code>
      */
-    public boolean hasOrientation() {
+    public boolean hasData() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 orientation = 1;</code>
+     * <code>required .structure.AttachmentData data = 1;</code>
      */
-    public int getOrientation() {
-      return orientation_;
+    public com.jmpspace.contracts.SpaceServer.Structure.AttachmentData getData() {
+      return data_;
+    }
+    /**
+     * <code>required .structure.AttachmentData data = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder getDataOrBuilder() {
+      return data_;
     }
 
-    public static final int OFFSET_FIELD_NUMBER = 2;
-    private int offset_;
+    public static final int NODE_FIELD_NUMBER = 2;
+    private com.jmpspace.contracts.SpaceServer.Structure.StructureNode node_;
     /**
-     * <code>required int32 offset = 2;</code>
+     * <code>required .structure.StructureNode node = 2;</code>
      */
-    public boolean hasOffset() {
+    public boolean hasNode() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int32 offset = 2;</code>
-     */
-    public int getOffset() {
-      return offset_;
-    }
-
-    public static final int NODE_FIELD_NUMBER = 3;
-    private com.jmpspace.contracts.SpaceServer.Structure.StructureNode node_;
-    /**
-     * <code>required .structure.StructureNode node = 3;</code>
-     */
-    public boolean hasNode() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required .structure.StructureNode node = 3;</code>
+     * <code>required .structure.StructureNode node = 2;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Structure.StructureNode getNode() {
       return node_;
     }
     /**
-     * <code>required .structure.StructureNode node = 3;</code>
+     * <code>required .structure.StructureNode node = 2;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Structure.StructureNodeOrBuilder getNodeOrBuilder() {
       return node_;
     }
 
     private void initFields() {
-      orientation_ = 0;
-      offset_ = 0;
+      data_ = com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance();
       node_ = com.jmpspace.contracts.SpaceServer.Structure.StructureNode.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -2891,15 +3370,15 @@ public final class Structure {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasOrientation()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasOffset()) {
+      if (!hasData()) {
         memoizedIsInitialized = 0;
         return false;
       }
       if (!hasNode()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getData().isInitialized()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -2915,13 +3394,10 @@ public final class Structure {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, orientation_);
+        output.writeMessage(1, data_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, offset_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, node_);
+        output.writeMessage(2, node_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2934,15 +3410,11 @@ public final class Structure {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, orientation_);
+          .computeMessageSize(1, data_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, offset_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, node_);
+          .computeMessageSize(2, node_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3053,6 +3525,7 @@ public final class Structure {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDataFieldBuilder();
           getNodeFieldBuilder();
         }
       }
@@ -3062,16 +3535,18 @@ public final class Structure {
 
       public Builder clear() {
         super.clear();
-        orientation_ = 0;
+        if (dataBuilder_ == null) {
+          data_ = com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance();
+        } else {
+          dataBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
-        offset_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         if (nodeBuilder_ == null) {
           node_ = com.jmpspace.contracts.SpaceServer.Structure.StructureNode.getDefaultInstance();
         } else {
           nodeBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -3103,13 +3578,13 @@ public final class Structure {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.orientation_ = orientation_;
+        if (dataBuilder_ == null) {
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
-        }
-        result.offset_ = offset_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
         }
         if (nodeBuilder_ == null) {
           result.node_ = node_;
@@ -3132,11 +3607,8 @@ public final class Structure {
 
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Structure.Attachment other) {
         if (other == com.jmpspace.contracts.SpaceServer.Structure.Attachment.getDefaultInstance()) return this;
-        if (other.hasOrientation()) {
-          setOrientation(other.getOrientation());
-        }
-        if (other.hasOffset()) {
-          setOffset(other.getOffset());
+        if (other.hasData()) {
+          mergeData(other.getData());
         }
         if (other.hasNode()) {
           mergeNode(other.getNode());
@@ -3146,15 +3618,15 @@ public final class Structure {
       }
 
       public final boolean isInitialized() {
-        if (!hasOrientation()) {
-          
-          return false;
-        }
-        if (!hasOffset()) {
+        if (!hasData()) {
           
           return false;
         }
         if (!hasNode()) {
+          
+          return false;
+        }
+        if (!getData().isInitialized()) {
           
           return false;
         }
@@ -3184,81 +3656,133 @@ public final class Structure {
       }
       private int bitField0_;
 
-      private int orientation_ ;
+      private com.jmpspace.contracts.SpaceServer.Structure.AttachmentData data_ = com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Structure.AttachmentData, com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder, com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder> dataBuilder_;
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required .structure.AttachmentData data = 1;</code>
        */
-      public boolean hasOrientation() {
+      public boolean hasData() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required .structure.AttachmentData data = 1;</code>
        */
-      public int getOrientation() {
-        return orientation_;
+      public com.jmpspace.contracts.SpaceServer.Structure.AttachmentData getData() {
+        if (dataBuilder_ == null) {
+          return data_;
+        } else {
+          return dataBuilder_.getMessage();
+        }
       }
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required .structure.AttachmentData data = 1;</code>
        */
-      public Builder setOrientation(int value) {
+      public Builder setData(com.jmpspace.contracts.SpaceServer.Structure.AttachmentData value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          data_ = value;
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000001;
-        orientation_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required .structure.AttachmentData data = 1;</code>
        */
-      public Builder clearOrientation() {
+      public Builder setData(
+          com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          data_ = builderForValue.build();
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.AttachmentData data = 1;</code>
+       */
+      public Builder mergeData(com.jmpspace.contracts.SpaceServer.Structure.AttachmentData value) {
+        if (dataBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              data_ != com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance()) {
+            data_ =
+              com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.newBuilder(data_).mergeFrom(value).buildPartial();
+          } else {
+            data_ = value;
+          }
+          onChanged();
+        } else {
+          dataBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.AttachmentData data = 1;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance();
+          onChanged();
+        } else {
+          dataBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
-        orientation_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int offset_ ;
-      /**
-       * <code>required int32 offset = 2;</code>
-       */
-      public boolean hasOffset() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int32 offset = 2;</code>
-       */
-      public int getOffset() {
-        return offset_;
-      }
-      /**
-       * <code>required int32 offset = 2;</code>
-       */
-      public Builder setOffset(int value) {
-        bitField0_ |= 0x00000002;
-        offset_ = value;
-        onChanged();
         return this;
       }
       /**
-       * <code>required int32 offset = 2;</code>
+       * <code>required .structure.AttachmentData data = 1;</code>
        */
-      public Builder clearOffset() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        offset_ = 0;
+      public com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder getDataBuilder() {
+        bitField0_ |= 0x00000001;
         onChanged();
-        return this;
+        return getDataFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .structure.AttachmentData data = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder getDataOrBuilder() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilder();
+        } else {
+          return data_;
+        }
+      }
+      /**
+       * <code>required .structure.AttachmentData data = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Structure.AttachmentData, com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder, com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Structure.AttachmentData, com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.Builder, com.jmpspace.contracts.SpaceServer.Structure.AttachmentDataOrBuilder>(
+                  getData(),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
       }
 
       private com.jmpspace.contracts.SpaceServer.Structure.StructureNode node_ = com.jmpspace.contracts.SpaceServer.Structure.StructureNode.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.jmpspace.contracts.SpaceServer.Structure.StructureNode, com.jmpspace.contracts.SpaceServer.Structure.StructureNode.Builder, com.jmpspace.contracts.SpaceServer.Structure.StructureNodeOrBuilder> nodeBuilder_;
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public boolean hasNode() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Structure.StructureNode getNode() {
         if (nodeBuilder_ == null) {
@@ -3268,7 +3792,7 @@ public final class Structure {
         }
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public Builder setNode(com.jmpspace.contracts.SpaceServer.Structure.StructureNode value) {
         if (nodeBuilder_ == null) {
@@ -3280,11 +3804,11 @@ public final class Structure {
         } else {
           nodeBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public Builder setNode(
           com.jmpspace.contracts.SpaceServer.Structure.StructureNode.Builder builderForValue) {
@@ -3294,15 +3818,15 @@ public final class Structure {
         } else {
           nodeBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public Builder mergeNode(com.jmpspace.contracts.SpaceServer.Structure.StructureNode value) {
         if (nodeBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
               node_ != com.jmpspace.contracts.SpaceServer.Structure.StructureNode.getDefaultInstance()) {
             node_ =
               com.jmpspace.contracts.SpaceServer.Structure.StructureNode.newBuilder(node_).mergeFrom(value).buildPartial();
@@ -3313,11 +3837,11 @@ public final class Structure {
         } else {
           nodeBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         return this;
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public Builder clearNode() {
         if (nodeBuilder_ == null) {
@@ -3326,19 +3850,19 @@ public final class Structure {
         } else {
           nodeBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Structure.StructureNode.Builder getNodeBuilder() {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         onChanged();
         return getNodeFieldBuilder().getBuilder();
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Structure.StructureNodeOrBuilder getNodeOrBuilder() {
         if (nodeBuilder_ != null) {
@@ -3348,7 +3872,7 @@ public final class Structure {
         }
       }
       /**
-       * <code>required .structure.StructureNode node = 3;</code>
+       * <code>required .structure.StructureNode node = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.jmpspace.contracts.SpaceServer.Structure.StructureNode, com.jmpspace.contracts.SpaceServer.Structure.StructureNode.Builder, com.jmpspace.contracts.SpaceServer.Structure.StructureNodeOrBuilder> 
@@ -4292,6 +4816,11 @@ public final class Structure {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_structure_Part_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_structure_AttachmentData_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_structure_AttachmentData_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_structure_Attachment_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -4317,13 +4846,14 @@ public final class Structure {
       "th\030\002 \002(\001\022\023\n\013pressurized\030\003 \002(\010\"\177\n\004Part\022!\n" +
       "\005armor\030\001 \001(\0132\020.structure.ArmorH\000\022#\n\006engi" +
       "ne\030\002 \001(\0132\021.structure.EngineH\000\022\'\n\010platfor" +
-      "m\030\003 \001(\0132\023.structure.PlatformH\000B\006\n\004part\"Y" +
-      "\n\nAttachment\022\023\n\013orientation\030\001 \002(\005\022\016\n\006off" +
-      "set\030\002 \002(\005\022&\n\004node\030\003 \002(\0132\030.structure.Stru",
-      "ctureNode\"Z\n\rStructureNode\022\035\n\004part\030\001 \002(\013" +
-      "2\017.structure.Part\022*\n\013attachments\030\002 \003(\0132\025" +
-      ".structure.AttachmentB$\n\"com.jmpspace.co" +
-      "ntracts.SpaceServer"
+      "m\030\003 \001(\0132\023.structure.PlatformH\000B\006\n\004part\"5" +
+      "\n\016AttachmentData\022\023\n\013orientation\030\001 \002(\005\022\016\n" +
+      "\006offset\030\002 \002(\005\"]\n\nAttachment\022\'\n\004data\030\001 \002(",
+      "\0132\031.structure.AttachmentData\022&\n\004node\030\002 \002" +
+      "(\0132\030.structure.StructureNode\"Z\n\rStructur" +
+      "eNode\022\035\n\004part\030\001 \002(\0132\017.structure.Part\022*\n\013" +
+      "attachments\030\002 \003(\0132\025.structure.Attachment" +
+      "B$\n\"com.jmpspace.contracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4361,14 +4891,20 @@ public final class Structure {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Part_descriptor,
         new java.lang.String[] { "Armor", "Engine", "Platform", "Part", });
-    internal_static_structure_Attachment_descriptor =
+    internal_static_structure_AttachmentData_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_structure_AttachmentData_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_structure_AttachmentData_descriptor,
+        new java.lang.String[] { "Orientation", "Offset", });
+    internal_static_structure_Attachment_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_structure_Attachment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Attachment_descriptor,
-        new java.lang.String[] { "Orientation", "Offset", "Node", });
+        new java.lang.String[] { "Data", "Node", });
     internal_static_structure_StructureNode_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_structure_StructureNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_StructureNode_descriptor,

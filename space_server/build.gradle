@@ -82,7 +82,9 @@ dependencies {
 
   "com.google.protobuf:protobuf-java:${protobufVersion}"
 
+//    compile "org.dyn4j:dyn4j:3.2.2"
   compile "com.vividsolutions:jts:1.13"
+
 
   compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5'
   compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'

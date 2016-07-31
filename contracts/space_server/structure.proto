@@ -32,10 +32,14 @@ message Part {
 
 // TODO: assess serialization costs of recursive messages
 
-message Attachment {
+message AttachmentData {
   required int32 orientation = 1;
   required int32 offset = 2;
-  required StructureNode node = 3;
+}
+
+message Attachment {
+  required AttachmentData data = 1;
+  required StructureNode node = 2;
 }
 
 message StructureNode {
