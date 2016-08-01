@@ -7,18 +7,20 @@ option java_package = "com.jmpspace.contracts.SpaceServer";
 
 message GameRequest {
   oneof request {
-    Spawn spawn = 1;
+    Ping ping = 1;
+    Spawn spawn = 2;
   }
 }
 
+message Ping {}
 message Spawn {}
 
 message GameResponse {
   oneof response {
-    Spawned spawned = 1;
-    Died died = 2;
+    Pong pong = 1;
   }
 }
 
+message Pong {}
 message Spawned {}
 message Died {}

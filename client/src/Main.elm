@@ -8,6 +8,10 @@ import Time exposing (every, second)
 import WebSocket exposing (listen, send)
 import WebSocket.LowLevel exposing (MessageData(..))
 
+import SpaceServer.Game exposing
+  ( GameResponse
+  , GameResponse_oneof_response(..)
+  )
 import SpaceServer.Session exposing
   ( LoginRequest
   , Ping
@@ -44,12 +48,15 @@ type alias ActiveState =
   { username: String
   }
 
+type GameState = Unspawned
+
 -- MODEL
 
 type Model
   = Unknown
   | Unauthenticated UnauthenticatedState
   | LoggedIn ActiveState
+  | BoundToPlayer ActiveState GameState
 
 init : (Model, Cmd Msg)
 init =
@@ -69,7 +76,7 @@ type Msg
   | PingTick
 
 unexpectedMessage : Msg -> Model -> (Model, Cmd Msg)
-unexpectedMessage msg model = Debug.log ("Unexpected message" ++ toString msg) (model, Cmd.none)
+unexpectedMessage msg model = Debug.crash ("Unexpected message" ++ toString msg) (model, Cmd.none)
 
 sendRequest : Request_oneof_request -> Cmd msg
 sendRequest =
@@ -79,6 +86,9 @@ sendRequest =
   ArrayBuffer >>
   send echoServer
 
+gameUpdate : GameResponse_oneof_response -> GameState -> (GameState, Cmd Msg)
+gameUpdate response gameState = (gameState, Cmd.none)
+
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case (model, msg) of
@@ -87,7 +97,9 @@ update msg model =
         Response_oneof_response_unauthenticated {error} ->
           (Unauthenticated { username = "", loginFailed = False, error = error }, Cmd.none)
         Response_oneof_response_loggedIn { playerId, playerName } ->
-          (LoggedIn { username = playerName}, Cmd.none)
+          (LoggedIn { username = playerName }, Cmd.none)
+        Response_oneof_response_boundToPlayer { playerId, playerName } ->
+          (BoundToPlayer { username = playerName } Unspawned, Cmd.none)
         _ -> unexpectedMessage msg model
     (Unauthenticated state, UsernameInput newUsername) ->
       (Unauthenticated { state | username = newUsername }, Cmd.none)
@@ -104,17 +116,29 @@ update msg model =
         Response_oneof_response_unauthenticated {error} ->
           (Unauthenticated { state | loginFailed = True, error = error }, Cmd.none)
         Response_oneof_response_loggedIn { playerId, playerName } ->
-          (LoggedIn { username = playerName}, Cmd.none)
+          (LoggedIn { username = playerName }, Cmd.none)
         _ -> unexpectedMessage msg model
-    (LoggedIn state, ServerMessage {response}) ->
+    (LoggedIn activeState, ServerMessage {response}) ->
       case response of
         Response_oneof_response_unauthenticated {error} ->
-          (Unauthenticated { username = state.username, loginFailed = True, error = error }, Cmd.none)
+          (Unauthenticated { username = activeState.username, loginFailed = True, error = error }, Cmd.none)
         Response_oneof_response_pong _ ->
           (model, Cmd.none)
+        Response_oneof_response_boundToPlayer _ ->
+          (BoundToPlayer activeState Unspawned, Cmd.none)
         _ -> unexpectedMessage msg model
     (LoggedIn _, PingTick) ->
       (model, Ping |> Request_oneof_request_ping >> sendRequest)
+    (BoundToPlayer activeState gameState, ServerMessage {response}) ->
+      case response of
+        Response_oneof_response_unauthenticated {error} ->
+          (Unauthenticated { username = activeState.username, loginFailed = True, error = error }, Cmd.none)
+        Response_oneof_response_pong _ ->
+          (model, Cmd.none)
+        Response_oneof_response_gameResponse { response } ->
+          let (newGameState, cmd) = gameUpdate response gameState
+          in (BoundToPlayer activeState newGameState, cmd)
+        _ -> unexpectedMessage msg model
 
     _ -> unexpectedMessage msg model
 
@@ -138,6 +162,7 @@ view model =
     Unknown -> text "Contacting server (initializing session state)"
     Unauthenticated state -> loginView state
     LoggedIn activeState -> activeView activeState
+    BoundToPlayer activeState gameState -> gameView activeState gameState
 
 loginView : UnauthenticatedState -> Html Msg
 loginView state =
@@ -150,3 +175,6 @@ loginView state =
 
 activeView : ActiveState -> Html Msg
 activeView {username} = text <| "Logged in as " ++ username
+
+gameView : ActiveState -> GameState -> Html Msg
+gameView {username} _ = text <| "Logged in as " ++ username ++ " and bound to player in instance"

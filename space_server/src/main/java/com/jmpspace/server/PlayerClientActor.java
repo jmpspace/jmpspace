@@ -1,13 +1,19 @@
 package com.jmpspace.server;
 
 import co.paralleluniverse.actors.*;
+import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.comsat.webactors.*;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.channels.SendPort;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
 import com.jmpspace.contracts.SpaceServer.Server;
 import com.jmpspace.contracts.SpaceServer.Session;
+import com.jmpspace.server.game.Instance;
+import com.jmpspace.server.game.Player;
+import com.jmpspace.server.game.common.CommonRequest;
+import net.bytebuddy.implementation.bind.annotation.TargetMethodAnnotationDrivenBinder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,12 +22,18 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.jmpspace.server.PlayerClientActor.PlayerClientState.BoundToPlayer;
 import static com.jmpspace.server.PlayerClientActor.PlayerClientState.LoggedIn;
-import static io.undertow.websockets.core.WebSocketFrameType.PING;
 
 //@SuppressWarnings("WeakerAccess")
 @WebActor(webSocketUrlPatterns = {"/"})
 public class PlayerClientActor extends BasicActor<Object, Void> {
+
+  private ActorRef<Instance.Request> _instanceRef;
+
+  public PlayerClientActor(ActorRef<Instance.Request> instanceRef) {
+    _instanceRef = instanceRef;
+  }
 
   private static final Logger logger = LogManager.getLogger(PlayerClientActor.class.getName());
 
@@ -34,10 +46,13 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
   // The client representation of this actor
   private SendPort<WebDataMessage> peer;
 
+  private ActorRef<Player.Request> playerRef;
+
   enum PlayerClientState {
     Unauthenticated,
     ForceWait,
-    LoggedIn
+    LoggedIn,
+    BoundToPlayer
   }
 
   private class ForceLogoff {
@@ -121,6 +136,12 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
                       .setPlayerId(playerId));
               isResponseBuilt = true;
               break;
+            case BoundToPlayer:
+              response.setBoundToPlayer(Session.BoundToPlayer
+                      .newBuilder()
+                      .setPlayerName(playerName)
+                      .setPlayerId(playerId));
+              isResponseBuilt = true;
           }
 
         } else {
@@ -158,6 +179,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
                             .setPlayerId(playerId));
                     isResponseBuilt = true;
                     state = LoggedIn;
+                    _instanceRef.send(new Instance.BindToInstance(self(), playerName));
                   }
                   break;
 
@@ -232,6 +254,19 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
           final WebDataMessage msg = (WebDataMessage) message;
           clientState.handleWebDataMessage(msg);
         }
+        else if (message instanceof Request) {
+          if (message instanceof BoundToPlayer) {
+            BoundToPlayer bound = (BoundToPlayer)message;
+            logger.info("Client bound to player actor");
+            Server.Response.Builder response = Server.Response.newBuilder();
+            response.setBoundToPlayer(Session.BoundToPlayer
+                                              .newBuilder()
+                                              .setPlayerName(clientState.playerName)
+                                              .setPlayerId(clientState.playerId));
+            sendWebDataResponse(response);
+            clientState.state = PlayerClientState.BoundToPlayer;
+          }
+        }
         else if (message instanceof ForceLogoff) {
           ActorRef<Object> activePlayer = activePlayers.get(clientState.playerName);
           if (activePlayer != null && activePlayer == self()) {
@@ -241,7 +276,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
             logger.info("Notifying client of kick");
             Server.Response.Builder response = Server.Response.newBuilder();
             response.setUnauthenticated(Session.Unauthenticated.newBuilder().setError("Forced off"));
-            postMessage(new WebDataMessage(self(), response.build().toByteString().asReadOnlyByteBuffer()));
+            sendWebDataResponse(response);
             logger.info("Notifying forcing actor to retry");
             ((ForceLogoff) message).forcingActor.send(new ForceLogoffComplete());
           }
@@ -256,9 +291,14 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
     }
   }
 
+  private void sendWebDataResponse(Message.Builder builder) throws InterruptedException, SuspendExecution {
+    postMessage(new WebDataMessage(self(), builder.build().toByteString().asReadOnlyByteBuffer()));
+  }
+
   private void postMessage(final WebDataMessage webDataMessage) throws InterruptedException, SuspendExecution {
     if (peer != null)
       peer.send(webDataMessage);
+    // TODO: what is this?
 //    if (webDataMessage.getFrom().equals(peer))
 //      for (final SendPort<Object> actor : actors)
 //        if (actor != self())
@@ -281,4 +321,18 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
     }
     return super.handleLifecycleMessage(m);
   }
+
+  // TODO: move this back into the PlayerRef?
+  public static abstract class Request extends CommonRequest {}
+
+  public static class BoundToPlayer extends Request {
+
+    private ActorRef<Player.Request> _spawned;
+
+    public BoundToPlayer(ActorRef<Player.Request> spawned) {
+      _spawned = spawned;
+    }
+
+  }
+
 }

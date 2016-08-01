@@ -22,7 +22,8 @@ message Response {
   oneof response {
     session.Unauthenticated unauthenticated = 1;
     session.LoggedIn loggedIn = 2;
-    session.Pong pong = 3;
-    game.GameResponse gameResponse = 4;
+    session.BoundToPlayer boundToPlayer = 3;
+    session.Pong pong = 4;
+    game.GameResponse gameResponse = 5;
   }
 }

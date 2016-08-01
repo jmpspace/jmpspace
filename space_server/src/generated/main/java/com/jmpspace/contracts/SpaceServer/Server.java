@@ -1455,28 +1455,41 @@ public final class Server {
     com.jmpspace.contracts.SpaceServer.Session.LoggedInOrBuilder getLoggedInOrBuilder();
 
     /**
-     * <code>optional .session.Pong pong = 3;</code>
+     * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+     */
+    boolean hasBoundToPlayer();
+    /**
+     * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer getBoundToPlayer();
+    /**
+     * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Session.BoundToPlayerOrBuilder getBoundToPlayerOrBuilder();
+
+    /**
+     * <code>optional .session.Pong pong = 4;</code>
      */
     boolean hasPong();
     /**
-     * <code>optional .session.Pong pong = 3;</code>
+     * <code>optional .session.Pong pong = 4;</code>
      */
     com.jmpspace.contracts.SpaceServer.Session.Pong getPong();
     /**
-     * <code>optional .session.Pong pong = 3;</code>
+     * <code>optional .session.Pong pong = 4;</code>
      */
     com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder getPongOrBuilder();
 
     /**
-     * <code>optional .game.GameResponse gameResponse = 4;</code>
+     * <code>optional .game.GameResponse gameResponse = 5;</code>
      */
     boolean hasGameResponse();
     /**
-     * <code>optional .game.GameResponse gameResponse = 4;</code>
+     * <code>optional .game.GameResponse gameResponse = 5;</code>
      */
     com.jmpspace.contracts.SpaceServer.Game.GameResponse getGameResponse();
     /**
-     * <code>optional .game.GameResponse gameResponse = 4;</code>
+     * <code>optional .game.GameResponse gameResponse = 5;</code>
      */
     com.jmpspace.contracts.SpaceServer.Game.GameResponseOrBuilder getGameResponseOrBuilder();
   }
@@ -1559,8 +1572,21 @@ public final class Server {
               break;
             }
             case 26: {
-              com.jmpspace.contracts.SpaceServer.Session.Pong.Builder subBuilder = null;
+              com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.Builder subBuilder = null;
               if (responseCase_ == 3) {
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_).toBuilder();
+              }
+              response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_);
+                response_ = subBuilder.buildPartial();
+              }
+              responseCase_ = 3;
+              break;
+            }
+            case 34: {
+              com.jmpspace.contracts.SpaceServer.Session.Pong.Builder subBuilder = null;
+              if (responseCase_ == 4) {
                 subBuilder = ((com.jmpspace.contracts.SpaceServer.Session.Pong) response_).toBuilder();
               }
               response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Session.Pong.PARSER, extensionRegistry);
@@ -1568,12 +1594,12 @@ public final class Server {
                 subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
                 response_ = subBuilder.buildPartial();
               }
-              responseCase_ = 3;
+              responseCase_ = 4;
               break;
             }
-            case 34: {
+            case 42: {
               com.jmpspace.contracts.SpaceServer.Game.GameResponse.Builder subBuilder = null;
-              if (responseCase_ == 4) {
+              if (responseCase_ == 5) {
                 subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_).toBuilder();
               }
               response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.GameResponse.PARSER, extensionRegistry);
@@ -1581,7 +1607,7 @@ public final class Server {
                 subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_);
                 response_ = subBuilder.buildPartial();
               }
-              responseCase_ = 4;
+              responseCase_ = 5;
               break;
             }
           }
@@ -1630,8 +1656,9 @@ public final class Server {
         implements com.google.protobuf.Internal.EnumLite {
       UNAUTHENTICATED(1),
       LOGGEDIN(2),
-      PONG(3),
-      GAMERESPONSE(4),
+      BOUNDTOPLAYER(3),
+      PONG(4),
+      GAMERESPONSE(5),
       RESPONSE_NOT_SET(0);
       private int value = 0;
       private ResponseCase(int value) {
@@ -1641,8 +1668,9 @@ public final class Server {
         switch (value) {
           case 1: return UNAUTHENTICATED;
           case 2: return LOGGEDIN;
-          case 3: return PONG;
-          case 4: return GAMERESPONSE;
+          case 3: return BOUNDTOPLAYER;
+          case 4: return PONG;
+          case 5: return GAMERESPONSE;
           case 0: return RESPONSE_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -1711,53 +1739,79 @@ public final class Server {
       return com.jmpspace.contracts.SpaceServer.Session.LoggedIn.getDefaultInstance();
     }
 
-    public static final int PONG_FIELD_NUMBER = 3;
+    public static final int BOUNDTOPLAYER_FIELD_NUMBER = 3;
     /**
-     * <code>optional .session.Pong pong = 3;</code>
+     * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
      */
-    public boolean hasPong() {
+    public boolean hasBoundToPlayer() {
       return responseCase_ == 3;
     }
     /**
-     * <code>optional .session.Pong pong = 3;</code>
+     * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer getBoundToPlayer() {
+      if (responseCase_ == 3) {
+         return (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance();
+    }
+    /**
+     * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Session.BoundToPlayerOrBuilder getBoundToPlayerOrBuilder() {
+      if (responseCase_ == 3) {
+         return (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance();
+    }
+
+    public static final int PONG_FIELD_NUMBER = 4;
+    /**
+     * <code>optional .session.Pong pong = 4;</code>
+     */
+    public boolean hasPong() {
+      return responseCase_ == 4;
+    }
+    /**
+     * <code>optional .session.Pong pong = 4;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Session.Pong getPong() {
-      if (responseCase_ == 3) {
+      if (responseCase_ == 4) {
          return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
       }
       return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
     }
     /**
-     * <code>optional .session.Pong pong = 3;</code>
+     * <code>optional .session.Pong pong = 4;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder getPongOrBuilder() {
-      if (responseCase_ == 3) {
+      if (responseCase_ == 4) {
          return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
       }
       return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
     }
 
-    public static final int GAMERESPONSE_FIELD_NUMBER = 4;
+    public static final int GAMERESPONSE_FIELD_NUMBER = 5;
     /**
-     * <code>optional .game.GameResponse gameResponse = 4;</code>
+     * <code>optional .game.GameResponse gameResponse = 5;</code>
      */
     public boolean hasGameResponse() {
-      return responseCase_ == 4;
+      return responseCase_ == 5;
     }
     /**
-     * <code>optional .game.GameResponse gameResponse = 4;</code>
+     * <code>optional .game.GameResponse gameResponse = 5;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Game.GameResponse getGameResponse() {
-      if (responseCase_ == 4) {
+      if (responseCase_ == 5) {
          return (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_;
       }
       return com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance();
     }
     /**
-     * <code>optional .game.GameResponse gameResponse = 4;</code>
+     * <code>optional .game.GameResponse gameResponse = 5;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Game.GameResponseOrBuilder getGameResponseOrBuilder() {
-      if (responseCase_ == 4) {
+      if (responseCase_ == 5) {
          return (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_;
       }
       return com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance();
@@ -1777,6 +1831,12 @@ public final class Server {
           return false;
         }
       }
+      if (hasBoundToPlayer()) {
+        if (!getBoundToPlayer().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1791,10 +1851,13 @@ public final class Server {
         output.writeMessage(2, (com.jmpspace.contracts.SpaceServer.Session.LoggedIn) response_);
       }
       if (responseCase_ == 3) {
-        output.writeMessage(3, (com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
+        output.writeMessage(3, (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_);
       }
       if (responseCase_ == 4) {
-        output.writeMessage(4, (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_);
+        output.writeMessage(4, (com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
+      }
+      if (responseCase_ == 5) {
+        output.writeMessage(5, (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1815,11 +1878,15 @@ public final class Server {
       }
       if (responseCase_ == 3) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, (com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
+          .computeMessageSize(3, (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_);
       }
       if (responseCase_ == 4) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_);
+          .computeMessageSize(4, (com.jmpspace.contracts.SpaceServer.Session.Pong) response_);
+      }
+      if (responseCase_ == 5) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1983,13 +2050,20 @@ public final class Server {
           }
         }
         if (responseCase_ == 3) {
+          if (boundToPlayerBuilder_ == null) {
+            result.response_ = response_;
+          } else {
+            result.response_ = boundToPlayerBuilder_.build();
+          }
+        }
+        if (responseCase_ == 4) {
           if (pongBuilder_ == null) {
             result.response_ = response_;
           } else {
             result.response_ = pongBuilder_.build();
           }
         }
-        if (responseCase_ == 4) {
+        if (responseCase_ == 5) {
           if (gameResponseBuilder_ == null) {
             result.response_ = response_;
           } else {
@@ -2022,6 +2096,10 @@ public final class Server {
             mergeLoggedIn(other.getLoggedIn());
             break;
           }
+          case BOUNDTOPLAYER: {
+            mergeBoundToPlayer(other.getBoundToPlayer());
+            break;
+          }
           case PONG: {
             mergePong(other.getPong());
             break;
@@ -2041,6 +2119,12 @@ public final class Server {
       public final boolean isInitialized() {
         if (hasLoggedIn()) {
           if (!getLoggedIn().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasBoundToPlayer()) {
+          if (!getBoundToPlayer().isInitialized()) {
             
             return false;
           }
@@ -2353,31 +2437,166 @@ public final class Server {
       }
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Session.Pong, com.jmpspace.contracts.SpaceServer.Session.Pong.Builder, com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder> pongBuilder_;
+          com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer, com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.Builder, com.jmpspace.contracts.SpaceServer.Session.BoundToPlayerOrBuilder> boundToPlayerBuilder_;
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
        */
-      public boolean hasPong() {
+      public boolean hasBoundToPlayer() {
         return responseCase_ == 3;
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer getBoundToPlayer() {
+        if (boundToPlayerBuilder_ == null) {
+          if (responseCase_ == 3) {
+            return (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance();
+        } else {
+          if (responseCase_ == 3) {
+            return boundToPlayerBuilder_.getMessage();
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public Builder setBoundToPlayer(com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer value) {
+        if (boundToPlayerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          response_ = value;
+          onChanged();
+        } else {
+          boundToPlayerBuilder_.setMessage(value);
+        }
+        responseCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public Builder setBoundToPlayer(
+          com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.Builder builderForValue) {
+        if (boundToPlayerBuilder_ == null) {
+          response_ = builderForValue.build();
+          onChanged();
+        } else {
+          boundToPlayerBuilder_.setMessage(builderForValue.build());
+        }
+        responseCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public Builder mergeBoundToPlayer(com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer value) {
+        if (boundToPlayerBuilder_ == null) {
+          if (responseCase_ == 3 &&
+              response_ != com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance()) {
+            response_ = com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.newBuilder((com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            response_ = value;
+          }
+          onChanged();
+        } else {
+          if (responseCase_ == 3) {
+            boundToPlayerBuilder_.mergeFrom(value);
+          }
+          boundToPlayerBuilder_.setMessage(value);
+        }
+        responseCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public Builder clearBoundToPlayer() {
+        if (boundToPlayerBuilder_ == null) {
+          if (responseCase_ == 3) {
+            responseCase_ = 0;
+            response_ = null;
+            onChanged();
+          }
+        } else {
+          if (responseCase_ == 3) {
+            responseCase_ = 0;
+            response_ = null;
+          }
+          boundToPlayerBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.Builder getBoundToPlayerBuilder() {
+        return getBoundToPlayerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Session.BoundToPlayerOrBuilder getBoundToPlayerOrBuilder() {
+        if ((responseCase_ == 3) && (boundToPlayerBuilder_ != null)) {
+          return boundToPlayerBuilder_.getMessageOrBuilder();
+        } else {
+          if (responseCase_ == 3) {
+            return (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .session.BoundToPlayer boundToPlayer = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer, com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.Builder, com.jmpspace.contracts.SpaceServer.Session.BoundToPlayerOrBuilder> 
+          getBoundToPlayerFieldBuilder() {
+        if (boundToPlayerBuilder_ == null) {
+          if (!(responseCase_ == 3)) {
+            response_ = com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.getDefaultInstance();
+          }
+          boundToPlayerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer, com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer.Builder, com.jmpspace.contracts.SpaceServer.Session.BoundToPlayerOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Session.BoundToPlayer) response_,
+                  getParentForChildren(),
+                  isClean());
+          response_ = null;
+        }
+        responseCase_ = 3;
+        return boundToPlayerBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Session.Pong, com.jmpspace.contracts.SpaceServer.Session.Pong.Builder, com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder> pongBuilder_;
+      /**
+       * <code>optional .session.Pong pong = 4;</code>
+       */
+      public boolean hasPong() {
+        return responseCase_ == 4;
+      }
+      /**
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Session.Pong getPong() {
         if (pongBuilder_ == null) {
-          if (responseCase_ == 3) {
+          if (responseCase_ == 4) {
             return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
           }
           return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
         } else {
-          if (responseCase_ == 3) {
+          if (responseCase_ == 4) {
             return pongBuilder_.getMessage();
           }
           return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public Builder setPong(com.jmpspace.contracts.SpaceServer.Session.Pong value) {
         if (pongBuilder_ == null) {
@@ -2389,11 +2608,11 @@ public final class Server {
         } else {
           pongBuilder_.setMessage(value);
         }
-        responseCase_ = 3;
+        responseCase_ = 4;
         return this;
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public Builder setPong(
           com.jmpspace.contracts.SpaceServer.Session.Pong.Builder builderForValue) {
@@ -2403,15 +2622,15 @@ public final class Server {
         } else {
           pongBuilder_.setMessage(builderForValue.build());
         }
-        responseCase_ = 3;
+        responseCase_ = 4;
         return this;
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public Builder mergePong(com.jmpspace.contracts.SpaceServer.Session.Pong value) {
         if (pongBuilder_ == null) {
-          if (responseCase_ == 3 &&
+          if (responseCase_ == 4 &&
               response_ != com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance()) {
             response_ = com.jmpspace.contracts.SpaceServer.Session.Pong.newBuilder((com.jmpspace.contracts.SpaceServer.Session.Pong) response_)
                 .mergeFrom(value).buildPartial();
@@ -2420,26 +2639,26 @@ public final class Server {
           }
           onChanged();
         } else {
-          if (responseCase_ == 3) {
+          if (responseCase_ == 4) {
             pongBuilder_.mergeFrom(value);
           }
           pongBuilder_.setMessage(value);
         }
-        responseCase_ = 3;
+        responseCase_ = 4;
         return this;
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public Builder clearPong() {
         if (pongBuilder_ == null) {
-          if (responseCase_ == 3) {
+          if (responseCase_ == 4) {
             responseCase_ = 0;
             response_ = null;
             onChanged();
           }
         } else {
-          if (responseCase_ == 3) {
+          if (responseCase_ == 4) {
             responseCase_ = 0;
             response_ = null;
           }
@@ -2448,32 +2667,32 @@ public final class Server {
         return this;
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Session.Pong.Builder getPongBuilder() {
         return getPongFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder getPongOrBuilder() {
-        if ((responseCase_ == 3) && (pongBuilder_ != null)) {
+        if ((responseCase_ == 4) && (pongBuilder_ != null)) {
           return pongBuilder_.getMessageOrBuilder();
         } else {
-          if (responseCase_ == 3) {
+          if (responseCase_ == 4) {
             return (com.jmpspace.contracts.SpaceServer.Session.Pong) response_;
           }
           return com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .session.Pong pong = 3;</code>
+       * <code>optional .session.Pong pong = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.jmpspace.contracts.SpaceServer.Session.Pong, com.jmpspace.contracts.SpaceServer.Session.Pong.Builder, com.jmpspace.contracts.SpaceServer.Session.PongOrBuilder> 
           getPongFieldBuilder() {
         if (pongBuilder_ == null) {
-          if (!(responseCase_ == 3)) {
+          if (!(responseCase_ == 4)) {
             response_ = com.jmpspace.contracts.SpaceServer.Session.Pong.getDefaultInstance();
           }
           pongBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2483,36 +2702,36 @@ public final class Server {
                   isClean());
           response_ = null;
         }
-        responseCase_ = 3;
+        responseCase_ = 4;
         return pongBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilder<
           com.jmpspace.contracts.SpaceServer.Game.GameResponse, com.jmpspace.contracts.SpaceServer.Game.GameResponse.Builder, com.jmpspace.contracts.SpaceServer.Game.GameResponseOrBuilder> gameResponseBuilder_;
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public boolean hasGameResponse() {
-        return responseCase_ == 4;
+        return responseCase_ == 5;
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Game.GameResponse getGameResponse() {
         if (gameResponseBuilder_ == null) {
-          if (responseCase_ == 4) {
+          if (responseCase_ == 5) {
             return (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_;
           }
           return com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance();
         } else {
-          if (responseCase_ == 4) {
+          if (responseCase_ == 5) {
             return gameResponseBuilder_.getMessage();
           }
           return com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public Builder setGameResponse(com.jmpspace.contracts.SpaceServer.Game.GameResponse value) {
         if (gameResponseBuilder_ == null) {
@@ -2524,11 +2743,11 @@ public final class Server {
         } else {
           gameResponseBuilder_.setMessage(value);
         }
-        responseCase_ = 4;
+        responseCase_ = 5;
         return this;
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public Builder setGameResponse(
           com.jmpspace.contracts.SpaceServer.Game.GameResponse.Builder builderForValue) {
@@ -2538,15 +2757,15 @@ public final class Server {
         } else {
           gameResponseBuilder_.setMessage(builderForValue.build());
         }
-        responseCase_ = 4;
+        responseCase_ = 5;
         return this;
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public Builder mergeGameResponse(com.jmpspace.contracts.SpaceServer.Game.GameResponse value) {
         if (gameResponseBuilder_ == null) {
-          if (responseCase_ == 4 &&
+          if (responseCase_ == 5 &&
               response_ != com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance()) {
             response_ = com.jmpspace.contracts.SpaceServer.Game.GameResponse.newBuilder((com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_)
                 .mergeFrom(value).buildPartial();
@@ -2555,26 +2774,26 @@ public final class Server {
           }
           onChanged();
         } else {
-          if (responseCase_ == 4) {
+          if (responseCase_ == 5) {
             gameResponseBuilder_.mergeFrom(value);
           }
           gameResponseBuilder_.setMessage(value);
         }
-        responseCase_ = 4;
+        responseCase_ = 5;
         return this;
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public Builder clearGameResponse() {
         if (gameResponseBuilder_ == null) {
-          if (responseCase_ == 4) {
+          if (responseCase_ == 5) {
             responseCase_ = 0;
             response_ = null;
             onChanged();
           }
         } else {
-          if (responseCase_ == 4) {
+          if (responseCase_ == 5) {
             responseCase_ = 0;
             response_ = null;
           }
@@ -2583,32 +2802,32 @@ public final class Server {
         return this;
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Game.GameResponse.Builder getGameResponseBuilder() {
         return getGameResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Game.GameResponseOrBuilder getGameResponseOrBuilder() {
-        if ((responseCase_ == 4) && (gameResponseBuilder_ != null)) {
+        if ((responseCase_ == 5) && (gameResponseBuilder_ != null)) {
           return gameResponseBuilder_.getMessageOrBuilder();
         } else {
-          if (responseCase_ == 4) {
+          if (responseCase_ == 5) {
             return (com.jmpspace.contracts.SpaceServer.Game.GameResponse) response_;
           }
           return com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.GameResponse gameResponse = 4;</code>
+       * <code>optional .game.GameResponse gameResponse = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.jmpspace.contracts.SpaceServer.Game.GameResponse, com.jmpspace.contracts.SpaceServer.Game.GameResponse.Builder, com.jmpspace.contracts.SpaceServer.Game.GameResponseOrBuilder> 
           getGameResponseFieldBuilder() {
         if (gameResponseBuilder_ == null) {
-          if (!(responseCase_ == 4)) {
+          if (!(responseCase_ == 5)) {
             response_ = com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance();
           }
           gameResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2618,7 +2837,7 @@ public final class Server {
                   isClean());
           response_ = null;
         }
-        responseCase_ = 4;
+        responseCase_ = 5;
         return gameResponseBuilder_;
       }
 
@@ -2659,12 +2878,13 @@ public final class Server {
       "ogout\030\003 \001(\0132\026.session.LogoutRequestH\000\022\035\n" +
       "\004ping\030\004 \001(\0132\r.session.PingH\000\022(\n\013gameRequ" +
       "est\030\005 \001(\0132\021.game.GameRequestH\000B\t\n\007reques" +
-      "t\"\275\001\n\010Response\0223\n\017unauthenticated\030\001 \001(\0132" +
+      "t\"\356\001\n\010Response\0223\n\017unauthenticated\030\001 \001(\0132" +
       "\030.session.UnauthenticatedH\000\022%\n\010loggedIn\030" +
-      "\002 \001(\0132\021.session.LoggedInH\000\022\035\n\004pong\030\003 \001(\013",
-      "2\r.session.PongH\000\022*\n\014gameResponse\030\004 \001(\0132" +
-      "\022.game.GameResponseH\000B\n\n\010responseB$\n\"com" +
-      ".jmpspace.contracts.SpaceServer"
+      "\002 \001(\0132\021.session.LoggedInH\000\022/\n\rboundToPla",
+      "yer\030\003 \001(\0132\026.session.BoundToPlayerH\000\022\035\n\004p" +
+      "ong\030\004 \001(\0132\r.session.PongH\000\022*\n\014gameRespon" +
+      "se\030\005 \001(\0132\022.game.GameResponseH\000B\n\n\010respon" +
+      "seB$\n\"com.jmpspace.contracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2691,7 +2911,7 @@ public final class Server {
     internal_static_server_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_server_Response_descriptor,
-        new java.lang.String[] { "Unauthenticated", "LoggedIn", "Pong", "GameResponse", "Response", });
+        new java.lang.String[] { "Unauthenticated", "LoggedIn", "BoundToPlayer", "Pong", "GameResponse", "Response", });
     com.jmpspace.contracts.SpaceServer.Session.getDescriptor();
     com.jmpspace.contracts.SpaceServer.Game.getDescriptor();
   }

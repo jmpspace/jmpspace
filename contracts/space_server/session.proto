@@ -27,6 +27,12 @@ message LoggedIn {
   required string playerName = 2;
 }
 
+message BoundToPlayer {
+  // TODO: NOT DRY!
+  required int32 playerId = 1;
+  required string playerName = 2;
+}
+
 message Ping {}
 
 message Pong {}

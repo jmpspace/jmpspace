@@ -1,9 +1,8 @@
 package com.jmpspace.server;
 
+import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
-import co.paralleluniverse.comsat.webactors.undertow.WebActorHandler;
-import co.paralleluniverse.spacebase.SpaceBase;
-import co.paralleluniverse.spacebase.SpaceBaseBuilder;
+import com.jmpspace.server.game.Instance;
 import io.undertow.Undertow;
 import io.undertow.server.session.InMemorySessionManager;
 import io.undertow.server.session.SessionAttachmentHandler;
@@ -31,12 +30,12 @@ class SpaceServer {
     final SessionAttachmentHandler sessionAttachmentHandler =
           new SessionAttachmentHandler(sessionManager, sessionConfig);
 
-//    sessionManager.registerSessionListener(new PlayerSessionListener());
+    ActorRef<Instance.Request> instanceRef = (new Instance()).spawn();
 
-//    Map<Class<?>, Object[]> classParams = new HashMap<Class<?>, Object[]>();
-//    classParams.put(PlayerClientActor.class, {});
+    Map<Class<?>, Object[]> classParams = new HashMap<>();
+    classParams.put(PlayerClientActor.class, new Object[]{ instanceRef });
 
-    AutoWebActorHandler handler = new AutoWebActorHandler();
+    AutoWebActorHandler handler = new AutoWebActorHandler(classParams);
 
     Undertow server = Undertow.builder().addHttpListener(port, "localhost")
            .setHandler(sessionAttachmentHandler.setNext(handler)).build();
