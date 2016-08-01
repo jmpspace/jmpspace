@@ -1,12 +1,10 @@
-package com.jmpspace.server.physics;
+package com.jmpspace.server.game.physics;
 
 import co.paralleluniverse.spacebase.AABB;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
-
-import java.awt.geom.AffineTransform;
 
 public class RigidObject {
 

@@ -1,0 +1,29 @@
+
+syntax = "proto2";
+
+package world;
+
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
+import "structure.proto";
+
+message Vector2 {
+  required double x = 1;
+  required double y = 2;
+}
+
+message PhysicsState {
+  required Vector2 position = 1;
+  required double orientation = 2;
+  required Vector2 velocity = 3;
+  required double spin = 4;
+}
+
+message FloatingStructure {
+  required PhysicsState physicsState = 1;
+  required structure.StructureNode structure = 2;
+}
+
+message World {
+  repeated FloatingStructure floatingStructures = 1;
+}

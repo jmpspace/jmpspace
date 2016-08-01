@@ -6,21 +6,41 @@ package structure;
 option java_package = "com.jmpspace.contracts.SpaceServer";
 
 message Armor {
-  required double width = 1;
-  required double length = 2;
+  required int32 width = 1;
+  required int32 length = 2;
 }
 
 message Engine {
-  required double radius = 1;
-  required double length = 2;
+  required int32 radius = 1;
+  required int32 length = 2;
   required int32 group = 3;
 };
 
 message Platform {
-  required double width = 1;
-  required double length = 2;
+  required int32 width = 1;
+  required int32 length = 2;
   required bool pressurized = 3;
+  repeated PlacedItem placedItems = 4;
 }
+
+message PlacedItem {
+  required int32 offsetX = 1;
+  required int32 offsetY = 2;
+  required int32 orientation = 3;
+  required Item item = 4;
+}
+
+message Item {
+  oneof item {
+    Chair chair = 1;
+    CryoTube cryoTube = 2;
+    Crate crate = 3;
+  }
+}
+
+message Chair {}
+message CryoTube {}
+message Crate {}
 
 message Part {
   oneof part {

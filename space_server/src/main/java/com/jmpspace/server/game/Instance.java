@@ -7,13 +7,20 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
 import co.paralleluniverse.spacebase.SpatialToken;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
+import com.jmpspace.server.game.scenarios.SpawnRoom;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
+
+  static final String PLAYER_DB = "player";
+  static final String LARGE_COLLIDE_DB = "large_collide";
+
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
@@ -25,10 +32,21 @@ public class Instance extends BasicActor<Instance.Request, Void> {
     // FIXME: execution context, parallel or concurrent
     // TODO: put this inside of the physics manager?
     SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
-    SpaceBase<PhysicsRef> playerBase = builder.build("player");
-//    SpaceBase ambientBase = builder.build("ambient");
-//    SpaceBase largeBase = builder.build("large");
-//    SpaceBase smallBase = builder.build("small");
+    SpaceBase<PhysicsRef> playerBase = builder.build(PLAYER_DB);
+    SpaceBase<PhysicsRef> largeCollidable = builder.build(LARGE_COLLIDE_DB);
+
+    World initialWorld = SpawnRoom.world.build();
+
+    initialWorld.getFloatingStructuresList().forEach((WorldOuterClass.FloatingStructure structure) -> {
+      /*
+        TODO:
+        calculate geometry
+        activate cryto tubes (add to spawn points)
+        create a physics ref
+        add to the large collidable objects base
+       */
+      return;
+    });
 
     for (;;) {
       final Object message = receive();
