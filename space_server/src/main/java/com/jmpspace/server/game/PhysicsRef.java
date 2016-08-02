@@ -9,6 +9,8 @@ abstract class PhysicsRef {
 
   private SpatialToken _token;
 
+  abstract AABB calculateBounds();
+
   abstract void step(SpaceBase<PhysicsRef> base);
 
   public SpatialToken get_token() {

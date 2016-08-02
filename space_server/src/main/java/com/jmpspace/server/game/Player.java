@@ -1,15 +1,17 @@
 package com.jmpspace.server.game;
 
-import co.paralleluniverse.actors.Actor;
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.SpaceBase;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.PlayerClientActor;
 
 import java.util.List;
+
+import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
 public class Player extends BasicActor<Player.Request, Void> {
 
@@ -20,7 +22,19 @@ public class Player extends BasicActor<Player.Request, Void> {
 //    ActorRef<Request> _owner;
   }
 
-  public static class FloatingRef extends PhysicsRef {
+  public static class FloatingPlayerRef extends PhysicsRef {
+
+    private PhysicsState physicsState;
+
+    public FloatingPlayerRef(PhysicsState physicsState) {
+      this.physicsState = physicsState;
+    }
+
+    @Override
+    AABB calculateBounds() {
+      return null;
+    }
+
     @Override
     void step(SpaceBase<PhysicsRef> base) {
 
@@ -29,6 +43,7 @@ public class Player extends BasicActor<Player.Request, Void> {
     static AABB defaultBounds() {
       return AABB.create(-0.5, .5, -0.5, .5);
     }
+
   }
 
   public static class Unspawned extends State {}
@@ -44,8 +59,8 @@ public class Player extends BasicActor<Player.Request, Void> {
   }
 
   class PlatformRef {
-    ActorRef<Structure.Request> actor;
-    Structure structure;
+    ActorRef<StructureActor.Request> actor;
+    StructureActor structureActor;
     List<Integer> structurePath;
   }
 

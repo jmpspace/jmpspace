@@ -6,28 +6,31 @@ import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
-import co.paralleluniverse.spacebase.SpatialToken;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
+import com.jmpspace.server.game.StructureActor.FloatingStructureRef;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
 
   static final String PLAYER_DB = "player";
   static final String LARGE_COLLIDE_DB = "large_collide";
 
+  // Perhaps Structures themselves can keep track of the spawn points; and just publish a count of spawn points
+  private Map<ActorRef<StructureActor.Request>, List<List<Integer>>> _spawnPoints = new HashMap<>();
+
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
     Map<String, ActorRef<Player.Request>> players = new HashMap<>();
 
-    PhysicsManager physicsManager = new PhysicsManager();
-    ActorRef<PhysicsManager.Request> physicsManagerRef = physicsManager.spawn();
+//    PhysicsManager physicsManager = new PhysicsManager();
+//    ActorRef<PhysicsManager.Request> physicsManagerRef = physicsManager.spawn();
 
     // FIXME: execution context, parallel or concurrent
     // TODO: put this inside of the physics manager?
@@ -37,15 +40,18 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
     World initialWorld = SpawnRoom.world.build();
 
-    initialWorld.getFloatingStructuresList().forEach((WorldOuterClass.FloatingStructure structure) -> {
-      /*
-        TODO:
-        calculate geometry
-        activate cryto tubes (add to spawn points)
-        create a physics ref
-        add to the large collidable objects base
-       */
-      return;
+    initialWorld.getFloatingStructuresList().forEach((WorldOuterClass.FloatingStructure floatingStructure) -> {
+
+      FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
+      largeCollidable.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
+      StructureActor structureActor = new StructureActor(floatingStructureRef, self());
+
+      ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
+
+      List<List<Integer>> structureCryoTubes = StructureUtils.findCryoTubes(floatingStructure.getStructure());
+
+      _spawnPoints.put(structureRef, structureCryoTubes);
+
     });
 
     for (;;) {
@@ -61,8 +67,8 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         ActorRef<PlayerClientActor.Request> playerClient = (ActorRef<PlayerClientActor.Request>) bind.getFrom();
         String playerName = bind._playerName;
 
-//        PhysicsRef physicsRef = new Player.FloatingRef();
-//        SpatialToken token = playerBase.insert(physicsRef, Player.FloatingRef.defaultBounds());
+//        PhysicsRef physicsRef = new Player.FloatingPlayerRef();
+//        SpatialToken token = playerBase.insert(physicsRef, Player.FloatingPlayerRef.defaultBounds());
 //        physicsRef.set_token(token);
 
         Player player = new Player(playerName, playerClient);
