@@ -71,9 +71,11 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 //    PhysicsManager physicsManager = new PhysicsManager();
 //    ActorRef<PhysicsManager.Request> physicsManagerRef = physicsManager.spawn();
 
-    World initialWorld = SpawnRoom.world.build();
+    World initialWorld = SpawnRoom.world();
 
     initialWorld.getFloatingStructuresList().forEach((WorldOuterClass.FloatingStructure floatingStructure) -> {
+
+      logger.debug("Found a structure");
 
       FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
       _spaceBaseWrapper.largeCollidables.insert(floatingStructureRef, floatingStructureRef.calculateBounds());

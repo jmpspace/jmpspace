@@ -1,8 +1,5 @@
 package com.jmpspace.server.game.scenarios;
 
-import com.jmpspace.contracts.SpaceServer.Game;
-import com.jmpspace.contracts.SpaceServer.Game.Spawn;
-import com.jmpspace.contracts.SpaceServer.Structure;
 import com.jmpspace.contracts.SpaceServer.Structure.*;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.PhysicsState;
@@ -11,39 +8,36 @@ import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SpawnRoom extends AbstractScenario {
 
-  public static List<PlacedItem.Builder> roomStuff = new ArrayList<PlacedItem.Builder>() {
+  public static List<PlacedItem> roomStuff = new ArrayList<PlacedItem>() {
     {
-      PlacedItem.newBuilder()
+      add(PlacedItem.newBuilder()
               .setOffsetX(10)
               .setOffsetY(10)
               .setOrientation(0)
-              .setItem(Item.newBuilder().setCryoTube(CryoTube.newBuilder()));
+              .setItem(Item.newBuilder().setCryoTube(CryoTube.newBuilder()))
+              .build());
     }
   };
 
-  public static StructureNode.Builder spawnRoom = StructureNode.newBuilder()
+  public static StructureNode spawnRoom = StructureNode.newBuilder()
           .setPart(
                   Part.newBuilder()
                   .setPlatform(
                           Platform.newBuilder()
                           .setWidth(20).setLength(20).setPressurized(false)
-                          .addAllPlacedItems(
-                                  roomStuff.stream()
-                                  .map((PlacedItem.Builder x) -> x.build())
-                                  .collect(Collectors.toList())
-                          )
+                          .addAllPlacedItems(roomStuff)
                   ))
-          .addAllAttachments(new ArrayList<>());
+          .addAllAttachments(new ArrayList<>())
+          .build();
 
 
-  public static List<FloatingStructure.Builder> spaceStuff = new ArrayList<FloatingStructure.Builder>()
+  public static List<FloatingStructure> spaceStuff = new ArrayList<FloatingStructure>()
   {
     {
-      FloatingStructure.newBuilder()
+      add(FloatingStructure.newBuilder()
               .setPhysicsState(
                       PhysicsState.newBuilder()
                       .setPosition(Vector2.newBuilder().setX(0).setY(0))
@@ -51,15 +45,12 @@ public class SpawnRoom extends AbstractScenario {
                       .setVelocity(Vector2.newBuilder().setX(0).setY(0))
                       .setSpin(0)
               )
-              .setStructure(spawnRoom);
+              .setStructure(spawnRoom).build());
     }
   };
 
-  public static World.Builder world = World.newBuilder()
-          .addAllFloatingStructures(
-                  spaceStuff.stream()
-                          .map((FloatingStructure.Builder x) -> x.build())
-                          .collect(Collectors.toList())
-          );
+  public static World world () {
+    return World.newBuilder().addAllFloatingStructures(spaceStuff).build();
+  }
 
 }
