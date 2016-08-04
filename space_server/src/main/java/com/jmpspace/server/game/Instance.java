@@ -11,21 +11,52 @@ import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.StructureActor.FloatingStructureRef;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
 
-  static final String PLAYER_DB = "player";
-  static final String LARGE_COLLIDE_DB = "large_collide";
+  public Instance(SpaceBaseWrapper spaceBaseWrapper) {
+    _spaceBaseWrapper = spaceBaseWrapper;
+  }
 
-  // Perhaps Structures themselves can keep track of the spawn points; and just publish a count of spawn points
-  private Map<ActorRef<StructureActor.Request>, List<List<Integer>>> _spawnPoints = new HashMap<>();
+  public static class SpaceBaseWrapper {
 
+    static final String PLAYER_DB = "player";
+    static final String LARGE_COLLIDE_DB = "large_collide";
+
+    SpaceBase<PhysicsRef> players;
+    SpaceBase<PhysicsRef> largeCollidables;
+
+    SpaceBaseWrapper(SpaceBase<PhysicsRef> players, SpaceBase<PhysicsRef> largeCollidables) {
+      this.players = players;
+      this.largeCollidables = largeCollidables;
+    }
+
+    public static SpaceBaseWrapper init() {
+      // FIXME: execution context, parallel or concurrent
+      // TODO: put this inside of the physics manager?
+      SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
+      SpaceBase<PhysicsRef> players = builder.build(PLAYER_DB);
+      SpaceBase<PhysicsRef> largeCollidables = builder.build(LARGE_COLLIDE_DB);
+      return new SpaceBaseWrapper(players, largeCollidables);
+    }
+  }
+
+  private static final Logger logger = LogManager.getLogger(Instance.class.getName());
+
+  private SpaceBaseWrapper _spaceBaseWrapper;
 
   class CryoTubeRef {
     UUID _uuid;
-    ActorRef<StructureActor.Request> structureActor;
+    ActorRef<StructureActor.Request> _structureActor;
+
+    public CryoTubeRef(UUID uuid, ActorRef<StructureActor.Request> structureActor) {
+      _uuid = uuid;
+      _structureActor = structureActor;
+    }
   }
 
   private Map<UUID, CryoTubeRef> cryoTubes = new HashMap<>();
@@ -33,23 +64,19 @@ public class Instance extends BasicActor<Instance.Request, Void> {
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
+    logger.info("Starting the instance actor");
+
     Map<String, ActorRef<Player.Request>> players = new HashMap<>();
 
 //    PhysicsManager physicsManager = new PhysicsManager();
 //    ActorRef<PhysicsManager.Request> physicsManagerRef = physicsManager.spawn();
-
-    // FIXME: execution context, parallel or concurrent
-    // TODO: put this inside of the physics manager?
-    SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
-    SpaceBase<PhysicsRef> playerBase = builder.build(PLAYER_DB);
-    SpaceBase<PhysicsRef> largeCollidable = builder.build(LARGE_COLLIDE_DB);
 
     World initialWorld = SpawnRoom.world.build();
 
     initialWorld.getFloatingStructuresList().forEach((WorldOuterClass.FloatingStructure floatingStructure) -> {
 
       FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
-      largeCollidable.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
+      _spaceBaseWrapper.largeCollidables.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
       StructureActor structureActor = new StructureActor(floatingStructureRef, self());
       ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
       floatingStructureRef._owner = structureRef;
@@ -59,7 +86,21 @@ public class Instance extends BasicActor<Instance.Request, Void> {
     });
 
     for (;;) {
-      final Object message = receive();
+      final Request message = receive();
+
+      if (message instanceof RegisterCryoTubes) {
+        RegisterCryoTubes register = (RegisterCryoTubes)message;
+
+        @SuppressWarnings("unchecked")
+        ActorRef<StructureActor.Request> structure = (ActorRef<StructureActor.Request>) register.getFrom();
+
+        logger.info("Registering cryo tubes on %p", structure);
+
+        register._cryoTubeIds.forEach(cryoTubeId -> {
+          CryoTubeRef ref = new CryoTubeRef(cryoTubeId, structure);
+          cryoTubes.put(cryoTubeId, ref);
+        });
+      }
 
       if (message instanceof BindToInstance) {
         BindToInstance bind = (BindToInstance)message;
@@ -68,6 +109,8 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         @SuppressWarnings("unchecked")
         ActorRef<PlayerClientActor.Request> playerClient = (ActorRef<PlayerClientActor.Request>) bind.getFrom();
         String playerName = bind._playerName;
+
+        logger.info("Binding player %s", playerName);
 
         Player player = new Player(playerName, self(), playerClient);
 
@@ -83,7 +126,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
         CryoTubeRef ref = cryoTubes.get(spawn._cryoTubeId);
 
-        ref.structureActor.send(new StructureActor.Spawn(player, ref._uuid));
+        ref._structureActor.send(new StructureActor.Spawn(player, ref._uuid));
       }
     }
   }

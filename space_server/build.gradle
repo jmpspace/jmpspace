@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'application'
+apply plugin: 'idea'
 
 group               = 'space_server'
 version             = '0.2.0'
@@ -44,6 +45,14 @@ sourceSets {
         proto {
             srcDir '../contracts/space_server'
         }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java");
+        // If you have additional sourceSets and/or codegen plugins, add all of them
+//        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/grpc");
     }
 }
 
@@ -92,6 +101,9 @@ dependencies {
   compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
 
   testCompile "junit:junit:$junitVer"
+
+  compile 'org.slf4j:slf4j-api:1.7.13'
+  compile 'org.slf4j:slf4j-simple:1.7.13'
 }
 
 test {

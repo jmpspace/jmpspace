@@ -31,7 +31,9 @@ class SpaceServer {
     final SessionAttachmentHandler sessionAttachmentHandler =
           new SessionAttachmentHandler(sessionManager, sessionConfig);
 
-    ActorRef<Instance.Request> instanceRef = (new Instance()).spawn();
+
+
+    ActorRef<Instance.Request> instanceRef = (new Instance(Instance.SpaceBaseWrapper.init())).spawn();
 
     Map<Class<?>, Object[]> classParams = new HashMap<>();
     classParams.put(PlayerClientActor.class, new Object[]{ instanceRef });

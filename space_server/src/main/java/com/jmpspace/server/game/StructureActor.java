@@ -10,6 +10,8 @@ import com.jmpspace.server.game.common.CommonRequest;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jooq.lambda.Seq;
 
 import java.util.*;
@@ -17,6 +19,8 @@ import java.util.*;
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
 public class StructureActor extends BasicActor<StructureActor.Request, Void> {
+
+  private static final Logger logger = LogManager.getLogger(StructureActor.class.getName());
 
   private ActorRef<Instance.Request> _instanceRef;
 
@@ -103,6 +107,8 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
+
+    logger.info("Registering %d cryo tubes", cryoTubes.size());
 
     _instanceRef.send(new Instance.RegisterCryoTubes(self(), cryoTubes.keySet()));
 
