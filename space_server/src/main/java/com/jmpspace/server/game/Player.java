@@ -8,6 +8,7 @@ import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.SpaceBase;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.PlayerClientActor;
+import com.jmpspace.server.game.common.CommonRequest;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 public class Player extends BasicActor<Player.Request, Void> {
 
   private String _playerName;
+  private ActorRef<Instance.Request> _instance;
   private ActorRef<PlayerClientActor.Request> _controller;
 
   abstract static class State {
@@ -48,6 +50,8 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   public static class Unspawned extends State {}
 
+  public static class SpawnPending extends State {}
+
   public static class Floating extends State {
 
     PhysicsRef _ref;
@@ -77,8 +81,9 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   private State _state;
 
-  Player (String playerName, ActorRef<PlayerClientActor.Request> controller) {
+  Player (String playerName, ActorRef<Instance.Request> instance, ActorRef<PlayerClientActor.Request> controller) {
     _playerName = playerName;
+    _instance = instance;
     _controller = controller;
 
     _state = new Unspawned();
@@ -90,18 +95,28 @@ public class Player extends BasicActor<Player.Request, Void> {
     _controller.send(new PlayerClientActor.BoundToPlayer(self()));
 
     for(;;) {
-      Object message = receive();
+      Request message = (Request)receive();
+
+      if (message instanceof SpawnCommand && _state instanceof Unspawned) {
+        SpawnCommand command = (SpawnCommand)message;
+        assert _controller == message.getFrom();
+        _state = new SpawnPending();
+        _instance.send(new Instance.Spawn(self()));
+      }
+
     }
   }
 
-  public abstract class Request implements FromMessage {
-    @Override
-    public ActorRef<?> getFrom() {
-      return from;
+  public abstract class Request extends CommonRequest {
+
+  }
+
+  public class SpawnCommand extends Request {
+    private int _cryoTubeId;
+
+    public SpawnCommand(ActorRef<PlayerClientActor.Request> from, int cryoTubeId) {
+      _from = from;
+      _cryoTubeId = cryoTubeId;
     }
-
-    protected ActorRef<?> from;
-
-
   }
 }

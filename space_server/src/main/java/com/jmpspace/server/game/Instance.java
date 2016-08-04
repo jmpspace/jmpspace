@@ -1,5 +1,6 @@
 package com.jmpspace.server.game;
 
+import co.paralleluniverse.actors.Actor;
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.actors.behaviors.FromMessage;
@@ -15,6 +16,7 @@ import com.jmpspace.server.game.scenarios.SpawnRoom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
 
@@ -23,6 +25,14 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   // Perhaps Structures themselves can keep track of the spawn points; and just publish a count of spawn points
   private Map<ActorRef<StructureActor.Request>, List<List<Integer>>> _spawnPoints = new HashMap<>();
+
+
+  class CryoTubeRef {
+    UUID _uuid;
+    ActorRef<StructureActor.Request> structureActor;
+  }
+
+  private Map<UUID, CryoTubeRef> cryoTubes = new HashMap<>();
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
@@ -48,16 +58,13 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
       ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
 
-      List<List<Integer>> structureCryoTubes = StructureUtils.findCryoTubes(floatingStructure.getStructure());
 
-      _spawnPoints.put(structureRef, structureCryoTubes);
+//      _spawnPoints.put(structureRef, structureCryoTubes);
 
     });
 
     for (;;) {
       final Object message = receive();
-
-//      if ()
 
       if (message instanceof BindToInstance) {
         BindToInstance bind = (BindToInstance)message;
@@ -67,15 +74,21 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         ActorRef<PlayerClientActor.Request> playerClient = (ActorRef<PlayerClientActor.Request>) bind.getFrom();
         String playerName = bind._playerName;
 
-//        PhysicsRef physicsRef = new Player.FloatingPlayerRef();
-//        SpatialToken token = playerBase.insert(physicsRef, Player.FloatingPlayerRef.defaultBounds());
-//        physicsRef.set_token(token);
-
         Player player = new Player(playerName, playerClient);
 
         // TODO: initialize player state
         ActorRef<Player.Request> ref = player.spawn();
-//        playerClient.send(new Spawned(player.ref()));
+      }
+
+      if (message instanceof Spawn) {
+        Spawn spawn = (Spawn)message;
+
+        @SuppressWarnings("unchecked")
+        ActorRef<Player.Request> player = (ActorRef<Player.Request>) spawn.getFrom();
+
+
+
+        Player.FloatingPlayerRef floatingPlayerRef = new Player.FloatingPlayerRef();
       }
     }
   }
@@ -100,7 +113,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   }
 
-  public class Spawn extends Request {
+  public static class Spawn extends Request {
 
     public Spawn(ActorRef<?> from) {
       _from = from;

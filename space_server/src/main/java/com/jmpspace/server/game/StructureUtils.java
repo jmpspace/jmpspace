@@ -1,5 +1,6 @@
 package com.jmpspace.server.game;
 
+import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.common.util.Function2;
 import co.paralleluniverse.common.util.Function3;
 import com.jmpspace.contracts.SpaceServer.Structure;
@@ -8,13 +9,9 @@ import com.vividsolutions.jts.geom.GeometryCollection;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Function;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 class StructureUtils {
 

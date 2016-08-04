@@ -9,7 +9,10 @@ import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
@@ -18,19 +21,40 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   private ActorRef<Instance.Request> _instanceRef;
 
+  class CryoTubeAddress {
+    UUID _uuid;
+    List<Integer> _address;
+
+    public CryoTubeAddress(UUID uuid, List<Integer> address) {
+      _uuid = uuid;
+      _address = address;
+    }
+  }
+
+  private Map<UUID, CryoTubeAddress> cryoTubes = new HashMap<>();
+
+
   public StructureActor(FloatingStructureRef floatingStructureRef, ActorRef<Instance.Request> instanceRef) {
     _floatingStructureRef = floatingStructureRef;
     _instanceRef = instanceRef;
+
+    List<List<Integer>> structureCryoTubes = StructureUtils.findCryoTubes(_floatingStructureRef._floatingStructure.getStructure());
+
+    structureCryoTubes.forEach(cryoTube -> {
+      UUID uuid = UUID.randomUUID();
+      CryoTubeAddress cryoTubeAddress = new CryoTubeAddress(uuid, cryoTube);
+      cryoTubes.put(uuid, cryoTubeAddress);
+    });
   }
 
   class PlayerRef {
     ActorRef<Player.Request> actor;
   }
 
-  public static class FloatingStructureRef extends PhysicsRef {
+  static class FloatingStructureRef extends PhysicsRef {
 
-    private FloatingStructure _floatingStructure;
-    private Geometry _staticGeometry;
+    FloatingStructure _floatingStructure;
+    Geometry _staticGeometry;
 
     public FloatingStructureRef(FloatingStructure floatingStructure) {
       _floatingStructure = floatingStructure;
@@ -70,7 +94,13 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
-    return null;
+
+    _instanceRef.send(new RegisterCryoTubes(cryoTubes.keySet()));
+
+    for (;;) {
+      Request message = (Request)receive();
+    }
+
   }
 
   abstract class Request {}
