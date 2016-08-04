@@ -1,9 +1,7 @@
 package com.jmpspace.server.game;
 
-import co.paralleluniverse.actors.Actor;
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
-import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
@@ -11,12 +9,10 @@ import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.StructureActor.FloatingStructureRef;
+import com.jmpspace.server.game.common.CommonRequest;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
 
@@ -55,9 +51,8 @@ public class Instance extends BasicActor<Instance.Request, Void> {
       FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
       largeCollidable.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
       StructureActor structureActor = new StructureActor(floatingStructureRef, self());
-
       ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
-
+      floatingStructureRef._owner = structureRef;
 
 //      _spawnPoints.put(structureRef, structureCryoTubes);
 
@@ -74,7 +69,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         ActorRef<PlayerClientActor.Request> playerClient = (ActorRef<PlayerClientActor.Request>) bind.getFrom();
         String playerName = bind._playerName;
 
-        Player player = new Player(playerName, playerClient);
+        Player player = new Player(playerName, self(), playerClient);
 
         // TODO: initialize player state
         ActorRef<Player.Request> ref = player.spawn();
@@ -86,21 +81,14 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         @SuppressWarnings("unchecked")
         ActorRef<Player.Request> player = (ActorRef<Player.Request>) spawn.getFrom();
 
+        CryoTubeRef ref = cryoTubes.get(spawn._cryoTubeId);
 
-
-        Player.FloatingPlayerRef floatingPlayerRef = new Player.FloatingPlayerRef();
+        ref.structureActor.send(new StructureActor.Spawn(player, ref._uuid));
       }
     }
   }
 
-  public static abstract class Request implements FromMessage {
-
-    protected ActorRef<?> _from;
-
-    @Override
-    public ActorRef<?> getFrom() { return _from; }
-
-  }
+  public static abstract class Request extends CommonRequest {}
 
   public static class BindToInstance extends Request {
 
@@ -115,10 +103,26 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   public static class Spawn extends Request {
 
-    public Spawn(ActorRef<?> from) {
+    UUID _cryoTubeId;
+
+    public Spawn(ActorRef<?> from, UUID spawnId) {
       _from = from;
+      _cryoTubeId = spawnId;
     }
 
   }
+
+  public static class RegisterCryoTubes extends Request {
+
+    Set<UUID> _cryoTubeIds;
+
+    public RegisterCryoTubes(ActorRef<?> from, Set<UUID> cryoTubeIds) {
+      _from = from;
+      _cryoTubeIds = cryoTubeIds;
+    }
+
+  }
+
+  public static class PhysicsTick extends Request {}
 
 }

@@ -1,8 +1,9 @@
 package com.jmpspace.server;
 
 import co.paralleluniverse.actors.*;
-import co.paralleluniverse.actors.behaviors.FromMessage;
-import co.paralleluniverse.comsat.webactors.*;
+import co.paralleluniverse.comsat.webactors.WebActor;
+import co.paralleluniverse.comsat.webactors.WebDataMessage;
+import co.paralleluniverse.comsat.webactors.WebSocketOpened;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.channels.SendPort;
 import com.google.protobuf.ByteString;
@@ -13,16 +14,14 @@ import com.jmpspace.contracts.SpaceServer.Session;
 import com.jmpspace.server.game.Instance;
 import com.jmpspace.server.game.Player;
 import com.jmpspace.server.game.common.CommonRequest;
-import net.bytebuddy.implementation.bind.annotation.TargetMethodAnnotationDrivenBinder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
-import static com.jmpspace.server.PlayerClientActor.PlayerClientState.BoundToPlayer;
 import static com.jmpspace.server.PlayerClientActor.PlayerClientState.LoggedIn;
 
 //@SuppressWarnings("WeakerAccess")
@@ -322,7 +321,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
     return super.handleLifecycleMessage(m);
   }
 
-  // TODO: move this back into the PlayerRef?
+  // TODO: move this back into the PlayerOnBoard?
   public static abstract class Request extends CommonRequest {}
 
   public static class BoundToPlayer extends Request {

@@ -2,6 +2,7 @@ package com.jmpspace.server;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
+import co.paralleluniverse.fibers.SuspendExecution;
 import com.jmpspace.server.game.Instance;
 import io.undertow.Undertow;
 import io.undertow.server.session.InMemorySessionManager;
@@ -11,8 +12,8 @@ import io.undertow.server.session.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.time.Instant;
+import java.util.*;
 
 class SpaceServer {
 
@@ -40,6 +41,15 @@ class SpaceServer {
     Undertow server = Undertow.builder().addHttpListener(port, "localhost")
            .setHandler(sessionAttachmentHandler.setNext(handler)).build();
 
+//    Timer physicsTick = new Timer();
+//    physicsTick.scheduleAtFixedRate(new TimerTask() {
+//      @Override
+//      public void run() throws SuspendExecution, InterruptedException {
+//        instanceRef.send(new Instance.PhysicsTick());
+//      }
+//    }, Date.from(Instant.now()), 50);
+
+    // TODO: channels.ThreadSendPort ?
 
     server.start();
 

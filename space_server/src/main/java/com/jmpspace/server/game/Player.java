@@ -11,6 +11,7 @@ import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
@@ -26,6 +27,8 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   public static class FloatingPlayerRef extends PhysicsRef {
 
+    ActorRef<Request> _owner;
+
     private PhysicsState physicsState;
 
     public FloatingPlayerRef(PhysicsState physicsState) {
@@ -38,7 +41,7 @@ public class Player extends BasicActor<Player.Request, Void> {
     }
 
     @Override
-    void step(SpaceBase<PhysicsRef> base) {
+    void step(SpaceBase<PhysicsRef> base) throws InterruptedException, SuspendExecution {
 
     }
 
@@ -101,7 +104,7 @@ public class Player extends BasicActor<Player.Request, Void> {
         SpawnCommand command = (SpawnCommand)message;
         assert _controller == message.getFrom();
         _state = new SpawnPending();
-        _instance.send(new Instance.Spawn(self()));
+        _instance.send(new Instance.Spawn(self(), command._cryoTubeId));
       }
 
     }
@@ -112,9 +115,9 @@ public class Player extends BasicActor<Player.Request, Void> {
   }
 
   public class SpawnCommand extends Request {
-    private int _cryoTubeId;
+    private UUID _cryoTubeId;
 
-    public SpawnCommand(ActorRef<PlayerClientActor.Request> from, int cryoTubeId) {
+    public SpawnCommand(ActorRef<PlayerClientActor.Request> from, UUID cryoTubeId) {
       _from = from;
       _cryoTubeId = cryoTubeId;
     }

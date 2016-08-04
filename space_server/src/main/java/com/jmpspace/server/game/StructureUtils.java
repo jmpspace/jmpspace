@@ -67,7 +67,7 @@ class StructureUtils {
       cryosResults.forEach(cryoResult -> cryoResult.forEach(cryoAddr -> newCryos.add(cryoAddr)));
       if (part.hasPlatform()) {
         Structure.Platform platform = part.getPlatform();
-        platform.getPlacedItemsList().stream().filter(placedItem -> placedItem.getItem().hasCryoTube()).forEach(cryo -> newCryos.add(new ArrayList()));
+        platform.getPlacedItemsList().stream().filter(placedItem -> placedItem.getItem().hasCryoTube()).forEach(cryo -> newCryos.add(new ArrayList<>()));
       }
       return newCryos;
     };

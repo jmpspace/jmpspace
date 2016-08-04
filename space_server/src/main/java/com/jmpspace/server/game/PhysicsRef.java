@@ -1,5 +1,6 @@
 package com.jmpspace.server.game;
 
+import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpatialQueries;
@@ -11,7 +12,7 @@ abstract class PhysicsRef {
 
   abstract AABB calculateBounds();
 
-  abstract void step(SpaceBase<PhysicsRef> base);
+  abstract void step(SpaceBase<PhysicsRef> base) throws InterruptedException, SuspendExecution;
 
   public SpatialToken get_token() {
     return _token;
