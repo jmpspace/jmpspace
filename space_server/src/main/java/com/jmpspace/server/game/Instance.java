@@ -96,7 +96,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         @SuppressWarnings("unchecked")
         ActorRef<StructureActor.Request> structure = (ActorRef<StructureActor.Request>) register.getFrom();
 
-        logger.info("Registering cryo tubes on %p", structure);
+        logger.info("Registering cryo tubes on {}", structure);
 
         register._cryoTubeIds.forEach(cryoTubeId -> {
           CryoTubeRef ref = new CryoTubeRef(cryoTubeId, structure);
@@ -112,7 +112,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         ActorRef<PlayerClientActor.Request> playerClient = (ActorRef<PlayerClientActor.Request>) bind.getFrom();
         String playerName = bind._playerName;
 
-        logger.info("Binding player %s", playerName);
+        logger.info("Binding player {}", playerName);
 
         Player player = new Player(playerName, self(), playerClient);
 

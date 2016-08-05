@@ -50,7 +50,7 @@ sourceSets {
 
 idea {
     module {
-        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java");
+        generatedSourceDirs += file("${protobuf.generatedFilesBaseDir}/main/java");
         // If you have additional sourceSets and/or codegen plugins, add all of them
 //        sourceDirs += file("${protobuf.generatedFilesBaseDir}/main/grpc");
     }

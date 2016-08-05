@@ -4,10 +4,14 @@ import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.common.util.Function2;
 import co.paralleluniverse.common.util.Function3;
 import com.jmpspace.contracts.SpaceServer.Structure;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
+import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryCollection;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
+import com.vividsolutions.jts.shape.GeometricShapeBuilder;
+import com.vividsolutions.jts.util.GeometricShapeFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,43 +19,63 @@ import java.util.stream.IntStream;
 
 class StructureUtils {
 
-  static <E,R> List<R> mapWithIndex(Function2<Integer, E, R> f, List<E> input) {
+  static final double atomicRotation = Math.PI / 6;
+  static final double atomicDistance = 1.0;
+
+  static Geometry attachmentTransform(Structure.AttachmentData attachmentData, Geometry inputGeometry) {
+    AffineTransformation floatingTransform = new AffineTransformation();
+    floatingTransform.translate(attachmentData.getOffset() * 1.0, 0);
+    floatingTransform.rotate(attachmentData.getOrientation() * atomicRotation);
+    Geometry floatingGeometry = (Geometry) inputGeometry.clone();
+    floatingGeometry.apply(floatingTransform);
+    return floatingGeometry;
+  }
+
+  static <E, R> List<R> mapWithIndex(Function2<Integer, E, R> f, List<E> input) {
     return IntStream.range(0, input.size()).mapToObj(i -> f.apply(i, input.get(i))).collect(Collectors.toList());
   }
 
   static <TResult> TResult foldStructureNode(Function3<Integer, Structure.AttachmentData, TResult, TResult> fAttach, Function2<Structure.Part, List<TResult>, TResult> fNode, Structure.StructureNode node) {
+    // TODO: replace with JOOL
     List<TResult> subResults =
             mapWithIndex((i, attachment) ->
                     fAttach.apply(i, attachment.getData(), foldStructureNode(fAttach, fNode, attachment.getNode())), node.getAttachmentsList());
     return fNode.apply(node.getPart(), subResults);
   }
 
-  static class CalculateGeometryState {
-    AffineTransformation _currentOffset;
-    Geometry _accum;
-
-    public CalculateGeometryState() {
-      GeometryFactory factory = new GeometryFactory();
-      this._accum = new GeometryCollection(new Geometry[0], factory);
-      this._currentOffset = new AffineTransformation();
-    }
-  }
-
   static Geometry calculateStructureGeometry(Structure.StructureNode tree) {
 
-    Function3<Integer, Structure.AttachmentData, CalculateGeometryState, CalculateGeometryState> fAttach = (_i, data, state) -> {
-      // TODO: translate the sub-tree
-      return state;
-    };
+    GeometryFactory factory = new GeometryFactory();
 
-    Function2<Structure.Part, List<CalculateGeometryState>, CalculateGeometryState> fNode = (part, attachStates) -> {
+    Function3<Integer, Structure.AttachmentData, Geometry, Geometry> fAttach = (_i, data, state) -> attachmentTransform(data, state);
+
+    Function2<Structure.Part, List<Geometry>, Geometry> fNode = (part, attachStates) -> {
       // TODO: combine all sub-geometry plus the geometry of this part
-      return new CalculateGeometryState();
+      Geometry partGeometry;
+
+      switch (part.getPartCase()) {
+        case PLATFORM:
+          Structure.Platform platform = part.getPlatform();
+          GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
+          shapeFactory.setBase(new Coordinate(0.0, 0.0));
+          shapeFactory.setWidth(platform.getWidth() * atomicDistance);
+          shapeFactory.setHeight(platform.getLength() * atomicDistance);
+          partGeometry = shapeFactory.createRectangle();
+          break;
+        default:
+          throw new RuntimeException("Unhandled part case Geometry");
+      }
+
+      attachStates.add(partGeometry);
+
+      // TODO: check for collisions
+
+      return new GeometryCollection(attachStates.toArray(new Geometry[0]), factory);
     };
 
-    CalculateGeometryState state = StructureUtils.foldStructureNode(fAttach, fNode, tree);
+    Geometry state = StructureUtils.foldStructureNode(fAttach, fNode, tree);
 
-    return state._accum;
+    return state;
   }
 
   static List<List<Integer>> findCryoTubes(Structure.StructureNode tree) {
@@ -59,7 +83,8 @@ class StructureUtils {
     Function3<Integer, Structure.AttachmentData, List<List<Integer>>, List<List<Integer>>> fAttach = (i, _data, cryos) ->
             cryos.stream().map(cryo -> {
               // NO PREPEND ???
-              cryo.add(0, i); return cryo;
+              cryo.add(0, i);
+              return cryo;
             }).collect(Collectors.toList());
 
     Function2<Structure.Part, List<List<List<Integer>>>, List<List<Integer>>> fNode = (part, cryosResults) -> {

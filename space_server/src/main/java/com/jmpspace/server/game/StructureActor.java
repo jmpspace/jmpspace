@@ -108,7 +108,7 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
-    logger.info("Registering %d cryo tubes", cryoTubes.size());
+    logger.info("Registering {} cryo tubes", cryoTubes.size());
 
     _instanceRef.send(new Instance.RegisterCryoTubes(self(), cryoTubes.keySet()));
 
