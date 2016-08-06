@@ -130,6 +130,10 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
         ref._structureActor.send(new StructureActor.Spawn(player, ref._uuid));
       }
+
+      if (message instanceof GameTick) {
+        logger.debug("Game tick");
+      }
     }
   }
 
@@ -168,6 +172,6 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   }
 
-  public static class PhysicsTick extends Request {}
+  public static class GameTick extends Request {}
 
 }

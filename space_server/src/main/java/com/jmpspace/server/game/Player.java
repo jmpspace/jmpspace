@@ -11,6 +11,7 @@ import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
@@ -122,4 +123,10 @@ public class Player extends BasicActor<Player.Request, Void> {
       _cryoTubeId = cryoTubeId;
     }
   }
+
+  public class GameUpdate extends Request {
+
+    private Set<UUID> _cryoTubeIds;
+  }
+
 }

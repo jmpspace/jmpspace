@@ -4,6 +4,7 @@ import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
 import co.paralleluniverse.fibers.SuspendExecution;
 import com.jmpspace.server.game.Instance;
+import com.jmpspace.server.game.Ticker;
 import io.undertow.Undertow;
 import io.undertow.server.session.InMemorySessionManager;
 import io.undertow.server.session.SessionAttachmentHandler;
@@ -35,6 +36,8 @@ class SpaceServer {
 
     ActorRef<Instance.Request> instanceRef = (new Instance(Instance.SpaceBaseWrapper.init())).spawn();
 
+    /*ActorRef<Object> tickerRef = */ (new Ticker(instanceRef)).spawn();
+
     Map<Class<?>, Object[]> classParams = new HashMap<>();
     classParams.put(PlayerClientActor.class, new Object[]{ instanceRef });
 
@@ -47,7 +50,7 @@ class SpaceServer {
 //    physicsTick.scheduleAtFixedRate(new TimerTask() {
 //      @Override
 //      public void run() throws SuspendExecution, InterruptedException {
-//        instanceRef.send(new Instance.PhysicsTick());
+//        instanceRef.send(new Instance.GameTick());
 //      }
 //    }, Date.from(Instant.now()), 50);
 
