@@ -2,12 +2,14 @@ package com.jmpspace.server.game;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
+import co.paralleluniverse.fibers.FiberUtil;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpaceBaseBuilder;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
+import com.jmpspace.server.game.Player.GameUpdate;
 import com.jmpspace.server.game.StructureActor.FloatingStructureRef;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
@@ -20,6 +22,11 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   public Instance(SpaceBaseWrapper spaceBaseWrapper) {
     _spaceBaseWrapper = spaceBaseWrapper;
+  }
+
+  class DirtyTable {
+    boolean cryoTubes = false;
+    Set<String> playersNeedingRefresh = new HashSet<>();
   }
 
   public static class SpaceBaseWrapper {
@@ -60,13 +67,14 @@ public class Instance extends BasicActor<Instance.Request, Void> {
   }
 
   private Map<UUID, CryoTubeRef> cryoTubes = new HashMap<>();
+  private Map<String, ActorRef<Player.Request>> players = new HashMap<>();
+  private DirtyTable dirtyTable = new DirtyTable();
+
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
     logger.info("Starting the instance actor");
-
-    Map<String, ActorRef<Player.Request>> players = new HashMap<>();
 
 //    PhysicsManager physicsManager = new PhysicsManager();
 //    ActorRef<PhysicsManager.Request> physicsManagerRef = physicsManager.spawn();
@@ -101,6 +109,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         register._cryoTubeIds.forEach(cryoTubeId -> {
           CryoTubeRef ref = new CryoTubeRef(cryoTubeId, structure);
           cryoTubes.put(cryoTubeId, ref);
+          dirtyTable.cryoTubes = true;
         });
       }
 
@@ -132,7 +141,30 @@ public class Instance extends BasicActor<Instance.Request, Void> {
       }
 
       if (message instanceof GameTick) {
+
+        // TODO: physics step!
+
         logger.debug("Game tick");
+
+        // TODO: parallel?
+        for (Map.Entry<String, ActorRef<Player.Request>> entry : players.entrySet()) {
+
+          String playerName = entry.getKey();
+          ActorRef<Player.Request> playerRef = entry.getValue();
+
+          boolean refreshPlayer = dirtyTable.playersNeedingRefresh.contains(playerName);
+
+          GameUpdate gameUpdate = new GameUpdate();
+          if (refreshPlayer || dirtyTable.cryoTubes) {
+            gameUpdate._cryoTubeIds = Optional.of(cryoTubes.keySet());
+          }
+          entry.getValue().send(gameUpdate);
+
+        }
+
+        dirtyTable.cryoTubes = false;
+        dirtyTable.playersNeedingRefresh = new HashSet<>(); // TODO: dangerous garbage collection?
+
       }
     }
   }

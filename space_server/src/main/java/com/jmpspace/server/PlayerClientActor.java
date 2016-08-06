@@ -9,11 +9,11 @@ import co.paralleluniverse.strands.channels.SendPort;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
+import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
 import com.jmpspace.contracts.SpaceServer.Server;
 import com.jmpspace.contracts.SpaceServer.Session;
 import com.jmpspace.server.game.Instance;
 import com.jmpspace.server.game.Player;
-import com.jmpspace.server.game.common.CommonRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -322,7 +322,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
   }
 
   // TODO: move this back into the PlayerOnBoard?
-  public static abstract class Request extends CommonRequest {}
+  public static abstract class Request {}
 
   public static class BoundToPlayer extends Request {
 
@@ -332,6 +332,15 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
       _spawned = spawned;
     }
 
+  }
+
+  public static class GameSnapshot extends Request {
+
+    private Snapshot _snapshot;
+
+    public GameSnapshot(Snapshot snapshot) {
+      _snapshot = snapshot;
+    }
   }
 
 }

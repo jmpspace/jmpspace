@@ -6,15 +6,18 @@ import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.SpaceBase;
+import com.jmpspace.contracts.SpaceServer.Game;
+import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
+
+// TODO: potential refactor, merge this and PlayerClient? not if there are multiple Instance planned...
 
 public class Player extends BasicActor<Player.Request, Void> {
 
@@ -108,14 +111,30 @@ public class Player extends BasicActor<Player.Request, Void> {
         _instance.send(new Instance.Spawn(self(), command._cryoTubeId));
       }
 
+      if (message instanceof GameUpdate && _state instanceof Unspawned) {
+
+        GameUpdate gameUpdate = (GameUpdate)message;
+
+        Snapshot.Builder builder = Snapshot.newBuilder();
+
+        gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
+          List<String> cryoTubeStringIds = cryoTubeIds.stream().map(id -> id.toString()).collect(Collectors.toList());
+          builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeStringIds));
+          return 0;
+        });
+
+        _controller.send(new PlayerClientActor.GameSnapshot(builder.build()));
+
+      }
+
     }
   }
 
-  public abstract class Request extends CommonRequest {
+  public static abstract class Request extends CommonRequest {
 
   }
 
-  public class SpawnCommand extends Request {
+  public static class SpawnCommand extends Request {
     private UUID _cryoTubeId;
 
     public SpawnCommand(ActorRef<PlayerClientActor.Request> from, UUID cryoTubeId) {
@@ -124,9 +143,10 @@ public class Player extends BasicActor<Player.Request, Void> {
     }
   }
 
-  public class GameUpdate extends Request {
+  static class GameUpdate extends Request {
 
-    private Set<UUID> _cryoTubeIds;
+    Optional<Set<UUID>> _cryoTubeIds;
+
   }
 
 }

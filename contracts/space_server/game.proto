@@ -22,5 +22,14 @@ message GameResponse {
 }
 
 message Pong {}
+
+message CryoTubesChange {
+  repeated string cryoTubeIds = 1;
+}
+
+message Snapshot {
+  optional CryoTubesChange cryoTubesChange = 1;
+}
+
 message Spawned {}
 message Died {}

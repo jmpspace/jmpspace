@@ -2306,6 +2306,1013 @@ public final class Game {
     // @@protoc_insertion_point(class_scope:game.Pong)
   }
 
+  public interface CryoTubesChangeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:game.CryoTubesChange)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    com.google.protobuf.ProtocolStringList
+        getCryoTubeIdsList();
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    int getCryoTubeIdsCount();
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    java.lang.String getCryoTubeIds(int index);
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCryoTubeIdsBytes(int index);
+  }
+  /**
+   * Protobuf type {@code game.CryoTubesChange}
+   */
+  public static final class CryoTubesChange extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:game.CryoTubesChange)
+      CryoTubesChangeOrBuilder {
+    // Use CryoTubesChange.newBuilder() to construct.
+    private CryoTubesChange(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private CryoTubesChange(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final CryoTubesChange defaultInstance;
+    public static CryoTubesChange getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public CryoTubesChange getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private CryoTubesChange(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                cryoTubeIds_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              cryoTubeIds_.add(bs);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          cryoTubeIds_ = cryoTubeIds_.getUnmodifiableView();
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_CryoTubesChange_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_CryoTubesChange_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.class, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<CryoTubesChange> PARSER =
+        new com.google.protobuf.AbstractParser<CryoTubesChange>() {
+      public CryoTubesChange parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new CryoTubesChange(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CryoTubesChange> getParserForType() {
+      return PARSER;
+    }
+
+    public static final int CRYOTUBEIDS_FIELD_NUMBER = 1;
+    private com.google.protobuf.LazyStringList cryoTubeIds_;
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getCryoTubeIdsList() {
+      return cryoTubeIds_;
+    }
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    public int getCryoTubeIdsCount() {
+      return cryoTubeIds_.size();
+    }
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    public java.lang.String getCryoTubeIds(int index) {
+      return cryoTubeIds_.get(index);
+    }
+    /**
+     * <code>repeated string cryoTubeIds = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCryoTubeIdsBytes(int index) {
+      return cryoTubeIds_.getByteString(index);
+    }
+
+    private void initFields() {
+      cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < cryoTubeIds_.size(); i++) {
+        output.writeBytes(1, cryoTubeIds_.getByteString(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      {
+        int dataSize = 0;
+        for (int i = 0; i < cryoTubeIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(cryoTubeIds_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getCryoTubeIdsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code game.CryoTubesChange}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:game.CryoTubesChange)
+        com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_CryoTubesChange_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_CryoTubesChange_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.class, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder.class);
+      }
+
+      // Construct using com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_CryoTubesChange_descriptor;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance();
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange build() {
+        com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange buildPartial() {
+        com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange result = new com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange(this);
+        int from_bitField0_ = bitField0_;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          cryoTubeIds_ = cryoTubeIds_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.cryoTubeIds_ = cryoTubeIds_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange other) {
+        if (other == com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance()) return this;
+        if (!other.cryoTubeIds_.isEmpty()) {
+          if (cryoTubeIds_.isEmpty()) {
+            cryoTubeIds_ = other.cryoTubeIds_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureCryoTubeIdsIsMutable();
+            cryoTubeIds_.addAll(other.cryoTubeIds_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.google.protobuf.LazyStringList cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureCryoTubeIdsIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          cryoTubeIds_ = new com.google.protobuf.LazyStringArrayList(cryoTubeIds_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getCryoTubeIdsList() {
+        return cryoTubeIds_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public int getCryoTubeIdsCount() {
+        return cryoTubeIds_.size();
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public java.lang.String getCryoTubeIds(int index) {
+        return cryoTubeIds_.get(index);
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCryoTubeIdsBytes(int index) {
+        return cryoTubeIds_.getByteString(index);
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public Builder setCryoTubeIds(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureCryoTubeIdsIsMutable();
+        cryoTubeIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public Builder addCryoTubeIds(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureCryoTubeIdsIsMutable();
+        cryoTubeIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public Builder addAllCryoTubeIds(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureCryoTubeIdsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, cryoTubeIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public Builder clearCryoTubeIds() {
+        cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string cryoTubeIds = 1;</code>
+       */
+      public Builder addCryoTubeIdsBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureCryoTubeIdsIsMutable();
+        cryoTubeIds_.add(value);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:game.CryoTubesChange)
+    }
+
+    static {
+      defaultInstance = new CryoTubesChange(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:game.CryoTubesChange)
+  }
+
+  public interface SnapshotOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:game.Snapshot)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+     */
+    boolean hasCryoTubesChange();
+    /**
+     * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange getCryoTubesChange();
+    /**
+     * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder getCryoTubesChangeOrBuilder();
+  }
+  /**
+   * Protobuf type {@code game.Snapshot}
+   */
+  public static final class Snapshot extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:game.Snapshot)
+      SnapshotOrBuilder {
+    // Use Snapshot.newBuilder() to construct.
+    private Snapshot(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Snapshot(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Snapshot defaultInstance;
+    public static Snapshot getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Snapshot getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Snapshot(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = cryoTubesChange_.toBuilder();
+              }
+              cryoTubesChange_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(cryoTubesChange_);
+                cryoTubesChange_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.jmpspace.contracts.SpaceServer.Game.Snapshot.class, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Snapshot> PARSER =
+        new com.google.protobuf.AbstractParser<Snapshot>() {
+      public Snapshot parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Snapshot(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Snapshot> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int CRYOTUBESCHANGE_FIELD_NUMBER = 1;
+    private com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange cryoTubesChange_;
+    /**
+     * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+     */
+    public boolean hasCryoTubesChange() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange getCryoTubesChange() {
+      return cryoTubesChange_;
+    }
+    /**
+     * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder getCryoTubesChangeOrBuilder() {
+      return cryoTubesChange_;
+    }
+
+    private void initFields() {
+      cryoTubesChange_ = com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, cryoTubesChange_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, cryoTubesChange_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.Snapshot prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code game.Snapshot}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:game.Snapshot)
+        com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.jmpspace.contracts.SpaceServer.Game.Snapshot.class, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder.class);
+      }
+
+      // Construct using com.jmpspace.contracts.SpaceServer.Game.Snapshot.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCryoTubesChangeFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (cryoTubesChangeBuilder_ == null) {
+          cryoTubesChange_ = com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance();
+        } else {
+          cryoTubesChangeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_descriptor;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Game.Snapshot getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Game.Snapshot build() {
+        com.jmpspace.contracts.SpaceServer.Game.Snapshot result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.Game.Snapshot buildPartial() {
+        com.jmpspace.contracts.SpaceServer.Game.Snapshot result = new com.jmpspace.contracts.SpaceServer.Game.Snapshot(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (cryoTubesChangeBuilder_ == null) {
+          result.cryoTubesChange_ = cryoTubesChange_;
+        } else {
+          result.cryoTubesChange_ = cryoTubesChangeBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.Snapshot) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Snapshot)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Snapshot other) {
+        if (other == com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance()) return this;
+        if (other.hasCryoTubesChange()) {
+          mergeCryoTubesChange(other.getCryoTubesChange());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.jmpspace.contracts.SpaceServer.Game.Snapshot parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.Snapshot) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange cryoTubesChange_ = com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder> cryoTubesChangeBuilder_;
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public boolean hasCryoTubesChange() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange getCryoTubesChange() {
+        if (cryoTubesChangeBuilder_ == null) {
+          return cryoTubesChange_;
+        } else {
+          return cryoTubesChangeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public Builder setCryoTubesChange(com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange value) {
+        if (cryoTubesChangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          cryoTubesChange_ = value;
+          onChanged();
+        } else {
+          cryoTubesChangeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public Builder setCryoTubesChange(
+          com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder builderForValue) {
+        if (cryoTubesChangeBuilder_ == null) {
+          cryoTubesChange_ = builderForValue.build();
+          onChanged();
+        } else {
+          cryoTubesChangeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public Builder mergeCryoTubesChange(com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange value) {
+        if (cryoTubesChangeBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              cryoTubesChange_ != com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance()) {
+            cryoTubesChange_ =
+              com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.newBuilder(cryoTubesChange_).mergeFrom(value).buildPartial();
+          } else {
+            cryoTubesChange_ = value;
+          }
+          onChanged();
+        } else {
+          cryoTubesChangeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public Builder clearCryoTubesChange() {
+        if (cryoTubesChangeBuilder_ == null) {
+          cryoTubesChange_ = com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance();
+          onChanged();
+        } else {
+          cryoTubesChangeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder getCryoTubesChangeBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getCryoTubesChangeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder getCryoTubesChangeOrBuilder() {
+        if (cryoTubesChangeBuilder_ != null) {
+          return cryoTubesChangeBuilder_.getMessageOrBuilder();
+        } else {
+          return cryoTubesChange_;
+        }
+      }
+      /**
+       * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder> 
+          getCryoTubesChangeFieldBuilder() {
+        if (cryoTubesChangeBuilder_ == null) {
+          cryoTubesChangeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.Builder, com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder>(
+                  getCryoTubesChange(),
+                  getParentForChildren(),
+                  isClean());
+          cryoTubesChange_ = null;
+        }
+        return cryoTubesChangeBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:game.Snapshot)
+    }
+
+    static {
+      defaultInstance = new Snapshot(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:game.Snapshot)
+  }
+
   public interface SpawnedOrBuilder extends
       // @@protoc_insertion_point(interface_extends:game.Spawned)
       com.google.protobuf.MessageOrBuilder {
@@ -2958,6 +3965,16 @@ public final class Game {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_Pong_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_game_CryoTubesChange_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_game_CryoTubesChange_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_game_Snapshot_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_game_Snapshot_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_game_Spawned_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -2980,8 +3997,11 @@ public final class Game {
       "g\030\001 \001(\0132\n.game.PingH\000\022\034\n\005spawn\030\002 \001(\0132\013.g" +
       "ame.SpawnH\000B\t\n\007request\"\006\n\004Ping\"\007\n\005Spawn\"" +
       "6\n\014GameResponse\022\032\n\004pong\030\001 \001(\0132\n.game.Pon" +
-      "gH\000B\n\n\010response\"\006\n\004Pong\"\t\n\007Spawned\"\006\n\004Di" +
-      "edB$\n\"com.jmpspace.contracts.SpaceServer"
+      "gH\000B\n\n\010response\"\006\n\004Pong\"&\n\017CryoTubesChan" +
+      "ge\022\023\n\013cryoTubeIds\030\001 \003(\t\":\n\010Snapshot\022.\n\017c" +
+      "ryoTubesChange\030\001 \001(\0132\025.game.CryoTubesCha" +
+      "nge\"\t\n\007Spawned\"\006\n\004DiedB$\n\"com.jmpspace.c" +
+      "ontracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3025,14 +4045,26 @@ public final class Game {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_Pong_descriptor,
         new java.lang.String[] { });
-    internal_static_game_Spawned_descriptor =
+    internal_static_game_CryoTubesChange_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_game_CryoTubesChange_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_game_CryoTubesChange_descriptor,
+        new java.lang.String[] { "CryoTubeIds", });
+    internal_static_game_Snapshot_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_game_Snapshot_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_game_Snapshot_descriptor,
+        new java.lang.String[] { "CryoTubesChange", });
+    internal_static_game_Spawned_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_game_Spawned_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_Spawned_descriptor,
         new java.lang.String[] { });
     internal_static_game_Died_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_game_Died_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_Died_descriptor,
