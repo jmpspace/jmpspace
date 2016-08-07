@@ -7,21 +7,19 @@ option java_package = "com.jmpspace.contracts.SpaceServer";
 
 message GameRequest {
   oneof request {
-    Ping ping = 1;
-    Spawn spawn = 2;
+    Spawn spawn = 1;
   }
 }
 
-message Ping {}
-message Spawn {}
+message Spawn {
+  required string cryoTubeId = 1;
+}
 
 message GameResponse {
   oneof response {
-    Pong pong = 1;
+    Snapshot snapshot = 1;
   }
 }
-
-message Pong {}
 
 message CryoTubesChange {
   repeated string cryoTubeIds = 1;
@@ -30,6 +28,3 @@ message CryoTubesChange {
 message Snapshot {
   optional CryoTubesChange cryoTubesChange = 1;
 }
-
-message Spawned {}
-message Died {}

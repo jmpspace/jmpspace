@@ -415,6 +415,12 @@ public final class Server {
           return false;
         }
       }
+      if (hasGameRequest()) {
+        if (!getGameRequest().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -697,6 +703,12 @@ public final class Server {
       public final boolean isInitialized() {
         if (hasLogin()) {
           if (!getLogin().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasGameRequest()) {
+          if (!getGameRequest().isInitialized()) {
             
             return false;
           }

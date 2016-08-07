@@ -9,6 +9,7 @@ import co.paralleluniverse.strands.channels.SendPort;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
+import com.jmpspace.contracts.SpaceServer.Game;
 import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
 import com.jmpspace.contracts.SpaceServer.Server;
 import com.jmpspace.contracts.SpaceServer.Session;
@@ -98,6 +99,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
                   .setPlayerId(playerId));
           isResponseBuilt = true;
           state = LoggedIn;
+          _instanceRef.send(new Instance.BindToInstance(self(), playerName));
 
       }
       if (isResponseBuilt) {
@@ -141,6 +143,8 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
                       .setPlayerName(playerName)
                       .setPlayerId(playerId));
               isResponseBuilt = true;
+              logger.debug("Notifiying needs refresh");
+              _instanceRef.send(new Instance.PlayerNeedsRefresh(playerName));
           }
 
         } else {
@@ -211,6 +215,25 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
               }
               break;
 
+            case BoundToPlayer:
+              switch (request.getRequestCase()) {
+                case SESSIONSTATE:
+                  break;
+                case LOGIN:
+                  break;
+                case LOGOUT:
+                  break;
+                case PING:
+                  request.getPing();
+                  response.setPong(Session.Pong.newBuilder());
+                  isResponseBuilt = true;
+                  break;
+                case GAMEREQUEST:
+                  Game.GameRequest gameRequest = request.getGameRequest();
+                  playerRef.send(new Player.GameRequest(gameRequest));
+                case REQUEST_NOT_SET:
+                  break;
+              }
           }
 
         }
@@ -236,7 +259,6 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
       //noinspection InfiniteLoopStatement
       for (;;) {
         final Object message = receive();
-        logger.debug("Got a message");
 
         if (message instanceof WebSocketOpened) {
           logger.info("Opened client socket");
@@ -254,17 +276,38 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
           clientState.handleWebDataMessage(msg);
         }
         else if (message instanceof Request) {
+
+          boolean responseBuilt = false;
+          Server.Response.Builder response = Server.Response.newBuilder();
+
           if (message instanceof BoundToPlayer) {
             BoundToPlayer bound = (BoundToPlayer)message;
             logger.info("Client bound to player actor");
-            Server.Response.Builder response = Server.Response.newBuilder();
+
             response.setBoundToPlayer(Session.BoundToPlayer
                                               .newBuilder()
                                               .setPlayerName(clientState.playerName)
                                               .setPlayerId(clientState.playerId));
-            sendWebDataResponse(response);
+            responseBuilt = true;
+
+            playerRef = bound._spawnedAsPlayer;
             clientState.state = PlayerClientState.BoundToPlayer;
           }
+
+          if (message instanceof GameSnapshot) {
+
+            logger.debug("Sending snapshot to client {}", this);
+
+            GameSnapshot gameSnapshot = (GameSnapshot)message;
+
+            response.setGameResponse(Game.GameResponse.newBuilder().setSnapshot(gameSnapshot._snapshot));
+            responseBuilt = true;
+          }
+
+          if (responseBuilt) {
+            sendWebDataResponse(response);
+          }
+
         }
         else if (message instanceof ForceLogoff) {
           ActorRef<Object> activePlayer = activePlayers.get(clientState.playerName);
@@ -288,6 +331,10 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
     } finally {
       actors.remove(self());
     }
+  }
+
+  private void sendWebDataResponse(Message message) throws InterruptedException, SuspendExecution {
+    postMessage(new WebDataMessage(self(), message.toByteString().asReadOnlyByteBuffer()));
   }
 
   private void sendWebDataResponse(Message.Builder builder) throws InterruptedException, SuspendExecution {
@@ -326,10 +373,10 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
 
   public static class BoundToPlayer extends Request {
 
-    private ActorRef<Player.Request> _spawned;
+    private ActorRef<Player.Request> _spawnedAsPlayer;
 
     public BoundToPlayer(ActorRef<Player.Request> spawned) {
-      _spawned = spawned;
+      _spawnedAsPlayer = spawned;
     }
 
   }

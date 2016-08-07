@@ -11,6 +11,9 @@ import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.ReflectionUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,6 +23,8 @@ import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 // TODO: potential refactor, merge this and PlayerClient? not if there are multiple Instance planned...
 
 public class Player extends BasicActor<Player.Request, Void> {
+
+  private static final Logger logger = LogManager.getLogger(Player.class.getName());
 
   private String _playerName;
   private ActorRef<Instance.Request> _instance;
@@ -104,26 +109,35 @@ public class Player extends BasicActor<Player.Request, Void> {
     for(;;) {
       Request message = (Request)receive();
 
-      if (message instanceof SpawnCommand && _state instanceof Unspawned) {
-        SpawnCommand command = (SpawnCommand)message;
-        assert _controller == message.getFrom();
-        _state = new SpawnPending();
-        _instance.send(new Instance.Spawn(self(), command._cryoTubeId));
-      }
-
       if (message instanceof GameUpdate && _state instanceof Unspawned) {
 
         GameUpdate gameUpdate = (GameUpdate)message;
 
         Snapshot.Builder builder = Snapshot.newBuilder();
 
-        gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
+        Optional<Integer> x = gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
           List<String> cryoTubeStringIds = cryoTubeIds.stream().map(id -> id.toString()).collect(Collectors.toList());
           builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeStringIds));
           return 0;
         });
 
         _controller.send(new PlayerClientActor.GameSnapshot(builder.build()));
+
+      }
+
+      if (message instanceof GameRequest) {
+
+        Game.GameRequest gameRequest = ((GameRequest) message).gameRequest;
+
+        if (_state instanceof Unspawned && gameRequest.hasSpawn()) {
+
+          Game.Spawn spawn = gameRequest.getSpawn();
+
+          logger.info("Spawning player {}:{} at {}", _playerName, this, spawn.getCryoTubeId());
+
+          // TODO: implement!
+
+        }
 
       }
 
@@ -134,19 +148,19 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   }
 
-  public static class SpawnCommand extends Request {
-    private UUID _cryoTubeId;
-
-    public SpawnCommand(ActorRef<PlayerClientActor.Request> from, UUID cryoTubeId) {
-      _from = from;
-      _cryoTubeId = cryoTubeId;
-    }
-  }
-
   static class GameUpdate extends Request {
 
-    Optional<Set<UUID>> _cryoTubeIds;
+    Optional<Set<UUID>> _cryoTubeIds = Optional.empty();
 
+  }
+
+  public static class GameRequest extends Request {
+
+    Game.GameRequest gameRequest;
+
+    public GameRequest(Game.GameRequest gameRequest) {
+      this.gameRequest = gameRequest;
+    }
   }
 
 }

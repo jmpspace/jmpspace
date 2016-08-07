@@ -11,6 +11,8 @@ import WebSocket.LowLevel exposing (MessageData(..))
 import SpaceServer.Game exposing
   ( GameResponse
   , GameResponse_oneof_response(..)
+  , GameRequest
+  , GameRequest_oneof_request(..)
   )
 import SpaceServer.Session exposing
   ( LoginRequest
@@ -44,13 +46,16 @@ type alias UnauthenticatedState =
   , loginFailed: Bool
   }
 
+type alias SpawnPoints = List String
+
+type GameState
+  = Unspawned SpawnPoints
+
+initialGameState = Unspawned []
+
 type alias ActiveState =
   { username: String
   }
-
-type GameState = Unspawned
-
--- MODEL
 
 type Model
   = Unknown
@@ -72,11 +77,12 @@ type Msg
   | LoginSubmit
   | LoginForce
   | LoginResponse
+  | Spawn String
   | ServerMessage SpaceServer.Server.Response
   | PingTick
 
 unexpectedMessage : Msg -> Model -> (Model, Cmd Msg)
-unexpectedMessage msg model = Debug.crash ("Unexpected message" ++ toString msg) (model, Cmd.none)
+unexpectedMessage msg model = Debug.crash ("Unexpected message " ++ toString msg ++ " in model " ++ toString model) (model, Cmd.none)
 
 sendRequest : Request_oneof_request -> Cmd msg
 sendRequest =
@@ -87,7 +93,14 @@ sendRequest =
   send echoServer
 
 gameUpdate : GameResponse_oneof_response -> GameState -> (GameState, Cmd Msg)
-gameUpdate response gameState = (gameState, Cmd.none)
+gameUpdate response gameState =
+  let newGameState =
+    case (response, gameState) of
+      (GameResponse_oneof_response_snapshot snapshot, Unspawned _) ->
+        case snapshot.cryoTubesChange of
+          Nothing -> gameState
+          Just cryoTubesChange -> Unspawned cryoTubesChange.cryoTubeIds
+  in (newGameState, Cmd.none)
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -99,7 +112,7 @@ update msg model =
         Response_oneof_response_loggedIn { playerId, playerName } ->
           (LoggedIn { username = playerName }, Cmd.none)
         Response_oneof_response_boundToPlayer { playerId, playerName } ->
-          (BoundToPlayer { username = playerName } Unspawned, Cmd.none)
+          (BoundToPlayer { username = playerName } initialGameState, Cmd.none)
         _ -> unexpectedMessage msg model
     (Unauthenticated state, UsernameInput newUsername) ->
       (Unauthenticated { state | username = newUsername }, Cmd.none)
@@ -125,10 +138,14 @@ update msg model =
         Response_oneof_response_pong _ ->
           (model, Cmd.none)
         Response_oneof_response_boundToPlayer _ ->
-          (BoundToPlayer activeState Unspawned, Cmd.none)
+          (BoundToPlayer activeState initialGameState, Cmd.none)
         _ -> unexpectedMessage msg model
     (LoggedIn _, PingTick) ->
       (model, Ping |> Request_oneof_request_ping >> sendRequest)
+    (BoundToPlayer _ (Unspawned _), Spawn cryoTubeId) ->
+      let
+        cmd = { cryoTubeId  = cryoTubeId } |> GameRequest_oneof_request_spawn >> (\x -> Request_oneof_request_gameRequest { request = x }) >> sendRequest
+      in (model, cmd)
     (BoundToPlayer activeState gameState, ServerMessage {response}) ->
       case response of
         Response_oneof_response_unauthenticated {error} ->
@@ -177,4 +194,10 @@ activeView : ActiveState -> Html Msg
 activeView {username} = text <| "Logged in as " ++ username
 
 gameView : ActiveState -> GameState -> Html Msg
-gameView {username} _ = text <| "Logged in as " ++ username ++ " and bound to player in instance"
+gameView {username} gameState =
+  case gameState of
+    Unspawned spawnPoints ->
+      div []
+        [ text <| "Logged in as " ++ username ++ " and bound to player in instance"
+        , div [] <| List.map (\a -> button [onClick (Spawn a)] [text <| "Spawn at: " ++ a]) spawnPoints
+        ]

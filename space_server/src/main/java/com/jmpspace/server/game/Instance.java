@@ -126,7 +126,20 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         Player player = new Player(playerName, self(), playerClient);
 
         // TODO: initialize player state
-        ActorRef<Player.Request> ref = player.spawn();
+        ActorRef<Player.Request> playerRef = player.spawn();
+
+        players.put(playerName, playerRef);
+        dirtyTable.playersNeedingRefresh.add(playerName);
+      }
+
+      if (message instanceof PlayerNeedsRefresh) {
+
+        PlayerNeedsRefresh needsRefresh = (PlayerNeedsRefresh)message;
+
+        logger.debug("Marking player needing refresh {}", needsRefresh.playerName);
+
+        dirtyTable.playersNeedingRefresh.add(needsRefresh.playerName);
+
       }
 
       if (message instanceof Spawn) {
@@ -144,10 +157,12 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
         // TODO: physics step!
 
-        logger.debug("Game tick");
+//        logger.debug("Game tick");
 
         // TODO: parallel?
         for (Map.Entry<String, ActorRef<Player.Request>> entry : players.entrySet()) {
+
+          boolean newPlayerData = false;
 
           String playerName = entry.getKey();
           ActorRef<Player.Request> playerRef = entry.getValue();
@@ -157,8 +172,12 @@ public class Instance extends BasicActor<Instance.Request, Void> {
           GameUpdate gameUpdate = new GameUpdate();
           if (refreshPlayer || dirtyTable.cryoTubes) {
             gameUpdate._cryoTubeIds = Optional.of(cryoTubes.keySet());
+            newPlayerData = true;
           }
-          entry.getValue().send(gameUpdate);
+
+          if (newPlayerData) {
+            entry.getValue().send(gameUpdate);
+          }
 
         }
 
@@ -205,5 +224,14 @@ public class Instance extends BasicActor<Instance.Request, Void> {
   }
 
   public static class GameTick extends Request {}
+
+  public static class PlayerNeedsRefresh extends Request {
+
+    String playerName;
+
+    public PlayerNeedsRefresh(String playerName) {
+      this.playerName = playerName;
+    }
+  }
 
 }

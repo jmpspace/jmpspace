@@ -13,28 +13,15 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .game.Ping ping = 1;</code>
-     */
-    boolean hasPing();
-    /**
-     * <code>optional .game.Ping ping = 1;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Game.Ping getPing();
-    /**
-     * <code>optional .game.Ping ping = 1;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder getPingOrBuilder();
-
-    /**
-     * <code>optional .game.Spawn spawn = 2;</code>
+     * <code>optional .game.Spawn spawn = 1;</code>
      */
     boolean hasSpawn();
     /**
-     * <code>optional .game.Spawn spawn = 2;</code>
+     * <code>optional .game.Spawn spawn = 1;</code>
      */
     com.jmpspace.contracts.SpaceServer.Game.Spawn getSpawn();
     /**
-     * <code>optional .game.Spawn spawn = 2;</code>
+     * <code>optional .game.Spawn spawn = 1;</code>
      */
     com.jmpspace.contracts.SpaceServer.Game.SpawnOrBuilder getSpawnOrBuilder();
   }
@@ -91,21 +78,8 @@ public final class Game {
               break;
             }
             case 10: {
-              com.jmpspace.contracts.SpaceServer.Game.Ping.Builder subBuilder = null;
-              if (requestCase_ == 1) {
-                subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.Ping) request_).toBuilder();
-              }
-              request_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.Ping.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Ping) request_);
-                request_ = subBuilder.buildPartial();
-              }
-              requestCase_ = 1;
-              break;
-            }
-            case 18: {
               com.jmpspace.contracts.SpaceServer.Game.Spawn.Builder subBuilder = null;
-              if (requestCase_ == 2) {
+              if (requestCase_ == 1) {
                 subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.Spawn) request_).toBuilder();
               }
               request_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.Spawn.PARSER, extensionRegistry);
@@ -113,7 +87,7 @@ public final class Game {
                 subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Spawn) request_);
                 request_ = subBuilder.buildPartial();
               }
-              requestCase_ = 2;
+              requestCase_ = 1;
               break;
             }
           }
@@ -160,8 +134,7 @@ public final class Game {
     private java.lang.Object request_;
     public enum RequestCase
         implements com.google.protobuf.Internal.EnumLite {
-      PING(1),
-      SPAWN(2),
+      SPAWN(1),
       REQUEST_NOT_SET(0);
       private int value = 0;
       private RequestCase(int value) {
@@ -169,8 +142,7 @@ public final class Game {
       }
       public static RequestCase valueOf(int value) {
         switch (value) {
-          case 1: return PING;
-          case 2: return SPAWN;
+          case 1: return SPAWN;
           case 0: return REQUEST_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -187,53 +159,27 @@ public final class Game {
           requestCase_);
     }
 
-    public static final int PING_FIELD_NUMBER = 1;
+    public static final int SPAWN_FIELD_NUMBER = 1;
     /**
-     * <code>optional .game.Ping ping = 1;</code>
+     * <code>optional .game.Spawn spawn = 1;</code>
      */
-    public boolean hasPing() {
+    public boolean hasSpawn() {
       return requestCase_ == 1;
     }
     /**
-     * <code>optional .game.Ping ping = 1;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Game.Ping getPing() {
-      if (requestCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.Game.Ping) request_;
-      }
-      return com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-    }
-    /**
-     * <code>optional .game.Ping ping = 1;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder getPingOrBuilder() {
-      if (requestCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.Game.Ping) request_;
-      }
-      return com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-    }
-
-    public static final int SPAWN_FIELD_NUMBER = 2;
-    /**
-     * <code>optional .game.Spawn spawn = 2;</code>
-     */
-    public boolean hasSpawn() {
-      return requestCase_ == 2;
-    }
-    /**
-     * <code>optional .game.Spawn spawn = 2;</code>
+     * <code>optional .game.Spawn spawn = 1;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Game.Spawn getSpawn() {
-      if (requestCase_ == 2) {
+      if (requestCase_ == 1) {
          return (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_;
       }
       return com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance();
     }
     /**
-     * <code>optional .game.Spawn spawn = 2;</code>
+     * <code>optional .game.Spawn spawn = 1;</code>
      */
     public com.jmpspace.contracts.SpaceServer.Game.SpawnOrBuilder getSpawnOrBuilder() {
-      if (requestCase_ == 2) {
+      if (requestCase_ == 1) {
          return (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_;
       }
       return com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance();
@@ -247,6 +193,12 @@ public final class Game {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (hasSpawn()) {
+        if (!getSpawn().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -255,10 +207,7 @@ public final class Game {
                         throws java.io.IOException {
       getSerializedSize();
       if (requestCase_ == 1) {
-        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.Game.Ping) request_);
-      }
-      if (requestCase_ == 2) {
-        output.writeMessage(2, (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_);
+        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -271,11 +220,7 @@ public final class Game {
       size = 0;
       if (requestCase_ == 1) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.Game.Ping) request_);
-      }
-      if (requestCase_ == 2) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_);
+          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -425,13 +370,6 @@ public final class Game {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (requestCase_ == 1) {
-          if (pingBuilder_ == null) {
-            result.request_ = request_;
-          } else {
-            result.request_ = pingBuilder_.build();
-          }
-        }
-        if (requestCase_ == 2) {
           if (spawnBuilder_ == null) {
             result.request_ = request_;
           } else {
@@ -456,10 +394,6 @@ public final class Game {
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.GameRequest other) {
         if (other == com.jmpspace.contracts.SpaceServer.Game.GameRequest.getDefaultInstance()) return this;
         switch (other.getRequestCase()) {
-          case PING: {
-            mergePing(other.getPing());
-            break;
-          }
           case SPAWN: {
             mergeSpawn(other.getSpawn());
             break;
@@ -473,6 +407,12 @@ public final class Game {
       }
 
       public final boolean isInitialized() {
+        if (hasSpawn()) {
+          if (!getSpawn().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -511,166 +451,31 @@ public final class Game {
       private int bitField0_;
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Ping, com.jmpspace.contracts.SpaceServer.Game.Ping.Builder, com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder> pingBuilder_;
+          com.jmpspace.contracts.SpaceServer.Game.Spawn, com.jmpspace.contracts.SpaceServer.Game.Spawn.Builder, com.jmpspace.contracts.SpaceServer.Game.SpawnOrBuilder> spawnBuilder_;
       /**
-       * <code>optional .game.Ping ping = 1;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
-      public boolean hasPing() {
+      public boolean hasSpawn() {
         return requestCase_ == 1;
       }
       /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Game.Ping getPing() {
-        if (pingBuilder_ == null) {
-          if (requestCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.Game.Ping) request_;
-          }
-          return com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-        } else {
-          if (requestCase_ == 1) {
-            return pingBuilder_.getMessage();
-          }
-          return com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public Builder setPing(com.jmpspace.contracts.SpaceServer.Game.Ping value) {
-        if (pingBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          request_ = value;
-          onChanged();
-        } else {
-          pingBuilder_.setMessage(value);
-        }
-        requestCase_ = 1;
-        return this;
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public Builder setPing(
-          com.jmpspace.contracts.SpaceServer.Game.Ping.Builder builderForValue) {
-        if (pingBuilder_ == null) {
-          request_ = builderForValue.build();
-          onChanged();
-        } else {
-          pingBuilder_.setMessage(builderForValue.build());
-        }
-        requestCase_ = 1;
-        return this;
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public Builder mergePing(com.jmpspace.contracts.SpaceServer.Game.Ping value) {
-        if (pingBuilder_ == null) {
-          if (requestCase_ == 1 &&
-              request_ != com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance()) {
-            request_ = com.jmpspace.contracts.SpaceServer.Game.Ping.newBuilder((com.jmpspace.contracts.SpaceServer.Game.Ping) request_)
-                .mergeFrom(value).buildPartial();
-          } else {
-            request_ = value;
-          }
-          onChanged();
-        } else {
-          if (requestCase_ == 1) {
-            pingBuilder_.mergeFrom(value);
-          }
-          pingBuilder_.setMessage(value);
-        }
-        requestCase_ = 1;
-        return this;
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public Builder clearPing() {
-        if (pingBuilder_ == null) {
-          if (requestCase_ == 1) {
-            requestCase_ = 0;
-            request_ = null;
-            onChanged();
-          }
-        } else {
-          if (requestCase_ == 1) {
-            requestCase_ = 0;
-            request_ = null;
-          }
-          pingBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Game.Ping.Builder getPingBuilder() {
-        return getPingFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder getPingOrBuilder() {
-        if ((requestCase_ == 1) && (pingBuilder_ != null)) {
-          return pingBuilder_.getMessageOrBuilder();
-        } else {
-          if (requestCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.Game.Ping) request_;
-          }
-          return com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-        }
-      }
-      /**
-       * <code>optional .game.Ping ping = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Ping, com.jmpspace.contracts.SpaceServer.Game.Ping.Builder, com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder> 
-          getPingFieldBuilder() {
-        if (pingBuilder_ == null) {
-          if (!(requestCase_ == 1)) {
-            request_ = com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-          }
-          pingBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.Game.Ping, com.jmpspace.contracts.SpaceServer.Game.Ping.Builder, com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder>(
-                  (com.jmpspace.contracts.SpaceServer.Game.Ping) request_,
-                  getParentForChildren(),
-                  isClean());
-          request_ = null;
-        }
-        requestCase_ = 1;
-        return pingBuilder_;
-      }
-
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Spawn, com.jmpspace.contracts.SpaceServer.Game.Spawn.Builder, com.jmpspace.contracts.SpaceServer.Game.SpawnOrBuilder> spawnBuilder_;
-      /**
-       * <code>optional .game.Spawn spawn = 2;</code>
-       */
-      public boolean hasSpawn() {
-        return requestCase_ == 2;
-      }
-      /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Game.Spawn getSpawn() {
         if (spawnBuilder_ == null) {
-          if (requestCase_ == 2) {
+          if (requestCase_ == 1) {
             return (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_;
           }
           return com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance();
         } else {
-          if (requestCase_ == 2) {
+          if (requestCase_ == 1) {
             return spawnBuilder_.getMessage();
           }
           return com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public Builder setSpawn(com.jmpspace.contracts.SpaceServer.Game.Spawn value) {
         if (spawnBuilder_ == null) {
@@ -682,11 +487,11 @@ public final class Game {
         } else {
           spawnBuilder_.setMessage(value);
         }
-        requestCase_ = 2;
+        requestCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public Builder setSpawn(
           com.jmpspace.contracts.SpaceServer.Game.Spawn.Builder builderForValue) {
@@ -696,15 +501,15 @@ public final class Game {
         } else {
           spawnBuilder_.setMessage(builderForValue.build());
         }
-        requestCase_ = 2;
+        requestCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public Builder mergeSpawn(com.jmpspace.contracts.SpaceServer.Game.Spawn value) {
         if (spawnBuilder_ == null) {
-          if (requestCase_ == 2 &&
+          if (requestCase_ == 1 &&
               request_ != com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance()) {
             request_ = com.jmpspace.contracts.SpaceServer.Game.Spawn.newBuilder((com.jmpspace.contracts.SpaceServer.Game.Spawn) request_)
                 .mergeFrom(value).buildPartial();
@@ -713,26 +518,26 @@ public final class Game {
           }
           onChanged();
         } else {
-          if (requestCase_ == 2) {
+          if (requestCase_ == 1) {
             spawnBuilder_.mergeFrom(value);
           }
           spawnBuilder_.setMessage(value);
         }
-        requestCase_ = 2;
+        requestCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public Builder clearSpawn() {
         if (spawnBuilder_ == null) {
-          if (requestCase_ == 2) {
+          if (requestCase_ == 1) {
             requestCase_ = 0;
             request_ = null;
             onChanged();
           }
         } else {
-          if (requestCase_ == 2) {
+          if (requestCase_ == 1) {
             requestCase_ = 0;
             request_ = null;
           }
@@ -741,32 +546,32 @@ public final class Game {
         return this;
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Game.Spawn.Builder getSpawnBuilder() {
         return getSpawnFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       public com.jmpspace.contracts.SpaceServer.Game.SpawnOrBuilder getSpawnOrBuilder() {
-        if ((requestCase_ == 2) && (spawnBuilder_ != null)) {
+        if ((requestCase_ == 1) && (spawnBuilder_ != null)) {
           return spawnBuilder_.getMessageOrBuilder();
         } else {
-          if (requestCase_ == 2) {
+          if (requestCase_ == 1) {
             return (com.jmpspace.contracts.SpaceServer.Game.Spawn) request_;
           }
           return com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.Spawn spawn = 2;</code>
+       * <code>optional .game.Spawn spawn = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.jmpspace.contracts.SpaceServer.Game.Spawn, com.jmpspace.contracts.SpaceServer.Game.Spawn.Builder, com.jmpspace.contracts.SpaceServer.Game.SpawnOrBuilder> 
           getSpawnFieldBuilder() {
         if (spawnBuilder_ == null) {
-          if (!(requestCase_ == 2)) {
+          if (!(requestCase_ == 1)) {
             request_ = com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance();
           }
           spawnBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -776,7 +581,7 @@ public final class Game {
                   isClean());
           request_ = null;
         }
-        requestCase_ = 2;
+        requestCase_ = 1;
         return spawnBuilder_;
       }
 
@@ -791,322 +596,23 @@ public final class Game {
     // @@protoc_insertion_point(class_scope:game.GameRequest)
   }
 
-  public interface PingOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:game.Ping)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code game.Ping}
-   */
-  public static final class Ping extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:game.Ping)
-      PingOrBuilder {
-    // Use Ping.newBuilder() to construct.
-    private Ping(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private Ping(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final Ping defaultInstance;
-    public static Ping getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public Ping getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Ping(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Ping_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Ping_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.Game.Ping.class, com.jmpspace.contracts.SpaceServer.Game.Ping.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<Ping> PARSER =
-        new com.google.protobuf.AbstractParser<Ping>() {
-      public Ping parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Ping(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Ping> getParserForType() {
-      return PARSER;
-    }
-
-    private void initFields() {
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Ping parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.Ping prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game.Ping}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:game.Ping)
-        com.jmpspace.contracts.SpaceServer.Game.PingOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Ping_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Ping_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.Game.Ping.class, com.jmpspace.contracts.SpaceServer.Game.Ping.Builder.class);
-      }
-
-      // Construct using com.jmpspace.contracts.SpaceServer.Game.Ping.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Ping_descriptor;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Ping getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance();
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Ping build() {
-        com.jmpspace.contracts.SpaceServer.Game.Ping result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Ping buildPartial() {
-        com.jmpspace.contracts.SpaceServer.Game.Ping result = new com.jmpspace.contracts.SpaceServer.Game.Ping(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.Ping) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Ping)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Ping other) {
-        if (other == com.jmpspace.contracts.SpaceServer.Game.Ping.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.Game.Ping parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.Ping) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game.Ping)
-    }
-
-    static {
-      defaultInstance = new Ping(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game.Ping)
-  }
-
   public interface SpawnOrBuilder extends
       // @@protoc_insertion_point(interface_extends:game.Spawn)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string cryoTubeId = 1;</code>
+     */
+    boolean hasCryoTubeId();
+    /**
+     * <code>required string cryoTubeId = 1;</code>
+     */
+    java.lang.String getCryoTubeId();
+    /**
+     * <code>required string cryoTubeId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCryoTubeIdBytes();
   }
   /**
    * Protobuf type {@code game.Spawn}
@@ -1142,6 +648,7 @@ public final class Game {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1157,6 +664,12 @@ public final class Game {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              cryoTubeId_ = bs;
               break;
             }
           }
@@ -1198,7 +711,51 @@ public final class Game {
       return PARSER;
     }
 
+    private int bitField0_;
+    public static final int CRYOTUBEID_FIELD_NUMBER = 1;
+    private java.lang.Object cryoTubeId_;
+    /**
+     * <code>required string cryoTubeId = 1;</code>
+     */
+    public boolean hasCryoTubeId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string cryoTubeId = 1;</code>
+     */
+    public java.lang.String getCryoTubeId() {
+      java.lang.Object ref = cryoTubeId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          cryoTubeId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string cryoTubeId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCryoTubeIdBytes() {
+      java.lang.Object ref = cryoTubeId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        cryoTubeId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
+      cryoTubeId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1206,6 +763,10 @@ public final class Game {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasCryoTubeId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1213,6 +774,9 @@ public final class Game {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getCryoTubeIdBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1222,6 +786,10 @@ public final class Game {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getCryoTubeIdBytes());
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1339,6 +907,8 @@ public final class Game {
 
       public Builder clear() {
         super.clear();
+        cryoTubeId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1365,6 +935,13 @@ public final class Game {
 
       public com.jmpspace.contracts.SpaceServer.Game.Spawn buildPartial() {
         com.jmpspace.contracts.SpaceServer.Game.Spawn result = new com.jmpspace.contracts.SpaceServer.Game.Spawn(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.cryoTubeId_ = cryoTubeId_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1380,11 +957,20 @@ public final class Game {
 
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Spawn other) {
         if (other == com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance()) return this;
+        if (other.hasCryoTubeId()) {
+          bitField0_ |= 0x00000001;
+          cryoTubeId_ = other.cryoTubeId_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasCryoTubeId()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -1405,6 +991,83 @@ public final class Game {
         }
         return this;
       }
+      private int bitField0_;
+
+      private java.lang.Object cryoTubeId_ = "";
+      /**
+       * <code>required string cryoTubeId = 1;</code>
+       */
+      public boolean hasCryoTubeId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string cryoTubeId = 1;</code>
+       */
+      public java.lang.String getCryoTubeId() {
+        java.lang.Object ref = cryoTubeId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            cryoTubeId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string cryoTubeId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCryoTubeIdBytes() {
+        java.lang.Object ref = cryoTubeId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          cryoTubeId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string cryoTubeId = 1;</code>
+       */
+      public Builder setCryoTubeId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        cryoTubeId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string cryoTubeId = 1;</code>
+       */
+      public Builder clearCryoTubeId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cryoTubeId_ = getDefaultInstance().getCryoTubeId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string cryoTubeId = 1;</code>
+       */
+      public Builder setCryoTubeIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        cryoTubeId_ = value;
+        onChanged();
+        return this;
+      }
 
       // @@protoc_insertion_point(builder_scope:game.Spawn)
     }
@@ -1422,17 +1085,17 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .game.Pong pong = 1;</code>
+     * <code>optional .game.Snapshot snapshot = 1;</code>
      */
-    boolean hasPong();
+    boolean hasSnapshot();
     /**
-     * <code>optional .game.Pong pong = 1;</code>
+     * <code>optional .game.Snapshot snapshot = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.Game.Pong getPong();
+    com.jmpspace.contracts.SpaceServer.Game.Snapshot getSnapshot();
     /**
-     * <code>optional .game.Pong pong = 1;</code>
+     * <code>optional .game.Snapshot snapshot = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder getPongOrBuilder();
+    com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder getSnapshotOrBuilder();
   }
   /**
    * Protobuf type {@code game.GameResponse}
@@ -1487,13 +1150,13 @@ public final class Game {
               break;
             }
             case 10: {
-              com.jmpspace.contracts.SpaceServer.Game.Pong.Builder subBuilder = null;
+              com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder subBuilder = null;
               if (responseCase_ == 1) {
-                subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.Pong) response_).toBuilder();
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_).toBuilder();
               }
-              response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.Pong.PARSER, extensionRegistry);
+              response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.Snapshot.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Pong) response_);
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_);
                 response_ = subBuilder.buildPartial();
               }
               responseCase_ = 1;
@@ -1543,7 +1206,7 @@ public final class Game {
     private java.lang.Object response_;
     public enum ResponseCase
         implements com.google.protobuf.Internal.EnumLite {
-      PONG(1),
+      SNAPSHOT(1),
       RESPONSE_NOT_SET(0);
       private int value = 0;
       private ResponseCase(int value) {
@@ -1551,7 +1214,7 @@ public final class Game {
       }
       public static ResponseCase valueOf(int value) {
         switch (value) {
-          case 1: return PONG;
+          case 1: return SNAPSHOT;
           case 0: return RESPONSE_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -1568,30 +1231,30 @@ public final class Game {
           responseCase_);
     }
 
-    public static final int PONG_FIELD_NUMBER = 1;
+    public static final int SNAPSHOT_FIELD_NUMBER = 1;
     /**
-     * <code>optional .game.Pong pong = 1;</code>
+     * <code>optional .game.Snapshot snapshot = 1;</code>
      */
-    public boolean hasPong() {
+    public boolean hasSnapshot() {
       return responseCase_ == 1;
     }
     /**
-     * <code>optional .game.Pong pong = 1;</code>
+     * <code>optional .game.Snapshot snapshot = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.Game.Pong getPong() {
+    public com.jmpspace.contracts.SpaceServer.Game.Snapshot getSnapshot() {
       if (responseCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.Game.Pong) response_;
+         return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
       }
-      return com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
     }
     /**
-     * <code>optional .game.Pong pong = 1;</code>
+     * <code>optional .game.Snapshot snapshot = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder getPongOrBuilder() {
+    public com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder getSnapshotOrBuilder() {
       if (responseCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.Game.Pong) response_;
+         return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
       }
-      return com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
     }
 
     private void initFields() {
@@ -1610,7 +1273,7 @@ public final class Game {
                         throws java.io.IOException {
       getSerializedSize();
       if (responseCase_ == 1) {
-        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.Game.Pong) response_);
+        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1623,7 +1286,7 @@ public final class Game {
       size = 0;
       if (responseCase_ == 1) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.Game.Pong) response_);
+          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1773,10 +1436,10 @@ public final class Game {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (responseCase_ == 1) {
-          if (pongBuilder_ == null) {
+          if (snapshotBuilder_ == null) {
             result.response_ = response_;
           } else {
-            result.response_ = pongBuilder_.build();
+            result.response_ = snapshotBuilder_.build();
           }
         }
         result.bitField0_ = to_bitField0_;
@@ -1797,8 +1460,8 @@ public final class Game {
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.GameResponse other) {
         if (other == com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance()) return this;
         switch (other.getResponseCase()) {
-          case PONG: {
-            mergePong(other.getPong());
+          case SNAPSHOT: {
+            mergeSnapshot(other.getSnapshot());
             break;
           }
           case RESPONSE_NOT_SET: {
@@ -1848,67 +1511,67 @@ public final class Game {
       private int bitField0_;
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Pong, com.jmpspace.contracts.SpaceServer.Game.Pong.Builder, com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder> pongBuilder_;
+          com.jmpspace.contracts.SpaceServer.Game.Snapshot, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder, com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder> snapshotBuilder_;
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public boolean hasPong() {
+      public boolean hasSnapshot() {
         return responseCase_ == 1;
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.Game.Pong getPong() {
-        if (pongBuilder_ == null) {
+      public com.jmpspace.contracts.SpaceServer.Game.Snapshot getSnapshot() {
+        if (snapshotBuilder_ == null) {
           if (responseCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.Game.Pong) response_;
+            return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
           }
-          return com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
         } else {
           if (responseCase_ == 1) {
-            return pongBuilder_.getMessage();
+            return snapshotBuilder_.getMessage();
           }
-          return com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public Builder setPong(com.jmpspace.contracts.SpaceServer.Game.Pong value) {
-        if (pongBuilder_ == null) {
+      public Builder setSnapshot(com.jmpspace.contracts.SpaceServer.Game.Snapshot value) {
+        if (snapshotBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           response_ = value;
           onChanged();
         } else {
-          pongBuilder_.setMessage(value);
+          snapshotBuilder_.setMessage(value);
         }
         responseCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public Builder setPong(
-          com.jmpspace.contracts.SpaceServer.Game.Pong.Builder builderForValue) {
-        if (pongBuilder_ == null) {
+      public Builder setSnapshot(
+          com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder builderForValue) {
+        if (snapshotBuilder_ == null) {
           response_ = builderForValue.build();
           onChanged();
         } else {
-          pongBuilder_.setMessage(builderForValue.build());
+          snapshotBuilder_.setMessage(builderForValue.build());
         }
         responseCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public Builder mergePong(com.jmpspace.contracts.SpaceServer.Game.Pong value) {
-        if (pongBuilder_ == null) {
+      public Builder mergeSnapshot(com.jmpspace.contracts.SpaceServer.Game.Snapshot value) {
+        if (snapshotBuilder_ == null) {
           if (responseCase_ == 1 &&
-              response_ != com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance()) {
-            response_ = com.jmpspace.contracts.SpaceServer.Game.Pong.newBuilder((com.jmpspace.contracts.SpaceServer.Game.Pong) response_)
+              response_ != com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance()) {
+            response_ = com.jmpspace.contracts.SpaceServer.Game.Snapshot.newBuilder((com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_)
                 .mergeFrom(value).buildPartial();
           } else {
             response_ = value;
@@ -1916,18 +1579,18 @@ public final class Game {
           onChanged();
         } else {
           if (responseCase_ == 1) {
-            pongBuilder_.mergeFrom(value);
+            snapshotBuilder_.mergeFrom(value);
           }
-          pongBuilder_.setMessage(value);
+          snapshotBuilder_.setMessage(value);
         }
         responseCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public Builder clearPong() {
-        if (pongBuilder_ == null) {
+      public Builder clearSnapshot() {
+        if (snapshotBuilder_ == null) {
           if (responseCase_ == 1) {
             responseCase_ = 0;
             response_ = null;
@@ -1938,48 +1601,48 @@ public final class Game {
             responseCase_ = 0;
             response_ = null;
           }
-          pongBuilder_.clear();
+          snapshotBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.Game.Pong.Builder getPongBuilder() {
-        return getPongFieldBuilder().getBuilder();
+      public com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder getSnapshotBuilder() {
+        return getSnapshotFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder getPongOrBuilder() {
-        if ((responseCase_ == 1) && (pongBuilder_ != null)) {
-          return pongBuilder_.getMessageOrBuilder();
+      public com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder getSnapshotOrBuilder() {
+        if ((responseCase_ == 1) && (snapshotBuilder_ != null)) {
+          return snapshotBuilder_.getMessageOrBuilder();
         } else {
           if (responseCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.Game.Pong) response_;
+            return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
           }
-          return com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.Pong pong = 1;</code>
+       * <code>optional .game.Snapshot snapshot = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Pong, com.jmpspace.contracts.SpaceServer.Game.Pong.Builder, com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder> 
-          getPongFieldBuilder() {
-        if (pongBuilder_ == null) {
+          com.jmpspace.contracts.SpaceServer.Game.Snapshot, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder, com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder> 
+          getSnapshotFieldBuilder() {
+        if (snapshotBuilder_ == null) {
           if (!(responseCase_ == 1)) {
-            response_ = com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
+            response_ = com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
           }
-          pongBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.Game.Pong, com.jmpspace.contracts.SpaceServer.Game.Pong.Builder, com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder>(
-                  (com.jmpspace.contracts.SpaceServer.Game.Pong) response_,
+          snapshotBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Game.Snapshot, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder, com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_,
                   getParentForChildren(),
                   isClean());
           response_ = null;
         }
         responseCase_ = 1;
-        return pongBuilder_;
+        return snapshotBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:game.GameResponse)
@@ -1991,319 +1654,6 @@ public final class Game {
     }
 
     // @@protoc_insertion_point(class_scope:game.GameResponse)
-  }
-
-  public interface PongOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:game.Pong)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code game.Pong}
-   */
-  public static final class Pong extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:game.Pong)
-      PongOrBuilder {
-    // Use Pong.newBuilder() to construct.
-    private Pong(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private Pong(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final Pong defaultInstance;
-    public static Pong getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public Pong getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Pong(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Pong_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Pong_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.Game.Pong.class, com.jmpspace.contracts.SpaceServer.Game.Pong.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<Pong> PARSER =
-        new com.google.protobuf.AbstractParser<Pong>() {
-      public Pong parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Pong(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Pong> getParserForType() {
-      return PARSER;
-    }
-
-    private void initFields() {
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Pong parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.Pong prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game.Pong}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:game.Pong)
-        com.jmpspace.contracts.SpaceServer.Game.PongOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Pong_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Pong_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.Game.Pong.class, com.jmpspace.contracts.SpaceServer.Game.Pong.Builder.class);
-      }
-
-      // Construct using com.jmpspace.contracts.SpaceServer.Game.Pong.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Pong_descriptor;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Pong getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance();
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Pong build() {
-        com.jmpspace.contracts.SpaceServer.Game.Pong result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Pong buildPartial() {
-        com.jmpspace.contracts.SpaceServer.Game.Pong result = new com.jmpspace.contracts.SpaceServer.Game.Pong(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.Pong) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Pong)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Pong other) {
-        if (other == com.jmpspace.contracts.SpaceServer.Game.Pong.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.Game.Pong parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.Pong) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game.Pong)
-    }
-
-    static {
-      defaultInstance = new Pong(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game.Pong)
   }
 
   public interface CryoTubesChangeOrBuilder extends
@@ -3313,642 +2663,11 @@ public final class Game {
     // @@protoc_insertion_point(class_scope:game.Snapshot)
   }
 
-  public interface SpawnedOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:game.Spawned)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code game.Spawned}
-   */
-  public static final class Spawned extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:game.Spawned)
-      SpawnedOrBuilder {
-    // Use Spawned.newBuilder() to construct.
-    private Spawned(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private Spawned(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final Spawned defaultInstance;
-    public static Spawned getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public Spawned getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Spawned(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Spawned_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Spawned_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.Game.Spawned.class, com.jmpspace.contracts.SpaceServer.Game.Spawned.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<Spawned> PARSER =
-        new com.google.protobuf.AbstractParser<Spawned>() {
-      public Spawned parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Spawned(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Spawned> getParserForType() {
-      return PARSER;
-    }
-
-    private void initFields() {
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Spawned parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.Spawned prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game.Spawned}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:game.Spawned)
-        com.jmpspace.contracts.SpaceServer.Game.SpawnedOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Spawned_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Spawned_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.Game.Spawned.class, com.jmpspace.contracts.SpaceServer.Game.Spawned.Builder.class);
-      }
-
-      // Construct using com.jmpspace.contracts.SpaceServer.Game.Spawned.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Spawned_descriptor;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Spawned getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.Spawned.getDefaultInstance();
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Spawned build() {
-        com.jmpspace.contracts.SpaceServer.Game.Spawned result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Spawned buildPartial() {
-        com.jmpspace.contracts.SpaceServer.Game.Spawned result = new com.jmpspace.contracts.SpaceServer.Game.Spawned(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.Spawned) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Spawned)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Spawned other) {
-        if (other == com.jmpspace.contracts.SpaceServer.Game.Spawned.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.Game.Spawned parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.Spawned) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game.Spawned)
-    }
-
-    static {
-      defaultInstance = new Spawned(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game.Spawned)
-  }
-
-  public interface DiedOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:game.Died)
-      com.google.protobuf.MessageOrBuilder {
-  }
-  /**
-   * Protobuf type {@code game.Died}
-   */
-  public static final class Died extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:game.Died)
-      DiedOrBuilder {
-    // Use Died.newBuilder() to construct.
-    private Died(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private Died(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final Died defaultInstance;
-    public static Died getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public Died getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private Died(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Died_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Died_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.Game.Died.class, com.jmpspace.contracts.SpaceServer.Game.Died.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<Died> PARSER =
-        new com.google.protobuf.AbstractParser<Died>() {
-      public Died parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Died(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Died> getParserForType() {
-      return PARSER;
-    }
-
-    private void initFields() {
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.Game.Died parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.Died prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code game.Died}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:game.Died)
-        com.jmpspace.contracts.SpaceServer.Game.DiedOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Died_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Died_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.Game.Died.class, com.jmpspace.contracts.SpaceServer.Game.Died.Builder.class);
-      }
-
-      // Construct using com.jmpspace.contracts.SpaceServer.Game.Died.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Died_descriptor;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Died getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.Died.getDefaultInstance();
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Died build() {
-        com.jmpspace.contracts.SpaceServer.Game.Died result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.Game.Died buildPartial() {
-        com.jmpspace.contracts.SpaceServer.Game.Died result = new com.jmpspace.contracts.SpaceServer.Game.Died(this);
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.Died) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Died)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Died other) {
-        if (other == com.jmpspace.contracts.SpaceServer.Game.Died.getDefaultInstance()) return this;
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.Game.Died parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.Died) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      // @@protoc_insertion_point(builder_scope:game.Died)
-    }
-
-    static {
-      defaultInstance = new Died(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:game.Died)
-  }
-
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_game_GameRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_GameRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_Ping_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_Ping_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_game_Spawn_descriptor;
   private static
@@ -3960,11 +2679,6 @@ public final class Game {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_GameResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_Pong_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_Pong_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_game_CryoTubesChange_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3974,16 +2688,6 @@ public final class Game {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_Snapshot_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_Spawned_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_Spawned_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_Died_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_Died_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3993,15 +2697,14 @@ public final class Game {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ngame.proto\022\004game\"R\n\013GameRequest\022\032\n\004pin" +
-      "g\030\001 \001(\0132\n.game.PingH\000\022\034\n\005spawn\030\002 \001(\0132\013.g" +
-      "ame.SpawnH\000B\t\n\007request\"\006\n\004Ping\"\007\n\005Spawn\"" +
-      "6\n\014GameResponse\022\032\n\004pong\030\001 \001(\0132\n.game.Pon" +
-      "gH\000B\n\n\010response\"\006\n\004Pong\"&\n\017CryoTubesChan" +
-      "ge\022\023\n\013cryoTubeIds\030\001 \003(\t\":\n\010Snapshot\022.\n\017c" +
-      "ryoTubesChange\030\001 \001(\0132\025.game.CryoTubesCha" +
-      "nge\"\t\n\007Spawned\"\006\n\004DiedB$\n\"com.jmpspace.c" +
-      "ontracts.SpaceServer"
+      "\n\ngame.proto\022\004game\"6\n\013GameRequest\022\034\n\005spa" +
+      "wn\030\001 \001(\0132\013.game.SpawnH\000B\t\n\007request\"\033\n\005Sp" +
+      "awn\022\022\n\ncryoTubeId\030\001 \002(\t\">\n\014GameResponse\022" +
+      "\"\n\010snapshot\030\001 \001(\0132\016.game.SnapshotH\000B\n\n\010r" +
+      "esponse\"&\n\017CryoTubesChange\022\023\n\013cryoTubeId" +
+      "s\030\001 \003(\t\":\n\010Snapshot\022.\n\017cryoTubesChange\030\001" +
+      " \001(\0132\025.game.CryoTubesChangeB$\n\"com.jmpsp" +
+      "ace.contracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4020,55 +2723,31 @@ public final class Game {
     internal_static_game_GameRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_GameRequest_descriptor,
-        new java.lang.String[] { "Ping", "Spawn", "Request", });
-    internal_static_game_Ping_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_game_Ping_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_game_Ping_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "Spawn", "Request", });
     internal_static_game_Spawn_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_game_Spawn_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_Spawn_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "CryoTubeId", });
     internal_static_game_GameResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_game_GameResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_GameResponse_descriptor,
-        new java.lang.String[] { "Pong", "Response", });
-    internal_static_game_Pong_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_game_Pong_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_game_Pong_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "Snapshot", "Response", });
     internal_static_game_CryoTubesChange_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_game_CryoTubesChange_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_CryoTubesChange_descriptor,
         new java.lang.String[] { "CryoTubeIds", });
     internal_static_game_Snapshot_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_game_Snapshot_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_Snapshot_descriptor,
         new java.lang.String[] { "CryoTubesChange", });
-    internal_static_game_Spawned_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_game_Spawned_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_game_Spawned_descriptor,
-        new java.lang.String[] { });
-    internal_static_game_Died_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_game_Died_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_game_Died_descriptor,
-        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
