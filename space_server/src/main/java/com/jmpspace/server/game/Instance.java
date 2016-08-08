@@ -87,7 +87,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
       FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
       _spaceBaseWrapper.largeCollidables.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
-      StructureActor structureActor = new StructureActor(floatingStructureRef, self());
+      StructureActor structureActor = new StructureActor(floatingStructureRef, self(), _spaceBaseWrapper.players);
       ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
       floatingStructureRef._owner = structureRef;
 
@@ -148,7 +148,10 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         @SuppressWarnings("unchecked")
         ActorRef<Player.Request> player = (ActorRef<Player.Request>) spawn.getFrom();
 
+
         CryoTubeRef ref = cryoTubes.get(spawn._cryoTubeId);
+
+        logger.info("Spawning player {} at {} on {}", player, spawn._cryoTubeId, ref._structureActor);
 
         ref._structureActor.send(new StructureActor.Spawn(player, ref._uuid));
       }
@@ -156,6 +159,8 @@ public class Instance extends BasicActor<Instance.Request, Void> {
       if (message instanceof GameTick) {
 
         // TODO: physics step!
+
+//        _spaceBaseWrapper.players;
 
 //        logger.debug("Game tick");
 

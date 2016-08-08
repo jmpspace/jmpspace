@@ -133,9 +133,11 @@ public class Player extends BasicActor<Player.Request, Void> {
 
           Game.Spawn spawn = gameRequest.getSpawn();
 
-          logger.info("Spawning player {}:{} at {}", _playerName, this, spawn.getCryoTubeId());
+          logger.debug("Spawning player {}:{} at {}", _playerName, this, spawn.getCryoTubeId());
 
-          // TODO: implement!
+          UUID cryoTubeId = UUID.fromString(spawn.getCryoTubeId());
+
+          _instance.send(new Instance.Spawn(self(), cryoTubeId));
 
         }
 

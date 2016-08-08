@@ -53,8 +53,9 @@ message Part {
 // TODO: assess serialization costs of recursive messages
 
 message AttachmentData {
-  required int32 orientation = 1;
+  required int32 orientationFromParent = 1;
   required int32 offset = 2;
+  required int32 orientationOfNode = 3;
 }
 
 message Attachment {

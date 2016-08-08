@@ -18,17 +18,32 @@ import java.util.*;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
-public class StructureActor extends BasicActor<StructureActor.Request, Void> {
+class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   private static final Logger logger = LogManager.getLogger(StructureActor.class.getName());
 
+  private FloatingStructureRef _floatingStructureRef;
   private ActorRef<Instance.Request> _instanceRef;
+  private SpaceBase<PhysicsRef> _playersBase;
+  private List<PlatformWrapper> _platforms;
 
-  class CryoTubeAddress {
+  static class PlatformWrapper {
+    int platformId;
+    Platform platform;
+    AffineTransformation platformRelativeLocation;
+
+    PlatformWrapper(int platformId, Platform platform, AffineTransformation platformRelativeLocation) {
+      this.platformId = platformId;
+      this.platform = platform;
+      this.platformRelativeLocation = platformRelativeLocation;
+    }
+  }
+
+  private class CryoTubeAddress {
     UUID _uuid;
     List<Integer> _address;
 
-    public CryoTubeAddress(UUID uuid, List<Integer> address) {
+    CryoTubeAddress(UUID uuid, List<Integer> address) {
       _uuid = uuid;
       _address = address;
     }
@@ -37,9 +52,11 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
   private Map<UUID, CryoTubeAddress> cryoTubes = new HashMap<>();
 
 
-  public StructureActor(FloatingStructureRef floatingStructureRef, ActorRef<Instance.Request> instanceRef) {
+  StructureActor(FloatingStructureRef floatingStructureRef, ActorRef<Instance.Request> instanceRef, SpaceBase<PhysicsRef> playersBase) {
     _floatingStructureRef = floatingStructureRef;
     _instanceRef = instanceRef;
+    _playersBase = playersBase;
+    _platforms = StructureUtils.findPlatforms(floatingStructureRef._floatingStructure.getStructure());
 
     List<List<Integer>> structureCryoTubes = StructureUtils.findCryoTubes(_floatingStructureRef._floatingStructure.getStructure());
 
@@ -57,7 +74,7 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
     ActorRef<Request> _owner;
 
-    public FloatingStructureRef(FloatingStructure floatingStructure) {
+    FloatingStructureRef(FloatingStructure floatingStructure) {
       _floatingStructure = floatingStructure;
       _staticGeometry = StructureUtils.calculateStructureGeometry(floatingStructure.getStructure());
     }
@@ -82,16 +99,16 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   }
 
-  private FloatingStructureRef _floatingStructureRef;
+
   private Geometry _geom;
 
-  static class PlayerOnBoard {
+  private static class PlayerOnBoard {
     private ActorRef<Player.Request> _player;
     private List<Integer> _platformAddress;
     private Platform _platform;
     private Vector2 _position;
 
-    public PlayerOnBoard(ActorRef<Player.Request> player, List<Integer> platformAddress, Platform platform, Vector2 position) {
+    PlayerOnBoard(ActorRef<Player.Request> player, List<Integer> platformAddress, Platform platform, Vector2 position) {
       _player = player;
       _platformAddress = platformAddress;
       _platform = platform;
@@ -101,9 +118,9 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   private Map<ActorRef<Player.Request>, PlayerOnBoard> _playersOnBoard = new HashMap<>();
 
-  abstract static class State {
-    ActorRef<StructureActor.Request> _owner;
-  }
+//  abstract static class State {
+//    ActorRef<StructureActor.Request> _owner;
+//  }
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
@@ -112,8 +129,9 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
     _instanceRef.send(new Instance.RegisterCryoTubes(self(), cryoTubes.keySet()));
 
+    //noinspection InfiniteLoopStatement
     for (;;) {
-      Request message = (Request)receive();
+      Request message = receive();
 
       if (message instanceof Spawn) {
 
@@ -132,8 +150,12 @@ public class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
         Vector2 position = Vector2.getDefaultInstance();
 
+        logger.info("Spawning player {} on platform {} ({})", player, platform, cryoTube._address);
+
         PlayerOnBoard playerOnBoard = new PlayerOnBoard(player, cryoTube._address, platform, position);
         _playersOnBoard.put(player, playerOnBoard);
+
+        // TODO: playerOnBoard should be a Physics ref, and add it to the playerBase for global tracking
 
         // TODO: send a message back to the Player? Or start a stream of messages to each player on board with position?
 

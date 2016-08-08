@@ -5759,13 +5759,13 @@ public final class Structure {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required int32 orientation = 1;</code>
+     * <code>required int32 orientationFromParent = 1;</code>
      */
-    boolean hasOrientation();
+    boolean hasOrientationFromParent();
     /**
-     * <code>required int32 orientation = 1;</code>
+     * <code>required int32 orientationFromParent = 1;</code>
      */
-    int getOrientation();
+    int getOrientationFromParent();
 
     /**
      * <code>required int32 offset = 2;</code>
@@ -5775,6 +5775,15 @@ public final class Structure {
      * <code>required int32 offset = 2;</code>
      */
     int getOffset();
+
+    /**
+     * <code>required int32 orientationOfNode = 3;</code>
+     */
+    boolean hasOrientationOfNode();
+    /**
+     * <code>required int32 orientationOfNode = 3;</code>
+     */
+    int getOrientationOfNode();
   }
   /**
    * Protobuf type {@code structure.AttachmentData}
@@ -5830,12 +5839,17 @@ public final class Structure {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              orientation_ = input.readInt32();
+              orientationFromParent_ = input.readInt32();
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
               offset_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              orientationOfNode_ = input.readInt32();
               break;
             }
           }
@@ -5878,19 +5892,19 @@ public final class Structure {
     }
 
     private int bitField0_;
-    public static final int ORIENTATION_FIELD_NUMBER = 1;
-    private int orientation_;
+    public static final int ORIENTATIONFROMPARENT_FIELD_NUMBER = 1;
+    private int orientationFromParent_;
     /**
-     * <code>required int32 orientation = 1;</code>
+     * <code>required int32 orientationFromParent = 1;</code>
      */
-    public boolean hasOrientation() {
+    public boolean hasOrientationFromParent() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 orientation = 1;</code>
+     * <code>required int32 orientationFromParent = 1;</code>
      */
-    public int getOrientation() {
-      return orientation_;
+    public int getOrientationFromParent() {
+      return orientationFromParent_;
     }
 
     public static final int OFFSET_FIELD_NUMBER = 2;
@@ -5908,9 +5922,25 @@ public final class Structure {
       return offset_;
     }
 
+    public static final int ORIENTATIONOFNODE_FIELD_NUMBER = 3;
+    private int orientationOfNode_;
+    /**
+     * <code>required int32 orientationOfNode = 3;</code>
+     */
+    public boolean hasOrientationOfNode() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 orientationOfNode = 3;</code>
+     */
+    public int getOrientationOfNode() {
+      return orientationOfNode_;
+    }
+
     private void initFields() {
-      orientation_ = 0;
+      orientationFromParent_ = 0;
       offset_ = 0;
+      orientationOfNode_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5918,11 +5948,15 @@ public final class Structure {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasOrientation()) {
+      if (!hasOrientationFromParent()) {
         memoizedIsInitialized = 0;
         return false;
       }
       if (!hasOffset()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOrientationOfNode()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -5934,10 +5968,13 @@ public final class Structure {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, orientation_);
+        output.writeInt32(1, orientationFromParent_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, offset_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, orientationOfNode_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5950,11 +5987,15 @@ public final class Structure {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, orientation_);
+          .computeInt32Size(1, orientationFromParent_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, offset_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, orientationOfNode_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6073,10 +6114,12 @@ public final class Structure {
 
       public Builder clear() {
         super.clear();
-        orientation_ = 0;
+        orientationFromParent_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         offset_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        orientationOfNode_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -6108,11 +6151,15 @@ public final class Structure {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.orientation_ = orientation_;
+        result.orientationFromParent_ = orientationFromParent_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
         result.offset_ = offset_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.orientationOfNode_ = orientationOfNode_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6129,22 +6176,29 @@ public final class Structure {
 
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Structure.AttachmentData other) {
         if (other == com.jmpspace.contracts.SpaceServer.Structure.AttachmentData.getDefaultInstance()) return this;
-        if (other.hasOrientation()) {
-          setOrientation(other.getOrientation());
+        if (other.hasOrientationFromParent()) {
+          setOrientationFromParent(other.getOrientationFromParent());
         }
         if (other.hasOffset()) {
           setOffset(other.getOffset());
+        }
+        if (other.hasOrientationOfNode()) {
+          setOrientationOfNode(other.getOrientationOfNode());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasOrientation()) {
+        if (!hasOrientationFromParent()) {
           
           return false;
         }
         if (!hasOffset()) {
+          
+          return false;
+        }
+        if (!hasOrientationOfNode()) {
           
           return false;
         }
@@ -6170,34 +6224,34 @@ public final class Structure {
       }
       private int bitField0_;
 
-      private int orientation_ ;
+      private int orientationFromParent_ ;
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required int32 orientationFromParent = 1;</code>
        */
-      public boolean hasOrientation() {
+      public boolean hasOrientationFromParent() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required int32 orientationFromParent = 1;</code>
        */
-      public int getOrientation() {
-        return orientation_;
+      public int getOrientationFromParent() {
+        return orientationFromParent_;
       }
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required int32 orientationFromParent = 1;</code>
        */
-      public Builder setOrientation(int value) {
+      public Builder setOrientationFromParent(int value) {
         bitField0_ |= 0x00000001;
-        orientation_ = value;
+        orientationFromParent_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 orientation = 1;</code>
+       * <code>required int32 orientationFromParent = 1;</code>
        */
-      public Builder clearOrientation() {
+      public Builder clearOrientationFromParent() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        orientation_ = 0;
+        orientationFromParent_ = 0;
         onChanged();
         return this;
       }
@@ -6230,6 +6284,38 @@ public final class Structure {
       public Builder clearOffset() {
         bitField0_ = (bitField0_ & ~0x00000002);
         offset_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int orientationOfNode_ ;
+      /**
+       * <code>required int32 orientationOfNode = 3;</code>
+       */
+      public boolean hasOrientationOfNode() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 orientationOfNode = 3;</code>
+       */
+      public int getOrientationOfNode() {
+        return orientationOfNode_;
+      }
+      /**
+       * <code>required int32 orientationOfNode = 3;</code>
+       */
+      public Builder setOrientationOfNode(int value) {
+        bitField0_ |= 0x00000004;
+        orientationOfNode_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 orientationOfNode = 3;</code>
+       */
+      public Builder clearOrientationOfNode() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        orientationOfNode_ = 0;
         onChanged();
         return this;
       }
@@ -7954,14 +8040,15 @@ public final class Structure {
       "e\"\007\n\005Crate\"\177\n\004Part\022!\n\005armor\030\001 \001(\0132\020.stru" +
       "cture.ArmorH\000\022#\n\006engine\030\002 \001(\0132\021.structur" +
       "e.EngineH\000\022\'\n\010platform\030\003 \001(\0132\023.structure" +
-      ".PlatformH\000B\006\n\004part\"5\n\016AttachmentData\022\023\n" +
-      "\013orientation\030\001 \002(\005\022\016\n\006offset\030\002 \002(\005\"]\n\nAt" +
-      "tachment\022\'\n\004data\030\001 \002(\0132\031.structure.Attac" +
-      "hmentData\022&\n\004node\030\002 \002(\0132\030.structure.Stru" +
-      "ctureNode\"Z\n\rStructureNode\022\035\n\004part\030\001 \002(\013",
-      "2\017.structure.Part\022*\n\013attachments\030\002 \003(\0132\025" +
-      ".structure.AttachmentB$\n\"com.jmpspace.co" +
-      "ntracts.SpaceServer"
+      ".PlatformH\000B\006\n\004part\"Z\n\016AttachmentData\022\035\n" +
+      "\025orientationFromParent\030\001 \002(\005\022\016\n\006offset\030\002" +
+      " \002(\005\022\031\n\021orientationOfNode\030\003 \002(\005\"]\n\nAttac" +
+      "hment\022\'\n\004data\030\001 \002(\0132\031.structure.Attachme" +
+      "ntData\022&\n\004node\030\002 \002(\0132\030.structure.Structu",
+      "reNode\"Z\n\rStructureNode\022\035\n\004part\030\001 \002(\0132\017." +
+      "structure.Part\022*\n\013attachments\030\002 \003(\0132\025.st" +
+      "ructure.AttachmentB$\n\"com.jmpspace.contr" +
+      "acts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8034,7 +8121,7 @@ public final class Structure {
     internal_static_structure_AttachmentData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_AttachmentData_descriptor,
-        new java.lang.String[] { "Orientation", "Offset", });
+        new java.lang.String[] { "OrientationFromParent", "Offset", "OrientationOfNode", });
     internal_static_structure_Attachment_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_structure_Attachment_fieldAccessorTable = new
