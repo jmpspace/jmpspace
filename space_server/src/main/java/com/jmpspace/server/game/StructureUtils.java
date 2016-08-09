@@ -61,7 +61,7 @@ class StructureUtils {
         case PLATFORM:
           Structure.Platform platform = part.getPlatform();
           GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
-          shapeFactory.setBase(new Coordinate(0.0, 0.0));
+          shapeFactory.setCentre(new Coordinate(0.0, 0.0));
           shapeFactory.setWidth(platform.getWidth() * atomicDistance);
           shapeFactory.setHeight(platform.getLength() * atomicDistance);
           partGeometry = shapeFactory.createRectangle();
@@ -72,7 +72,7 @@ class StructureUtils {
 
       attachStates.add(partGeometry);
 
-      // TODO: check for collisions
+      // TODO: check for overlapping structures
 
       return new GeometryCollection(attachStates.toArray(new Geometry[0]), factory);
     };
@@ -104,7 +104,7 @@ class StructureUtils {
     return StructureUtils.foldStructureNode(fAttach, fNode, tree);
   }
 
-  static List<StructureActor.PlatformWrapper> findPlatforms(Structure.StructureNode tree) {
+  static List<StructureActor.PlatformWrapper> findPlatforms(StructureActor.FloatingStructureRef floatingStructureRef) {
 
 //    List<StructureActor.PlatformWrapper> platforms;
 
@@ -126,13 +126,13 @@ class StructureUtils {
         Structure.Platform platform = part.getPlatform();
         int platformId = platformCounter.incrementAndGet();
         StructureActor.PlatformWrapper wrapper =
-                new StructureActor.PlatformWrapper(platformId, platform, new AffineTransformation());
+                new StructureActor.PlatformWrapper(platformId, platform, new AffineTransformation(), floatingStructureRef);
         newPlatforms.add(wrapper);
       }
       return newPlatforms;
     };
 
-    return StructureUtils.foldStructureNode(fAttach, fNode, tree);
+    return StructureUtils.foldStructureNode(fAttach, fNode, floatingStructureRef._floatingStructure.getStructure());
 
   }
 

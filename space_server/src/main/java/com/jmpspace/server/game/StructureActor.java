@@ -12,9 +12,9 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jooq.lambda.Seq;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
@@ -26,44 +26,49 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   private ActorRef<Instance.Request> _instanceRef;
   private SpaceBase<PhysicsRef> _playersBase;
   private List<PlatformWrapper> _platforms;
+  private Map<UUID, CryoTubeAddress> _cryoTubes = new HashMap<>();
 
   static class PlatformWrapper {
     int platformId;
     Platform platform;
     AffineTransformation platformRelativeLocation;
+    FloatingStructureRef floatingStructureRef;
 
-    PlatformWrapper(int platformId, Platform platform, AffineTransformation platformRelativeLocation) {
+    public PlatformWrapper(int platformId, Platform platform, AffineTransformation platformRelativeLocation, FloatingStructureRef floatingStructureRef) {
       this.platformId = platformId;
       this.platform = platform;
       this.platformRelativeLocation = platformRelativeLocation;
+      this.floatingStructureRef = floatingStructureRef;
     }
   }
 
   private class CryoTubeAddress {
-    UUID _uuid;
-    List<Integer> _address;
+    int id;
+    PlatformWrapper platform;
 
-    CryoTubeAddress(UUID uuid, List<Integer> address) {
-      _uuid = uuid;
-      _address = address;
+    public CryoTubeAddress(int id, PlatformWrapper platform) {
+      this.id = id;
+      this.platform = platform;
     }
   }
-
-  private Map<UUID, CryoTubeAddress> cryoTubes = new HashMap<>();
-
 
   StructureActor(FloatingStructureRef floatingStructureRef, ActorRef<Instance.Request> instanceRef, SpaceBase<PhysicsRef> playersBase) {
     _floatingStructureRef = floatingStructureRef;
     _instanceRef = instanceRef;
     _playersBase = playersBase;
-    _platforms = StructureUtils.findPlatforms(floatingStructureRef._floatingStructure.getStructure());
+    _platforms = StructureUtils.findPlatforms(floatingStructureRef);
 
-    List<List<Integer>> structureCryoTubes = StructureUtils.findCryoTubes(_floatingStructureRef._floatingStructure.getStructure());
+    List<CryoTubeAddress> cryoTubeAddresses = new ArrayList<>();
+    AtomicInteger cryoTubeCounter = new AtomicInteger();
 
-    structureCryoTubes.forEach(cryoTube -> {
-      UUID uuid = UUID.randomUUID();
-      CryoTubeAddress cryoTubeAddress = new CryoTubeAddress(uuid, cryoTube);
-      cryoTubes.put(uuid, cryoTubeAddress);
+    _platforms.forEach(platform -> {
+      platform.platform
+              .getPlacedItemsList().stream()
+              .filter(placedItem -> placedItem.getItem().hasCryoTube())
+              .forEach(placedCryoTube -> {
+                int id = cryoTubeCounter.getAndIncrement();
+                cryoTubeAddresses.add(new CryoTubeAddress(id, platform));
+              });
     });
   }
 
@@ -79,13 +84,18 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
       _staticGeometry = StructureUtils.calculateStructureGeometry(floatingStructure.getStructure());
     }
 
-    @Override
-    AABB calculateBounds() {
+    AffineTransformation absoluteTransform() {
       PhysicsState physicsState = _floatingStructure.getPhysicsState();
       Vector2 position = physicsState.getPosition();
       AffineTransformation floatingTransform = new AffineTransformation();
       floatingTransform.rotate(physicsState.getOrientation());
       floatingTransform.translate(position.getX(), position.getY());
+      return floatingTransform;
+    }
+
+    @Override
+    AABB calculateBounds() {
+      AffineTransformation floatingTransform = absoluteTransform();
       Geometry floatingGeometry = (Geometry)_staticGeometry.clone();
       floatingGeometry.apply(floatingTransform);
       Envelope bounds = floatingGeometry.getEnvelopeInternal();
@@ -102,17 +112,32 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   private Geometry _geom;
 
-  private static class PlayerOnBoard {
+  private static class PlayerOnBoard extends PhysicsRef {
     private ActorRef<Player.Request> _player;
-    private List<Integer> _platformAddress;
-    private Platform _platform;
+    private PlatformWrapper _platform;
     private Vector2 _position;
 
-    PlayerOnBoard(ActorRef<Player.Request> player, List<Integer> platformAddress, Platform platform, Vector2 position) {
+    PlayerOnBoard(ActorRef<Player.Request> player, PlatformWrapper platform, Vector2 position) {
       _player = player;
-      _platformAddress = platformAddress;
       _platform = platform;
       _position = position;
+    }
+
+    @Override
+    AABB calculateBounds() {
+      AffineTransformation transform = new AffineTransformation();
+      transform.translate(_position.getX(), _position.getY());
+      transform.composeBefore(_platform.platformRelativeLocation);
+      transform.composeBefore(_platform.floatingStructureRef.absoluteTransform());
+      Geometry playerGeometry = (Geometry)PlayerUtils.playerGeometry.clone();
+      playerGeometry.apply(transform);
+      Envelope bounds = playerGeometry.getEnvelopeInternal();
+      return AABB.create(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
+    }
+
+    @Override
+    void step(SpaceBase<PhysicsRef> base) throws InterruptedException, SuspendExecution {
+
     }
   }
 
@@ -125,9 +150,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
-    logger.info("Registering {} cryo tubes", cryoTubes.size());
+    logger.info("Registering {} cryo tubes", _cryoTubes.size());
 
-    _instanceRef.send(new Instance.RegisterCryoTubes(self(), cryoTubes.keySet()));
+    _instanceRef.send(new Instance.RegisterCryoTubes(self(), _cryoTubes.keySet()));
 
     //noinspection InfiniteLoopStatement
     for (;;) {
@@ -140,19 +165,15 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
         assert ! _playersOnBoard.containsKey(player);
 
-        CryoTubeAddress cryoTube = cryoTubes.get(spawn._cryoTubeId);
+        CryoTubeAddress cryoTubeAddress = _cryoTubes.get(spawn._cryoTubeId);
 
-        Platform platform = Seq.foldLeft(
-                cryoTube._address,
-                _floatingStructureRef._floatingStructure.getStructure(),
-                (node, i) -> node.getAttachments(i).getNode()
-                ).getPart().getPlatform();
+        PlatformWrapper platform = cryoTubeAddress.platform;
 
         Vector2 position = Vector2.getDefaultInstance();
 
-        logger.info("Spawning player {} on platform {} ({})", player, platform, cryoTube._address);
+        logger.info("Spawning player {} on platform {}", player, platform);
 
-        PlayerOnBoard playerOnBoard = new PlayerOnBoard(player, cryoTube._address, platform, position);
+        PlayerOnBoard playerOnBoard = new PlayerOnBoard(player, platform, position);
         _playersOnBoard.put(player, playerOnBoard);
 
         // TODO: playerOnBoard should be a Physics ref, and add it to the playerBase for global tracking
