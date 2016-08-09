@@ -4,7 +4,9 @@ import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
-import co.paralleluniverse.spacebase.SpaceBase;
+import co.paralleluniverse.spacebase.ElementUpdater;
+import co.paralleluniverse.spacebase.quasar.SpaceBase;
+import co.paralleluniverse.spacebase.SpatialToken;
 import com.jmpspace.contracts.SpaceServer.Structure.Platform;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.vividsolutions.jts.geom.Envelope;
@@ -103,8 +105,13 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     }
 
     @Override
-    void step(SpaceBase<PhysicsRef> base) throws InterruptedException, SuspendExecution {
-      // TODO
+    void step(ElementUpdater<PhysicsRef> base) {
+
+    }
+
+    @Override
+    void notifyOwner() throws SuspendExecution, InterruptedException {
+
     }
 
   }
@@ -136,9 +143,15 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     }
 
     @Override
-    void step(SpaceBase<PhysicsRef> base) throws InterruptedException, SuspendExecution {
+    void step(ElementUpdater<PhysicsRef> base) {
 
     }
+
+    @Override
+    void notifyOwner() throws SuspendExecution, InterruptedException {
+
+    }
+
   }
 
   private Map<ActorRef<Player.Request>, PlayerOnBoard> _playersOnBoard = new HashMap<>();
@@ -176,7 +189,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
         PlayerOnBoard playerOnBoard = new PlayerOnBoard(player, platform, position);
         _playersOnBoard.put(player, playerOnBoard);
 
-        // TODO: playerOnBoard should be a Physics ref, and add it to the playerBase for global tracking
+        SpatialToken playerOnBoardToken = _playersBase.insert(playerOnBoard, playerOnBoard.calculateBounds());
+
+        playerOnBoard.set_token(playerOnBoardToken);
 
         // TODO: send a message back to the Player? Or start a stream of messages to each player on board with position?
 

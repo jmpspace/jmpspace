@@ -5,6 +5,7 @@ import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
+import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.SpaceBase;
 import com.jmpspace.contracts.SpaceServer.Game;
 import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
@@ -50,7 +51,12 @@ public class Player extends BasicActor<Player.Request, Void> {
     }
 
     @Override
-    void step(SpaceBase<PhysicsRef> base) throws InterruptedException, SuspendExecution {
+    void step(ElementUpdater<PhysicsRef> elementUpdater)  {
+
+    }
+
+    @Override
+    void notifyOwner() throws SuspendExecution, InterruptedException {
 
     }
 

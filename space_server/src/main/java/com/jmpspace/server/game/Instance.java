@@ -4,8 +4,13 @@ import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.FiberUtil;
 import co.paralleluniverse.fibers.SuspendExecution;
-import co.paralleluniverse.spacebase.SpaceBase;
-import co.paralleluniverse.spacebase.SpaceBaseBuilder;
+//import co.paralleluniverse.spacebase.*;
+import co.paralleluniverse.spacebase.ElementUpdater;
+import co.paralleluniverse.spacebase.SpatialModifyingVisitor;
+import co.paralleluniverse.spacebase.SpatialQueries;
+import co.paralleluniverse.spacebase.quasar.ResultSet;
+import co.paralleluniverse.spacebase.quasar.SpaceBase;
+import co.paralleluniverse.spacebase.quasar.SpaceBaseBuilder;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
@@ -81,7 +86,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
     World initialWorld = SpawnRoom.world();
 
-    initialWorld.getFloatingStructuresList().forEach((WorldOuterClass.FloatingStructure floatingStructure) -> {
+    for (WorldOuterClass.FloatingStructure floatingStructure : initialWorld.getFloatingStructuresList()) {
 
       logger.debug("Found a structure");
 
@@ -93,7 +98,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
 //      _spawnPoints.put(structureRef, structureCryoTubes);
 
-    });
+    }
 
     for (;;) {
       final Request message = receive();
@@ -158,11 +163,24 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
       if (message instanceof GameTick) {
 
-        // TODO: physics step!
+        logger.debug("Game tick");
 
-//        _spaceBaseWrapper.players;
+        try(ResultSet<PhysicsRef> structures = _spaceBaseWrapper.largeCollidables.queryForUpdate(null, SpatialQueries.ALL_QUERY, false)) {
+          for (ElementUpdater<PhysicsRef> elementUpdater : structures.getResultForUpdate()) {
+            PhysicsRef ref = elementUpdater.elem();
+            ref.step(elementUpdater);
+            ref.notifyOwner();
+          }
+        };
 
-//        logger.debug("Game tick");
+        // TODO: atomicity matters?
+        try(ResultSet<PhysicsRef> players = _spaceBaseWrapper.players.queryForUpdate(null, SpatialQueries.ALL_QUERY, false)) {
+          for (ElementUpdater<PhysicsRef> elementUpdater : players.getResultForUpdate()) {
+            PhysicsRef ref = elementUpdater.elem();
+            ref.step(elementUpdater);
+            ref.notifyOwner();
+          }
+        };
 
         // TODO: parallel?
         for (Map.Entry<String, ActorRef<Player.Request>> entry : players.entrySet()) {

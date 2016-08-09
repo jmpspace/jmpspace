@@ -15,7 +15,7 @@ public class Ticker extends BasicActor<Object, Void> {
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
     for (;;) {
-      this.getStrand().sleep(50);
+      this.getStrand().sleep(1000);
       _instance.send(new Instance.GameTick());
     }
   }
