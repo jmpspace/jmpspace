@@ -2,8 +2,10 @@ package com.jmpspace.server;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
-import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.spacebase.quasar.SpaceBase;
+import co.paralleluniverse.spacebase.quasar.SpaceBaseBuilder;
 import com.jmpspace.server.game.Instance;
+import com.jmpspace.server.game.PhysicsRef;
 import com.jmpspace.server.game.Ticker;
 import io.undertow.Undertow;
 import io.undertow.server.session.InMemorySessionManager;
@@ -13,8 +15,8 @@ import io.undertow.server.session.SessionManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 class SpaceServer {
 
@@ -33,8 +35,9 @@ class SpaceServer {
           new SessionAttachmentHandler(sessionManager, sessionConfig);
 
 
-
-    ActorRef<Instance.Request> instanceRef = (new Instance(Instance.SpaceBaseWrapper.init())).spawn();
+    SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
+    SpaceBase<PhysicsRef> physicsBase = builder.build("stuff");
+    ActorRef<Instance.Request> instanceRef = (new Instance(physicsBase)).spawn();
 
     /*ActorRef<Object> tickerRef = */ (new Ticker(instanceRef)).spawn();
 

@@ -42,6 +42,7 @@ public class Player extends BasicActor<Player.Request, Void> {
     private PhysicsState physicsState;
 
     public FloatingPlayerRef(PhysicsState physicsState) {
+      super();
       this.physicsState = physicsState;
     }
 
@@ -51,7 +52,12 @@ public class Player extends BasicActor<Player.Request, Void> {
     }
 
     @Override
-    void step(ElementUpdater<PhysicsRef> elementUpdater)  {
+    public PhysicsStepType get_physicsType() {
+      return PhysicsStepType.Floating;
+    }
+
+    @Override
+    public void stepPhysics(ElementUpdater<PhysicsRef> elementUpdater)  {
 
     }
 
@@ -62,6 +68,11 @@ public class Player extends BasicActor<Player.Request, Void> {
 
     static AABB defaultBounds() {
       return AABB.create(-0.5, .5, -0.5, .5);
+    }
+
+    @Override
+    public boolean get_hasPlayerCamera() {
+      return true;
     }
 
   }

@@ -2,64 +2,44 @@ package com.jmpspace.server.game;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
-import co.paralleluniverse.fibers.FiberUtil;
 import co.paralleluniverse.fibers.SuspendExecution;
-//import co.paralleluniverse.spacebase.*;
 import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.SpatialModifyingVisitor;
 import co.paralleluniverse.spacebase.SpatialQueries;
-import co.paralleluniverse.spacebase.quasar.ResultSet;
 import co.paralleluniverse.spacebase.quasar.SpaceBase;
-import co.paralleluniverse.spacebase.quasar.SpaceBaseBuilder;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.Player.GameUpdate;
 import com.jmpspace.server.game.StructureActor.FloatingStructureRef;
 import com.jmpspace.server.game.common.CommonRequest;
+import com.jmpspace.server.game.physics.Queries;
+import com.jmpspace.server.game.physics.Visitors;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
 
-  public Instance(SpaceBaseWrapper spaceBaseWrapper) {
-    _spaceBaseWrapper = spaceBaseWrapper;
+  public Instance(SpaceBase<PhysicsRef> spaceBaseWrapper) {
+    _spaceBase = spaceBaseWrapper;
   }
+
+  public static final double viewDistance = 50;
 
   class DirtyTable {
     boolean cryoTubes = false;
     Set<String> playersNeedingRefresh = new HashSet<>();
   }
 
-  public static class SpaceBaseWrapper {
-
-    static final String PLAYER_DB = "player";
-    static final String LARGE_COLLIDE_DB = "large_collide";
-
-    SpaceBase<PhysicsRef> players;
-    SpaceBase<PhysicsRef> largeCollidables;
-
-    SpaceBaseWrapper(SpaceBase<PhysicsRef> players, SpaceBase<PhysicsRef> largeCollidables) {
-      this.players = players;
-      this.largeCollidables = largeCollidables;
-    }
-
-    public static SpaceBaseWrapper init() {
-      // FIXME: execution context, parallel or concurrent
-      // TODO: put this inside of the physics manager?
-      SpaceBaseBuilder builder = new SpaceBaseBuilder().setDimensions(2);
-      SpaceBase<PhysicsRef> players = builder.build(PLAYER_DB);
-      SpaceBase<PhysicsRef> largeCollidables = builder.build(LARGE_COLLIDE_DB);
-      return new SpaceBaseWrapper(players, largeCollidables);
-    }
-  }
-
   private static final Logger logger = LogManager.getLogger(Instance.class.getName());
 
-  private SpaceBaseWrapper _spaceBaseWrapper;
+  private SpaceBase<PhysicsRef> _spaceBase;
 
   class CryoTubeRef {
     UUID _uuid;
@@ -75,6 +55,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
   private Map<String, ActorRef<Player.Request>> players = new HashMap<>();
   private DirtyTable dirtyTable = new DirtyTable();
 
+  private AtomicInteger stepCounter = new AtomicInteger();
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
@@ -91,8 +72,8 @@ public class Instance extends BasicActor<Instance.Request, Void> {
       logger.debug("Found a structure");
 
       FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
-      _spaceBaseWrapper.largeCollidables.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
-      StructureActor structureActor = new StructureActor(floatingStructureRef, self(), _spaceBaseWrapper.players);
+      _spaceBase.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
+      StructureActor structureActor = new StructureActor(floatingStructureRef, self(), _spaceBase);
       ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
       floatingStructureRef._owner = structureRef;
 
@@ -163,24 +144,22 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
       if (message instanceof GameTick) {
 
+        int tickStepNumber = stepCounter.getAndIncrement();
+
         logger.debug("Game tick");
 
-        try(ResultSet<PhysicsRef> structures = _spaceBaseWrapper.largeCollidables.queryForUpdate(null, SpatialQueries.ALL_QUERY, false)) {
-          for (ElementUpdater<PhysicsRef> elementUpdater : structures.getResultForUpdate()) {
-            PhysicsRef ref = elementUpdater.elem();
-            ref.step(elementUpdater);
-            ref.notifyOwner();
-          }
-        };
+        // Move all floating entities
+        _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(PhysicsRef.PhysicsStepType.Floating), new Visitors.PhysicsStep());
 
-        // TODO: atomicity matters?
-        try(ResultSet<PhysicsRef> players = _spaceBaseWrapper.players.queryForUpdate(null, SpatialQueries.ALL_QUERY, false)) {
-          for (ElementUpdater<PhysicsRef> elementUpdater : players.getResultForUpdate()) {
-            PhysicsRef ref = elementUpdater.elem();
-            ref.step(elementUpdater);
-            ref.notifyOwner();
-          }
-        };
+        // Update all attached entities
+        _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(PhysicsRef.PhysicsStepType.Attached), new Visitors.PhysicsStep());
+
+        // TODO: parallelism?
+        // _spaceBase.joinAllPendingOperations();
+
+        ConcurrentMap<Integer, List<PhysicsRef>> visibleEntities = new ConcurrentHashMap<>();
+
+        _spaceBase.join(new Queries.PlayerVisibility(), new Visitors.SaveVisibleEntities(visibleEntities));
 
         // TODO: parallel?
         for (Map.Entry<String, ActorRef<Player.Request>> entry : players.entrySet()) {

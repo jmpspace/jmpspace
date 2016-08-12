@@ -82,6 +82,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     ActorRef<Request> _owner;
 
     FloatingStructureRef(FloatingStructure floatingStructure) {
+      super();
       _floatingStructure = floatingStructure;
       _staticGeometry = StructureUtils.calculateStructureGeometry(floatingStructure.getStructure());
     }
@@ -105,8 +106,12 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     }
 
     @Override
-    void step(ElementUpdater<PhysicsRef> base) {
+    public PhysicsStepType get_physicsType() {
+      return PhysicsStepType.Floating;
+    }
 
+    @Override
+    public void stepPhysics(ElementUpdater<PhysicsRef> base) {
     }
 
     @Override
@@ -116,15 +121,13 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   }
 
-
-  private Geometry _geom;
-
   private static class PlayerOnBoard extends PhysicsRef {
     private ActorRef<Player.Request> _player;
     private PlatformWrapper _platform;
     private Vector2 _position;
 
     PlayerOnBoard(ActorRef<Player.Request> player, PlatformWrapper platform, Vector2 position) {
+      super();
       _player = player;
       _platform = platform;
       _position = position;
@@ -143,7 +146,12 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     }
 
     @Override
-    void step(ElementUpdater<PhysicsRef> base) {
+    public PhysicsStepType get_physicsType() {
+      return PhysicsStepType.Attached;
+    }
+
+    @Override
+    public void stepPhysics(ElementUpdater<PhysicsRef> base) {
 
     }
 
@@ -152,6 +160,10 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
     }
 
+    @Override
+    public boolean get_hasPlayerCamera() {
+      return true;
+    }
   }
 
   private Map<ActorRef<Player.Request>, PlayerOnBoard> _playersOnBoard = new HashMap<>();
