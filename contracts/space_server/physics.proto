@@ -1,0 +1,18 @@
+
+syntax = "proto2";
+
+package physics;
+
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
+message Vector2 {
+  required double x = 1;
+  required double y = 2;
+}
+
+message PhysicsState {
+  required Vector2 position = 1;
+  required double orientation = 2;
+  required Vector2 velocity = 3;
+  required double spin = 4;
+}

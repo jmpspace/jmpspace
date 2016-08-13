@@ -5,25 +5,23 @@ package world;
 
 option java_package = "com.jmpspace.contracts.SpaceServer";
 
+import "physics.proto";
+import "player.proto";
 import "structure.proto";
 
-message Vector2 {
-  required double x = 1;
-  required double y = 2;
+message Entity {
+  oneof entity {
+    structure.Structure structure = 1;
+    player.Player player = 2;
+  }
 }
 
-message PhysicsState {
-  required Vector2 position = 1;
-  required double orientation = 2;
-  required Vector2 velocity = 3;
-  required double spin = 4;
-}
-
-message FloatingStructure {
-  required PhysicsState physicsState = 1;
-  required structure.StructureNode structure = 2;
+message FloatingEntity {
+  required physics.PhysicsState physicsState = 1;
+  required Entity entity = 2;
 }
 
 message World {
-  repeated FloatingStructure floatingStructures = 1;
+  repeated FloatingEntity floatingEntities = 1;
+  required player.State playerState = 2;
 }

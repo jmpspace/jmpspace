@@ -7,7 +7,11 @@ import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.quasar.SpaceBase;
 import co.paralleluniverse.spacebase.SpatialToken;
-import com.jmpspace.contracts.SpaceServer.Structure.Platform;
+import com.jmpspace.contracts.SpaceServer.Physics;
+import com.jmpspace.contracts.SpaceServer.Physics.Vector2;
+import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
+import com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform;
+import com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureNode;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
@@ -76,19 +80,21 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   static class FloatingStructureRef extends PhysicsRef {
 
-    FloatingStructure _floatingStructure;
+//    FloatingStructure _floatingStructure;
+
+    Physics.PhysicsState physicsState;
+    StructureNode tree;
     Geometry _staticGeometry;
 
     ActorRef<Request> _owner;
 
-    FloatingStructureRef(FloatingStructure floatingStructure) {
-      super();
-      _floatingStructure = floatingStructure;
-      _staticGeometry = StructureUtils.calculateStructureGeometry(floatingStructure.getStructure());
+    public FloatingStructureRef(Physics.PhysicsState physicsState, StructureNode tree) {
+      this.physicsState = physicsState;
+      this.tree = tree;
+      _staticGeometry = StructureUtils.calculateStructureGeometry(tree);
     }
 
     AffineTransformation absoluteTransform() {
-      PhysicsState physicsState = _floatingStructure.getPhysicsState();
       Vector2 position = physicsState.getPosition();
       AffineTransformation floatingTransform = new AffineTransformation();
       floatingTransform.rotate(physicsState.getOrientation());
@@ -121,7 +127,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   }
 
-  private static class PlayerOnBoard extends PhysicsRef {
+  public static class PlayerOnBoard extends PhysicsRef {
     private ActorRef<Player.Request> _player;
     private PlatformWrapper _platform;
     private Vector2 _position;

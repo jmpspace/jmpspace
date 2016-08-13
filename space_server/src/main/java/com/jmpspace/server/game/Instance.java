@@ -2,6 +2,7 @@ package com.jmpspace.server.game;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
+import co.paralleluniverse.common.util.ConcurrentSet;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.SpatialModifyingVisitor;
@@ -67,17 +68,22 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
     World initialWorld = SpawnRoom.world();
 
-    for (WorldOuterClass.FloatingStructure floatingStructure : initialWorld.getFloatingStructuresList()) {
+    for (WorldOuterClass.FloatingEntity floatingEntity : initialWorld.getFloatingEntitiesList()) {
 
       logger.debug("Found a structure");
 
-      FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingStructure);
-      _spaceBase.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
-      StructureActor structureActor = new StructureActor(floatingStructureRef, self(), _spaceBase);
-      ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
-      floatingStructureRef._owner = structureRef;
+      if (floatingEntity.getEntity().hasStructure()) {
+
+        FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingEntity.getPhysicsState(), floatingEntity.getEntity().getStructure().getTree());
+        _spaceBase.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
+        StructureActor structureActor = new StructureActor(floatingStructureRef, self(), _spaceBase);
+        ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
+        floatingStructureRef._owner = structureRef;
 
 //      _spawnPoints.put(structureRef, structureCryoTubes);
+      } else {
+        // don't include
+      }
 
     }
 
@@ -157,29 +163,21 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         // TODO: parallelism?
         // _spaceBase.joinAllPendingOperations();
 
-        ConcurrentMap<Integer, List<PhysicsRef>> visibleEntities = new ConcurrentHashMap<>();
+        ConcurrentMap<Integer, ConcurrentMap<PhysicsRef, Boolean>> visibleEntities = new ConcurrentHashMap<>();
 
         _spaceBase.join(new Queries.PlayerVisibility(), new Visitors.SaveVisibleEntities(visibleEntities));
 
         // TODO: parallel?
+
+        GameUpdate gameUpdate = new GameUpdate();
+        if (dirtyTable.cryoTubes) {
+          gameUpdate._cryoTubeIds = Optional.of(cryoTubes.keySet());
+        }
+        gameUpdate.allVisibleObjects = visibleEntities;
+
         for (Map.Entry<String, ActorRef<Player.Request>> entry : players.entrySet()) {
 
-          boolean newPlayerData = false;
-
-          String playerName = entry.getKey();
-          ActorRef<Player.Request> playerRef = entry.getValue();
-
-          boolean refreshPlayer = dirtyTable.playersNeedingRefresh.contains(playerName);
-
-          GameUpdate gameUpdate = new GameUpdate();
-          if (refreshPlayer || dirtyTable.cryoTubes) {
-            gameUpdate._cryoTubeIds = Optional.of(cryoTubes.keySet());
-            newPlayerData = true;
-          }
-
-          if (newPlayerData) {
-            entry.getValue().send(gameUpdate);
-          }
+          entry.getValue().send(gameUpdate);
 
         }
 

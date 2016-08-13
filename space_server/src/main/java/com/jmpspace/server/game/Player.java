@@ -2,21 +2,19 @@ package com.jmpspace.server.game;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
-import co.paralleluniverse.actors.behaviors.FromMessage;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
-import co.paralleluniverse.spacebase.SpaceBase;
 import com.jmpspace.contracts.SpaceServer.Game;
 import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
-import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
+import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.util.ReflectionUtil;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
@@ -83,12 +81,21 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   public static class Floating extends State {
 
-    PhysicsRef _ref;
+    FloatingPlayerRef _ref;
 
-    Floating(PhysicsRef ref) {
+    public Floating(FloatingPlayerRef ref) {
       _ref = ref;
     }
 
+  }
+
+  public static class OnBoard extends State {
+
+    StructureActor.PlayerOnBoard ref;
+
+    public OnBoard(StructureActor.PlayerOnBoard _ref) {
+      this.ref = _ref;
+    }
   }
 
   class PlatformRef {
@@ -142,6 +149,17 @@ public class Player extends BasicActor<Player.Request, Void> {
 
       }
 
+      if (message instanceof GameUpdate && _state instanceof OnBoard) {
+
+        GameUpdate gameUpdate = (GameUpdate) message;
+        OnBoard onBoard = (OnBoard) _state;
+
+        Set<PhysicsRef> myVisibleObjecs = gameUpdate.allVisibleObjects.get(onBoard.ref.getId()).keySet();
+
+        myVisibleObjecs.stream().map(ref -> ref );
+
+      }
+
       if (message instanceof GameRequest) {
 
         Game.GameRequest gameRequest = ((GameRequest) message).gameRequest;
@@ -160,6 +178,14 @@ public class Player extends BasicActor<Player.Request, Void> {
 
       }
 
+      if (message instanceof Spawned && _state instanceof SpawnPending) {
+
+        Spawned spawned = (Spawned) message;
+
+        _state = new Player.OnBoard(spawned.ref);
+
+      }
+
     }
   }
 
@@ -167,9 +193,19 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   }
 
+  static class Spawned extends Request {
+
+    StructureActor.PlayerOnBoard ref;
+
+    public Spawned(StructureActor.PlayerOnBoard ref) {
+      this.ref = ref;
+    }
+  }
+
   static class GameUpdate extends Request {
 
     Optional<Set<UUID>> _cryoTubeIds = Optional.empty();
+    Map<Integer, ConcurrentMap<PhysicsRef, Boolean>> allVisibleObjects;
 
   }
 

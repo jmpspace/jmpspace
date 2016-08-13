@@ -1,0 +1,31 @@
+
+syntax = "proto2";
+
+package player;
+
+option java_package = "com.jmpspace.contracts.SpaceServer";
+
+import "physics.proto";
+
+message Player {}
+
+message Unspawned {}
+
+message Floating {
+  required physics.PhysicsState physicsState = 1;
+}
+
+message Onboard {
+  required physics.PhysicsState physicsState = 1;
+  required int32 structureId = 2;
+  repeated int32 platformAddress = 3;
+  required physics.Vector2 platformPosition = 4;
+}
+
+message State {
+  oneof state {
+    Unspawned unspawned = 1;
+    Floating floating = 2;
+    Onboard onboard = 3;
+  }
+}
