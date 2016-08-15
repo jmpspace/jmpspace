@@ -7,6 +7,7 @@ import com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentData;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.Part;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureNode;
+import com.jmpspace.server.game.entities.FloatingStructure;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryCollection;
@@ -19,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class StructureUtils {
+public class StructureUtils {
 
   static final double atomicRotation = Math.PI / 6;
   static final double atomicDistance = 1.0;
@@ -51,7 +52,7 @@ class StructureUtils {
     return fNode.apply(node.getPart(), subResults);
   }
 
-  static Geometry calculateStructureGeometry(StructureNode tree) {
+  public static Geometry calculateStructureGeometry(StructureNode tree) {
 
     GeometryFactory factory = new GeometryFactory();
 
@@ -108,7 +109,7 @@ class StructureUtils {
     return StructureUtils.foldStructureNode(fAttach, fNode, tree);
   }
 
-  static List<StructureActor.PlatformWrapper> findPlatforms(StructureActor.FloatingStructureRef floatingStructureRef) {
+  static List<StructureActor.PlatformWrapper> findPlatforms(FloatingStructure floatingStructureRef) {
 
 //    List<StructureActor.PlatformWrapper> platforms;
 
@@ -136,7 +137,7 @@ class StructureUtils {
       return newPlatforms;
     };
 
-    return StructureUtils.foldStructureNode(fAttach, fNode, floatingStructureRef.tree);
+    return StructureUtils.foldStructureNode(fAttach, fNode, floatingStructureRef.structureComponent().tree);
 
   }
 

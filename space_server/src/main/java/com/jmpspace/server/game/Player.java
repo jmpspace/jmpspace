@@ -156,7 +156,7 @@ public class Player extends BasicActor<Player.Request, Void> {
 
         Set<PhysicsRef> myVisibleObjecs = gameUpdate.allVisibleObjects.get(onBoard.ref.getId()).keySet();
 
-        myVisibleObjecs.stream().map(ref -> ref );
+        myVisibleObjecs.stream().map(ref -> ref);
 
       }
 
@@ -206,6 +206,8 @@ public class Player extends BasicActor<Player.Request, Void> {
 
     Optional<Set<UUID>> _cryoTubeIds = Optional.empty();
     Map<Integer, ConcurrentMap<PhysicsRef, Boolean>> allVisibleObjects;
+
+
 
   }
 

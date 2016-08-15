@@ -2,21 +2,24 @@ package com.jmpspace.server.game;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
-import co.paralleluniverse.common.util.ConcurrentSet;
 import co.paralleluniverse.fibers.SuspendExecution;
-import co.paralleluniverse.spacebase.ElementUpdater;
-import co.paralleluniverse.spacebase.SpatialModifyingVisitor;
-import co.paralleluniverse.spacebase.SpatialQueries;
 import co.paralleluniverse.spacebase.quasar.SpaceBase;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.Player.GameUpdate;
-import com.jmpspace.server.game.StructureActor.FloatingStructureRef;
 import com.jmpspace.server.game.common.CommonRequest;
+import com.jmpspace.server.game.ecs.Entity;
+import com.jmpspace.server.game.ecs.Entity.HasPhysics;
+import com.jmpspace.server.game.ecs.GeometryComponent;
+import com.jmpspace.server.game.ecs.PhysicsComponent;
+import com.jmpspace.server.game.ecs.SimplePhysicsComponent;
+import com.jmpspace.server.game.entities.FloatingStructure;
 import com.jmpspace.server.game.physics.Queries;
 import com.jmpspace.server.game.physics.Visitors;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
+import com.vividsolutions.jts.geom.Geometry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,26 +30,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Instance extends BasicActor<Instance.Request, Void> {
 
-  public Instance(SpaceBase<PhysicsRef> spaceBaseWrapper) {
-    _spaceBase = spaceBaseWrapper;
-  }
-
   public static final double viewDistance = 50;
 
-  class DirtyTable {
+  private class DirtyTable {
     boolean cryoTubes = false;
     Set<String> playersNeedingRefresh = new HashSet<>();
   }
 
   private static final Logger logger = LogManager.getLogger(Instance.class.getName());
 
-  private SpaceBase<PhysicsRef> _spaceBase;
+  private SpaceBase<HasPhysics> _spaceBase;
 
-  class CryoTubeRef {
+  public Instance(SpaceBase<HasPhysics> spaceBaseWrapper) {
+    _spaceBase = spaceBaseWrapper;
+  }
+
+  private class CryoTubeRef {
     UUID _uuid;
     ActorRef<StructureActor.Request> _structureActor;
 
-    public CryoTubeRef(UUID uuid, ActorRef<StructureActor.Request> structureActor) {
+    CryoTubeRef(UUID uuid, ActorRef<StructureActor.Request> structureActor) {
       _uuid = uuid;
       _structureActor = structureActor;
     }
@@ -57,6 +60,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
   private DirtyTable dirtyTable = new DirtyTable();
 
   private AtomicInteger stepCounter = new AtomicInteger();
+  private AtomicInteger structureCounter = new AtomicInteger();
 
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
@@ -68,17 +72,21 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
     World initialWorld = SpawnRoom.world();
 
-    for (WorldOuterClass.FloatingEntity floatingEntity : initialWorld.getFloatingEntitiesList()) {
+    for (FloatingEntity floatingEntity : initialWorld.getFloatingEntitiesList()) {
 
       logger.debug("Found a structure");
 
       if (floatingEntity.getEntity().hasStructure()) {
 
-        FloatingStructureRef floatingStructureRef = new FloatingStructureRef(floatingEntity.getPhysicsState(), floatingEntity.getEntity().getStructure().getTree());
-        _spaceBase.insert(floatingStructureRef, floatingStructureRef.calculateBounds());
-        StructureActor structureActor = new StructureActor(floatingStructureRef, self(), _spaceBase);
+        // Don't use the deserialized id, generate a fresh, runtime id
+        Integer structureId = structureCounter.getAndIncrement();
+
+        FloatingStructure floatingStructure = new FloatingStructure(structureId, floatingEntity.getEntity().getStructure().getTree(), floatingEntity.getPhysicsState());
+
+        _spaceBase.insert(floatingStructure, floatingStructure.physicsComponent().calculateAABB());
+
+        StructureActor structureActor = new StructureActor(floatingStructure, self(), _spaceBase);
         ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
-        floatingStructureRef._owner = structureRef;
 
 //      _spawnPoints.put(structureRef, structureCryoTubes);
       } else {

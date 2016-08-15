@@ -1,19 +1,13 @@
 package com.jmpspace.server.game.physics;
 
-import co.paralleluniverse.common.util.ConcurrentSet;
 import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.SpatialJoinVisitor;
 import co.paralleluniverse.spacebase.SpatialModifyingVisitor;
 import co.paralleluniverse.spacebase.SpatialToken;
 import com.jmpspace.server.game.PhysicsRef;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.BiFunction;
-import java.util.function.BooleanSupplier;
 
 public class Visitors {
 

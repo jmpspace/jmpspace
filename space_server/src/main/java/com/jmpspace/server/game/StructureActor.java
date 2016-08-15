@@ -13,6 +13,9 @@ import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureNode;
 import com.jmpspace.server.game.common.CommonRequest;
+import com.jmpspace.server.game.ecs.*;
+import com.jmpspace.server.game.ecs.Entity;
+import com.jmpspace.server.game.entities.FloatingStructure;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
@@ -28,9 +31,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   private static final Logger logger = LogManager.getLogger(StructureActor.class.getName());
 
-  private FloatingStructureRef _floatingStructureRef;
+  private FloatingStructure _floatingStructureRef;
   private ActorRef<Instance.Request> _instanceRef;
-  private SpaceBase<PhysicsRef> _playersBase;
+  private SpaceBase<Entity.HasPhysics> _playersBase;
   private List<PlatformWrapper> _platforms;
   private Map<UUID, CryoTubeAddress> _cryoTubes = new HashMap<>();
 
@@ -38,9 +41,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     int platformId;
     Platform platform;
     AffineTransformation platformRelativeLocation;
-    FloatingStructureRef floatingStructureRef;
+    FloatingStructure floatingStructureRef;
 
-    public PlatformWrapper(int platformId, Platform platform, AffineTransformation platformRelativeLocation, FloatingStructureRef floatingStructureRef) {
+    public PlatformWrapper(int platformId, Platform platform, AffineTransformation platformRelativeLocation, FloatingStructure floatingStructureRef) {
       this.platformId = platformId;
       this.platform = platform;
       this.platformRelativeLocation = platformRelativeLocation;
@@ -58,7 +61,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     }
   }
 
-  StructureActor(FloatingStructureRef floatingStructureRef, ActorRef<Instance.Request> instanceRef, SpaceBase<PhysicsRef> playersBase) {
+  StructureActor(FloatingStructure floatingStructureRef, ActorRef<Instance.Request> instanceRef, SpaceBase<Entity.HasPhysics> playersBase) {
     _floatingStructureRef = floatingStructureRef;
     _instanceRef = instanceRef;
     _playersBase = playersBase;
@@ -76,55 +79,6 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
                 cryoTubeAddresses.add(new CryoTubeAddress(id, platform));
               });
     });
-  }
-
-  static class FloatingStructureRef extends PhysicsRef {
-
-//    FloatingStructure _floatingStructure;
-
-    Physics.PhysicsState physicsState;
-    StructureNode tree;
-    Geometry _staticGeometry;
-
-    ActorRef<Request> _owner;
-
-    public FloatingStructureRef(Physics.PhysicsState physicsState, StructureNode tree) {
-      this.physicsState = physicsState;
-      this.tree = tree;
-      _staticGeometry = StructureUtils.calculateStructureGeometry(tree);
-    }
-
-    AffineTransformation absoluteTransform() {
-      Vector2 position = physicsState.getPosition();
-      AffineTransformation floatingTransform = new AffineTransformation();
-      floatingTransform.rotate(physicsState.getOrientation());
-      floatingTransform.translate(position.getX(), position.getY());
-      return floatingTransform;
-    }
-
-    @Override
-    AABB calculateBounds() {
-      AffineTransformation floatingTransform = absoluteTransform();
-      Geometry floatingGeometry = (Geometry)_staticGeometry.clone();
-      floatingGeometry.apply(floatingTransform);
-      Envelope bounds = floatingGeometry.getEnvelopeInternal();
-      return AABB.create(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
-    }
-
-    @Override
-    public PhysicsStepType get_physicsType() {
-      return PhysicsStepType.Floating;
-    }
-
-    @Override
-    public void stepPhysics(ElementUpdater<PhysicsRef> base) {
-    }
-
-    @Override
-    void notifyOwner() throws SuspendExecution, InterruptedException {
-
-    }
-
   }
 
   public static class PlayerOnBoard extends PhysicsRef {
