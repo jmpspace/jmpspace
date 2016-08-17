@@ -10,14 +10,17 @@ import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
 import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
+import com.jmpspace.server.game.ecs.Entity.HashSerializeEntity;
+import com.jmpspace.server.game.entities.PlayerOnBoard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
-
-import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
 // TODO: potential refactor, merge this and PlayerClient? not if there are multiple Instance planned...
 
@@ -91,9 +94,9 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   public static class OnBoard extends State {
 
-    StructureActor.PlayerOnBoard ref;
+    PlayerOnBoard ref;
 
-    public OnBoard(StructureActor.PlayerOnBoard _ref) {
+    public OnBoard(PlayerOnBoard _ref) {
       this.ref = _ref;
     }
   }
@@ -154,7 +157,7 @@ public class Player extends BasicActor<Player.Request, Void> {
         GameUpdate gameUpdate = (GameUpdate) message;
         OnBoard onBoard = (OnBoard) _state;
 
-        Set<PhysicsRef> myVisibleObjecs = gameUpdate.allVisibleObjects.get(onBoard.ref.getId()).keySet();
+        Set<HashSerializeEntity> myVisibleObjecs = gameUpdate.allVisibleObjects.get(onBoard.ref.cameraComponent().id).keySet();
 
         myVisibleObjecs.stream().map(ref -> ref);
 
@@ -195,9 +198,9 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   static class Spawned extends Request {
 
-    StructureActor.PlayerOnBoard ref;
+    PlayerOnBoard ref;
 
-    public Spawned(StructureActor.PlayerOnBoard ref) {
+    public Spawned(PlayerOnBoard ref) {
       this.ref = ref;
     }
   }
@@ -205,7 +208,7 @@ public class Player extends BasicActor<Player.Request, Void> {
   static class GameUpdate extends Request {
 
     Optional<Set<UUID>> _cryoTubeIds = Optional.empty();
-    Map<Integer, ConcurrentMap<PhysicsRef, Boolean>> allVisibleObjects;
+    ConcurrentMap<Integer, ConcurrentMap<HashSerializeEntity, Boolean>> allVisibleObjects;
 
 
 

@@ -5,14 +5,20 @@ import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.SpatialQuery;
 import co.paralleluniverse.spacebase.queries.DistanceJoin;
 import com.jmpspace.server.game.PhysicsRef;
+import com.jmpspace.server.game.ecs.Entity;
+import com.jmpspace.server.game.ecs.Entity.HasCamera;
+import com.jmpspace.server.game.ecs.Entity.HasPhysics;
+import com.jmpspace.server.game.ecs.Entity.HashSerializeEntity;
+import com.jmpspace.server.game.ecs.PhysicsComponent;
+import com.jmpspace.server.game.ecs.PhysicsComponent.PhysicsStepType;
 
 public class Queries {
 
-  public static class AllOfPhysicsStepType implements SpatialQuery<PhysicsRef> {
+  public static class AllOfPhysicsStepType implements SpatialQuery<HasPhysics> {
 
-    private PhysicsRef.PhysicsStepType physicsStepType;
+    private PhysicsStepType physicsStepType;
 
-    public AllOfPhysicsStepType(PhysicsRef.PhysicsStepType physicsStepType) {
+    public AllOfPhysicsStepType(PhysicsStepType physicsStepType) {
       this.physicsStepType = physicsStepType;
     }
 
@@ -22,12 +28,12 @@ public class Queries {
     }
 
     @Override
-    public boolean queryElement(AABB aabb, PhysicsRef physicsRef) {
-      return physicsRef.get_physicsType() == physicsStepType;
+    public boolean queryElement(AABB aabb, HasPhysics physicsRef) {
+      return physicsRef.physicsComponent().stepType == physicsStepType;
     }
   }
 
-  public static class PlayerVisibility extends DistanceJoin<PhysicsRef, PhysicsRef> {
+  public static class PlayerVisibility extends DistanceJoin<HasPhysics, HasPhysics> {
 
     private static final int playerVisbilityDistance = 50;
 
@@ -36,8 +42,8 @@ public class Queries {
     }
 
     @Override
-    public boolean joinElements(AABB b1, PhysicsRef playerRef, AABB b2, PhysicsRef other) {
-      return playerRef.get_hasPlayerCamera();
+    public boolean joinElements(AABB b1, HasPhysics playerRef, AABB b2, HasPhysics other) {
+      return (playerRef instanceof HasCamera) && (other instanceof HashSerializeEntity);
     }
   }
 

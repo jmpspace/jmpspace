@@ -11,17 +11,19 @@ import com.vividsolutions.jts.geom.util.AffineTransformation;
 
 public abstract class SimplePhysicsComponent extends PhysicsComponent {
 
+  Physics.PhysicsState.Builder state;
+
   public SimplePhysicsComponent(Entity entity, Physics.PhysicsState state, PhysicsComponent.PhysicsStepType type) {
-    super(entity, state, type);
+    super(entity, type);
+    this.state = Physics.PhysicsState.newBuilder(state);
+  }
+
+  public AffineTransformation calculateAbsoluteTransform() {
+    return Utils.absoluteTransform(state);
   }
 
   @Override
-  public AABB calculateAABB() {
-
-  }
-
-  @Override
-  void step(ElementUpdater<Entity.HasPhysics> updater) {
+  public void step(ElementUpdater<Entity.HasPhysics> updater) {
     Vector2 position = state.getPosition();
     Double orientation = state.getOrientation();
     Vector2 velocity = state.getVelocity();
@@ -37,5 +39,9 @@ public abstract class SimplePhysicsComponent extends PhysicsComponent {
     state.setPosition(newPosition).setOrientation(newOrientation);
 
     updater.update(calculateAABB());
+  }
+
+  public Physics.PhysicsState calculatePhysicsState() {
+    return state.build();
   }
 }

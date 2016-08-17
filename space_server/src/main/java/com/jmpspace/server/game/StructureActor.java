@@ -10,12 +10,14 @@ import co.paralleluniverse.spacebase.SpatialToken;
 import com.jmpspace.contracts.SpaceServer.Physics;
 import com.jmpspace.contracts.SpaceServer.Physics.Vector2;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
-import com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform;
+import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureNode;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.jmpspace.server.game.ecs.*;
 import com.jmpspace.server.game.ecs.Entity;
 import com.jmpspace.server.game.entities.FloatingStructure;
+import com.jmpspace.server.game.entities.Platform;
+import com.jmpspace.server.game.entities.PlayerOnBoard;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
@@ -34,28 +36,28 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   private FloatingStructure _floatingStructureRef;
   private ActorRef<Instance.Request> _instanceRef;
   private SpaceBase<Entity.HasPhysics> _playersBase;
-  private List<PlatformWrapper> _platforms;
+  private List<Platform> _platforms;
   private Map<UUID, CryoTubeAddress> _cryoTubes = new HashMap<>();
 
-  static class PlatformWrapper {
-    int platformId;
-    Platform platform;
-    AffineTransformation platformRelativeLocation;
-    FloatingStructure floatingStructureRef;
-
-    public PlatformWrapper(int platformId, Platform platform, AffineTransformation platformRelativeLocation, FloatingStructure floatingStructureRef) {
-      this.platformId = platformId;
-      this.platform = platform;
-      this.platformRelativeLocation = platformRelativeLocation;
-      this.floatingStructureRef = floatingStructureRef;
-    }
-  }
+//  static class PlatformWrapper {
+//    int platformId;
+//    StructureOuterClass.Platform platform;
+//    AffineTransformation platformRelativeLocation;
+//    FloatingStructure floatingStructureRef;
+//
+//    public PlatformWrapper(int platformId, StructureOuterClass.Platform platform, AffineTransformation platformRelativeLocation, FloatingStructure floatingStructureRef) {
+//      this.platformId = platformId;
+//      this.platform = platform;
+//      this.platformRelativeLocation = platformRelativeLocation;
+//      this.floatingStructureRef = floatingStructureRef;
+//    }
+//  }
 
   private class CryoTubeAddress {
     int id;
-    PlatformWrapper platform;
+    Platform platform;
 
-    public CryoTubeAddress(int id, PlatformWrapper platform) {
+    public CryoTubeAddress(int id, Platform platform) {
       this.id = id;
       this.platform = platform;
     }
@@ -71,7 +73,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     AtomicInteger cryoTubeCounter = new AtomicInteger();
 
     _platforms.forEach(platform -> {
-      platform.platform
+      platform.platformPart
               .getPlacedItemsList().stream()
               .filter(placedItem -> placedItem.getItem().hasCryoTube())
               .forEach(placedCryoTube -> {
@@ -81,51 +83,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     });
   }
 
-  public static class PlayerOnBoard extends PhysicsRef {
-    private ActorRef<Player.Request> _player;
-    private PlatformWrapper _platform;
-    private Vector2 _position;
-
-    PlayerOnBoard(ActorRef<Player.Request> player, PlatformWrapper platform, Vector2 position) {
-      super();
-      _player = player;
-      _platform = platform;
-      _position = position;
-    }
-
-    @Override
-    AABB calculateBounds() {
-      AffineTransformation transform = new AffineTransformation();
-      transform.translate(_position.getX(), _position.getY());
-      transform.composeBefore(_platform.platformRelativeLocation);
-      transform.composeBefore(_platform.floatingStructureRef.absoluteTransform());
-      Geometry playerGeometry = (Geometry)PlayerUtils.playerGeometry.clone();
-      playerGeometry.apply(transform);
-      Envelope bounds = playerGeometry.getEnvelopeInternal();
-      return AABB.create(bounds.getMinX(), bounds.getMaxX(), bounds.getMinY(), bounds.getMaxY());
-    }
-
-    @Override
-    public PhysicsStepType get_physicsType() {
-      return PhysicsStepType.Attached;
-    }
-
-    @Override
-    public void stepPhysics(ElementUpdater<PhysicsRef> base) {
-
-    }
-
-    @Override
-    void notifyOwner() throws SuspendExecution, InterruptedException {
-
-    }
-
-    @Override
-    public boolean get_hasPlayerCamera() {
-      return true;
-    }
-  }
-
+  // Note: probably the responsibility of Platform now
   private Map<ActorRef<Player.Request>, PlayerOnBoard> _playersOnBoard = new HashMap<>();
 
 //  abstract static class State {
@@ -152,18 +110,16 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
         CryoTubeAddress cryoTubeAddress = _cryoTubes.get(spawn._cryoTubeId);
 
-        PlatformWrapper platform = cryoTubeAddress.platform;
+        Platform platform = cryoTubeAddress.platform;
 
         Vector2 position = Vector2.getDefaultInstance();
 
         logger.info("Spawning player {} on platform {}", player, platform);
 
-        PlayerOnBoard playerOnBoard = new PlayerOnBoard(player, platform, position);
+        PlayerOnBoard playerOnBoard = new PlayerOnBoard(platform, position, player);
         _playersOnBoard.put(player, playerOnBoard);
 
-        SpatialToken playerOnBoardToken = _playersBase.insert(playerOnBoard, playerOnBoard.calculateBounds());
-
-        playerOnBoard.set_token(playerOnBoardToken);
+        SpatialToken playerOnBoardToken = _playersBase.insert(playerOnBoard, playerOnBoard.physicsComponent().calculateAABB());
 
         // TODO: send a message back to the Player? Or start a stream of messages to each player on board with position?
 

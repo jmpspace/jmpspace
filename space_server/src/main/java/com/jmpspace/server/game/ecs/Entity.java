@@ -11,6 +11,10 @@ abstract public class Entity {
     StructureComponent structureComponent();
   }
 
+  public interface HasCamera {
+    CameraComponent cameraComponent();
+  }
+
   public interface HasStaticGeometry {
     GeometryComponent geometryComponent();
   }

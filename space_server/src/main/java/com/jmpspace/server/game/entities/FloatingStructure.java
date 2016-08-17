@@ -4,16 +4,21 @@ import com.jmpspace.contracts.SpaceServer.Physics;
 import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureNode;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.game.StructureUtils;
 import com.jmpspace.server.game.ecs.*;
+import com.jmpspace.server.game.ecs.Entity.HasPhysics;
+import com.jmpspace.server.game.ecs.Entity.HasStaticGeometry;
+import com.jmpspace.server.game.ecs.Entity.HasStructure;
 import com.vividsolutions.jts.geom.Geometry;
 
-public class FloatingStructure extends Entity implements Entity.HasStructure, Entity.HasStaticGeometry, Entity.HasPhysics {
+public class FloatingStructure extends Entity implements HasStructure, HasStaticGeometry, HasPhysics, Entity.HashSerializeEntity {
 
   Integer id;
   StructureComponent structureComponent;
   GeometryComponent geometryComponent;
   PhysicsComponent physicsComponent;
+  SerializeEntityComponent serializeEntityComponent;
 
   public FloatingStructure(Integer id, StructureNode tree, PhysicsState state) {
     this.id = id;
@@ -26,7 +31,22 @@ public class FloatingStructure extends Entity implements Entity.HasStructure, En
         return staticGeometry;
       }
     };
-
+    this.serializeEntityComponent = new SerializeEntityComponent(this) {
+      @Override
+      public WorldOuterClass.FloatingEntity.Builder calculateFloatingEntity() {
+        return WorldOuterClass.FloatingEntity
+                .newBuilder()
+                .setPhysicsState(state)
+                .setEntity(WorldOuterClass.Entity
+                        .newBuilder()
+                        .setStructure(StructureOuterClass.Structure
+                                .newBuilder()
+                                .setId(id)
+                                .setTree(tree)
+                        )
+                );
+      }
+    };
   }
 
   @Override
@@ -43,4 +63,7 @@ public class FloatingStructure extends Entity implements Entity.HasStructure, En
   public StructureComponent structureComponent() {
     return structureComponent;
   }
+
+  @Override
+  public SerializeEntityComponent serializeEntityComponent() { return serializeEntityComponent; }
 }

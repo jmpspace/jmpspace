@@ -2,8 +2,8 @@ package com.jmpspace.server.game.ecs;
 
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
+import com.jmpspace.contracts.SpaceServer.Physics;
 import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
-import com.jmpspace.server.game.PhysicsRef;
 import com.jmpspace.server.game.physics.Utils;
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
@@ -14,25 +14,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class PhysicsComponent extends ComponentBase<PhysicsComponent.PhysicsSystem> {
 
   static class PhysicsSystem {}
-  public enum PhysicsStepType { Static, Floating, Attached }
+  public enum PhysicsStepType {
+    Static,
+    Floating,
+    AttachedToStructure,
+    AttachedToPart
+  }
   private static AtomicInteger identityGenerator = new AtomicInteger(0);
 
-  int id;
-  PhysicsState.Builder state;
-  PhysicsStepType type;
+  public int id;
+  public PhysicsStepType stepType;
 
-  PhysicsComponent(Entity entity, PhysicsState state, PhysicsComponent.PhysicsStepType type) {
+  protected PhysicsComponent(Entity entity, PhysicsComponent.PhysicsStepType stepType) {
     super(entity);
     this.id = identityGenerator.getAndIncrement();
-    this.state = PhysicsState.newBuilder(state);
-    this.type = type;
+    this.stepType = stepType;
   }
 
   public abstract Geometry calculateStaticGeometry();
 
-  public AffineTransformation calculateAbsoluteTransform() {
-    return Utils.absoluteTransform(state);
-  }
+  public abstract AffineTransformation calculateAbsoluteTransform();
 
   public AABB calculateAABB() {
     Geometry geom = (Geometry) calculateStaticGeometry().clone();
@@ -41,7 +42,8 @@ public abstract class PhysicsComponent extends ComponentBase<PhysicsComponent.Ph
     return AABB.create(envelope.getMinX(), envelope.getMaxX(), envelope.getMinY(), envelope.getMaxY());
   }
 
-  abstract void step(ElementUpdater<Entity.HasPhysics> updater);
+  public abstract void step(ElementUpdater<Entity.HasPhysics> updater);
 
+  public abstract Physics.PhysicsState calculatePhysicsState();
 
 }

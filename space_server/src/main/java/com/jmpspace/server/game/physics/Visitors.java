@@ -4,18 +4,23 @@ import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.SpatialJoinVisitor;
 import co.paralleluniverse.spacebase.SpatialModifyingVisitor;
 import co.paralleluniverse.spacebase.SpatialToken;
-import com.jmpspace.server.game.PhysicsRef;
+import com.jmpspace.server.game.ecs.Entity;
+import com.jmpspace.server.game.ecs.Entity.HasCamera;
+import com.jmpspace.server.game.ecs.Entity.HasPhysics;
+import com.jmpspace.server.game.ecs.Entity.HashSerializeEntity;
+import com.jmpspace.server.game.ecs.PhysicsComponent;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class Visitors {
 
-  public static class PhysicsStep implements SpatialModifyingVisitor<PhysicsRef> {
+  public static class PhysicsStep implements SpatialModifyingVisitor<HasPhysics> {
 
     @Override
-    public void visit(ElementUpdater<PhysicsRef> elementUpdater) {
-      elementUpdater.elem().stepPhysics(elementUpdater);
+    public void visit(ElementUpdater<HasPhysics> elementUpdater) {
+      PhysicsComponent physicsComponent = elementUpdater.elem().physicsComponent();
+      physicsComponent.step(elementUpdater);
     }
 
     @Override
@@ -24,19 +29,25 @@ public class Visitors {
     }
   }
 
-  public static class SaveVisibleEntities implements SpatialJoinVisitor<PhysicsRef, PhysicsRef> {
+  public static class SaveVisibleEntities implements SpatialJoinVisitor<HasPhysics, HasPhysics> {
 
-    private ConcurrentMap<Integer, ConcurrentMap<PhysicsRef, Boolean>> visibleEntities;
+    private ConcurrentMap<Integer, ConcurrentMap<HashSerializeEntity, Boolean>> visibleEntities;
 
-    public SaveVisibleEntities(ConcurrentMap<Integer, ConcurrentMap<PhysicsRef, Boolean>> visibleEntities) {
+    public SaveVisibleEntities(ConcurrentMap<Integer, ConcurrentMap<HashSerializeEntity, Boolean>> visibleEntities) {
       this.visibleEntities = visibleEntities;
     }
 
     @Override
-    public void visit(PhysicsRef playerRef, SpatialToken spatialToken, PhysicsRef o2, SpatialToken spatialToken1) {
-      Integer playerRefKey = playerRef.getId();
-      visibleEntities.putIfAbsent(playerRefKey, new ConcurrentHashMap<>());
-      visibleEntities.get(playerRefKey).put(o2, true);
+    public void visit(HasPhysics playerRef, SpatialToken spatialToken, HasPhysics other, SpatialToken spatialToken1) {
+
+      // Unchecked
+      HasCamera cameraRef = (HasCamera) playerRef;
+      HashSerializeEntity targetRef = (HashSerializeEntity) other;
+
+      Integer cameraId = cameraRef.cameraComponent().id;
+
+      visibleEntities.putIfAbsent(cameraId, new ConcurrentHashMap<>());
+      visibleEntities.get(cameraId).put(targetRef, true);
     }
   }
 }

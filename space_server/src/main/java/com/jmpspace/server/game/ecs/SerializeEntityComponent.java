@@ -1,9 +1,14 @@
 package com.jmpspace.server.game.ecs;
 
-public class SerializeEntityComponent extends ComponentBase<Void> {
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity;
 
-  SerializeEntityComponent(Entity entity) {
+abstract public class SerializeEntityComponent extends ComponentBase<Void> {
+
+  public SerializeEntityComponent(Entity entity) {
     super(entity);
   }
+
+  abstract public FloatingEntity.Builder calculateFloatingEntity();
 
 }

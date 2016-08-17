@@ -14,6 +14,7 @@ import com.jmpspace.server.game.ecs.Entity;
 import com.jmpspace.server.game.ecs.Entity.HasPhysics;
 import com.jmpspace.server.game.ecs.GeometryComponent;
 import com.jmpspace.server.game.ecs.PhysicsComponent;
+import com.jmpspace.server.game.ecs.PhysicsComponent.PhysicsStepType;
 import com.jmpspace.server.game.ecs.SimplePhysicsComponent;
 import com.jmpspace.server.game.entities.FloatingStructure;
 import com.jmpspace.server.game.physics.Queries;
@@ -162,16 +163,24 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
         logger.debug("Game tick");
 
-        // Move all floating entities
-        _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(PhysicsRef.PhysicsStepType.Floating), new Visitors.PhysicsStep());
+        /*
+         * This section is really the Physics System!
+         */
 
-        // Update all attached entities
-        _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(PhysicsRef.PhysicsStepType.Attached), new Visitors.PhysicsStep());
+        List<PhysicsStepType> stepPhases = new ArrayList<PhysicsStepType>() {{
+          add(PhysicsStepType.Floating);
+          add(PhysicsStepType.AttachedToStructure);
+          add(PhysicsStepType.AttachedToPart);
+        }};
 
-        // TODO: parallelism?
+        for (PhysicsStepType stepType : stepPhases) {
+          _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(stepType), new Visitors.PhysicsStep());
+        }
+
+        // TODO: parallelism? Transaction?
         // _spaceBase.joinAllPendingOperations();
 
-        ConcurrentMap<Integer, ConcurrentMap<PhysicsRef, Boolean>> visibleEntities = new ConcurrentHashMap<>();
+        ConcurrentMap<Integer, ConcurrentMap<Entity.HashSerializeEntity, Boolean>> visibleEntities = new ConcurrentHashMap<>();
 
         _spaceBase.join(new Queries.PlayerVisibility(), new Visitors.SaveVisibleEntities(visibleEntities));
 
