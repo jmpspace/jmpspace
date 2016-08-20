@@ -40,24 +40,24 @@ main =
 echoServer : String
 echoServer = "ws://localhost:8001"
 
-stepType alias UnauthenticatedState =
+type alias UnauthenticatedState =
   { username: String
   , error: Maybe String
   , loginFailed: Bool
   }
 
-stepType alias SpawnPoints = List String
+type alias SpawnPoints = List String
 
-stepType GameState
+type GameState
   = Unspawned SpawnPoints
 
 initialGameState = Unspawned []
 
-stepType alias ActiveState =
+type alias ActiveState =
   { username: String
   }
 
-stepType Model
+type Model
   = Unknown
   | Unauthenticated UnauthenticatedState
   | LoggedIn ActiveState
@@ -71,7 +71,7 @@ init =
 
 -- UPDATE
 
-stepType Msg
+type Msg
   = NoOp
   | UsernameInput String
   | LoginSubmit

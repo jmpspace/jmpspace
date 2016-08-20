@@ -5,7 +5,7 @@ import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
-import co.paralleluniverse.spacebase.quasar.SpaceBase;
+import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpatialToken;
 import com.jmpspace.contracts.SpaceServer.Physics;
 import com.jmpspace.contracts.SpaceServer.Physics.Vector2;

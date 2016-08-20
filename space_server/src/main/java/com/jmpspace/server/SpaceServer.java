@@ -2,8 +2,8 @@ package com.jmpspace.server;
 
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.comsat.webactors.undertow.AutoWebActorHandler;
-import co.paralleluniverse.spacebase.quasar.SpaceBase;
-import co.paralleluniverse.spacebase.quasar.SpaceBaseBuilder;
+import co.paralleluniverse.spacebase.SpaceBase;
+import co.paralleluniverse.spacebase.SpaceBaseBuilder;
 import com.jmpspace.server.game.Instance;
 import com.jmpspace.server.game.PhysicsRef;
 import com.jmpspace.server.game.Ticker;

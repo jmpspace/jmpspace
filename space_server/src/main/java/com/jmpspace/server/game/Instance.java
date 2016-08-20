@@ -3,8 +3,7 @@ package com.jmpspace.server.game;
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.SuspendExecution;
-import co.paralleluniverse.spacebase.quasar.SpaceBase;
-import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
+import co.paralleluniverse.spacebase.SpaceBase;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
@@ -12,15 +11,11 @@ import com.jmpspace.server.game.Player.GameUpdate;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.jmpspace.server.game.ecs.Entity;
 import com.jmpspace.server.game.ecs.Entity.HasPhysics;
-import com.jmpspace.server.game.ecs.GeometryComponent;
-import com.jmpspace.server.game.ecs.PhysicsComponent;
 import com.jmpspace.server.game.ecs.PhysicsComponent.PhysicsStepType;
-import com.jmpspace.server.game.ecs.SimplePhysicsComponent;
 import com.jmpspace.server.game.entities.FloatingStructure;
 import com.jmpspace.server.game.physics.Queries;
 import com.jmpspace.server.game.physics.Visitors;
 import com.jmpspace.server.game.scenarios.SpawnRoom;
-import com.vividsolutions.jts.geom.Geometry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,12 +63,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
     logger.info("Starting the instance actor");
 
-//    PhysicsManager physicsManager = new PhysicsManager();
-//    ActorRef<PhysicsManager.Request> physicsManagerRef = physicsManager.spawn();
-
-    World initialWorld = SpawnRoom.world();
-
-    for (FloatingEntity floatingEntity : initialWorld.getFloatingEntitiesList()) {
+    for (FloatingEntity floatingEntity : SpawnRoom.spaceStuff) {
 
       logger.debug("Found a structure");
 

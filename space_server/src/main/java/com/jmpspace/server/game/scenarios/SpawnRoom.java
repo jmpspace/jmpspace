@@ -63,8 +63,8 @@ public class SpawnRoom extends AbstractScenario {
     }
   };
 
-  public static World world () {
-    return World.newBuilder().addAllFloatingEntities(spaceStuff).build();
-  }
+//  public static World world () {
+//    return World.newBuilder().addAllFloatingEntities(spaceStuff).build();
+//  }
 
 }
