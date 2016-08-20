@@ -24,7 +24,7 @@ public class Queries {
 
     @Override
     public QueryResult queryContainer(AABB aabb) {
-      return QueryResult.ALL;
+      return QueryResult.SOME;
     }
 
     @Override
@@ -43,7 +43,8 @@ public class Queries {
 
     @Override
     public boolean joinElements(AABB b1, HasPhysics playerRef, AABB b2, HasPhysics other) {
-      return (playerRef instanceof HasCamera) && (other instanceof HashSerializeEntity);
+      boolean valid = (playerRef instanceof HasCamera) && (other instanceof HashSerializeEntity);
+      return valid;
     }
   }
 

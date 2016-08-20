@@ -1076,727 +1076,6 @@ public final class StructureOuterClass {
     // @@protoc_insertion_point(class_scope:structure.Engine)
   }
 
-  public interface WalkingPlayerOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:structure.WalkingPlayer)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required .physics.Vector2 position = 1;</code>
-     */
-    boolean hasPosition();
-    /**
-     * <code>required .physics.Vector2 position = 1;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Physics.Vector2 getPosition();
-    /**
-     * <code>required .physics.Vector2 position = 1;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder getPositionOrBuilder();
-
-    /**
-     * <code>required .player.Player player = 2;</code>
-     */
-    boolean hasPlayer();
-    /**
-     * <code>required .player.Player player = 2;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player getPlayer();
-    /**
-     * <code>required .player.Player player = 2;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder getPlayerOrBuilder();
-  }
-  /**
-   * Protobuf type {@code structure.WalkingPlayer}
-   */
-  public static final class WalkingPlayer extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:structure.WalkingPlayer)
-      WalkingPlayerOrBuilder {
-    // Use WalkingPlayer.newBuilder() to construct.
-    private WalkingPlayer(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private WalkingPlayer(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final WalkingPlayer defaultInstance;
-    public static WalkingPlayer getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public WalkingPlayer getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private WalkingPlayer(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = position_.toBuilder();
-              }
-              position_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Physics.Vector2.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(position_);
-                position_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 18: {
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = player_.toBuilder();
-              }
-              player_ = input.readMessage(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(player_);
-                player_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_WalkingPlayer_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_WalkingPlayer_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.class, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<WalkingPlayer> PARSER =
-        new com.google.protobuf.AbstractParser<WalkingPlayer>() {
-      public WalkingPlayer parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new WalkingPlayer(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<WalkingPlayer> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int POSITION_FIELD_NUMBER = 1;
-    private com.jmpspace.contracts.SpaceServer.Physics.Vector2 position_;
-    /**
-     * <code>required .physics.Vector2 position = 1;</code>
-     */
-    public boolean hasPosition() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required .physics.Vector2 position = 1;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Physics.Vector2 getPosition() {
-      return position_;
-    }
-    /**
-     * <code>required .physics.Vector2 position = 1;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder getPositionOrBuilder() {
-      return position_;
-    }
-
-    public static final int PLAYER_FIELD_NUMBER = 2;
-    private com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player player_;
-    /**
-     * <code>required .player.Player player = 2;</code>
-     */
-    public boolean hasPlayer() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required .player.Player player = 2;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player getPlayer() {
-      return player_;
-    }
-    /**
-     * <code>required .player.Player player = 2;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder getPlayerOrBuilder() {
-      return player_;
-    }
-
-    private void initFields() {
-      position_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
-      player_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPosition()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPlayer()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getPosition().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, position_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, player_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, position_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, player_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code structure.WalkingPlayer}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:structure.WalkingPlayer)
-        com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_WalkingPlayer_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_WalkingPlayer_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.class, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder.class);
-      }
-
-      // Construct using com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getPositionFieldBuilder();
-          getPlayerFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (positionBuilder_ == null) {
-          position_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
-        } else {
-          positionBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (playerBuilder_ == null) {
-          player_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
-        } else {
-          playerBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_WalkingPlayer_descriptor;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.getDefaultInstance();
-      }
-
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer build() {
-        com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer buildPartial() {
-        com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer result = new com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (positionBuilder_ == null) {
-          result.position_ = position_;
-        } else {
-          result.position_ = positionBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        if (playerBuilder_ == null) {
-          result.player_ = player_;
-        } else {
-          result.player_ = playerBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer other) {
-        if (other == com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.getDefaultInstance()) return this;
-        if (other.hasPosition()) {
-          mergePosition(other.getPosition());
-        }
-        if (other.hasPlayer()) {
-          mergePlayer(other.getPlayer());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPosition()) {
-          
-          return false;
-        }
-        if (!hasPlayer()) {
-          
-          return false;
-        }
-        if (!getPosition().isInitialized()) {
-          
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.jmpspace.contracts.SpaceServer.Physics.Vector2 position_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Physics.Vector2, com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder, com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder> positionBuilder_;
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public boolean hasPosition() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Physics.Vector2 getPosition() {
-        if (positionBuilder_ == null) {
-          return position_;
-        } else {
-          return positionBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public Builder setPosition(com.jmpspace.contracts.SpaceServer.Physics.Vector2 value) {
-        if (positionBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          position_ = value;
-          onChanged();
-        } else {
-          positionBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public Builder setPosition(
-          com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder builderForValue) {
-        if (positionBuilder_ == null) {
-          position_ = builderForValue.build();
-          onChanged();
-        } else {
-          positionBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public Builder mergePosition(com.jmpspace.contracts.SpaceServer.Physics.Vector2 value) {
-        if (positionBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              position_ != com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance()) {
-            position_ =
-              com.jmpspace.contracts.SpaceServer.Physics.Vector2.newBuilder(position_).mergeFrom(value).buildPartial();
-          } else {
-            position_ = value;
-          }
-          onChanged();
-        } else {
-          positionBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public Builder clearPosition() {
-        if (positionBuilder_ == null) {
-          position_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
-          onChanged();
-        } else {
-          positionBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder getPositionBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getPositionFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder getPositionOrBuilder() {
-        if (positionBuilder_ != null) {
-          return positionBuilder_.getMessageOrBuilder();
-        } else {
-          return position_;
-        }
-      }
-      /**
-       * <code>required .physics.Vector2 position = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Physics.Vector2, com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder, com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder> 
-          getPositionFieldBuilder() {
-        if (positionBuilder_ == null) {
-          positionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.Physics.Vector2, com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder, com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder>(
-                  getPosition(),
-                  getParentForChildren(),
-                  isClean());
-          position_ = null;
-        }
-        return positionBuilder_;
-      }
-
-      private com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player player_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder> playerBuilder_;
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public boolean hasPlayer() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player getPlayer() {
-        if (playerBuilder_ == null) {
-          return player_;
-        } else {
-          return playerBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public Builder setPlayer(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player value) {
-        if (playerBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          player_ = value;
-          onChanged();
-        } else {
-          playerBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public Builder setPlayer(
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder builderForValue) {
-        if (playerBuilder_ == null) {
-          player_ = builderForValue.build();
-          onChanged();
-        } else {
-          playerBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public Builder mergePlayer(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player value) {
-        if (playerBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              player_ != com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance()) {
-            player_ =
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.newBuilder(player_).mergeFrom(value).buildPartial();
-          } else {
-            player_ = value;
-          }
-          onChanged();
-        } else {
-          playerBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public Builder clearPlayer() {
-        if (playerBuilder_ == null) {
-          player_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
-          onChanged();
-        } else {
-          playerBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder getPlayerBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getPlayerFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder getPlayerOrBuilder() {
-        if (playerBuilder_ != null) {
-          return playerBuilder_.getMessageOrBuilder();
-        } else {
-          return player_;
-        }
-      }
-      /**
-       * <code>required .player.Player player = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder> 
-          getPlayerFieldBuilder() {
-        if (playerBuilder_ == null) {
-          playerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder>(
-                  getPlayer(),
-                  getParentForChildren(),
-                  isClean());
-          player_ = null;
-        }
-        return playerBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:structure.WalkingPlayer)
-    }
-
-    static {
-      defaultInstance = new WalkingPlayer(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:structure.WalkingPlayer)
-  }
-
   public interface PlatformOrBuilder extends
       // @@protoc_insertion_point(interface_extends:structure.Platform)
       com.google.protobuf.MessageOrBuilder {
@@ -1850,30 +1129,6 @@ public final class StructureOuterClass {
      * <code>repeated .structure.PlacedItem placedItems = 4;</code>
      */
     com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlacedItemOrBuilder getPlacedItemsOrBuilder(
-        int index);
-
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer> 
-        getPlayersList();
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer getPlayers(int index);
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    int getPlayersCount();
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder> 
-        getPlayersOrBuilderList();
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder getPlayersOrBuilder(
         int index);
   }
   /**
@@ -1951,14 +1206,6 @@ public final class StructureOuterClass {
               placedItems_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlacedItem.PARSER, extensionRegistry));
               break;
             }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                players_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              players_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.PARSER, extensionRegistry));
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1969,9 +1216,6 @@ public final class StructureOuterClass {
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           placedItems_ = java.util.Collections.unmodifiableList(placedItems_);
-        }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          players_ = java.util.Collections.unmodifiableList(players_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2085,47 +1329,11 @@ public final class StructureOuterClass {
       return placedItems_.get(index);
     }
 
-    public static final int PLAYERS_FIELD_NUMBER = 5;
-    private java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer> players_;
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer> getPlayersList() {
-      return players_;
-    }
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    public java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder> 
-        getPlayersOrBuilderList() {
-      return players_;
-    }
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    public int getPlayersCount() {
-      return players_.size();
-    }
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer getPlayers(int index) {
-      return players_.get(index);
-    }
-    /**
-     * <code>repeated .structure.WalkingPlayer players = 5;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder getPlayersOrBuilder(
-        int index) {
-      return players_.get(index);
-    }
-
     private void initFields() {
       width_ = 0;
       length_ = 0;
       pressurized_ = false;
       placedItems_ = java.util.Collections.emptyList();
-      players_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2151,12 +1359,6 @@ public final class StructureOuterClass {
           return false;
         }
       }
-      for (int i = 0; i < getPlayersCount(); i++) {
-        if (!getPlayers(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2175,9 +1377,6 @@ public final class StructureOuterClass {
       }
       for (int i = 0; i < placedItems_.size(); i++) {
         output.writeMessage(4, placedItems_.get(i));
-      }
-      for (int i = 0; i < players_.size(); i++) {
-        output.writeMessage(5, players_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2203,10 +1402,6 @@ public final class StructureOuterClass {
       for (int i = 0; i < placedItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, placedItems_.get(i));
-      }
-      for (int i = 0; i < players_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, players_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2318,7 +1513,6 @@ public final class StructureOuterClass {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getPlacedItemsFieldBuilder();
-          getPlayersFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2338,12 +1532,6 @@ public final class StructureOuterClass {
           bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           placedItemsBuilder_.clear();
-        }
-        if (playersBuilder_ == null) {
-          players_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-        } else {
-          playersBuilder_.clear();
         }
         return this;
       }
@@ -2393,15 +1581,6 @@ public final class StructureOuterClass {
           result.placedItems_ = placedItems_;
         } else {
           result.placedItems_ = placedItemsBuilder_.build();
-        }
-        if (playersBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            players_ = java.util.Collections.unmodifiableList(players_);
-            bitField0_ = (bitField0_ & ~0x00000010);
-          }
-          result.players_ = players_;
-        } else {
-          result.players_ = playersBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2454,32 +1633,6 @@ public final class StructureOuterClass {
             }
           }
         }
-        if (playersBuilder_ == null) {
-          if (!other.players_.isEmpty()) {
-            if (players_.isEmpty()) {
-              players_ = other.players_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-            } else {
-              ensurePlayersIsMutable();
-              players_.addAll(other.players_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.players_.isEmpty()) {
-            if (playersBuilder_.isEmpty()) {
-              playersBuilder_.dispose();
-              playersBuilder_ = null;
-              players_ = other.players_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-              playersBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getPlayersFieldBuilder() : null;
-            } else {
-              playersBuilder_.addAllMessages(other.players_);
-            }
-          }
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2499,12 +1652,6 @@ public final class StructureOuterClass {
         }
         for (int i = 0; i < getPlacedItemsCount(); i++) {
           if (!getPlacedItems(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        for (int i = 0; i < getPlayersCount(); i++) {
-          if (!getPlayers(i).isInitialized()) {
             
             return false;
           }
@@ -2865,246 +2012,6 @@ public final class StructureOuterClass {
           placedItems_ = null;
         }
         return placedItemsBuilder_;
-      }
-
-      private java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer> players_ =
-        java.util.Collections.emptyList();
-      private void ensurePlayersIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          players_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer>(players_);
-          bitField0_ |= 0x00000010;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder> playersBuilder_;
-
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer> getPlayersList() {
-        if (playersBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(players_);
-        } else {
-          return playersBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public int getPlayersCount() {
-        if (playersBuilder_ == null) {
-          return players_.size();
-        } else {
-          return playersBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer getPlayers(int index) {
-        if (playersBuilder_ == null) {
-          return players_.get(index);
-        } else {
-          return playersBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder setPlayers(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer value) {
-        if (playersBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePlayersIsMutable();
-          players_.set(index, value);
-          onChanged();
-        } else {
-          playersBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder setPlayers(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder builderForValue) {
-        if (playersBuilder_ == null) {
-          ensurePlayersIsMutable();
-          players_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          playersBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder addPlayers(com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer value) {
-        if (playersBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePlayersIsMutable();
-          players_.add(value);
-          onChanged();
-        } else {
-          playersBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder addPlayers(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer value) {
-        if (playersBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePlayersIsMutable();
-          players_.add(index, value);
-          onChanged();
-        } else {
-          playersBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder addPlayers(
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder builderForValue) {
-        if (playersBuilder_ == null) {
-          ensurePlayersIsMutable();
-          players_.add(builderForValue.build());
-          onChanged();
-        } else {
-          playersBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder addPlayers(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder builderForValue) {
-        if (playersBuilder_ == null) {
-          ensurePlayersIsMutable();
-          players_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          playersBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder addAllPlayers(
-          java.lang.Iterable<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer> values) {
-        if (playersBuilder_ == null) {
-          ensurePlayersIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, players_);
-          onChanged();
-        } else {
-          playersBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder clearPlayers() {
-        if (playersBuilder_ == null) {
-          players_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-          onChanged();
-        } else {
-          playersBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public Builder removePlayers(int index) {
-        if (playersBuilder_ == null) {
-          ensurePlayersIsMutable();
-          players_.remove(index);
-          onChanged();
-        } else {
-          playersBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder getPlayersBuilder(
-          int index) {
-        return getPlayersFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder getPlayersOrBuilder(
-          int index) {
-        if (playersBuilder_ == null) {
-          return players_.get(index);  } else {
-          return playersBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder> 
-           getPlayersOrBuilderList() {
-        if (playersBuilder_ != null) {
-          return playersBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(players_);
-        }
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder addPlayersBuilder() {
-        return getPlayersFieldBuilder().addBuilder(
-            com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder addPlayersBuilder(
-          int index) {
-        return getPlayersFieldBuilder().addBuilder(
-            index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .structure.WalkingPlayer players = 5;</code>
-       */
-      public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder> 
-           getPlayersBuilderList() {
-        return getPlayersFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder> 
-          getPlayersFieldBuilder() {
-        if (playersBuilder_ == null) {
-          playersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayer.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.WalkingPlayerOrBuilder>(
-                  players_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
-                  getParentForChildren(),
-                  isClean());
-          players_ = null;
-        }
-        return playersBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:structure.Platform)
@@ -9670,11 +8577,6 @@ public final class StructureOuterClass {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_structure_Engine_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_structure_WalkingPlayer_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_structure_WalkingPlayer_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_structure_Platform_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9741,32 +8643,29 @@ public final class StructureOuterClass {
       "\n\017structure.proto\022\tstructure\032\rphysics.pr" +
       "oto\032\014player.proto\"&\n\005Armor\022\r\n\005width\030\001 \002(" +
       "\005\022\016\n\006length\030\002 \002(\005\"7\n\006Engine\022\016\n\006radius\030\001 " +
-      "\002(\005\022\016\n\006length\030\002 \002(\005\022\r\n\005group\030\003 \002(\005\"S\n\rWa" +
-      "lkingPlayer\022\"\n\010position\030\001 \002(\0132\020.physics." +
-      "Vector2\022\036\n\006player\030\002 \002(\0132\016.player.Player\"" +
-      "\225\001\n\010Platform\022\r\n\005width\030\001 \002(\005\022\016\n\006length\030\002 " +
-      "\002(\005\022\023\n\013pressurized\030\003 \002(\010\022*\n\013placedItems\030" +
-      "\004 \003(\0132\025.structure.PlacedItem\022)\n\007players\030" +
-      "\005 \003(\0132\030.structure.WalkingPlayer\"b\n\nPlace",
-      "dItem\022\017\n\007offsetX\030\001 \002(\005\022\017\n\007offsetY\030\002 \002(\005\022" +
-      "\023\n\013orientation\030\003 \002(\005\022\035\n\004item\030\004 \002(\0132\017.str" +
-      "ucture.Item\"}\n\004Item\022!\n\005chair\030\001 \001(\0132\020.str" +
-      "ucture.ChairH\000\022\'\n\010cryoTube\030\002 \001(\0132\023.struc" +
-      "ture.CryoTubeH\000\022!\n\005crate\030\003 \001(\0132\020.structu" +
-      "re.CrateH\000B\006\n\004item\"\007\n\005Chair\"\n\n\010CryoTube\"" +
-      "\007\n\005Crate\"\177\n\004Part\022!\n\005armor\030\001 \001(\0132\020.struct" +
-      "ure.ArmorH\000\022#\n\006engine\030\002 \001(\0132\021.structure." +
-      "EngineH\000\022\'\n\010platform\030\003 \001(\0132\023.structure.P" +
-      "latformH\000B\006\n\004part\"Z\n\016AttachmentData\022\035\n\025o",
-      "rientationFromParent\030\001 \002(\005\022\016\n\006offset\030\002 \002" +
-      "(\005\022\031\n\021orientationOfNode\030\003 \002(\005\"]\n\nAttachm" +
-      "ent\022\'\n\004data\030\001 \002(\0132\031.structure.Attachment" +
-      "Data\022&\n\004node\030\002 \002(\0132\030.structure.Structure" +
-      "Node\"Z\n\rStructureNode\022\035\n\004part\030\001 \002(\0132\017.st" +
-      "ructure.Part\022*\n\013attachments\030\002 \003(\0132\025.stru" +
-      "cture.Attachment\"?\n\tStructure\022\n\n\002id\030\001 \002(" +
-      "\005\022&\n\004tree\030\002 \002(\0132\030.structure.StructureNod" +
-      "eB$\n\"com.jmpspace.contracts.SpaceServer"
+      "\002(\005\022\016\n\006length\030\002 \002(\005\022\r\n\005group\030\003 \002(\005\"j\n\010Pl" +
+      "atform\022\r\n\005width\030\001 \002(\005\022\016\n\006length\030\002 \002(\005\022\023\n" +
+      "\013pressurized\030\003 \002(\010\022*\n\013placedItems\030\004 \003(\0132" +
+      "\025.structure.PlacedItem\"b\n\nPlacedItem\022\017\n\007" +
+      "offsetX\030\001 \002(\005\022\017\n\007offsetY\030\002 \002(\005\022\023\n\013orient" +
+      "ation\030\003 \002(\005\022\035\n\004item\030\004 \002(\0132\017.structure.It" +
+      "em\"}\n\004Item\022!\n\005chair\030\001 \001(\0132\020.structure.Ch",
+      "airH\000\022\'\n\010cryoTube\030\002 \001(\0132\023.structure.Cryo" +
+      "TubeH\000\022!\n\005crate\030\003 \001(\0132\020.structure.CrateH" +
+      "\000B\006\n\004item\"\007\n\005Chair\"\n\n\010CryoTube\"\007\n\005Crate\"" +
+      "\177\n\004Part\022!\n\005armor\030\001 \001(\0132\020.structure.Armor" +
+      "H\000\022#\n\006engine\030\002 \001(\0132\021.structure.EngineH\000\022" +
+      "\'\n\010platform\030\003 \001(\0132\023.structure.PlatformH\000" +
+      "B\006\n\004part\"Z\n\016AttachmentData\022\035\n\025orientatio" +
+      "nFromParent\030\001 \002(\005\022\016\n\006offset\030\002 \002(\005\022\031\n\021ori" +
+      "entationOfNode\030\003 \002(\005\"]\n\nAttachment\022\'\n\004da" +
+      "ta\030\001 \002(\0132\031.structure.AttachmentData\022&\n\004n",
+      "ode\030\002 \002(\0132\030.structure.StructureNode\"Z\n\rS" +
+      "tructureNode\022\035\n\004part\030\001 \002(\0132\017.structure.P" +
+      "art\022*\n\013attachments\030\002 \003(\0132\025.structure.Att" +
+      "achment\"?\n\tStructure\022\n\n\002id\030\001 \002(\005\022&\n\004tree" +
+      "\030\002 \002(\0132\030.structure.StructureNodeB$\n\"com." +
+      "jmpspace.contracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -9780,7 +8679,7 @@ public final class StructureOuterClass {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.jmpspace.contracts.SpaceServer.Physics.getDescriptor(),
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.getDescriptor(),
+          com.jmpspace.contracts.SpaceServer.Player.getDescriptor(),
         }, assigner);
     internal_static_structure_Armor_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -9794,80 +8693,74 @@ public final class StructureOuterClass {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Engine_descriptor,
         new java.lang.String[] { "Radius", "Length", "Group", });
-    internal_static_structure_WalkingPlayer_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_structure_WalkingPlayer_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_structure_WalkingPlayer_descriptor,
-        new java.lang.String[] { "Position", "Player", });
     internal_static_structure_Platform_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_structure_Platform_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Platform_descriptor,
-        new java.lang.String[] { "Width", "Length", "Pressurized", "PlacedItems", "Players", });
+        new java.lang.String[] { "Width", "Length", "Pressurized", "PlacedItems", });
     internal_static_structure_PlacedItem_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_structure_PlacedItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_PlacedItem_descriptor,
         new java.lang.String[] { "OffsetX", "OffsetY", "Orientation", "Item", });
     internal_static_structure_Item_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_structure_Item_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Item_descriptor,
         new java.lang.String[] { "Chair", "CryoTube", "Crate", "Item", });
     internal_static_structure_Chair_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_structure_Chair_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Chair_descriptor,
         new java.lang.String[] { });
     internal_static_structure_CryoTube_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_structure_CryoTube_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_CryoTube_descriptor,
         new java.lang.String[] { });
     internal_static_structure_Crate_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_structure_Crate_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Crate_descriptor,
         new java.lang.String[] { });
     internal_static_structure_Part_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_structure_Part_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Part_descriptor,
         new java.lang.String[] { "Armor", "Engine", "Platform", "Part", });
     internal_static_structure_AttachmentData_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_structure_AttachmentData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_AttachmentData_descriptor,
         new java.lang.String[] { "OrientationFromParent", "Offset", "OrientationOfNode", });
     internal_static_structure_Attachment_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_structure_Attachment_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Attachment_descriptor,
         new java.lang.String[] { "Data", "Node", });
     internal_static_structure_StructureNode_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_structure_StructureNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_StructureNode_descriptor,
         new java.lang.String[] { "Part", "Attachments", });
     internal_static_structure_Structure_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_structure_Structure_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Structure_descriptor,
         new java.lang.String[] { "Id", "Tree", });
     com.jmpspace.contracts.SpaceServer.Physics.getDescriptor();
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.getDescriptor();
+    com.jmpspace.contracts.SpaceServer.Player.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -1,6 +1,8 @@
 package com.jmpspace.server.game.entities;
 
+import com.jmpspace.contracts.SpaceServer.Physics;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.game.StructureUtils;
 import com.jmpspace.server.game.ecs.*;
 import com.vividsolutions.jts.geom.Geometry;
@@ -8,7 +10,7 @@ import com.vividsolutions.jts.geom.util.AffineTransformation;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Platform extends Entity implements Entity.HasPhysics, Entity.HasStaticGeometry {
+public class Platform extends Entity implements Entity.HasPhysics, Entity.HasStaticGeometry, Entity.HashSerializeEntity {
 
   static AtomicInteger platformCounter = new AtomicInteger();
 
@@ -16,6 +18,7 @@ public class Platform extends Entity implements Entity.HasPhysics, Entity.HasSta
   FloatingStructure floatingStructure;
   public StructureOuterClass.Platform platformPart;
   public AffineTransformation staticRelativeTransform;
+  SerializeEntityComponent serializeEntityComponent;
 
   PhysicsComponent physicsComponent;
   GeometryComponent geometryComponent;
@@ -38,6 +41,21 @@ public class Platform extends Entity implements Entity.HasPhysics, Entity.HasSta
       }
     };
 
+    this.serializeEntityComponent = new SerializeEntityComponent(this) {
+      @Override
+      public WorldOuterClass.Entity.Builder marshalEntity() {
+        return WorldOuterClass.Entity.newBuilder()
+                .setStructurePlatform(WorldOuterClass.Platform
+                        .newBuilder()
+                        .setPlatform(platformPart)
+                        .setStructureId(floatingStructure.id)
+                        // TODO - these are fudged!
+                        .setPlatformPosition(Physics.Vector2.getDefaultInstance())
+                        .setPlatformRotation(0)
+                );
+      }
+    };
+
   }
 
   @Override
@@ -46,4 +64,7 @@ public class Platform extends Entity implements Entity.HasPhysics, Entity.HasSta
 
   @Override
   public GeometryComponent geometryComponent() { return geometryComponent; }
+
+  @Override
+  public SerializeEntityComponent serializeEntityComponent() { return serializeEntityComponent; }
 }

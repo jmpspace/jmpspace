@@ -8,35 +8,1691 @@ public final class WorldOuterClass {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public interface FloatingStructureOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:world.FloatingStructure)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .structure.Structure sructure = 1;</code>
+     */
+    boolean hasSructure();
+    /**
+     * <code>required .structure.Structure sructure = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure getSructure();
+    /**
+     * <code>required .structure.Structure sructure = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder getSructureOrBuilder();
+
+    /**
+     * <code>required .physics.PhysicsState physicsState = 2;</code>
+     */
+    boolean hasPhysicsState();
+    /**
+     * <code>required .physics.PhysicsState physicsState = 2;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Physics.PhysicsState getPhysicsState();
+    /**
+     * <code>required .physics.PhysicsState physicsState = 2;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder getPhysicsStateOrBuilder();
+  }
+  /**
+   * Protobuf type {@code world.FloatingStructure}
+   */
+  public static final class FloatingStructure extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:world.FloatingStructure)
+      FloatingStructureOrBuilder {
+    // Use FloatingStructure.newBuilder() to construct.
+    private FloatingStructure(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private FloatingStructure(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final FloatingStructure defaultInstance;
+    public static FloatingStructure getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public FloatingStructure getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FloatingStructure(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = sructure_.toBuilder();
+              }
+              sructure_ = input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(sructure_);
+                sructure_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 18: {
+              com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = physicsState_.toBuilder();
+              }
+              physicsState_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(physicsState_);
+                physicsState_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingStructure_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingStructure_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.class, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<FloatingStructure> PARSER =
+        new com.google.protobuf.AbstractParser<FloatingStructure>() {
+      public FloatingStructure parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FloatingStructure(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FloatingStructure> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SRUCTURE_FIELD_NUMBER = 1;
+    private com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure sructure_;
+    /**
+     * <code>required .structure.Structure sructure = 1;</code>
+     */
+    public boolean hasSructure() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .structure.Structure sructure = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure getSructure() {
+      return sructure_;
+    }
+    /**
+     * <code>required .structure.Structure sructure = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder getSructureOrBuilder() {
+      return sructure_;
+    }
+
+    public static final int PHYSICSSTATE_FIELD_NUMBER = 2;
+    private com.jmpspace.contracts.SpaceServer.Physics.PhysicsState physicsState_;
+    /**
+     * <code>required .physics.PhysicsState physicsState = 2;</code>
+     */
+    public boolean hasPhysicsState() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required .physics.PhysicsState physicsState = 2;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Physics.PhysicsState getPhysicsState() {
+      return physicsState_;
+    }
+    /**
+     * <code>required .physics.PhysicsState physicsState = 2;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder getPhysicsStateOrBuilder() {
+      return physicsState_;
+    }
+
+    private void initFields() {
+      sructure_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+      physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasSructure()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPhysicsState()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getSructure().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPhysicsState().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sructure_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, physicsState_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sructure_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, physicsState_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code world.FloatingStructure}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:world.FloatingStructure)
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingStructure_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingStructure_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.class, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder.class);
+      }
+
+      // Construct using com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSructureFieldBuilder();
+          getPhysicsStateFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (sructureBuilder_ == null) {
+          sructure_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+        } else {
+          sructureBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (physicsStateBuilder_ == null) {
+          physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
+        } else {
+          physicsStateBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingStructure_descriptor;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
+      }
+
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure build() {
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure buildPartial() {
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure result = new com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (sructureBuilder_ == null) {
+          result.sructure_ = sructure_;
+        } else {
+          result.sructure_ = sructureBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (physicsStateBuilder_ == null) {
+          result.physicsState_ = physicsState_;
+        } else {
+          result.physicsState_ = physicsStateBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure other) {
+        if (other == com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance()) return this;
+        if (other.hasSructure()) {
+          mergeSructure(other.getSructure());
+        }
+        if (other.hasPhysicsState()) {
+          mergePhysicsState(other.getPhysicsState());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasSructure()) {
+          
+          return false;
+        }
+        if (!hasPhysicsState()) {
+          
+          return false;
+        }
+        if (!getSructure().isInitialized()) {
+          
+          return false;
+        }
+        if (!getPhysicsState().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure sructure_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder> sructureBuilder_;
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public boolean hasSructure() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure getSructure() {
+        if (sructureBuilder_ == null) {
+          return sructure_;
+        } else {
+          return sructureBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public Builder setSructure(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure value) {
+        if (sructureBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sructure_ = value;
+          onChanged();
+        } else {
+          sructureBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public Builder setSructure(
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder builderForValue) {
+        if (sructureBuilder_ == null) {
+          sructure_ = builderForValue.build();
+          onChanged();
+        } else {
+          sructureBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public Builder mergeSructure(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure value) {
+        if (sructureBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sructure_ != com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance()) {
+            sructure_ =
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.newBuilder(sructure_).mergeFrom(value).buildPartial();
+          } else {
+            sructure_ = value;
+          }
+          onChanged();
+        } else {
+          sructureBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public Builder clearSructure() {
+        if (sructureBuilder_ == null) {
+          sructure_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+          onChanged();
+        } else {
+          sructureBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder getSructureBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSructureFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder getSructureOrBuilder() {
+        if (sructureBuilder_ != null) {
+          return sructureBuilder_.getMessageOrBuilder();
+        } else {
+          return sructure_;
+        }
+      }
+      /**
+       * <code>required .structure.Structure sructure = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder> 
+          getSructureFieldBuilder() {
+        if (sructureBuilder_ == null) {
+          sructureBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder>(
+                  getSructure(),
+                  getParentForChildren(),
+                  isClean());
+          sructure_ = null;
+        }
+        return sructureBuilder_;
+      }
+
+      private com.jmpspace.contracts.SpaceServer.Physics.PhysicsState physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Physics.PhysicsState, com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder, com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder> physicsStateBuilder_;
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public boolean hasPhysicsState() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Physics.PhysicsState getPhysicsState() {
+        if (physicsStateBuilder_ == null) {
+          return physicsState_;
+        } else {
+          return physicsStateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public Builder setPhysicsState(com.jmpspace.contracts.SpaceServer.Physics.PhysicsState value) {
+        if (physicsStateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          physicsState_ = value;
+          onChanged();
+        } else {
+          physicsStateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public Builder setPhysicsState(
+          com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder builderForValue) {
+        if (physicsStateBuilder_ == null) {
+          physicsState_ = builderForValue.build();
+          onChanged();
+        } else {
+          physicsStateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public Builder mergePhysicsState(com.jmpspace.contracts.SpaceServer.Physics.PhysicsState value) {
+        if (physicsStateBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              physicsState_ != com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance()) {
+            physicsState_ =
+              com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.newBuilder(physicsState_).mergeFrom(value).buildPartial();
+          } else {
+            physicsState_ = value;
+          }
+          onChanged();
+        } else {
+          physicsStateBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public Builder clearPhysicsState() {
+        if (physicsStateBuilder_ == null) {
+          physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
+          onChanged();
+        } else {
+          physicsStateBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder getPhysicsStateBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getPhysicsStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder getPhysicsStateOrBuilder() {
+        if (physicsStateBuilder_ != null) {
+          return physicsStateBuilder_.getMessageOrBuilder();
+        } else {
+          return physicsState_;
+        }
+      }
+      /**
+       * <code>required .physics.PhysicsState physicsState = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Physics.PhysicsState, com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder, com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder> 
+          getPhysicsStateFieldBuilder() {
+        if (physicsStateBuilder_ == null) {
+          physicsStateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Physics.PhysicsState, com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder, com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder>(
+                  getPhysicsState(),
+                  getParentForChildren(),
+                  isClean());
+          physicsState_ = null;
+        }
+        return physicsStateBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:world.FloatingStructure)
+    }
+
+    static {
+      defaultInstance = new FloatingStructure(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:world.FloatingStructure)
+  }
+
+  public interface PlatformOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:world.Platform)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .structure.Platform platform = 1;</code>
+     */
+    boolean hasPlatform();
+    /**
+     * <code>required .structure.Platform platform = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform getPlatform();
+    /**
+     * <code>required .structure.Platform platform = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlatformOrBuilder getPlatformOrBuilder();
+
+    /**
+     * <code>required int32 structureId = 2;</code>
+     */
+    boolean hasStructureId();
+    /**
+     * <code>required int32 structureId = 2;</code>
+     */
+    int getStructureId();
+
+    /**
+     * <code>required .physics.Vector2 platformPosition = 3;</code>
+     */
+    boolean hasPlatformPosition();
+    /**
+     * <code>required .physics.Vector2 platformPosition = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Physics.Vector2 getPlatformPosition();
+    /**
+     * <code>required .physics.Vector2 platformPosition = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder getPlatformPositionOrBuilder();
+
+    /**
+     * <code>required int32 platformRotation = 4;</code>
+     */
+    boolean hasPlatformRotation();
+    /**
+     * <code>required int32 platformRotation = 4;</code>
+     */
+    int getPlatformRotation();
+  }
+  /**
+   * Protobuf type {@code world.Platform}
+   */
+  public static final class Platform extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:world.Platform)
+      PlatformOrBuilder {
+    // Use Platform.newBuilder() to construct.
+    private Platform(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Platform(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Platform defaultInstance;
+    public static Platform getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Platform getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Platform(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = platform_.toBuilder();
+              }
+              platform_ = input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(platform_);
+                platform_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              structureId_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = platformPosition_.toBuilder();
+              }
+              platformPosition_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Physics.Vector2.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(platformPosition_);
+                platformPosition_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              platformRotation_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_Platform_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_Platform_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.class, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Platform> PARSER =
+        new com.google.protobuf.AbstractParser<Platform>() {
+      public Platform parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Platform(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Platform> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int PLATFORM_FIELD_NUMBER = 1;
+    private com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform platform_;
+    /**
+     * <code>required .structure.Platform platform = 1;</code>
+     */
+    public boolean hasPlatform() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .structure.Platform platform = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform getPlatform() {
+      return platform_;
+    }
+    /**
+     * <code>required .structure.Platform platform = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlatformOrBuilder getPlatformOrBuilder() {
+      return platform_;
+    }
+
+    public static final int STRUCTUREID_FIELD_NUMBER = 2;
+    private int structureId_;
+    /**
+     * <code>required int32 structureId = 2;</code>
+     */
+    public boolean hasStructureId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 structureId = 2;</code>
+     */
+    public int getStructureId() {
+      return structureId_;
+    }
+
+    public static final int PLATFORMPOSITION_FIELD_NUMBER = 3;
+    private com.jmpspace.contracts.SpaceServer.Physics.Vector2 platformPosition_;
+    /**
+     * <code>required .physics.Vector2 platformPosition = 3;</code>
+     */
+    public boolean hasPlatformPosition() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required .physics.Vector2 platformPosition = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Physics.Vector2 getPlatformPosition() {
+      return platformPosition_;
+    }
+    /**
+     * <code>required .physics.Vector2 platformPosition = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder getPlatformPositionOrBuilder() {
+      return platformPosition_;
+    }
+
+    public static final int PLATFORMROTATION_FIELD_NUMBER = 4;
+    private int platformRotation_;
+    /**
+     * <code>required int32 platformRotation = 4;</code>
+     */
+    public boolean hasPlatformRotation() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 platformRotation = 4;</code>
+     */
+    public int getPlatformRotation() {
+      return platformRotation_;
+    }
+
+    private void initFields() {
+      platform_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.getDefaultInstance();
+      structureId_ = 0;
+      platformPosition_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
+      platformRotation_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasPlatform()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasStructureId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPlatformPosition()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPlatformRotation()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPlatform().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPlatformPosition().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, platform_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, structureId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, platformPosition_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, platformRotation_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, platform_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, structureId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, platformPosition_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, platformRotation_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code world.Platform}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:world.Platform)
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_Platform_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_Platform_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.class, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder.class);
+      }
+
+      // Construct using com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPlatformFieldBuilder();
+          getPlatformPositionFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (platformBuilder_ == null) {
+          platform_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.getDefaultInstance();
+        } else {
+          platformBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        structureId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (platformPositionBuilder_ == null) {
+          platformPosition_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
+        } else {
+          platformPositionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        platformRotation_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_Platform_descriptor;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
+      }
+
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform build() {
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform buildPartial() {
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform result = new com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (platformBuilder_ == null) {
+          result.platform_ = platform_;
+        } else {
+          result.platform_ = platformBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.structureId_ = structureId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (platformPositionBuilder_ == null) {
+          result.platformPosition_ = platformPosition_;
+        } else {
+          result.platformPosition_ = platformPositionBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.platformRotation_ = platformRotation_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform other) {
+        if (other == com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance()) return this;
+        if (other.hasPlatform()) {
+          mergePlatform(other.getPlatform());
+        }
+        if (other.hasStructureId()) {
+          setStructureId(other.getStructureId());
+        }
+        if (other.hasPlatformPosition()) {
+          mergePlatformPosition(other.getPlatformPosition());
+        }
+        if (other.hasPlatformRotation()) {
+          setPlatformRotation(other.getPlatformRotation());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasPlatform()) {
+          
+          return false;
+        }
+        if (!hasStructureId()) {
+          
+          return false;
+        }
+        if (!hasPlatformPosition()) {
+          
+          return false;
+        }
+        if (!hasPlatformRotation()) {
+          
+          return false;
+        }
+        if (!getPlatform().isInitialized()) {
+          
+          return false;
+        }
+        if (!getPlatformPosition().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform platform_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlatformOrBuilder> platformBuilder_;
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public boolean hasPlatform() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform getPlatform() {
+        if (platformBuilder_ == null) {
+          return platform_;
+        } else {
+          return platformBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public Builder setPlatform(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform value) {
+        if (platformBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          platform_ = value;
+          onChanged();
+        } else {
+          platformBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public Builder setPlatform(
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.Builder builderForValue) {
+        if (platformBuilder_ == null) {
+          platform_ = builderForValue.build();
+          onChanged();
+        } else {
+          platformBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public Builder mergePlatform(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform value) {
+        if (platformBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              platform_ != com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.getDefaultInstance()) {
+            platform_ =
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.newBuilder(platform_).mergeFrom(value).buildPartial();
+          } else {
+            platform_ = value;
+          }
+          onChanged();
+        } else {
+          platformBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public Builder clearPlatform() {
+        if (platformBuilder_ == null) {
+          platform_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.getDefaultInstance();
+          onChanged();
+        } else {
+          platformBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.Builder getPlatformBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getPlatformFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlatformOrBuilder getPlatformOrBuilder() {
+        if (platformBuilder_ != null) {
+          return platformBuilder_.getMessageOrBuilder();
+        } else {
+          return platform_;
+        }
+      }
+      /**
+       * <code>required .structure.Platform platform = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlatformOrBuilder> 
+          getPlatformFieldBuilder() {
+        if (platformBuilder_ == null) {
+          platformBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Platform.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.PlatformOrBuilder>(
+                  getPlatform(),
+                  getParentForChildren(),
+                  isClean());
+          platform_ = null;
+        }
+        return platformBuilder_;
+      }
+
+      private int structureId_ ;
+      /**
+       * <code>required int32 structureId = 2;</code>
+       */
+      public boolean hasStructureId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 structureId = 2;</code>
+       */
+      public int getStructureId() {
+        return structureId_;
+      }
+      /**
+       * <code>required int32 structureId = 2;</code>
+       */
+      public Builder setStructureId(int value) {
+        bitField0_ |= 0x00000002;
+        structureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 structureId = 2;</code>
+       */
+      public Builder clearStructureId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        structureId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.jmpspace.contracts.SpaceServer.Physics.Vector2 platformPosition_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Physics.Vector2, com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder, com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder> platformPositionBuilder_;
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public boolean hasPlatformPosition() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Physics.Vector2 getPlatformPosition() {
+        if (platformPositionBuilder_ == null) {
+          return platformPosition_;
+        } else {
+          return platformPositionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public Builder setPlatformPosition(com.jmpspace.contracts.SpaceServer.Physics.Vector2 value) {
+        if (platformPositionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          platformPosition_ = value;
+          onChanged();
+        } else {
+          platformPositionBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public Builder setPlatformPosition(
+          com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder builderForValue) {
+        if (platformPositionBuilder_ == null) {
+          platformPosition_ = builderForValue.build();
+          onChanged();
+        } else {
+          platformPositionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public Builder mergePlatformPosition(com.jmpspace.contracts.SpaceServer.Physics.Vector2 value) {
+        if (platformPositionBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              platformPosition_ != com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance()) {
+            platformPosition_ =
+              com.jmpspace.contracts.SpaceServer.Physics.Vector2.newBuilder(platformPosition_).mergeFrom(value).buildPartial();
+          } else {
+            platformPosition_ = value;
+          }
+          onChanged();
+        } else {
+          platformPositionBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public Builder clearPlatformPosition() {
+        if (platformPositionBuilder_ == null) {
+          platformPosition_ = com.jmpspace.contracts.SpaceServer.Physics.Vector2.getDefaultInstance();
+          onChanged();
+        } else {
+          platformPositionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder getPlatformPositionBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getPlatformPositionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder getPlatformPositionOrBuilder() {
+        if (platformPositionBuilder_ != null) {
+          return platformPositionBuilder_.getMessageOrBuilder();
+        } else {
+          return platformPosition_;
+        }
+      }
+      /**
+       * <code>required .physics.Vector2 platformPosition = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Physics.Vector2, com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder, com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder> 
+          getPlatformPositionFieldBuilder() {
+        if (platformPositionBuilder_ == null) {
+          platformPositionBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Physics.Vector2, com.jmpspace.contracts.SpaceServer.Physics.Vector2.Builder, com.jmpspace.contracts.SpaceServer.Physics.Vector2OrBuilder>(
+                  getPlatformPosition(),
+                  getParentForChildren(),
+                  isClean());
+          platformPosition_ = null;
+        }
+        return platformPositionBuilder_;
+      }
+
+      private int platformRotation_ ;
+      /**
+       * <code>required int32 platformRotation = 4;</code>
+       */
+      public boolean hasPlatformRotation() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 platformRotation = 4;</code>
+       */
+      public int getPlatformRotation() {
+        return platformRotation_;
+      }
+      /**
+       * <code>required int32 platformRotation = 4;</code>
+       */
+      public Builder setPlatformRotation(int value) {
+        bitField0_ |= 0x00000008;
+        platformRotation_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 platformRotation = 4;</code>
+       */
+      public Builder clearPlatformRotation() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        platformRotation_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:world.Platform)
+    }
+
+    static {
+      defaultInstance = new Platform(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:world.Platform)
+  }
+
   public interface EntityOrBuilder extends
       // @@protoc_insertion_point(interface_extends:world.Entity)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .structure.Structure structure = 1;</code>
+     * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
      */
-    boolean hasStructure();
+    boolean hasFloatingStructure();
     /**
-     * <code>optional .structure.Structure structure = 1;</code>
+     * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure getStructure();
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure getFloatingStructure();
     /**
-     * <code>optional .structure.Structure structure = 1;</code>
+     * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder getStructureOrBuilder();
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder getFloatingStructureOrBuilder();
 
     /**
-     * <code>optional .player.Player player = 2;</code>
+     * <code>optional .world.Platform structurePlatform = 2;</code>
      */
-    boolean hasPlayer();
+    boolean hasStructurePlatform();
     /**
-     * <code>optional .player.Player player = 2;</code>
+     * <code>optional .world.Platform structurePlatform = 2;</code>
      */
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player getPlayer();
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform getStructurePlatform();
     /**
-     * <code>optional .player.Player player = 2;</code>
+     * <code>optional .world.Platform structurePlatform = 2;</code>
      */
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder getPlayerOrBuilder();
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder getStructurePlatformOrBuilder();
+
+    /**
+     * <code>optional .player.Floating floatingPlayer = 3;</code>
+     */
+    boolean hasFloatingPlayer();
+    /**
+     * <code>optional .player.Floating floatingPlayer = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Player.Floating getFloatingPlayer();
+    /**
+     * <code>optional .player.Floating floatingPlayer = 3;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Player.FloatingOrBuilder getFloatingPlayerOrBuilder();
+
+    /**
+     * <code>optional .player.Onboard onboardPlayer = 4;</code>
+     */
+    boolean hasOnboardPlayer();
+    /**
+     * <code>optional .player.Onboard onboardPlayer = 4;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Player.Onboard getOnboardPlayer();
+    /**
+     * <code>optional .player.Onboard onboardPlayer = 4;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.Player.OnboardOrBuilder getOnboardPlayerOrBuilder();
   }
   /**
    * Protobuf type {@code world.Entity}
@@ -91,29 +1747,55 @@ public final class WorldOuterClass {
               break;
             }
             case 10: {
-              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder subBuilder = null;
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder subBuilder = null;
               if (entityCase_ == 1) {
-                subBuilder = ((com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_).toBuilder();
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_).toBuilder();
               }
-              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.PARSER, extensionRegistry);
+              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_);
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_);
                 entity_ = subBuilder.buildPartial();
               }
               entityCase_ = 1;
               break;
             }
             case 18: {
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder subBuilder = null;
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder subBuilder = null;
               if (entityCase_ == 2) {
-                subBuilder = ((com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_).toBuilder();
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_).toBuilder();
               }
-              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.PARSER, extensionRegistry);
+              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_);
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_);
                 entity_ = subBuilder.buildPartial();
               }
               entityCase_ = 2;
+              break;
+            }
+            case 26: {
+              com.jmpspace.contracts.SpaceServer.Player.Floating.Builder subBuilder = null;
+              if (entityCase_ == 3) {
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Player.Floating) entity_).toBuilder();
+              }
+              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Player.Floating.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Player.Floating) entity_);
+                entity_ = subBuilder.buildPartial();
+              }
+              entityCase_ = 3;
+              break;
+            }
+            case 34: {
+              com.jmpspace.contracts.SpaceServer.Player.Onboard.Builder subBuilder = null;
+              if (entityCase_ == 4) {
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_).toBuilder();
+              }
+              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Player.Onboard.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_);
+                entity_ = subBuilder.buildPartial();
+              }
+              entityCase_ = 4;
               break;
             }
           }
@@ -160,8 +1842,10 @@ public final class WorldOuterClass {
     private java.lang.Object entity_;
     public enum EntityCase
         implements com.google.protobuf.Internal.EnumLite {
-      STRUCTURE(1),
-      PLAYER(2),
+      FLOATINGSTRUCTURE(1),
+      STRUCTUREPLATFORM(2),
+      FLOATINGPLAYER(3),
+      ONBOARDPLAYER(4),
       ENTITY_NOT_SET(0);
       private int value = 0;
       private EntityCase(int value) {
@@ -169,8 +1853,10 @@ public final class WorldOuterClass {
       }
       public static EntityCase valueOf(int value) {
         switch (value) {
-          case 1: return STRUCTURE;
-          case 2: return PLAYER;
+          case 1: return FLOATINGSTRUCTURE;
+          case 2: return STRUCTUREPLATFORM;
+          case 3: return FLOATINGPLAYER;
+          case 4: return ONBOARDPLAYER;
           case 0: return ENTITY_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -187,56 +1873,108 @@ public final class WorldOuterClass {
           entityCase_);
     }
 
-    public static final int STRUCTURE_FIELD_NUMBER = 1;
+    public static final int FLOATINGSTRUCTURE_FIELD_NUMBER = 1;
     /**
-     * <code>optional .structure.Structure structure = 1;</code>
+     * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
      */
-    public boolean hasStructure() {
+    public boolean hasFloatingStructure() {
       return entityCase_ == 1;
     }
     /**
-     * <code>optional .structure.Structure structure = 1;</code>
+     * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure getStructure() {
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure getFloatingStructure() {
       if (entityCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_;
+         return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_;
       }
-      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
     }
     /**
-     * <code>optional .structure.Structure structure = 1;</code>
+     * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder getStructureOrBuilder() {
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder getFloatingStructureOrBuilder() {
       if (entityCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_;
+         return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_;
       }
-      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
     }
 
-    public static final int PLAYER_FIELD_NUMBER = 2;
+    public static final int STRUCTUREPLATFORM_FIELD_NUMBER = 2;
     /**
-     * <code>optional .player.Player player = 2;</code>
+     * <code>optional .world.Platform structurePlatform = 2;</code>
      */
-    public boolean hasPlayer() {
+    public boolean hasStructurePlatform() {
       return entityCase_ == 2;
     }
     /**
-     * <code>optional .player.Player player = 2;</code>
+     * <code>optional .world.Platform structurePlatform = 2;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player getPlayer() {
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform getStructurePlatform() {
       if (entityCase_ == 2) {
-         return (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_;
+         return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_;
       }
-      return com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
     }
     /**
-     * <code>optional .player.Player player = 2;</code>
+     * <code>optional .world.Platform structurePlatform = 2;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder getPlayerOrBuilder() {
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder getStructurePlatformOrBuilder() {
       if (entityCase_ == 2) {
-         return (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_;
+         return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_;
       }
-      return com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
+    }
+
+    public static final int FLOATINGPLAYER_FIELD_NUMBER = 3;
+    /**
+     * <code>optional .player.Floating floatingPlayer = 3;</code>
+     */
+    public boolean hasFloatingPlayer() {
+      return entityCase_ == 3;
+    }
+    /**
+     * <code>optional .player.Floating floatingPlayer = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Player.Floating getFloatingPlayer() {
+      if (entityCase_ == 3) {
+         return (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance();
+    }
+    /**
+     * <code>optional .player.Floating floatingPlayer = 3;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Player.FloatingOrBuilder getFloatingPlayerOrBuilder() {
+      if (entityCase_ == 3) {
+         return (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance();
+    }
+
+    public static final int ONBOARDPLAYER_FIELD_NUMBER = 4;
+    /**
+     * <code>optional .player.Onboard onboardPlayer = 4;</code>
+     */
+    public boolean hasOnboardPlayer() {
+      return entityCase_ == 4;
+    }
+    /**
+     * <code>optional .player.Onboard onboardPlayer = 4;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Player.Onboard getOnboardPlayer() {
+      if (entityCase_ == 4) {
+         return (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance();
+    }
+    /**
+     * <code>optional .player.Onboard onboardPlayer = 4;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.Player.OnboardOrBuilder getOnboardPlayerOrBuilder() {
+      if (entityCase_ == 4) {
+         return (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_;
+      }
+      return com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance();
     }
 
     private void initFields() {
@@ -247,8 +1985,26 @@ public final class WorldOuterClass {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (hasStructure()) {
-        if (!getStructure().isInitialized()) {
+      if (hasFloatingStructure()) {
+        if (!getFloatingStructure().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasStructurePlatform()) {
+        if (!getStructurePlatform().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasFloatingPlayer()) {
+        if (!getFloatingPlayer().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasOnboardPlayer()) {
+        if (!getOnboardPlayer().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -261,10 +2017,16 @@ public final class WorldOuterClass {
                         throws java.io.IOException {
       getSerializedSize();
       if (entityCase_ == 1) {
-        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_);
+        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_);
       }
       if (entityCase_ == 2) {
-        output.writeMessage(2, (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_);
+        output.writeMessage(2, (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_);
+      }
+      if (entityCase_ == 3) {
+        output.writeMessage(3, (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_);
+      }
+      if (entityCase_ == 4) {
+        output.writeMessage(4, (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -277,11 +2039,19 @@ public final class WorldOuterClass {
       size = 0;
       if (entityCase_ == 1) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_);
+          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_);
       }
       if (entityCase_ == 2) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_);
+          .computeMessageSize(2, (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_);
+      }
+      if (entityCase_ == 3) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_);
+      }
+      if (entityCase_ == 4) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -431,17 +2201,31 @@ public final class WorldOuterClass {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (entityCase_ == 1) {
-          if (structureBuilder_ == null) {
+          if (floatingStructureBuilder_ == null) {
             result.entity_ = entity_;
           } else {
-            result.entity_ = structureBuilder_.build();
+            result.entity_ = floatingStructureBuilder_.build();
           }
         }
         if (entityCase_ == 2) {
-          if (playerBuilder_ == null) {
+          if (structurePlatformBuilder_ == null) {
             result.entity_ = entity_;
           } else {
-            result.entity_ = playerBuilder_.build();
+            result.entity_ = structurePlatformBuilder_.build();
+          }
+        }
+        if (entityCase_ == 3) {
+          if (floatingPlayerBuilder_ == null) {
+            result.entity_ = entity_;
+          } else {
+            result.entity_ = floatingPlayerBuilder_.build();
+          }
+        }
+        if (entityCase_ == 4) {
+          if (onboardPlayerBuilder_ == null) {
+            result.entity_ = entity_;
+          } else {
+            result.entity_ = onboardPlayerBuilder_.build();
           }
         }
         result.bitField0_ = to_bitField0_;
@@ -462,12 +2246,20 @@ public final class WorldOuterClass {
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity other) {
         if (other == com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance()) return this;
         switch (other.getEntityCase()) {
-          case STRUCTURE: {
-            mergeStructure(other.getStructure());
+          case FLOATINGSTRUCTURE: {
+            mergeFloatingStructure(other.getFloatingStructure());
             break;
           }
-          case PLAYER: {
-            mergePlayer(other.getPlayer());
+          case STRUCTUREPLATFORM: {
+            mergeStructurePlatform(other.getStructurePlatform());
+            break;
+          }
+          case FLOATINGPLAYER: {
+            mergeFloatingPlayer(other.getFloatingPlayer());
+            break;
+          }
+          case ONBOARDPLAYER: {
+            mergeOnboardPlayer(other.getOnboardPlayer());
             break;
           }
           case ENTITY_NOT_SET: {
@@ -479,8 +2271,26 @@ public final class WorldOuterClass {
       }
 
       public final boolean isInitialized() {
-        if (hasStructure()) {
-          if (!getStructure().isInitialized()) {
+        if (hasFloatingStructure()) {
+          if (!getFloatingStructure().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasStructurePlatform()) {
+          if (!getStructurePlatform().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasFloatingPlayer()) {
+          if (!getFloatingPlayer().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasOnboardPlayer()) {
+          if (!getOnboardPlayer().isInitialized()) {
             
             return false;
           }
@@ -523,67 +2333,67 @@ public final class WorldOuterClass {
       private int bitField0_;
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder> structureBuilder_;
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder> floatingStructureBuilder_;
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public boolean hasStructure() {
+      public boolean hasFloatingStructure() {
         return entityCase_ == 1;
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure getStructure() {
-        if (structureBuilder_ == null) {
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure getFloatingStructure() {
+        if (floatingStructureBuilder_ == null) {
           if (entityCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_;
+            return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_;
           }
-          return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
         } else {
           if (entityCase_ == 1) {
-            return structureBuilder_.getMessage();
+            return floatingStructureBuilder_.getMessage();
           }
-          return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public Builder setStructure(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure value) {
-        if (structureBuilder_ == null) {
+      public Builder setFloatingStructure(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure value) {
+        if (floatingStructureBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           entity_ = value;
           onChanged();
         } else {
-          structureBuilder_.setMessage(value);
+          floatingStructureBuilder_.setMessage(value);
         }
         entityCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public Builder setStructure(
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder builderForValue) {
-        if (structureBuilder_ == null) {
+      public Builder setFloatingStructure(
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder builderForValue) {
+        if (floatingStructureBuilder_ == null) {
           entity_ = builderForValue.build();
           onChanged();
         } else {
-          structureBuilder_.setMessage(builderForValue.build());
+          floatingStructureBuilder_.setMessage(builderForValue.build());
         }
         entityCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public Builder mergeStructure(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure value) {
-        if (structureBuilder_ == null) {
+      public Builder mergeFloatingStructure(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure value) {
+        if (floatingStructureBuilder_ == null) {
           if (entityCase_ == 1 &&
-              entity_ != com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance()) {
-            entity_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.newBuilder((com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_)
+              entity_ != com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance()) {
+            entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.newBuilder((com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_)
                 .mergeFrom(value).buildPartial();
           } else {
             entity_ = value;
@@ -591,18 +2401,18 @@ public final class WorldOuterClass {
           onChanged();
         } else {
           if (entityCase_ == 1) {
-            structureBuilder_.mergeFrom(value);
+            floatingStructureBuilder_.mergeFrom(value);
           }
-          structureBuilder_.setMessage(value);
+          floatingStructureBuilder_.setMessage(value);
         }
         entityCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public Builder clearStructure() {
-        if (structureBuilder_ == null) {
+      public Builder clearFloatingStructure() {
+        if (floatingStructureBuilder_ == null) {
           if (entityCase_ == 1) {
             entityCase_ = 0;
             entity_ = null;
@@ -613,112 +2423,112 @@ public final class WorldOuterClass {
             entityCase_ = 0;
             entity_ = null;
           }
-          structureBuilder_.clear();
+          floatingStructureBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder getStructureBuilder() {
-        return getStructureFieldBuilder().getBuilder();
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder getFloatingStructureBuilder() {
+        return getFloatingStructureFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder getStructureOrBuilder() {
-        if ((entityCase_ == 1) && (structureBuilder_ != null)) {
-          return structureBuilder_.getMessageOrBuilder();
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder getFloatingStructureOrBuilder() {
+        if ((entityCase_ == 1) && (floatingStructureBuilder_ != null)) {
+          return floatingStructureBuilder_.getMessageOrBuilder();
         } else {
           if (entityCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_;
+            return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_;
           }
-          return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .structure.Structure structure = 1;</code>
+       * <code>optional .world.FloatingStructure floatingStructure = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder> 
-          getStructureFieldBuilder() {
-        if (structureBuilder_ == null) {
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder> 
+          getFloatingStructureFieldBuilder() {
+        if (floatingStructureBuilder_ == null) {
           if (!(entityCase_ == 1)) {
-            entity_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.getDefaultInstance();
+            entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.getDefaultInstance();
           }
-          structureBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureOrBuilder>(
-                  (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Structure) entity_,
+          floatingStructureBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructureOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure) entity_,
                   getParentForChildren(),
                   isClean());
           entity_ = null;
         }
         entityCase_ = 1;
-        return structureBuilder_;
+        return floatingStructureBuilder_;
       }
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder> playerBuilder_;
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder> structurePlatformBuilder_;
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public boolean hasPlayer() {
+      public boolean hasStructurePlatform() {
         return entityCase_ == 2;
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player getPlayer() {
-        if (playerBuilder_ == null) {
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform getStructurePlatform() {
+        if (structurePlatformBuilder_ == null) {
           if (entityCase_ == 2) {
-            return (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_;
+            return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_;
           }
-          return com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
         } else {
           if (entityCase_ == 2) {
-            return playerBuilder_.getMessage();
+            return structurePlatformBuilder_.getMessage();
           }
-          return com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public Builder setPlayer(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player value) {
-        if (playerBuilder_ == null) {
+      public Builder setStructurePlatform(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform value) {
+        if (structurePlatformBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           entity_ = value;
           onChanged();
         } else {
-          playerBuilder_.setMessage(value);
+          structurePlatformBuilder_.setMessage(value);
         }
         entityCase_ = 2;
         return this;
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public Builder setPlayer(
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder builderForValue) {
-        if (playerBuilder_ == null) {
+      public Builder setStructurePlatform(
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder builderForValue) {
+        if (structurePlatformBuilder_ == null) {
           entity_ = builderForValue.build();
           onChanged();
         } else {
-          playerBuilder_.setMessage(builderForValue.build());
+          structurePlatformBuilder_.setMessage(builderForValue.build());
         }
         entityCase_ = 2;
         return this;
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public Builder mergePlayer(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player value) {
-        if (playerBuilder_ == null) {
+      public Builder mergeStructurePlatform(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform value) {
+        if (structurePlatformBuilder_ == null) {
           if (entityCase_ == 2 &&
-              entity_ != com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance()) {
-            entity_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.newBuilder((com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_)
+              entity_ != com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance()) {
+            entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.newBuilder((com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_)
                 .mergeFrom(value).buildPartial();
           } else {
             entity_ = value;
@@ -726,18 +2536,18 @@ public final class WorldOuterClass {
           onChanged();
         } else {
           if (entityCase_ == 2) {
-            playerBuilder_.mergeFrom(value);
+            structurePlatformBuilder_.mergeFrom(value);
           }
-          playerBuilder_.setMessage(value);
+          structurePlatformBuilder_.setMessage(value);
         }
         entityCase_ = 2;
         return this;
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public Builder clearPlayer() {
-        if (playerBuilder_ == null) {
+      public Builder clearStructurePlatform() {
+        if (structurePlatformBuilder_ == null) {
           if (entityCase_ == 2) {
             entityCase_ = 0;
             entity_ = null;
@@ -748,48 +2558,318 @@ public final class WorldOuterClass {
             entityCase_ = 0;
             entity_ = null;
           }
-          playerBuilder_.clear();
+          structurePlatformBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder getPlayerBuilder() {
-        return getPlayerFieldBuilder().getBuilder();
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder getStructurePlatformBuilder() {
+        return getStructurePlatformFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder getPlayerOrBuilder() {
-        if ((entityCase_ == 2) && (playerBuilder_ != null)) {
-          return playerBuilder_.getMessageOrBuilder();
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder getStructurePlatformOrBuilder() {
+        if ((entityCase_ == 2) && (structurePlatformBuilder_ != null)) {
+          return structurePlatformBuilder_.getMessageOrBuilder();
         } else {
           if (entityCase_ == 2) {
-            return (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_;
+            return (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_;
           }
-          return com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .player.Player player = 2;</code>
+       * <code>optional .world.Platform structurePlatform = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder> 
-          getPlayerFieldBuilder() {
-        if (playerBuilder_ == null) {
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder> 
+          getStructurePlatformFieldBuilder() {
+        if (structurePlatformBuilder_ == null) {
           if (!(entityCase_ == 2)) {
-            entity_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.getDefaultInstance();
+            entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.getDefaultInstance();
           }
-          playerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.PlayerOrBuilder>(
-                  (com.jmpspace.contracts.SpaceServer.PlayerOuterClass.Player) entity_,
+          structurePlatformBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.PlatformOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.WorldOuterClass.Platform) entity_,
                   getParentForChildren(),
                   isClean());
           entity_ = null;
         }
         entityCase_ = 2;
-        return playerBuilder_;
+        return structurePlatformBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Player.Floating, com.jmpspace.contracts.SpaceServer.Player.Floating.Builder, com.jmpspace.contracts.SpaceServer.Player.FloatingOrBuilder> floatingPlayerBuilder_;
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public boolean hasFloatingPlayer() {
+        return entityCase_ == 3;
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Player.Floating getFloatingPlayer() {
+        if (floatingPlayerBuilder_ == null) {
+          if (entityCase_ == 3) {
+            return (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance();
+        } else {
+          if (entityCase_ == 3) {
+            return floatingPlayerBuilder_.getMessage();
+          }
+          return com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public Builder setFloatingPlayer(com.jmpspace.contracts.SpaceServer.Player.Floating value) {
+        if (floatingPlayerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          entity_ = value;
+          onChanged();
+        } else {
+          floatingPlayerBuilder_.setMessage(value);
+        }
+        entityCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public Builder setFloatingPlayer(
+          com.jmpspace.contracts.SpaceServer.Player.Floating.Builder builderForValue) {
+        if (floatingPlayerBuilder_ == null) {
+          entity_ = builderForValue.build();
+          onChanged();
+        } else {
+          floatingPlayerBuilder_.setMessage(builderForValue.build());
+        }
+        entityCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public Builder mergeFloatingPlayer(com.jmpspace.contracts.SpaceServer.Player.Floating value) {
+        if (floatingPlayerBuilder_ == null) {
+          if (entityCase_ == 3 &&
+              entity_ != com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance()) {
+            entity_ = com.jmpspace.contracts.SpaceServer.Player.Floating.newBuilder((com.jmpspace.contracts.SpaceServer.Player.Floating) entity_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            entity_ = value;
+          }
+          onChanged();
+        } else {
+          if (entityCase_ == 3) {
+            floatingPlayerBuilder_.mergeFrom(value);
+          }
+          floatingPlayerBuilder_.setMessage(value);
+        }
+        entityCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public Builder clearFloatingPlayer() {
+        if (floatingPlayerBuilder_ == null) {
+          if (entityCase_ == 3) {
+            entityCase_ = 0;
+            entity_ = null;
+            onChanged();
+          }
+        } else {
+          if (entityCase_ == 3) {
+            entityCase_ = 0;
+            entity_ = null;
+          }
+          floatingPlayerBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Player.Floating.Builder getFloatingPlayerBuilder() {
+        return getFloatingPlayerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Player.FloatingOrBuilder getFloatingPlayerOrBuilder() {
+        if ((entityCase_ == 3) && (floatingPlayerBuilder_ != null)) {
+          return floatingPlayerBuilder_.getMessageOrBuilder();
+        } else {
+          if (entityCase_ == 3) {
+            return (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .player.Floating floatingPlayer = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Player.Floating, com.jmpspace.contracts.SpaceServer.Player.Floating.Builder, com.jmpspace.contracts.SpaceServer.Player.FloatingOrBuilder> 
+          getFloatingPlayerFieldBuilder() {
+        if (floatingPlayerBuilder_ == null) {
+          if (!(entityCase_ == 3)) {
+            entity_ = com.jmpspace.contracts.SpaceServer.Player.Floating.getDefaultInstance();
+          }
+          floatingPlayerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Player.Floating, com.jmpspace.contracts.SpaceServer.Player.Floating.Builder, com.jmpspace.contracts.SpaceServer.Player.FloatingOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Player.Floating) entity_,
+                  getParentForChildren(),
+                  isClean());
+          entity_ = null;
+        }
+        entityCase_ = 3;
+        return floatingPlayerBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Player.Onboard, com.jmpspace.contracts.SpaceServer.Player.Onboard.Builder, com.jmpspace.contracts.SpaceServer.Player.OnboardOrBuilder> onboardPlayerBuilder_;
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public boolean hasOnboardPlayer() {
+        return entityCase_ == 4;
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Player.Onboard getOnboardPlayer() {
+        if (onboardPlayerBuilder_ == null) {
+          if (entityCase_ == 4) {
+            return (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance();
+        } else {
+          if (entityCase_ == 4) {
+            return onboardPlayerBuilder_.getMessage();
+          }
+          return com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public Builder setOnboardPlayer(com.jmpspace.contracts.SpaceServer.Player.Onboard value) {
+        if (onboardPlayerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          entity_ = value;
+          onChanged();
+        } else {
+          onboardPlayerBuilder_.setMessage(value);
+        }
+        entityCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public Builder setOnboardPlayer(
+          com.jmpspace.contracts.SpaceServer.Player.Onboard.Builder builderForValue) {
+        if (onboardPlayerBuilder_ == null) {
+          entity_ = builderForValue.build();
+          onChanged();
+        } else {
+          onboardPlayerBuilder_.setMessage(builderForValue.build());
+        }
+        entityCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public Builder mergeOnboardPlayer(com.jmpspace.contracts.SpaceServer.Player.Onboard value) {
+        if (onboardPlayerBuilder_ == null) {
+          if (entityCase_ == 4 &&
+              entity_ != com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance()) {
+            entity_ = com.jmpspace.contracts.SpaceServer.Player.Onboard.newBuilder((com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            entity_ = value;
+          }
+          onChanged();
+        } else {
+          if (entityCase_ == 4) {
+            onboardPlayerBuilder_.mergeFrom(value);
+          }
+          onboardPlayerBuilder_.setMessage(value);
+        }
+        entityCase_ = 4;
+        return this;
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public Builder clearOnboardPlayer() {
+        if (onboardPlayerBuilder_ == null) {
+          if (entityCase_ == 4) {
+            entityCase_ = 0;
+            entity_ = null;
+            onChanged();
+          }
+        } else {
+          if (entityCase_ == 4) {
+            entityCase_ = 0;
+            entity_ = null;
+          }
+          onboardPlayerBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Player.Onboard.Builder getOnboardPlayerBuilder() {
+        return getOnboardPlayerFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.Player.OnboardOrBuilder getOnboardPlayerOrBuilder() {
+        if ((entityCase_ == 4) && (onboardPlayerBuilder_ != null)) {
+          return onboardPlayerBuilder_.getMessageOrBuilder();
+        } else {
+          if (entityCase_ == 4) {
+            return (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_;
+          }
+          return com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .player.Onboard onboardPlayer = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.Player.Onboard, com.jmpspace.contracts.SpaceServer.Player.Onboard.Builder, com.jmpspace.contracts.SpaceServer.Player.OnboardOrBuilder> 
+          getOnboardPlayerFieldBuilder() {
+        if (onboardPlayerBuilder_ == null) {
+          if (!(entityCase_ == 4)) {
+            entity_ = com.jmpspace.contracts.SpaceServer.Player.Onboard.getDefaultInstance();
+          }
+          onboardPlayerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Player.Onboard, com.jmpspace.contracts.SpaceServer.Player.Onboard.Builder, com.jmpspace.contracts.SpaceServer.Player.OnboardOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Player.Onboard) entity_,
+                  getParentForChildren(),
+                  isClean());
+          entity_ = null;
+        }
+        entityCase_ = 4;
+        return onboardPlayerBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:world.Entity)
@@ -803,761 +2883,32 @@ public final class WorldOuterClass {
     // @@protoc_insertion_point(class_scope:world.Entity)
   }
 
-  public interface FloatingEntityOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:world.FloatingEntity)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required .physics.PhysicsState physicsState = 1;</code>
-     */
-    boolean hasPhysicsState();
-    /**
-     * <code>required .physics.PhysicsState physicsState = 1;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Physics.PhysicsState getPhysicsState();
-    /**
-     * <code>required .physics.PhysicsState physicsState = 1;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder getPhysicsStateOrBuilder();
-
-    /**
-     * <code>required .world.Entity entity = 2;</code>
-     */
-    boolean hasEntity();
-    /**
-     * <code>required .world.Entity entity = 2;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity getEntity();
-    /**
-     * <code>required .world.Entity entity = 2;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntityOrBuilder();
-  }
-  /**
-   * Protobuf type {@code world.FloatingEntity}
-   */
-  public static final class FloatingEntity extends
-      com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:world.FloatingEntity)
-      FloatingEntityOrBuilder {
-    // Use FloatingEntity.newBuilder() to construct.
-    private FloatingEntity(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-      super(builder);
-      this.unknownFields = builder.getUnknownFields();
-    }
-    private FloatingEntity(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final FloatingEntity defaultInstance;
-    public static FloatingEntity getDefaultInstance() {
-      return defaultInstance;
-    }
-
-    public FloatingEntity getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
-    }
-    private FloatingEntity(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = physicsState_.toBuilder();
-              }
-              physicsState_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(physicsState_);
-                physicsState_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
-            case 18: {
-              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                subBuilder = entity_.toBuilder();
-              }
-              entity_ = input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(entity_);
-                entity_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000002;
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingEntity_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingEntity_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.class, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<FloatingEntity> PARSER =
-        new com.google.protobuf.AbstractParser<FloatingEntity>() {
-      public FloatingEntity parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new FloatingEntity(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<FloatingEntity> getParserForType() {
-      return PARSER;
-    }
-
-    private int bitField0_;
-    public static final int PHYSICSSTATE_FIELD_NUMBER = 1;
-    private com.jmpspace.contracts.SpaceServer.Physics.PhysicsState physicsState_;
-    /**
-     * <code>required .physics.PhysicsState physicsState = 1;</code>
-     */
-    public boolean hasPhysicsState() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required .physics.PhysicsState physicsState = 1;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Physics.PhysicsState getPhysicsState() {
-      return physicsState_;
-    }
-    /**
-     * <code>required .physics.PhysicsState physicsState = 1;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder getPhysicsStateOrBuilder() {
-      return physicsState_;
-    }
-
-    public static final int ENTITY_FIELD_NUMBER = 2;
-    private com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity entity_;
-    /**
-     * <code>required .world.Entity entity = 2;</code>
-     */
-    public boolean hasEntity() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required .world.Entity entity = 2;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity getEntity() {
-      return entity_;
-    }
-    /**
-     * <code>required .world.Entity entity = 2;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntityOrBuilder() {
-      return entity_;
-    }
-
-    private void initFields() {
-      physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
-      entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPhysicsState()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasEntity()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getPhysicsState().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getEntity().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, physicsState_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, entity_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, physicsState_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, entity_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code world.FloatingEntity}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:world.FloatingEntity)
-        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingEntity_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingEntity_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.class, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder.class);
-      }
-
-      // Construct using com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getPhysicsStateFieldBuilder();
-          getEntityFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        if (physicsStateBuilder_ == null) {
-          physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
-        } else {
-          physicsStateBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        if (entityBuilder_ == null) {
-          entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance();
-        } else {
-          entityBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.internal_static_world_FloatingEntity_descriptor;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.getDefaultInstance();
-      }
-
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity build() {
-        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity buildPartial() {
-        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity result = new com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (physicsStateBuilder_ == null) {
-          result.physicsState_ = physicsState_;
-        } else {
-          result.physicsState_ = physicsStateBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        if (entityBuilder_ == null) {
-          result.entity_ = entity_;
-        } else {
-          result.entity_ = entityBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity other) {
-        if (other == com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.getDefaultInstance()) return this;
-        if (other.hasPhysicsState()) {
-          mergePhysicsState(other.getPhysicsState());
-        }
-        if (other.hasEntity()) {
-          mergeEntity(other.getEntity());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPhysicsState()) {
-          
-          return false;
-        }
-        if (!hasEntity()) {
-          
-          return false;
-        }
-        if (!getPhysicsState().isInitialized()) {
-          
-          return false;
-        }
-        if (!getEntity().isInitialized()) {
-          
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.jmpspace.contracts.SpaceServer.Physics.PhysicsState physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Physics.PhysicsState, com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder, com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder> physicsStateBuilder_;
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public boolean hasPhysicsState() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Physics.PhysicsState getPhysicsState() {
-        if (physicsStateBuilder_ == null) {
-          return physicsState_;
-        } else {
-          return physicsStateBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public Builder setPhysicsState(com.jmpspace.contracts.SpaceServer.Physics.PhysicsState value) {
-        if (physicsStateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          physicsState_ = value;
-          onChanged();
-        } else {
-          physicsStateBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public Builder setPhysicsState(
-          com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder builderForValue) {
-        if (physicsStateBuilder_ == null) {
-          physicsState_ = builderForValue.build();
-          onChanged();
-        } else {
-          physicsStateBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public Builder mergePhysicsState(com.jmpspace.contracts.SpaceServer.Physics.PhysicsState value) {
-        if (physicsStateBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              physicsState_ != com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance()) {
-            physicsState_ =
-              com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.newBuilder(physicsState_).mergeFrom(value).buildPartial();
-          } else {
-            physicsState_ = value;
-          }
-          onChanged();
-        } else {
-          physicsStateBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public Builder clearPhysicsState() {
-        if (physicsStateBuilder_ == null) {
-          physicsState_ = com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.getDefaultInstance();
-          onChanged();
-        } else {
-          physicsStateBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder getPhysicsStateBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getPhysicsStateFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder getPhysicsStateOrBuilder() {
-        if (physicsStateBuilder_ != null) {
-          return physicsStateBuilder_.getMessageOrBuilder();
-        } else {
-          return physicsState_;
-        }
-      }
-      /**
-       * <code>required .physics.PhysicsState physicsState = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Physics.PhysicsState, com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder, com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder> 
-          getPhysicsStateFieldBuilder() {
-        if (physicsStateBuilder_ == null) {
-          physicsStateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.Physics.PhysicsState, com.jmpspace.contracts.SpaceServer.Physics.PhysicsState.Builder, com.jmpspace.contracts.SpaceServer.Physics.PhysicsStateOrBuilder>(
-                  getPhysicsState(),
-                  getParentForChildren(),
-                  isClean());
-          physicsState_ = null;
-        }
-        return physicsStateBuilder_;
-      }
-
-      private com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> entityBuilder_;
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public boolean hasEntity() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity getEntity() {
-        if (entityBuilder_ == null) {
-          return entity_;
-        } else {
-          return entityBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public Builder setEntity(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity value) {
-        if (entityBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          entity_ = value;
-          onChanged();
-        } else {
-          entityBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public Builder setEntity(
-          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder builderForValue) {
-        if (entityBuilder_ == null) {
-          entity_ = builderForValue.build();
-          onChanged();
-        } else {
-          entityBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public Builder mergeEntity(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity value) {
-        if (entityBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              entity_ != com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance()) {
-            entity_ =
-              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.newBuilder(entity_).mergeFrom(value).buildPartial();
-          } else {
-            entity_ = value;
-          }
-          onChanged();
-        } else {
-          entityBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public Builder clearEntity() {
-        if (entityBuilder_ == null) {
-          entity_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance();
-          onChanged();
-        } else {
-          entityBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder getEntityBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getEntityFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntityOrBuilder() {
-        if (entityBuilder_ != null) {
-          return entityBuilder_.getMessageOrBuilder();
-        } else {
-          return entity_;
-        }
-      }
-      /**
-       * <code>required .world.Entity entity = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> 
-          getEntityFieldBuilder() {
-        if (entityBuilder_ == null) {
-          entityBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder>(
-                  getEntity(),
-                  getParentForChildren(),
-                  isClean());
-          entity_ = null;
-        }
-        return entityBuilder_;
-      }
-
-      // @@protoc_insertion_point(builder_scope:world.FloatingEntity)
-    }
-
-    static {
-      defaultInstance = new FloatingEntity(true);
-      defaultInstance.initFields();
-    }
-
-    // @@protoc_insertion_point(class_scope:world.FloatingEntity)
-  }
-
   public interface WorldOrBuilder extends
       // @@protoc_insertion_point(interface_extends:world.World)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity> 
-        getFloatingEntitiesList();
+    java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> 
+        getEntitiesList();
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity getFloatingEntities(int index);
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity getEntities(int index);
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    int getFloatingEntitiesCount();
+    int getEntitiesCount();
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    java.util.List<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder> 
-        getFloatingEntitiesOrBuilderList();
+    java.util.List<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> 
+        getEntitiesOrBuilderList();
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder getFloatingEntitiesOrBuilder(
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntitiesOrBuilder(
         int index);
 
     /**
@@ -1567,11 +2918,11 @@ public final class WorldOuterClass {
     /**
      * <code>required .player.State playerState = 2;</code>
      */
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State getPlayerState();
+    com.jmpspace.contracts.SpaceServer.Player.State getPlayerState();
     /**
      * <code>required .player.State playerState = 2;</code>
      */
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.StateOrBuilder getPlayerStateOrBuilder();
+    com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder getPlayerStateOrBuilder();
   }
   /**
    * Protobuf type {@code world.World}
@@ -1627,18 +2978,18 @@ public final class WorldOuterClass {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                floatingEntities_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity>();
+                entities_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              floatingEntities_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.PARSER, extensionRegistry));
+              entities_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.PARSER, extensionRegistry));
               break;
             }
             case 18: {
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.Builder subBuilder = null;
+              com.jmpspace.contracts.SpaceServer.Player.State.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
                 subBuilder = playerState_.toBuilder();
               }
-              playerState_ = input.readMessage(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.PARSER, extensionRegistry);
+              playerState_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Player.State.PARSER, extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(playerState_);
                 playerState_ = subBuilder.buildPartial();
@@ -1655,7 +3006,7 @@ public final class WorldOuterClass {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          floatingEntities_ = java.util.Collections.unmodifiableList(floatingEntities_);
+          entities_ = java.util.Collections.unmodifiableList(entities_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1689,43 +3040,43 @@ public final class WorldOuterClass {
     }
 
     private int bitField0_;
-    public static final int FLOATINGENTITIES_FIELD_NUMBER = 1;
-    private java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity> floatingEntities_;
+    public static final int ENTITIES_FIELD_NUMBER = 1;
+    private java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> entities_;
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    public java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity> getFloatingEntitiesList() {
-      return floatingEntities_;
+    public java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> getEntitiesList() {
+      return entities_;
     }
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    public java.util.List<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder> 
-        getFloatingEntitiesOrBuilderList() {
-      return floatingEntities_;
+    public java.util.List<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> 
+        getEntitiesOrBuilderList() {
+      return entities_;
     }
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    public int getFloatingEntitiesCount() {
-      return floatingEntities_.size();
+    public int getEntitiesCount() {
+      return entities_.size();
     }
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity getFloatingEntities(int index) {
-      return floatingEntities_.get(index);
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity getEntities(int index) {
+      return entities_.get(index);
     }
     /**
-     * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+     * <code>repeated .world.Entity entities = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder getFloatingEntitiesOrBuilder(
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntitiesOrBuilder(
         int index) {
-      return floatingEntities_.get(index);
+      return entities_.get(index);
     }
 
     public static final int PLAYERSTATE_FIELD_NUMBER = 2;
-    private com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State playerState_;
+    private com.jmpspace.contracts.SpaceServer.Player.State playerState_;
     /**
      * <code>required .player.State playerState = 2;</code>
      */
@@ -1735,19 +3086,19 @@ public final class WorldOuterClass {
     /**
      * <code>required .player.State playerState = 2;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State getPlayerState() {
+    public com.jmpspace.contracts.SpaceServer.Player.State getPlayerState() {
       return playerState_;
     }
     /**
      * <code>required .player.State playerState = 2;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.StateOrBuilder getPlayerStateOrBuilder() {
+    public com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder getPlayerStateOrBuilder() {
       return playerState_;
     }
 
     private void initFields() {
-      floatingEntities_ = java.util.Collections.emptyList();
-      playerState_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.getDefaultInstance();
+      entities_ = java.util.Collections.emptyList();
+      playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1759,8 +3110,8 @@ public final class WorldOuterClass {
         memoizedIsInitialized = 0;
         return false;
       }
-      for (int i = 0; i < getFloatingEntitiesCount(); i++) {
-        if (!getFloatingEntities(i).isInitialized()) {
+      for (int i = 0; i < getEntitiesCount(); i++) {
+        if (!getEntities(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -1776,8 +3127,8 @@ public final class WorldOuterClass {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      for (int i = 0; i < floatingEntities_.size(); i++) {
-        output.writeMessage(1, floatingEntities_.get(i));
+      for (int i = 0; i < entities_.size(); i++) {
+        output.writeMessage(1, entities_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(2, playerState_);
@@ -1791,9 +3142,9 @@ public final class WorldOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < floatingEntities_.size(); i++) {
+      for (int i = 0; i < entities_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, floatingEntities_.get(i));
+          .computeMessageSize(1, entities_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1908,7 +3259,7 @@ public final class WorldOuterClass {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getFloatingEntitiesFieldBuilder();
+          getEntitiesFieldBuilder();
           getPlayerStateFieldBuilder();
         }
       }
@@ -1918,14 +3269,14 @@ public final class WorldOuterClass {
 
       public Builder clear() {
         super.clear();
-        if (floatingEntitiesBuilder_ == null) {
-          floatingEntities_ = java.util.Collections.emptyList();
+        if (entitiesBuilder_ == null) {
+          entities_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          floatingEntitiesBuilder_.clear();
+          entitiesBuilder_.clear();
         }
         if (playerStateBuilder_ == null) {
-          playerState_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.getDefaultInstance();
+          playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
         } else {
           playerStateBuilder_.clear();
         }
@@ -1958,14 +3309,14 @@ public final class WorldOuterClass {
         com.jmpspace.contracts.SpaceServer.WorldOuterClass.World result = new com.jmpspace.contracts.SpaceServer.WorldOuterClass.World(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (floatingEntitiesBuilder_ == null) {
+        if (entitiesBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            floatingEntities_ = java.util.Collections.unmodifiableList(floatingEntities_);
+            entities_ = java.util.Collections.unmodifiableList(entities_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.floatingEntities_ = floatingEntities_;
+          result.entities_ = entities_;
         } else {
-          result.floatingEntities_ = floatingEntitiesBuilder_.build();
+          result.entities_ = entitiesBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000001;
@@ -1991,29 +3342,29 @@ public final class WorldOuterClass {
 
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.WorldOuterClass.World other) {
         if (other == com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.getDefaultInstance()) return this;
-        if (floatingEntitiesBuilder_ == null) {
-          if (!other.floatingEntities_.isEmpty()) {
-            if (floatingEntities_.isEmpty()) {
-              floatingEntities_ = other.floatingEntities_;
+        if (entitiesBuilder_ == null) {
+          if (!other.entities_.isEmpty()) {
+            if (entities_.isEmpty()) {
+              entities_ = other.entities_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureFloatingEntitiesIsMutable();
-              floatingEntities_.addAll(other.floatingEntities_);
+              ensureEntitiesIsMutable();
+              entities_.addAll(other.entities_);
             }
             onChanged();
           }
         } else {
-          if (!other.floatingEntities_.isEmpty()) {
-            if (floatingEntitiesBuilder_.isEmpty()) {
-              floatingEntitiesBuilder_.dispose();
-              floatingEntitiesBuilder_ = null;
-              floatingEntities_ = other.floatingEntities_;
+          if (!other.entities_.isEmpty()) {
+            if (entitiesBuilder_.isEmpty()) {
+              entitiesBuilder_.dispose();
+              entitiesBuilder_ = null;
+              entities_ = other.entities_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              floatingEntitiesBuilder_ = 
+              entitiesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getFloatingEntitiesFieldBuilder() : null;
+                   getEntitiesFieldBuilder() : null;
             } else {
-              floatingEntitiesBuilder_.addAllMessages(other.floatingEntities_);
+              entitiesBuilder_.addAllMessages(other.entities_);
             }
           }
         }
@@ -2029,8 +3380,8 @@ public final class WorldOuterClass {
           
           return false;
         }
-        for (int i = 0; i < getFloatingEntitiesCount(); i++) {
-          if (!getFloatingEntities(i).isInitialized()) {
+        for (int i = 0; i < getEntitiesCount(); i++) {
+          if (!getEntities(i).isInitialized()) {
             
             return false;
           }
@@ -2061,249 +3412,249 @@ public final class WorldOuterClass {
       }
       private int bitField0_;
 
-      private java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity> floatingEntities_ =
+      private java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> entities_ =
         java.util.Collections.emptyList();
-      private void ensureFloatingEntitiesIsMutable() {
+      private void ensureEntitiesIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          floatingEntities_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity>(floatingEntities_);
+          entities_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity>(entities_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder> floatingEntitiesBuilder_;
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> entitiesBuilder_;
 
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity> getFloatingEntitiesList() {
-        if (floatingEntitiesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(floatingEntities_);
+      public java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> getEntitiesList() {
+        if (entitiesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(entities_);
         } else {
-          return floatingEntitiesBuilder_.getMessageList();
+          return entitiesBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public int getFloatingEntitiesCount() {
-        if (floatingEntitiesBuilder_ == null) {
-          return floatingEntities_.size();
+      public int getEntitiesCount() {
+        if (entitiesBuilder_ == null) {
+          return entities_.size();
         } else {
-          return floatingEntitiesBuilder_.getCount();
+          return entitiesBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity getFloatingEntities(int index) {
-        if (floatingEntitiesBuilder_ == null) {
-          return floatingEntities_.get(index);
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity getEntities(int index) {
+        if (entitiesBuilder_ == null) {
+          return entities_.get(index);
         } else {
-          return floatingEntitiesBuilder_.getMessage(index);
+          return entitiesBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder setFloatingEntities(
-          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity value) {
-        if (floatingEntitiesBuilder_ == null) {
+      public Builder setEntities(
+          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity value) {
+        if (entitiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.set(index, value);
+          ensureEntitiesIsMutable();
+          entities_.set(index, value);
           onChanged();
         } else {
-          floatingEntitiesBuilder_.setMessage(index, value);
+          entitiesBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder setFloatingEntities(
-          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder builderForValue) {
-        if (floatingEntitiesBuilder_ == null) {
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.set(index, builderForValue.build());
+      public Builder setEntities(
+          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder builderForValue) {
+        if (entitiesBuilder_ == null) {
+          ensureEntitiesIsMutable();
+          entities_.set(index, builderForValue.build());
           onChanged();
         } else {
-          floatingEntitiesBuilder_.setMessage(index, builderForValue.build());
+          entitiesBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder addFloatingEntities(com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity value) {
-        if (floatingEntitiesBuilder_ == null) {
+      public Builder addEntities(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity value) {
+        if (entitiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.add(value);
+          ensureEntitiesIsMutable();
+          entities_.add(value);
           onChanged();
         } else {
-          floatingEntitiesBuilder_.addMessage(value);
+          entitiesBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder addFloatingEntities(
-          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity value) {
-        if (floatingEntitiesBuilder_ == null) {
+      public Builder addEntities(
+          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity value) {
+        if (entitiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.add(index, value);
+          ensureEntitiesIsMutable();
+          entities_.add(index, value);
           onChanged();
         } else {
-          floatingEntitiesBuilder_.addMessage(index, value);
+          entitiesBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder addFloatingEntities(
-          com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder builderForValue) {
-        if (floatingEntitiesBuilder_ == null) {
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.add(builderForValue.build());
+      public Builder addEntities(
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder builderForValue) {
+        if (entitiesBuilder_ == null) {
+          ensureEntitiesIsMutable();
+          entities_.add(builderForValue.build());
           onChanged();
         } else {
-          floatingEntitiesBuilder_.addMessage(builderForValue.build());
+          entitiesBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder addFloatingEntities(
-          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder builderForValue) {
-        if (floatingEntitiesBuilder_ == null) {
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.add(index, builderForValue.build());
+      public Builder addEntities(
+          int index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder builderForValue) {
+        if (entitiesBuilder_ == null) {
+          ensureEntitiesIsMutable();
+          entities_.add(index, builderForValue.build());
           onChanged();
         } else {
-          floatingEntitiesBuilder_.addMessage(index, builderForValue.build());
+          entitiesBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder addAllFloatingEntities(
-          java.lang.Iterable<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity> values) {
-        if (floatingEntitiesBuilder_ == null) {
-          ensureFloatingEntitiesIsMutable();
+      public Builder addAllEntities(
+          java.lang.Iterable<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> values) {
+        if (entitiesBuilder_ == null) {
+          ensureEntitiesIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, floatingEntities_);
+              values, entities_);
           onChanged();
         } else {
-          floatingEntitiesBuilder_.addAllMessages(values);
+          entitiesBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder clearFloatingEntities() {
-        if (floatingEntitiesBuilder_ == null) {
-          floatingEntities_ = java.util.Collections.emptyList();
+      public Builder clearEntities() {
+        if (entitiesBuilder_ == null) {
+          entities_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          floatingEntitiesBuilder_.clear();
+          entitiesBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public Builder removeFloatingEntities(int index) {
-        if (floatingEntitiesBuilder_ == null) {
-          ensureFloatingEntitiesIsMutable();
-          floatingEntities_.remove(index);
+      public Builder removeEntities(int index) {
+        if (entitiesBuilder_ == null) {
+          ensureEntitiesIsMutable();
+          entities_.remove(index);
           onChanged();
         } else {
-          floatingEntitiesBuilder_.remove(index);
+          entitiesBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder getFloatingEntitiesBuilder(
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder getEntitiesBuilder(
           int index) {
-        return getFloatingEntitiesFieldBuilder().getBuilder(index);
+        return getEntitiesFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder getFloatingEntitiesOrBuilder(
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntitiesOrBuilder(
           int index) {
-        if (floatingEntitiesBuilder_ == null) {
-          return floatingEntities_.get(index);  } else {
-          return floatingEntitiesBuilder_.getMessageOrBuilder(index);
+        if (entitiesBuilder_ == null) {
+          return entities_.get(index);  } else {
+          return entitiesBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public java.util.List<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder> 
-           getFloatingEntitiesOrBuilderList() {
-        if (floatingEntitiesBuilder_ != null) {
-          return floatingEntitiesBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> 
+           getEntitiesOrBuilderList() {
+        if (entitiesBuilder_ != null) {
+          return entitiesBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(floatingEntities_);
+          return java.util.Collections.unmodifiableList(entities_);
         }
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder addFloatingEntitiesBuilder() {
-        return getFloatingEntitiesFieldBuilder().addBuilder(
-            com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.getDefaultInstance());
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder addEntitiesBuilder() {
+        return getEntitiesFieldBuilder().addBuilder(
+            com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance());
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder addFloatingEntitiesBuilder(
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder addEntitiesBuilder(
           int index) {
-        return getFloatingEntitiesFieldBuilder().addBuilder(
-            index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.getDefaultInstance());
+        return getEntitiesFieldBuilder().addBuilder(
+            index, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.getDefaultInstance());
       }
       /**
-       * <code>repeated .world.FloatingEntity floatingEntities = 1;</code>
+       * <code>repeated .world.Entity entities = 1;</code>
        */
-      public java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder> 
-           getFloatingEntitiesBuilderList() {
-        return getFloatingEntitiesFieldBuilder().getBuilderList();
+      public java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder> 
+           getEntitiesBuilderList() {
+        return getEntitiesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder> 
-          getFloatingEntitiesFieldBuilder() {
-        if (floatingEntitiesBuilder_ == null) {
-          floatingEntitiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntityOrBuilder>(
-                  floatingEntities_,
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder> 
+          getEntitiesFieldBuilder() {
+        if (entitiesBuilder_ == null) {
+          entitiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity, com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder>(
+                  entities_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
-          floatingEntities_ = null;
+          entities_ = null;
         }
-        return floatingEntitiesBuilder_;
+        return entitiesBuilder_;
       }
 
-      private com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State playerState_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.getDefaultInstance();
+      private com.jmpspace.contracts.SpaceServer.Player.State playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.StateOrBuilder> playerStateBuilder_;
+          com.jmpspace.contracts.SpaceServer.Player.State, com.jmpspace.contracts.SpaceServer.Player.State.Builder, com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder> playerStateBuilder_;
       /**
        * <code>required .player.State playerState = 2;</code>
        */
@@ -2313,7 +3664,7 @@ public final class WorldOuterClass {
       /**
        * <code>required .player.State playerState = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State getPlayerState() {
+      public com.jmpspace.contracts.SpaceServer.Player.State getPlayerState() {
         if (playerStateBuilder_ == null) {
           return playerState_;
         } else {
@@ -2323,7 +3674,7 @@ public final class WorldOuterClass {
       /**
        * <code>required .player.State playerState = 2;</code>
        */
-      public Builder setPlayerState(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State value) {
+      public Builder setPlayerState(com.jmpspace.contracts.SpaceServer.Player.State value) {
         if (playerStateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2340,7 +3691,7 @@ public final class WorldOuterClass {
        * <code>required .player.State playerState = 2;</code>
        */
       public Builder setPlayerState(
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.Builder builderForValue) {
+          com.jmpspace.contracts.SpaceServer.Player.State.Builder builderForValue) {
         if (playerStateBuilder_ == null) {
           playerState_ = builderForValue.build();
           onChanged();
@@ -2353,12 +3704,12 @@ public final class WorldOuterClass {
       /**
        * <code>required .player.State playerState = 2;</code>
        */
-      public Builder mergePlayerState(com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State value) {
+      public Builder mergePlayerState(com.jmpspace.contracts.SpaceServer.Player.State value) {
         if (playerStateBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              playerState_ != com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.getDefaultInstance()) {
+              playerState_ != com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance()) {
             playerState_ =
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.newBuilder(playerState_).mergeFrom(value).buildPartial();
+              com.jmpspace.contracts.SpaceServer.Player.State.newBuilder(playerState_).mergeFrom(value).buildPartial();
           } else {
             playerState_ = value;
           }
@@ -2374,7 +3725,7 @@ public final class WorldOuterClass {
        */
       public Builder clearPlayerState() {
         if (playerStateBuilder_ == null) {
-          playerState_ = com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.getDefaultInstance();
+          playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
           onChanged();
         } else {
           playerStateBuilder_.clear();
@@ -2385,7 +3736,7 @@ public final class WorldOuterClass {
       /**
        * <code>required .player.State playerState = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.Builder getPlayerStateBuilder() {
+      public com.jmpspace.contracts.SpaceServer.Player.State.Builder getPlayerStateBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getPlayerStateFieldBuilder().getBuilder();
@@ -2393,7 +3744,7 @@ public final class WorldOuterClass {
       /**
        * <code>required .player.State playerState = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.PlayerOuterClass.StateOrBuilder getPlayerStateOrBuilder() {
+      public com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder getPlayerStateOrBuilder() {
         if (playerStateBuilder_ != null) {
           return playerStateBuilder_.getMessageOrBuilder();
         } else {
@@ -2404,11 +3755,11 @@ public final class WorldOuterClass {
        * <code>required .player.State playerState = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.StateOrBuilder> 
+          com.jmpspace.contracts.SpaceServer.Player.State, com.jmpspace.contracts.SpaceServer.Player.State.Builder, com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder> 
           getPlayerStateFieldBuilder() {
         if (playerStateBuilder_ == null) {
           playerStateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.State.Builder, com.jmpspace.contracts.SpaceServer.PlayerOuterClass.StateOrBuilder>(
+              com.jmpspace.contracts.SpaceServer.Player.State, com.jmpspace.contracts.SpaceServer.Player.State.Builder, com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder>(
                   getPlayerState(),
                   getParentForChildren(),
                   isClean());
@@ -2429,15 +3780,20 @@ public final class WorldOuterClass {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_world_FloatingStructure_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_world_FloatingStructure_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_world_Platform_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_world_Platform_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_world_Entity_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_world_Entity_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_world_FloatingEntity_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_world_FloatingEntity_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_world_World_descriptor;
   private static
@@ -2453,15 +3809,21 @@ public final class WorldOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\013world.proto\022\005world\032\rphysics.proto\032\014pla" +
-      "yer.proto\032\017structure.proto\"_\n\006Entity\022)\n\t" +
-      "structure\030\001 \001(\0132\024.structure.StructureH\000\022" +
-      " \n\006player\030\002 \001(\0132\016.player.PlayerH\000B\010\n\006ent" +
-      "ity\"\\\n\016FloatingEntity\022+\n\014physicsState\030\001 " +
-      "\002(\0132\025.physics.PhysicsState\022\035\n\006entity\030\002 \002" +
-      "(\0132\r.world.Entity\"\\\n\005World\022/\n\020floatingEn" +
-      "tities\030\001 \003(\0132\025.world.FloatingEntity\022\"\n\013p" +
-      "layerState\030\002 \002(\0132\r.player.StateB$\n\"com.j" +
-      "mpspace.contracts.SpaceServer"
+      "yer.proto\032\017structure.proto\"h\n\021FloatingSt" +
+      "ructure\022&\n\010sructure\030\001 \002(\0132\024.structure.St" +
+      "ructure\022+\n\014physicsState\030\002 \002(\0132\025.physics." +
+      "PhysicsState\"\214\001\n\010Platform\022%\n\010platform\030\001 " +
+      "\002(\0132\023.structure.Platform\022\023\n\013structureId\030" +
+      "\002 \002(\005\022*\n\020platformPosition\030\003 \002(\0132\020.physic" +
+      "s.Vector2\022\030\n\020platformRotation\030\004 \002(\005\"\315\001\n\006" +
+      "Entity\0225\n\021floatingStructure\030\001 \001(\0132\030.worl" +
+      "d.FloatingStructureH\000\022,\n\021structurePlatfo",
+      "rm\030\002 \001(\0132\017.world.PlatformH\000\022*\n\016floatingP" +
+      "layer\030\003 \001(\0132\020.player.FloatingH\000\022(\n\ronboa" +
+      "rdPlayer\030\004 \001(\0132\017.player.OnboardH\000B\010\n\006ent" +
+      "ity\"L\n\005World\022\037\n\010entities\030\001 \003(\0132\r.world.E" +
+      "ntity\022\"\n\013playerState\030\002 \002(\0132\r.player.Stat" +
+      "eB$\n\"com.jmpspace.contracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2475,29 +3837,35 @@ public final class WorldOuterClass {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.jmpspace.contracts.SpaceServer.Physics.getDescriptor(),
-          com.jmpspace.contracts.SpaceServer.PlayerOuterClass.getDescriptor(),
+          com.jmpspace.contracts.SpaceServer.Player.getDescriptor(),
           com.jmpspace.contracts.SpaceServer.StructureOuterClass.getDescriptor(),
         }, assigner);
-    internal_static_world_Entity_descriptor =
+    internal_static_world_FloatingStructure_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_world_FloatingStructure_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_world_FloatingStructure_descriptor,
+        new java.lang.String[] { "Sructure", "PhysicsState", });
+    internal_static_world_Platform_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_world_Platform_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_world_Platform_descriptor,
+        new java.lang.String[] { "Platform", "StructureId", "PlatformPosition", "PlatformRotation", });
+    internal_static_world_Entity_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_world_Entity_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_world_Entity_descriptor,
-        new java.lang.String[] { "Structure", "Player", "Entity", });
-    internal_static_world_FloatingEntity_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_world_FloatingEntity_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_world_FloatingEntity_descriptor,
-        new java.lang.String[] { "PhysicsState", "Entity", });
+        new java.lang.String[] { "FloatingStructure", "StructurePlatform", "FloatingPlayer", "OnboardPlayer", "Entity", });
     internal_static_world_World_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_world_World_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_world_World_descriptor,
-        new java.lang.String[] { "FloatingEntities", "PlayerState", });
+        new java.lang.String[] { "Entities", "PlayerState", });
     com.jmpspace.contracts.SpaceServer.Physics.getDescriptor();
-    com.jmpspace.contracts.SpaceServer.PlayerOuterClass.getDescriptor();
+    com.jmpspace.contracts.SpaceServer.Player.getDescriptor();
     com.jmpspace.contracts.SpaceServer.StructureOuterClass.getDescriptor();
   }
 

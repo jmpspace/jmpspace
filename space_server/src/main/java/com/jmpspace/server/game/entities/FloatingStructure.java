@@ -33,17 +33,16 @@ public class FloatingStructure extends Entity implements HasStructure, HasStatic
     };
     this.serializeEntityComponent = new SerializeEntityComponent(this) {
       @Override
-      public WorldOuterClass.FloatingEntity.Builder calculateFloatingEntity() {
-        return WorldOuterClass.FloatingEntity
+      public WorldOuterClass.Entity.Builder marshalEntity() {
+        return WorldOuterClass.Entity
                 .newBuilder()
-                .setPhysicsState(state)
-                .setEntity(WorldOuterClass.Entity
+                .setFloatingStructure(WorldOuterClass.FloatingStructure
                         .newBuilder()
-                        .setStructure(StructureOuterClass.Structure
+                        .setPhysicsState(state)
+                        .setSructure(StructureOuterClass.Structure
                                 .newBuilder()
                                 .setId(id)
-                                .setTree(tree)
-                        )
+                                .setTree(tree))
                 );
       }
     };

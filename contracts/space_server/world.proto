@@ -9,19 +9,28 @@ import "physics.proto";
 import "player.proto";
 import "structure.proto";
 
+message FloatingStructure {
+  required structure.Structure sructure = 1;
+  required physics.PhysicsState physicsState = 2;
+}
+
+message Platform {
+  required structure.Platform platform = 1;
+  required int32 structureId = 2;
+  required physics.Vector2 platformPosition = 3;
+  required int32 platformRotation = 4;
+}
+
 message Entity {
   oneof entity {
-    structure.Structure structure = 1;
-    player.Player player = 2;
+    FloatingStructure floatingStructure = 1;
+    Platform structurePlatform = 2;
+    player.Floating floatingPlayer = 3;
+    player.Onboard onboardPlayer = 4;
   }
 }
 
-message FloatingEntity {
-  required physics.PhysicsState physicsState = 1;
-  required Entity entity = 2;
-}
-
 message World {
-  repeated FloatingEntity floatingEntities = 1;
+  repeated Entity entities = 1;
   required player.State playerState = 2;
 }

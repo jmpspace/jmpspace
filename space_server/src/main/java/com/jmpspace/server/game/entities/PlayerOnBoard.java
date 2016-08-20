@@ -1,15 +1,10 @@
 package com.jmpspace.server.game.entities;
 
 import co.paralleluniverse.actors.ActorRef;
-import co.paralleluniverse.spacebase.AABB;
-import co.paralleluniverse.spacebase.ElementUpdater;
 import com.jmpspace.contracts.SpaceServer.Physics;
-import com.jmpspace.contracts.SpaceServer.PlayerOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.game.Player;
-import com.jmpspace.server.game.PlayerUtils;
 import com.jmpspace.server.game.ecs.*;
-import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.util.AffineTransformation;
 import com.vividsolutions.jts.util.GeometricShapeFactory;
@@ -62,15 +57,15 @@ public class PlayerOnBoard extends Entity implements Entity.HasPhysics, Entity.H
 
     this.serializeEntityComponent = new SerializeEntityComponent(this) {
       @Override
-      public WorldOuterClass.FloatingEntity.Builder calculateFloatingEntity() {
-        return WorldOuterClass.FloatingEntity
+      public WorldOuterClass.Entity.Builder marshalEntity() {
+
+        return WorldOuterClass.Entity
                 .newBuilder()
-                .setPhysicsState(physicsComponent().calculatePhysicsState())
-                .setEntity(WorldOuterClass.Entity
+                .setOnboardPlayer(com.jmpspace.contracts.SpaceServer.Player.Onboard
                         .newBuilder()
-                        .setPlayer(PlayerOuterClass.Player
-                                .newBuilder()
-                        )
+                        .setPlatformId(platform.id)
+                        .setStandingPosition(position)
+                        .setStandindOrientation(0)
                 );
       }
     };
@@ -78,18 +73,16 @@ public class PlayerOnBoard extends Entity implements Entity.HasPhysics, Entity.H
   }
 
   @Override
-  public PhysicsComponent physicsComponent() {
-    return null;
-  }
+  public PhysicsComponent physicsComponent() { return physicsComponent; }
 
   @Override
-  public CameraComponent cameraComponent() { return null; }
+  public CameraComponent cameraComponent() { return cameraComponent; }
 
   @Override
-  public GeometryComponent geometryComponent() { return null; }
+  public GeometryComponent geometryComponent() { return geometryComponent; }
 
   @Override
-  public SerializeEntityComponent serializeEntityComponent() { return null; }
+  public SerializeEntityComponent serializeEntityComponent() { return serializeEntityComponent; }
 
 
 }

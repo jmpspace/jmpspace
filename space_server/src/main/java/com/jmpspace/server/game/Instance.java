@@ -4,7 +4,7 @@ import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.SpaceBase;
-import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.Player.GameUpdate;
@@ -42,16 +42,16 @@ public class Instance extends BasicActor<Instance.Request, Void> {
   }
 
   private class CryoTubeRef {
-    UUID _uuid;
+    int _uuid;
     ActorRef<StructureActor.Request> _structureActor;
 
-    CryoTubeRef(UUID uuid, ActorRef<StructureActor.Request> structureActor) {
+    CryoTubeRef(int uuid, ActorRef<StructureActor.Request> structureActor) {
       _uuid = uuid;
       _structureActor = structureActor;
     }
   }
 
-  private Map<UUID, CryoTubeRef> cryoTubes = new HashMap<>();
+  private Map<Integer, CryoTubeRef> cryoTubes = new HashMap<>();
   private Map<String, ActorRef<Player.Request>> players = new HashMap<>();
   private DirtyTable dirtyTable = new DirtyTable();
 
@@ -63,26 +63,23 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
     logger.info("Starting the instance actor");
 
-    for (FloatingEntity floatingEntity : SpawnRoom.spaceStuff) {
+    for (WorldOuterClass.FloatingStructure floatingStructureData : SpawnRoom.spaceStuff) {
 
       logger.debug("Found a structure");
 
-      if (floatingEntity.getEntity().hasStructure()) {
 
-        // Don't use the deserialized id, generate a fresh, runtime id
-        Integer structureId = structureCounter.getAndIncrement();
+      // Don't use the deserialized id, generate a fresh, runtime id
+      Integer structureId = structureCounter.getAndIncrement();
 
-        FloatingStructure floatingStructure = new FloatingStructure(structureId, floatingEntity.getEntity().getStructure().getTree(), floatingEntity.getPhysicsState());
+      FloatingStructure floatingStructure = new FloatingStructure(structureId, floatingStructureData.getSructure().getTree(), floatingStructureData.getPhysicsState());
 
-        _spaceBase.insert(floatingStructure, floatingStructure.physicsComponent().calculateAABB());
+      _spaceBase.insert(floatingStructure, floatingStructure.physicsComponent().calculateAABB());
 
-        StructureActor structureActor = new StructureActor(floatingStructure, self(), _spaceBase);
-        ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
+      StructureActor structureActor = new StructureActor(floatingStructure, self(), _spaceBase);
+      ActorRef<StructureActor.Request> structureRef = structureActor.spawn();
 
 //      _spawnPoints.put(structureRef, structureCryoTubes);
-      } else {
-        // don't include
-      }
+
 
     }
 
@@ -97,7 +94,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
         logger.info("Registering cryo tubes on {}", structure);
 
-        register._cryoTubeIds.forEach(cryoTubeId -> {
+        register.cryoTubeIds.forEach(cryoTubeId -> {
           CryoTubeRef ref = new CryoTubeRef(cryoTubeId, structure);
           cryoTubes.put(cryoTubeId, ref);
           dirtyTable.cryoTubes = true;
@@ -164,6 +161,7 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         }};
 
         for (PhysicsStepType stepType : stepPhases) {
+          logger.debug("Stepping {} entities", stepType.toString());
           _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(stepType), new Visitors.PhysicsStep());
         }
 
@@ -183,6 +181,12 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         gameUpdate.allVisibleObjects = visibleEntities;
 
         for (Map.Entry<String, ActorRef<Player.Request>> entry : players.entrySet()) {
+
+          String playerName = entry.getKey();
+
+          if (dirtyTable.playersNeedingRefresh.contains(playerName)) {
+            gameUpdate._cryoTubeIds = Optional.of(cryoTubes.keySet());
+          }
 
           entry.getValue().send(gameUpdate);
 
@@ -210,9 +214,9 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   public static class Spawn extends Request {
 
-    UUID _cryoTubeId;
+    int _cryoTubeId;
 
-    public Spawn(ActorRef<?> from, UUID spawnId) {
+    public Spawn(ActorRef<?> from, int spawnId) {
       _from = from;
       _cryoTubeId = spawnId;
     }
@@ -221,11 +225,11 @@ public class Instance extends BasicActor<Instance.Request, Void> {
 
   public static class RegisterCryoTubes extends Request {
 
-    Set<UUID> _cryoTubeIds;
+    Set<Integer> cryoTubeIds;
 
-    public RegisterCryoTubes(ActorRef<?> from, Set<UUID> cryoTubeIds) {
-      _from = from;
-      _cryoTubeIds = cryoTubeIds;
+    public RegisterCryoTubes(ActorRef<?> from, Set<Integer> cryoTubeIds) {
+      this._from = from;
+      this.cryoTubeIds = cryoTubeIds;
     }
 
   }

@@ -1,11 +1,8 @@
 package com.jmpspace.server.game.scenarios;
 
 import com.jmpspace.contracts.SpaceServer.Physics;
-import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
 import com.jmpspace.contracts.SpaceServer.StructureOuterClass.*;
-import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
-import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingEntity;
-import com.jmpspace.contracts.SpaceServer.WorldOuterClass.World;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass.FloatingStructure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,35 +20,29 @@ public class SpawnRoom extends AbstractScenario {
     }
   };
 
-  public static WorldOuterClass.Entity spawnRoom =
-          WorldOuterClass.Entity
+  public static Structure spawnRoom =
+          Structure
                   .newBuilder()
-                  .setStructure(StructureOuterClass.Structure
+                  .setId(0)
+                  .setTree(StructureNode
                           .newBuilder()
-                          .setId(0)
-                          .setTree(StructureNode
+                          .setPart(Part
                                   .newBuilder()
-                                  .setPart(Part
+                                  .setPlatform(Platform
                                           .newBuilder()
-                                          .setPlatform(Platform
-                                                  .newBuilder()
-                                                  .setWidth(20)
-                                                  .setLength(20)
-                                                  .setPressurized(false)
-                                                  .addAllPlacedItems(roomStuff)
-                                          ))
-                                          .addAllAttachments(new ArrayList<>())
-                  )
+                                          .setWidth(20)
+                                          .setLength(20)
+                                          .setPressurized(false)
+                                          .addAllPlacedItems(roomStuff)
+                                  ))
+                                  .addAllAttachments(new ArrayList<>())
+
           ).build();
 
-
-
-
-
-  public static List<FloatingEntity> spaceStuff = new ArrayList<FloatingEntity>()
+  public static List<FloatingStructure> spaceStuff = new ArrayList<FloatingStructure>()
   {
     {
-      add(FloatingEntity.newBuilder()
+      add(FloatingStructure.newBuilder()
               .setPhysicsState(
                       Physics.PhysicsState.newBuilder()
                       .setPosition(Physics.Vector2.newBuilder().setX(0).setY(0))
@@ -59,12 +50,8 @@ public class SpawnRoom extends AbstractScenario {
                       .setVelocity(Physics.Vector2.newBuilder().setX(0).setY(0))
                       .setSpin(0)
               )
-              .setEntity(spawnRoom).build());
+              .setSructure(spawnRoom).build());
     }
   };
-
-//  public static World world () {
-//    return World.newBuilder().addAllFloatingEntities(spaceStuff).build();
-//  }
 
 }

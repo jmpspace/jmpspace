@@ -46,7 +46,7 @@ type alias UnauthenticatedState =
   , loginFailed: Bool
   }
 
-type alias SpawnPoints = List String
+type alias SpawnPoints = List Int
 
 type GameState
   = Unspawned SpawnPoints
@@ -77,7 +77,7 @@ type Msg
   | LoginSubmit
   | LoginForce
   | LoginResponse
-  | Spawn String
+  | Spawn Int
   | ServerMessage SpaceServer.Server.Response
   | PingTick
 
@@ -154,6 +154,7 @@ update msg model =
           (model, Cmd.none)
         Response_oneof_response_gameResponse { response } ->
           let (newGameState, cmd) = gameUpdate response gameState
+              x = Debug.log <| toString response
           in (BoundToPlayer activeState newGameState, cmd)
         _ -> unexpectedMessage msg model
 
@@ -199,5 +200,5 @@ gameView {username} gameState =
     Unspawned spawnPoints ->
       div []
         [ text <| "Logged in as " ++ username ++ " and bound to player in instance"
-        , div [] <| List.map (\a -> button [onClick (Spawn a)] [text <| "Spawn at: " ++ a]) spawnPoints
+        , div [] <| List.map (\a -> button [onClick (Spawn a)] [text <| "Spawn at: " ++ toString a]) spawnPoints
         ]

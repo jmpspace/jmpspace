@@ -143,8 +143,7 @@ public class Player extends BasicActor<Player.Request, Void> {
         Snapshot.Builder builder = Snapshot.newBuilder();
 
         Optional<Integer> x = gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
-          List<String> cryoTubeStringIds = cryoTubeIds.stream().map(id -> id.toString()).collect(Collectors.toList());
-          builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeStringIds));
+          builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeIds));
           return 0;
         });
 
@@ -173,7 +172,7 @@ public class Player extends BasicActor<Player.Request, Void> {
 
           logger.debug("Spawning player {}:{} at {}", _playerName, this, spawn.getCryoTubeId());
 
-          UUID cryoTubeId = UUID.fromString(spawn.getCryoTubeId());
+          int cryoTubeId = spawn.getCryoTubeId();
 
           _instance.send(new Instance.Spawn(self(), cryoTubeId));
 
@@ -207,7 +206,7 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   static class GameUpdate extends Request {
 
-    Optional<Set<UUID>> _cryoTubeIds = Optional.empty();
+    Optional<Set<Integer>> _cryoTubeIds = Optional.empty();
     ConcurrentMap<Integer, ConcurrentMap<HashSerializeEntity, Boolean>> allVisibleObjects;
 
 

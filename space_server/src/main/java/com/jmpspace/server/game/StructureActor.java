@@ -37,7 +37,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   private ActorRef<Instance.Request> _instanceRef;
   private SpaceBase<Entity.HasPhysics> _playersBase;
   private List<Platform> _platforms;
-  private Map<UUID, CryoTubeAddress> _cryoTubes = new HashMap<>();
+  private Map<Integer, CryoTubeAddress> cryoTubeAddresses = new HashMap<>();
 
 //  static class PlatformWrapper {
 //    int platformId;
@@ -69,7 +69,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     _playersBase = playersBase;
     _platforms = StructureUtils.findPlatforms(floatingStructureRef);
 
-    List<CryoTubeAddress> cryoTubeAddresses = new ArrayList<>();
+//    List<CryoTubeAddress> cryoTubeAddresses = new ArrayList<>();
     AtomicInteger cryoTubeCounter = new AtomicInteger();
 
     _platforms.forEach(platform -> {
@@ -78,7 +78,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
               .filter(placedItem -> placedItem.getItem().hasCryoTube())
               .forEach(placedCryoTube -> {
                 int id = cryoTubeCounter.getAndIncrement();
-                cryoTubeAddresses.add(new CryoTubeAddress(id, platform));
+                cryoTubeAddresses.put(id, new CryoTubeAddress(id, platform));
               });
     });
   }
@@ -93,9 +93,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   @Override
   protected Void doRun() throws InterruptedException, SuspendExecution {
 
-    logger.info("Registering {} cryo tubes", _cryoTubes.size());
+    logger.info("Registering {} cryo tubes", cryoTubeAddresses.size());
 
-    _instanceRef.send(new Instance.RegisterCryoTubes(self(), _cryoTubes.keySet()));
+    _instanceRef.send(new Instance.RegisterCryoTubes(self(), cryoTubeAddresses.keySet()));
 
     //noinspection InfiniteLoopStatement
     for (;;) {
@@ -108,7 +108,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
         assert ! _playersOnBoard.containsKey(player);
 
-        CryoTubeAddress cryoTubeAddress = _cryoTubes.get(spawn._cryoTubeId);
+        CryoTubeAddress cryoTubeAddress = cryoTubeAddresses.get(spawn._cryoTubeId);
 
         Platform platform = cryoTubeAddress.platform;
 
@@ -138,9 +138,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   static class Spawn extends Request {
 
     private ActorRef<Player.Request> _player;
-    private UUID _cryoTubeId;
+    private int _cryoTubeId;
 
-    Spawn(ActorRef<Player.Request> player, UUID cryoTubeId) {
+    Spawn(ActorRef<Player.Request> player, int cryoTubeId) {
       _player = player;
       _cryoTubeId = cryoTubeId;
     }

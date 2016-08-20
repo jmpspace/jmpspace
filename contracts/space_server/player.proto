@@ -7,8 +7,6 @@ option java_package = "com.jmpspace.contracts.SpaceServer";
 
 import "physics.proto";
 
-message Player {}
-
 message Unspawned {}
 
 message Floating {
@@ -16,10 +14,9 @@ message Floating {
 }
 
 message Onboard {
-  required physics.PhysicsState physicsState = 1;
-  required int32 structureId = 2;
-  repeated int32 platformAddress = 3;
-  required physics.Vector2 platformPosition = 4;
+  required int32 platformId = 1;
+  required physics.Vector2 standingPosition = 2;
+  required int32 standindOrientation = 3;
 }
 
 message State {

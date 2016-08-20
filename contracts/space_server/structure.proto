@@ -19,17 +19,11 @@ message Engine {
   required int32 group = 3;
 };
 
-message WalkingPlayer {
-  required physics.Vector2 position = 1;
-  required player.Player player = 2;
-}
-
 message Platform {
   required int32 width = 1;
   required int32 length = 2;
   required bool pressurized = 3;
   repeated PlacedItem placedItems = 4;
-  repeated WalkingPlayer players = 5;
 }
 
 message PlacedItem {

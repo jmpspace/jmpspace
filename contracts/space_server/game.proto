@@ -12,7 +12,7 @@ message GameRequest {
 }
 
 message Spawn {
-  required string cryoTubeId = 1;
+  required int32 cryoTubeId = 1;
 }
 
 message GameResponse {
@@ -22,7 +22,7 @@ message GameResponse {
 }
 
 message CryoTubesChange {
-  repeated string cryoTubeIds = 1;
+  repeated int32 cryoTubeIds = 1;
 }
 
 message Snapshot {

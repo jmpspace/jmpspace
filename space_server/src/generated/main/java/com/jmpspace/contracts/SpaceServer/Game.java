@@ -601,18 +601,13 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string cryoTubeId = 1;</code>
+     * <code>required int32 cryoTubeId = 1;</code>
      */
     boolean hasCryoTubeId();
     /**
-     * <code>required string cryoTubeId = 1;</code>
+     * <code>required int32 cryoTubeId = 1;</code>
      */
-    java.lang.String getCryoTubeId();
-    /**
-     * <code>required string cryoTubeId = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getCryoTubeIdBytes();
+    int getCryoTubeId();
   }
   /**
    * Protobuf type {@code game.Spawn}
@@ -666,10 +661,9 @@ public final class Game {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               bitField0_ |= 0x00000001;
-              cryoTubeId_ = bs;
+              cryoTubeId_ = input.readInt32();
               break;
             }
           }
@@ -713,49 +707,22 @@ public final class Game {
 
     private int bitField0_;
     public static final int CRYOTUBEID_FIELD_NUMBER = 1;
-    private java.lang.Object cryoTubeId_;
+    private int cryoTubeId_;
     /**
-     * <code>required string cryoTubeId = 1;</code>
+     * <code>required int32 cryoTubeId = 1;</code>
      */
     public boolean hasCryoTubeId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string cryoTubeId = 1;</code>
+     * <code>required int32 cryoTubeId = 1;</code>
      */
-    public java.lang.String getCryoTubeId() {
-      java.lang.Object ref = cryoTubeId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          cryoTubeId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string cryoTubeId = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getCryoTubeIdBytes() {
-      java.lang.Object ref = cryoTubeId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        cryoTubeId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getCryoTubeId() {
+      return cryoTubeId_;
     }
 
     private void initFields() {
-      cryoTubeId_ = "";
+      cryoTubeId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -775,7 +742,7 @@ public final class Game {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getCryoTubeIdBytes());
+        output.writeInt32(1, cryoTubeId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -788,7 +755,7 @@ public final class Game {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getCryoTubeIdBytes());
+          .computeInt32Size(1, cryoTubeId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -907,7 +874,7 @@ public final class Game {
 
       public Builder clear() {
         super.clear();
-        cryoTubeId_ = "";
+        cryoTubeId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -958,9 +925,7 @@ public final class Game {
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Spawn other) {
         if (other == com.jmpspace.contracts.SpaceServer.Game.Spawn.getDefaultInstance()) return this;
         if (other.hasCryoTubeId()) {
-          bitField0_ |= 0x00000001;
-          cryoTubeId_ = other.cryoTubeId_;
-          onChanged();
+          setCryoTubeId(other.getCryoTubeId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -993,78 +958,34 @@ public final class Game {
       }
       private int bitField0_;
 
-      private java.lang.Object cryoTubeId_ = "";
+      private int cryoTubeId_ ;
       /**
-       * <code>required string cryoTubeId = 1;</code>
+       * <code>required int32 cryoTubeId = 1;</code>
        */
       public boolean hasCryoTubeId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string cryoTubeId = 1;</code>
+       * <code>required int32 cryoTubeId = 1;</code>
        */
-      public java.lang.String getCryoTubeId() {
-        java.lang.Object ref = cryoTubeId_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            cryoTubeId_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getCryoTubeId() {
+        return cryoTubeId_;
       }
       /**
-       * <code>required string cryoTubeId = 1;</code>
+       * <code>required int32 cryoTubeId = 1;</code>
        */
-      public com.google.protobuf.ByteString
-          getCryoTubeIdBytes() {
-        java.lang.Object ref = cryoTubeId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          cryoTubeId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string cryoTubeId = 1;</code>
-       */
-      public Builder setCryoTubeId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+      public Builder setCryoTubeId(int value) {
+        bitField0_ |= 0x00000001;
         cryoTubeId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string cryoTubeId = 1;</code>
+       * <code>required int32 cryoTubeId = 1;</code>
        */
       public Builder clearCryoTubeId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        cryoTubeId_ = getDefaultInstance().getCryoTubeId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string cryoTubeId = 1;</code>
-       */
-      public Builder setCryoTubeIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        cryoTubeId_ = value;
+        cryoTubeId_ = 0;
         onChanged();
         return this;
       }
@@ -1661,23 +1582,17 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated string cryoTubeIds = 1;</code>
+     * <code>repeated int32 cryoTubeIds = 1;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getCryoTubeIdsList();
+    java.util.List<java.lang.Integer> getCryoTubeIdsList();
     /**
-     * <code>repeated string cryoTubeIds = 1;</code>
+     * <code>repeated int32 cryoTubeIds = 1;</code>
      */
     int getCryoTubeIdsCount();
     /**
-     * <code>repeated string cryoTubeIds = 1;</code>
+     * <code>repeated int32 cryoTubeIds = 1;</code>
      */
-    java.lang.String getCryoTubeIds(int index);
-    /**
-     * <code>repeated string cryoTubeIds = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getCryoTubeIdsBytes(int index);
+    int getCryoTubeIds(int index);
   }
   /**
    * Protobuf type {@code game.CryoTubesChange}
@@ -1731,13 +1646,25 @@ public final class Game {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                cryoTubeIds_ = new com.google.protobuf.LazyStringArrayList();
+                cryoTubeIds_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              cryoTubeIds_.add(bs);
+              cryoTubeIds_.add(input.readInt32());
+              break;
+            }
+            case 10: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
+                cryoTubeIds_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                cryoTubeIds_.add(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -1749,7 +1676,7 @@ public final class Game {
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          cryoTubeIds_ = cryoTubeIds_.getUnmodifiableView();
+          cryoTubeIds_ = java.util.Collections.unmodifiableList(cryoTubeIds_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1783,36 +1710,29 @@ public final class Game {
     }
 
     public static final int CRYOTUBEIDS_FIELD_NUMBER = 1;
-    private com.google.protobuf.LazyStringList cryoTubeIds_;
+    private java.util.List<java.lang.Integer> cryoTubeIds_;
     /**
-     * <code>repeated string cryoTubeIds = 1;</code>
+     * <code>repeated int32 cryoTubeIds = 1;</code>
      */
-    public com.google.protobuf.ProtocolStringList
+    public java.util.List<java.lang.Integer>
         getCryoTubeIdsList() {
       return cryoTubeIds_;
     }
     /**
-     * <code>repeated string cryoTubeIds = 1;</code>
+     * <code>repeated int32 cryoTubeIds = 1;</code>
      */
     public int getCryoTubeIdsCount() {
       return cryoTubeIds_.size();
     }
     /**
-     * <code>repeated string cryoTubeIds = 1;</code>
+     * <code>repeated int32 cryoTubeIds = 1;</code>
      */
-    public java.lang.String getCryoTubeIds(int index) {
+    public int getCryoTubeIds(int index) {
       return cryoTubeIds_.get(index);
-    }
-    /**
-     * <code>repeated string cryoTubeIds = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getCryoTubeIdsBytes(int index) {
-      return cryoTubeIds_.getByteString(index);
     }
 
     private void initFields() {
-      cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      cryoTubeIds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1828,7 +1748,7 @@ public final class Game {
                         throws java.io.IOException {
       getSerializedSize();
       for (int i = 0; i < cryoTubeIds_.size(); i++) {
-        output.writeBytes(1, cryoTubeIds_.getByteString(i));
+        output.writeInt32(1, cryoTubeIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1843,7 +1763,7 @@ public final class Game {
         int dataSize = 0;
         for (int i = 0; i < cryoTubeIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(cryoTubeIds_.getByteString(i));
+            .computeInt32SizeNoTag(cryoTubeIds_.get(i));
         }
         size += dataSize;
         size += 1 * getCryoTubeIdsList().size();
@@ -1965,7 +1885,7 @@ public final class Game {
 
       public Builder clear() {
         super.clear();
-        cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        cryoTubeIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -1995,7 +1915,7 @@ public final class Game {
         com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange result = new com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange(this);
         int from_bitField0_ = bitField0_;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          cryoTubeIds_ = cryoTubeIds_.getUnmodifiableView();
+          cryoTubeIds_ = java.util.Collections.unmodifiableList(cryoTubeIds_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.cryoTubeIds_ = cryoTubeIds_;
@@ -2051,70 +1971,56 @@ public final class Game {
       }
       private int bitField0_;
 
-      private com.google.protobuf.LazyStringList cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private java.util.List<java.lang.Integer> cryoTubeIds_ = java.util.Collections.emptyList();
       private void ensureCryoTubeIdsIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          cryoTubeIds_ = new com.google.protobuf.LazyStringArrayList(cryoTubeIds_);
+          cryoTubeIds_ = new java.util.ArrayList<java.lang.Integer>(cryoTubeIds_);
           bitField0_ |= 0x00000001;
          }
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
-      public com.google.protobuf.ProtocolStringList
+      public java.util.List<java.lang.Integer>
           getCryoTubeIdsList() {
-        return cryoTubeIds_.getUnmodifiableView();
+        return java.util.Collections.unmodifiableList(cryoTubeIds_);
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
       public int getCryoTubeIdsCount() {
         return cryoTubeIds_.size();
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
-      public java.lang.String getCryoTubeIds(int index) {
+      public int getCryoTubeIds(int index) {
         return cryoTubeIds_.get(index);
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getCryoTubeIdsBytes(int index) {
-        return cryoTubeIds_.getByteString(index);
-      }
-      /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
       public Builder setCryoTubeIds(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureCryoTubeIdsIsMutable();
+          int index, int value) {
+        ensureCryoTubeIdsIsMutable();
         cryoTubeIds_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
-      public Builder addCryoTubeIds(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureCryoTubeIdsIsMutable();
+      public Builder addCryoTubeIds(int value) {
+        ensureCryoTubeIdsIsMutable();
         cryoTubeIds_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
       public Builder addAllCryoTubeIds(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<? extends java.lang.Integer> values) {
         ensureCryoTubeIdsIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
             values, cryoTubeIds_);
@@ -2122,24 +2028,11 @@ public final class Game {
         return this;
       }
       /**
-       * <code>repeated string cryoTubeIds = 1;</code>
+       * <code>repeated int32 cryoTubeIds = 1;</code>
        */
       public Builder clearCryoTubeIds() {
-        cryoTubeIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        cryoTubeIds_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string cryoTubeIds = 1;</code>
-       */
-      public Builder addCryoTubeIdsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureCryoTubeIdsIsMutable();
-        cryoTubeIds_.add(value);
         onChanged();
         return this;
       }
@@ -2699,10 +2592,10 @@ public final class Game {
     java.lang.String[] descriptorData = {
       "\n\ngame.proto\022\004game\"6\n\013GameRequest\022\034\n\005spa" +
       "wn\030\001 \001(\0132\013.game.SpawnH\000B\t\n\007request\"\033\n\005Sp" +
-      "awn\022\022\n\ncryoTubeId\030\001 \002(\t\">\n\014GameResponse\022" +
+      "awn\022\022\n\ncryoTubeId\030\001 \002(\005\">\n\014GameResponse\022" +
       "\"\n\010snapshot\030\001 \001(\0132\016.game.SnapshotH\000B\n\n\010r" +
       "esponse\"&\n\017CryoTubesChange\022\023\n\013cryoTubeId" +
-      "s\030\001 \003(\t\":\n\010Snapshot\022.\n\017cryoTubesChange\030\001" +
+      "s\030\001 \003(\005\":\n\010Snapshot\022.\n\017cryoTubesChange\030\001" +
       " \001(\0132\025.game.CryoTubesChangeB$\n\"com.jmpsp" +
       "ace.contracts.SpaceServer"
     };
