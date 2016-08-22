@@ -44,10 +44,12 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
   private class CryoTubeAddress {
     int id;
     Platform platform;
+    Vector2 position;
 
-    public CryoTubeAddress(int id, Platform platform) {
+    public CryoTubeAddress(int id, Platform platform, Vector2 position) {
       this.id = id;
       this.platform = platform;
+      this.position = position;
     }
   }
 
@@ -69,7 +71,14 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
               .filter(placedItem -> placedItem.getItem().hasCryoTube())
               .forEach(placedCryoTube -> {
                 int id = cryoTubeCounter.getAndIncrement();
-                cryoTubeAddresses.put(id, new CryoTubeAddress(id, platform));
+                Vector2 position = Vector2
+                        .newBuilder()
+                        .setX(placedCryoTube.getOffsetX())
+                        .setY(placedCryoTube.getOffsetY())
+                        .build();
+                cryoTubeAddresses.put(
+                        id,
+                        new CryoTubeAddress(id, platform, position));
               });
 
     });
@@ -104,7 +113,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
         Platform platform = cryoTubeAddress.platform;
 
-        Vector2 position = Vector2.getDefaultInstance();
+        Vector2 position = cryoTubeAddress.position;
 
         logger.info("Spawning player {} on platform {}", player, platform);
 

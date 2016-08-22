@@ -48,7 +48,7 @@ public class StructureUtils {
     // TODO: replace with JOOL
     List<TResult> subResults =
             mapWithIndex((i, attachment) ->
-                    fAttach.apply(i, attachment.getData(), foldStructureNode(fAttach, fNode, attachment.getNode())), node.getAttachmentsList());
+                    fAttach.apply(i, attachment.getAttachment().getData(), foldStructureNode(fAttach, fNode, attachment.getAttachment().getNode())), node.getAttachmentsList());
     return fNode.apply(node.getPart(), subResults);
   }
 

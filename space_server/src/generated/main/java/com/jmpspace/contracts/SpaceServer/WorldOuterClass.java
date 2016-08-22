@@ -2910,19 +2910,6 @@ public final class WorldOuterClass {
      */
     com.jmpspace.contracts.SpaceServer.WorldOuterClass.EntityOrBuilder getEntitiesOrBuilder(
         int index);
-
-    /**
-     * <code>required .player.State playerState = 2;</code>
-     */
-    boolean hasPlayerState();
-    /**
-     * <code>required .player.State playerState = 2;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Player.State getPlayerState();
-    /**
-     * <code>required .player.State playerState = 2;</code>
-     */
-    com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder getPlayerStateOrBuilder();
   }
   /**
    * Protobuf type {@code world.World}
@@ -2984,19 +2971,6 @@ public final class WorldOuterClass {
               entities_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity.PARSER, extensionRegistry));
               break;
             }
-            case 18: {
-              com.jmpspace.contracts.SpaceServer.Player.State.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = playerState_.toBuilder();
-              }
-              playerState_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Player.State.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(playerState_);
-                playerState_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3039,7 +3013,6 @@ public final class WorldOuterClass {
       return PARSER;
     }
 
-    private int bitField0_;
     public static final int ENTITIES_FIELD_NUMBER = 1;
     private java.util.List<com.jmpspace.contracts.SpaceServer.WorldOuterClass.Entity> entities_;
     /**
@@ -3075,30 +3048,8 @@ public final class WorldOuterClass {
       return entities_.get(index);
     }
 
-    public static final int PLAYERSTATE_FIELD_NUMBER = 2;
-    private com.jmpspace.contracts.SpaceServer.Player.State playerState_;
-    /**
-     * <code>required .player.State playerState = 2;</code>
-     */
-    public boolean hasPlayerState() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required .player.State playerState = 2;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Player.State getPlayerState() {
-      return playerState_;
-    }
-    /**
-     * <code>required .player.State playerState = 2;</code>
-     */
-    public com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder getPlayerStateOrBuilder() {
-      return playerState_;
-    }
-
     private void initFields() {
       entities_ = java.util.Collections.emptyList();
-      playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3106,19 +3057,11 @@ public final class WorldOuterClass {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasPlayerState()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       for (int i = 0; i < getEntitiesCount(); i++) {
         if (!getEntities(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
-      }
-      if (!getPlayerState().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
       }
       memoizedIsInitialized = 1;
       return true;
@@ -3129,9 +3072,6 @@ public final class WorldOuterClass {
       getSerializedSize();
       for (int i = 0; i < entities_.size(); i++) {
         output.writeMessage(1, entities_.get(i));
-      }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(2, playerState_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3145,10 +3085,6 @@ public final class WorldOuterClass {
       for (int i = 0; i < entities_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, entities_.get(i));
-      }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, playerState_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3260,7 +3196,6 @@ public final class WorldOuterClass {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getEntitiesFieldBuilder();
-          getPlayerStateFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3275,12 +3210,6 @@ public final class WorldOuterClass {
         } else {
           entitiesBuilder_.clear();
         }
-        if (playerStateBuilder_ == null) {
-          playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
-        } else {
-          playerStateBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -3308,7 +3237,6 @@ public final class WorldOuterClass {
       public com.jmpspace.contracts.SpaceServer.WorldOuterClass.World buildPartial() {
         com.jmpspace.contracts.SpaceServer.WorldOuterClass.World result = new com.jmpspace.contracts.SpaceServer.WorldOuterClass.World(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (entitiesBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             entities_ = java.util.Collections.unmodifiableList(entities_);
@@ -3318,15 +3246,6 @@ public final class WorldOuterClass {
         } else {
           result.entities_ = entitiesBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (playerStateBuilder_ == null) {
-          result.playerState_ = playerState_;
-        } else {
-          result.playerState_ = playerStateBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3368,27 +3287,16 @@ public final class WorldOuterClass {
             }
           }
         }
-        if (other.hasPlayerState()) {
-          mergePlayerState(other.getPlayerState());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasPlayerState()) {
-          
-          return false;
-        }
         for (int i = 0; i < getEntitiesCount(); i++) {
           if (!getEntities(i).isInitialized()) {
             
             return false;
           }
-        }
-        if (!getPlayerState().isInitialized()) {
-          
-          return false;
         }
         return true;
       }
@@ -3652,122 +3560,6 @@ public final class WorldOuterClass {
         return entitiesBuilder_;
       }
 
-      private com.jmpspace.contracts.SpaceServer.Player.State playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Player.State, com.jmpspace.contracts.SpaceServer.Player.State.Builder, com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder> playerStateBuilder_;
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public boolean hasPlayerState() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Player.State getPlayerState() {
-        if (playerStateBuilder_ == null) {
-          return playerState_;
-        } else {
-          return playerStateBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public Builder setPlayerState(com.jmpspace.contracts.SpaceServer.Player.State value) {
-        if (playerStateBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          playerState_ = value;
-          onChanged();
-        } else {
-          playerStateBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public Builder setPlayerState(
-          com.jmpspace.contracts.SpaceServer.Player.State.Builder builderForValue) {
-        if (playerStateBuilder_ == null) {
-          playerState_ = builderForValue.build();
-          onChanged();
-        } else {
-          playerStateBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public Builder mergePlayerState(com.jmpspace.contracts.SpaceServer.Player.State value) {
-        if (playerStateBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              playerState_ != com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance()) {
-            playerState_ =
-              com.jmpspace.contracts.SpaceServer.Player.State.newBuilder(playerState_).mergeFrom(value).buildPartial();
-          } else {
-            playerState_ = value;
-          }
-          onChanged();
-        } else {
-          playerStateBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000002;
-        return this;
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public Builder clearPlayerState() {
-        if (playerStateBuilder_ == null) {
-          playerState_ = com.jmpspace.contracts.SpaceServer.Player.State.getDefaultInstance();
-          onChanged();
-        } else {
-          playerStateBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Player.State.Builder getPlayerStateBuilder() {
-        bitField0_ |= 0x00000002;
-        onChanged();
-        return getPlayerStateFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      public com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder getPlayerStateOrBuilder() {
-        if (playerStateBuilder_ != null) {
-          return playerStateBuilder_.getMessageOrBuilder();
-        } else {
-          return playerState_;
-        }
-      }
-      /**
-       * <code>required .player.State playerState = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Player.State, com.jmpspace.contracts.SpaceServer.Player.State.Builder, com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder> 
-          getPlayerStateFieldBuilder() {
-        if (playerStateBuilder_ == null) {
-          playerStateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.Player.State, com.jmpspace.contracts.SpaceServer.Player.State.Builder, com.jmpspace.contracts.SpaceServer.Player.StateOrBuilder>(
-                  getPlayerState(),
-                  getParentForChildren(),
-                  isClean());
-          playerState_ = null;
-        }
-        return playerStateBuilder_;
-      }
-
       // @@protoc_insertion_point(builder_scope:world.World)
     }
 
@@ -3821,9 +3613,9 @@ public final class WorldOuterClass {
       "rm\030\002 \001(\0132\017.world.PlatformH\000\022*\n\016floatingP" +
       "layer\030\003 \001(\0132\020.player.FloatingH\000\022(\n\ronboa" +
       "rdPlayer\030\004 \001(\0132\017.player.OnboardH\000B\010\n\006ent" +
-      "ity\"L\n\005World\022\037\n\010entities\030\001 \003(\0132\r.world.E" +
-      "ntity\022\"\n\013playerState\030\002 \002(\0132\r.player.Stat" +
-      "eB$\n\"com.jmpspace.contracts.SpaceServer"
+      "ity\"(\n\005World\022\037\n\010entities\030\001 \003(\0132\r.world.E" +
+      "ntityB$\n\"com.jmpspace.contracts.SpaceSer" +
+      "ver"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3863,7 +3655,7 @@ public final class WorldOuterClass {
     internal_static_world_World_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_world_World_descriptor,
-        new java.lang.String[] { "Entities", "PlayerState", });
+        new java.lang.String[] { "Entities", });
     com.jmpspace.contracts.SpaceServer.Physics.getDescriptor();
     com.jmpspace.contracts.SpaceServer.Player.getDescriptor();
     com.jmpspace.contracts.SpaceServer.StructureOuterClass.getDescriptor();

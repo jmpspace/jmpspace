@@ -32,5 +32,4 @@ message Entity {
 
 message World {
   repeated Entity entities = 1;
-  required player.State playerState = 2;
 }

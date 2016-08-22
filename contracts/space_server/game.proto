@@ -6,6 +6,7 @@ package game;
 option java_package = "com.jmpspace.contracts.SpaceServer";
 
 import "world.proto";
+import "player.proto";
 
 message GameRequest {
   oneof request {
@@ -30,4 +31,5 @@ message CryoTubesChange {
 message GameStateUpdate {
   optional CryoTubesChange cryoTubesChange = 1;
   optional world.World worldChange = 2;
+  optional player.State playerState = 3;
 }

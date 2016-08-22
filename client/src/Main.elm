@@ -27,6 +27,8 @@ import SpaceServer.Server exposing
   , encodeRequest
   , marshalRequest
   , unmarshalResponse )
+import SpaceServer.Player as Player
+import SpaceServer.World as World
 
 main =
   Html.program
@@ -48,10 +50,14 @@ type alias UnauthenticatedState =
 
 type alias SpawnPoints = List Int
 
-type GameState
-  = Unspawned SpawnPoints
+type alias GameState =
+  { spawnPoints: SpawnPoints
+  , playerState: Player.State
+  , world: World.World
+  }
 
-initialGameState = Unspawned []
+initialGameState : GameState
+initialGameState = GameState [] (Player.State (Player.State_oneof_state_unspawned {} )) (World.World [])
 
 type alias ActiveState =
   { username: String
@@ -93,13 +99,20 @@ sendRequest =
   send echoServer
 
 gameUpdate : GameResponse_oneof_response -> GameState -> (GameState, Cmd Msg)
-gameUpdate response gameState =
-  let newGameState =
-    case (response, gameState) of
-      (GameResponse_oneof_response_snapshot snapshot, Unspawned _) ->
-        case snapshot.cryoTubesChange of
-          Nothing -> gameState
-          Just cryoTubesChange -> Unspawned cryoTubesChange.cryoTubeIds
+gameUpdate (GameResponse_oneof_response_gameStateUpdate update) gameState =
+  let newSpawnPoints =
+        case update.cryoTubesChange of
+          Nothing -> gameState.spawnPoints
+          Just cryoTubesChange -> cryoTubesChange.cryoTubeIds
+      newPlayerState =
+        case update.playerState of
+          Nothing -> gameState.playerState
+          Just playerState -> playerState
+      newWorld =
+        case update.worldChange of
+          Nothing -> gameState.world
+          Just worldChange -> worldChange
+      newGameState = GameState newSpawnPoints newPlayerState newWorld
   in (newGameState, Cmd.none)
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -142,7 +155,7 @@ update msg model =
         _ -> unexpectedMessage msg model
     (LoggedIn _, PingTick) ->
       (model, Ping |> Request_oneof_request_ping >> sendRequest)
-    (BoundToPlayer _ (Unspawned _), Spawn cryoTubeId) ->
+    (BoundToPlayer _ _, Spawn cryoTubeId) ->
       let
         cmd = { cryoTubeId  = cryoTubeId } |> GameRequest_oneof_request_spawn >> (\x -> Request_oneof_request_gameRequest { request = x }) >> sendRequest
       in (model, cmd)
@@ -196,9 +209,14 @@ activeView {username} = text <| "Logged in as " ++ username
 
 gameView : ActiveState -> GameState -> Html Msg
 gameView {username} gameState =
-  case gameState of
-    Unspawned spawnPoints ->
+  case gameState.playerState.state of
+    Player.State_oneof_state_unspawned _ ->
       div []
         [ text <| "Logged in as " ++ username ++ " and bound to player in instance"
-        , div [] <| List.map (\a -> button [onClick (Spawn a)] [text <| "Spawn at: " ++ toString a]) spawnPoints
+        , div [] <| List.map (\a -> button [onClick (Spawn a)] [text <| "Spawn at: " ++ toString a]) gameState.spawnPoints
         ]
+    Player.State_oneof_state_onboard onboard ->
+      div []
+        [ text <| "On board the good ship " ++ toString onboard.platformId
+        ]
+    Player.State_oneof_state_floating _ -> text "FLOATING AAAAH"

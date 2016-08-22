@@ -293,13 +293,13 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
             clientState.state = PlayerClientState.BoundToPlayer;
           }
 
-          if (message instanceof GameSnapshot) {
+          if (message instanceof GameStateUpdate) {
 
             logger.debug("Sending snapshot to client {}", this);
 
-            GameSnapshot gameSnapshot = (GameSnapshot)message;
+            GameStateUpdate gameStateUpdate = (GameStateUpdate)message;
 
-            response.setGameResponse(Game.GameResponse.newBuilder().setGameStateUpdate(gameSnapshot._snapshot));
+            response.setGameResponse(Game.GameResponse.newBuilder().setGameStateUpdate(gameStateUpdate._snapshot));
             responseBuilt = true;
           }
 
@@ -380,11 +380,11 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
 
   }
 
-  public static class GameSnapshot extends Request {
+  public static class GameStateUpdate extends Request {
 
     private Game.GameStateUpdate _snapshot;
 
-    public GameSnapshot(Game.GameStateUpdate snapshot) {
+    public GameStateUpdate(Game.GameStateUpdate snapshot) {
       _snapshot = snapshot;
     }
   }

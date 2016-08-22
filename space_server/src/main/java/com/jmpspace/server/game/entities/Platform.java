@@ -44,13 +44,20 @@ public class Platform extends Entity implements Entity.HasPhysics, Entity.HasSta
     this.serializeEntityComponent = new SerializeEntityComponent(this) {
       @Override
       public WorldOuterClass.Entity.Builder marshalEntity() {
+
+        // TODO: faking it
+        Physics.Vector2.Builder platformPosition = Physics.Vector2
+                .newBuilder()
+                .setX(0)
+                .setY(0);
+
         return WorldOuterClass.Entity.newBuilder()
                 .setStructurePlatform(WorldOuterClass.Platform
                         .newBuilder()
                         .setPlatform(platformPart)
                         .setStructureId(floatingStructure.id)
                         // TODO - these are fudged!
-                        .setPlatformPosition(Physics.Vector2.getDefaultInstance())
+                        .setPlatformPosition(platformPosition)
                         .setPlatformRotation(0)
                 );
       }

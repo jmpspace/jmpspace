@@ -66,9 +66,15 @@ message Attachment {
   required StructureNode node = 2;
 }
 
+message AttachmentBox {
+  oneof attachmentBox {
+    Attachment attachment = 1;
+  }
+}
+
 message StructureNode {
   required Part part = 1;
-  repeated Attachment attachments = 2;
+  repeated AttachmentBox attachments = 2;
 }
 
 message Structure {

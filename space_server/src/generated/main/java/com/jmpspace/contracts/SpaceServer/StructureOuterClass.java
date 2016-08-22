@@ -7060,6 +7060,594 @@ public final class StructureOuterClass {
     // @@protoc_insertion_point(class_scope:structure.Attachment)
   }
 
+  public interface AttachmentBoxOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:structure.AttachmentBox)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .structure.Attachment attachment = 1;</code>
+     */
+    boolean hasAttachment();
+    /**
+     * <code>optional .structure.Attachment attachment = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment getAttachment();
+    /**
+     * <code>optional .structure.Attachment attachment = 1;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder getAttachmentOrBuilder();
+  }
+  /**
+   * Protobuf type {@code structure.AttachmentBox}
+   */
+  public static final class AttachmentBox extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:structure.AttachmentBox)
+      AttachmentBoxOrBuilder {
+    // Use AttachmentBox.newBuilder() to construct.
+    private AttachmentBox(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private AttachmentBox(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final AttachmentBox defaultInstance;
+    public static AttachmentBox getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public AttachmentBox getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AttachmentBox(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder subBuilder = null;
+              if (attachmentBoxCase_ == 1) {
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_).toBuilder();
+              }
+              attachmentBox_ = input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_);
+                attachmentBox_ = subBuilder.buildPartial();
+              }
+              attachmentBoxCase_ = 1;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_AttachmentBox_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_AttachmentBox_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.class, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<AttachmentBox> PARSER =
+        new com.google.protobuf.AbstractParser<AttachmentBox>() {
+      public AttachmentBox parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AttachmentBox(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AttachmentBox> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    private int attachmentBoxCase_ = 0;
+    private java.lang.Object attachmentBox_;
+    public enum AttachmentBoxCase
+        implements com.google.protobuf.Internal.EnumLite {
+      ATTACHMENT(1),
+      ATTACHMENTBOX_NOT_SET(0);
+      private int value = 0;
+      private AttachmentBoxCase(int value) {
+        this.value = value;
+      }
+      public static AttachmentBoxCase valueOf(int value) {
+        switch (value) {
+          case 1: return ATTACHMENT;
+          case 0: return ATTACHMENTBOX_NOT_SET;
+          default: throw new java.lang.IllegalArgumentException(
+            "Value is undefined for this oneof enum.");
+        }
+      }
+      public int getNumber() {
+        return this.value;
+      }
+    };
+
+    public AttachmentBoxCase
+    getAttachmentBoxCase() {
+      return AttachmentBoxCase.valueOf(
+          attachmentBoxCase_);
+    }
+
+    public static final int ATTACHMENT_FIELD_NUMBER = 1;
+    /**
+     * <code>optional .structure.Attachment attachment = 1;</code>
+     */
+    public boolean hasAttachment() {
+      return attachmentBoxCase_ == 1;
+    }
+    /**
+     * <code>optional .structure.Attachment attachment = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment getAttachment() {
+      if (attachmentBoxCase_ == 1) {
+         return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_;
+      }
+      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance();
+    }
+    /**
+     * <code>optional .structure.Attachment attachment = 1;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder getAttachmentOrBuilder() {
+      if (attachmentBoxCase_ == 1) {
+         return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_;
+      }
+      return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance();
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (hasAttachment()) {
+        if (!getAttachment().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (attachmentBoxCase_ == 1) {
+        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (attachmentBoxCase_ == 1) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code structure.AttachmentBox}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:structure.AttachmentBox)
+        com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_AttachmentBox_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_AttachmentBox_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.class, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder.class);
+      }
+
+      // Construct using com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        attachmentBoxCase_ = 0;
+        attachmentBox_ = null;
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.internal_static_structure_AttachmentBox_descriptor;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.getDefaultInstance();
+      }
+
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox build() {
+        com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox buildPartial() {
+        com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox result = new com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (attachmentBoxCase_ == 1) {
+          if (attachmentBuilder_ == null) {
+            result.attachmentBox_ = attachmentBox_;
+          } else {
+            result.attachmentBox_ = attachmentBuilder_.build();
+          }
+        }
+        result.bitField0_ = to_bitField0_;
+        result.attachmentBoxCase_ = attachmentBoxCase_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox other) {
+        if (other == com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.getDefaultInstance()) return this;
+        switch (other.getAttachmentBoxCase()) {
+          case ATTACHMENT: {
+            mergeAttachment(other.getAttachment());
+            break;
+          }
+          case ATTACHMENTBOX_NOT_SET: {
+            break;
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (hasAttachment()) {
+          if (!getAttachment().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int attachmentBoxCase_ = 0;
+      private java.lang.Object attachmentBox_;
+      public AttachmentBoxCase
+          getAttachmentBoxCase() {
+        return AttachmentBoxCase.valueOf(
+            attachmentBoxCase_);
+      }
+
+      public Builder clearAttachmentBox() {
+        attachmentBoxCase_ = 0;
+        attachmentBox_ = null;
+        onChanged();
+        return this;
+      }
+
+      private int bitField0_;
+
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> attachmentBuilder_;
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public boolean hasAttachment() {
+        return attachmentBoxCase_ == 1;
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment getAttachment() {
+        if (attachmentBuilder_ == null) {
+          if (attachmentBoxCase_ == 1) {
+            return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_;
+          }
+          return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance();
+        } else {
+          if (attachmentBoxCase_ == 1) {
+            return attachmentBuilder_.getMessage();
+          }
+          return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public Builder setAttachment(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment value) {
+        if (attachmentBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          attachmentBox_ = value;
+          onChanged();
+        } else {
+          attachmentBuilder_.setMessage(value);
+        }
+        attachmentBoxCase_ = 1;
+        return this;
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public Builder setAttachment(
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder builderForValue) {
+        if (attachmentBuilder_ == null) {
+          attachmentBox_ = builderForValue.build();
+          onChanged();
+        } else {
+          attachmentBuilder_.setMessage(builderForValue.build());
+        }
+        attachmentBoxCase_ = 1;
+        return this;
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public Builder mergeAttachment(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment value) {
+        if (attachmentBuilder_ == null) {
+          if (attachmentBoxCase_ == 1 &&
+              attachmentBox_ != com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance()) {
+            attachmentBox_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.newBuilder((com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            attachmentBox_ = value;
+          }
+          onChanged();
+        } else {
+          if (attachmentBoxCase_ == 1) {
+            attachmentBuilder_.mergeFrom(value);
+          }
+          attachmentBuilder_.setMessage(value);
+        }
+        attachmentBoxCase_ = 1;
+        return this;
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public Builder clearAttachment() {
+        if (attachmentBuilder_ == null) {
+          if (attachmentBoxCase_ == 1) {
+            attachmentBoxCase_ = 0;
+            attachmentBox_ = null;
+            onChanged();
+          }
+        } else {
+          if (attachmentBoxCase_ == 1) {
+            attachmentBoxCase_ = 0;
+            attachmentBox_ = null;
+          }
+          attachmentBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder getAttachmentBuilder() {
+        return getAttachmentFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder getAttachmentOrBuilder() {
+        if ((attachmentBoxCase_ == 1) && (attachmentBuilder_ != null)) {
+          return attachmentBuilder_.getMessageOrBuilder();
+        } else {
+          if (attachmentBoxCase_ == 1) {
+            return (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_;
+          }
+          return com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .structure.Attachment attachment = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> 
+          getAttachmentFieldBuilder() {
+        if (attachmentBuilder_ == null) {
+          if (!(attachmentBoxCase_ == 1)) {
+            attachmentBox_ = com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance();
+          }
+          attachmentBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment) attachmentBox_,
+                  getParentForChildren(),
+                  isClean());
+          attachmentBox_ = null;
+        }
+        attachmentBoxCase_ = 1;
+        return attachmentBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:structure.AttachmentBox)
+    }
+
+    static {
+      defaultInstance = new AttachmentBox(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:structure.AttachmentBox)
+  }
+
   public interface StructureNodeOrBuilder extends
       // @@protoc_insertion_point(interface_extends:structure.StructureNode)
       com.google.protobuf.MessageOrBuilder {
@@ -7078,27 +7666,27 @@ public final class StructureOuterClass {
     com.jmpspace.contracts.SpaceServer.StructureOuterClass.PartOrBuilder getPartOrBuilder();
 
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment> 
+    java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox> 
         getAttachmentsList();
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment getAttachments(int index);
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox getAttachments(int index);
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
     int getAttachmentsCount();
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> 
+    java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder> 
         getAttachmentsOrBuilderList();
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder getAttachmentsOrBuilder(
+    com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder getAttachmentsOrBuilder(
         int index);
   }
   /**
@@ -7168,10 +7756,10 @@ public final class StructureOuterClass {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                attachments_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment>();
+                attachments_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              attachments_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.PARSER, extensionRegistry));
+              attachments_.add(input.readMessage(com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.PARSER, extensionRegistry));
               break;
             }
           }
@@ -7239,36 +7827,36 @@ public final class StructureOuterClass {
     }
 
     public static final int ATTACHMENTS_FIELD_NUMBER = 2;
-    private java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment> attachments_;
+    private java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox> attachments_;
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment> getAttachmentsList() {
+    public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox> getAttachmentsList() {
       return attachments_;
     }
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    public java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> 
+    public java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder> 
         getAttachmentsOrBuilderList() {
       return attachments_;
     }
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
     public int getAttachmentsCount() {
       return attachments_.size();
     }
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment getAttachments(int index) {
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox getAttachments(int index) {
       return attachments_.get(index);
     }
     /**
-     * <code>repeated .structure.Attachment attachments = 2;</code>
+     * <code>repeated .structure.AttachmentBox attachments = 2;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder getAttachmentsOrBuilder(
+    public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder getAttachmentsOrBuilder(
         int index) {
       return attachments_.get(index);
     }
@@ -7705,22 +8293,22 @@ public final class StructureOuterClass {
         return partBuilder_;
       }
 
-      private java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment> attachments_ =
+      private java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox> attachments_ =
         java.util.Collections.emptyList();
       private void ensureAttachmentsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          attachments_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment>(attachments_);
+          attachments_ = new java.util.ArrayList<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox>(attachments_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> attachmentsBuilder_;
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder> attachmentsBuilder_;
 
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment> getAttachmentsList() {
+      public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox> getAttachmentsList() {
         if (attachmentsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(attachments_);
         } else {
@@ -7728,7 +8316,7 @@ public final class StructureOuterClass {
         }
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public int getAttachmentsCount() {
         if (attachmentsBuilder_ == null) {
@@ -7738,9 +8326,9 @@ public final class StructureOuterClass {
         }
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment getAttachments(int index) {
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox getAttachments(int index) {
         if (attachmentsBuilder_ == null) {
           return attachments_.get(index);
         } else {
@@ -7748,10 +8336,10 @@ public final class StructureOuterClass {
         }
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder setAttachments(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment value) {
+          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox value) {
         if (attachmentsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7765,10 +8353,10 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder setAttachments(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder builderForValue) {
+          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder builderForValue) {
         if (attachmentsBuilder_ == null) {
           ensureAttachmentsIsMutable();
           attachments_.set(index, builderForValue.build());
@@ -7779,9 +8367,9 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public Builder addAttachments(com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment value) {
+      public Builder addAttachments(com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox value) {
         if (attachmentsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7795,10 +8383,10 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder addAttachments(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment value) {
+          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox value) {
         if (attachmentsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7812,10 +8400,10 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder addAttachments(
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder builderForValue) {
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder builderForValue) {
         if (attachmentsBuilder_ == null) {
           ensureAttachmentsIsMutable();
           attachments_.add(builderForValue.build());
@@ -7826,10 +8414,10 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder addAttachments(
-          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder builderForValue) {
+          int index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder builderForValue) {
         if (attachmentsBuilder_ == null) {
           ensureAttachmentsIsMutable();
           attachments_.add(index, builderForValue.build());
@@ -7840,10 +8428,10 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder addAllAttachments(
-          java.lang.Iterable<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment> values) {
+          java.lang.Iterable<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox> values) {
         if (attachmentsBuilder_ == null) {
           ensureAttachmentsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -7855,7 +8443,7 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder clearAttachments() {
         if (attachmentsBuilder_ == null) {
@@ -7868,7 +8456,7 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
       public Builder removeAttachments(int index) {
         if (attachmentsBuilder_ == null) {
@@ -7881,16 +8469,16 @@ public final class StructureOuterClass {
         return this;
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder getAttachmentsBuilder(
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder getAttachmentsBuilder(
           int index) {
         return getAttachmentsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder getAttachmentsOrBuilder(
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder getAttachmentsOrBuilder(
           int index) {
         if (attachmentsBuilder_ == null) {
           return attachments_.get(index);  } else {
@@ -7898,9 +8486,9 @@ public final class StructureOuterClass {
         }
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> 
+      public java.util.List<? extends com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder> 
            getAttachmentsOrBuilderList() {
         if (attachmentsBuilder_ != null) {
           return attachmentsBuilder_.getMessageOrBuilderList();
@@ -7909,33 +8497,33 @@ public final class StructureOuterClass {
         }
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder addAttachmentsBuilder() {
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder addAttachmentsBuilder() {
         return getAttachmentsFieldBuilder().addBuilder(
-            com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance());
+            com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.getDefaultInstance());
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder addAttachmentsBuilder(
+      public com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder addAttachmentsBuilder(
           int index) {
         return getAttachmentsFieldBuilder().addBuilder(
-            index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.getDefaultInstance());
+            index, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.getDefaultInstance());
       }
       /**
-       * <code>repeated .structure.Attachment attachments = 2;</code>
+       * <code>repeated .structure.AttachmentBox attachments = 2;</code>
        */
-      public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder> 
+      public java.util.List<com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder> 
            getAttachmentsBuilderList() {
         return getAttachmentsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder> 
+          com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder> 
           getAttachmentsFieldBuilder() {
         if (attachmentsBuilder_ == null) {
           attachmentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment, com.jmpspace.contracts.SpaceServer.StructureOuterClass.Attachment.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentOrBuilder>(
+              com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBox.Builder, com.jmpspace.contracts.SpaceServer.StructureOuterClass.AttachmentBoxOrBuilder>(
                   attachments_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -8622,6 +9210,11 @@ public final class StructureOuterClass {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_structure_Attachment_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_structure_AttachmentBox_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_structure_AttachmentBox_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_structure_StructureNode_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8660,12 +9253,14 @@ public final class StructureOuterClass {
       "nFromParent\030\001 \002(\005\022\016\n\006offset\030\002 \002(\005\022\031\n\021ori" +
       "entationOfNode\030\003 \002(\005\"]\n\nAttachment\022\'\n\004da" +
       "ta\030\001 \002(\0132\031.structure.AttachmentData\022&\n\004n",
-      "ode\030\002 \002(\0132\030.structure.StructureNode\"Z\n\rS" +
-      "tructureNode\022\035\n\004part\030\001 \002(\0132\017.structure.P" +
-      "art\022*\n\013attachments\030\002 \003(\0132\025.structure.Att" +
-      "achment\"?\n\tStructure\022\n\n\002id\030\001 \002(\005\022&\n\004tree" +
-      "\030\002 \002(\0132\030.structure.StructureNodeB$\n\"com." +
-      "jmpspace.contracts.SpaceServer"
+      "ode\030\002 \002(\0132\030.structure.StructureNode\"M\n\rA" +
+      "ttachmentBox\022+\n\nattachment\030\001 \001(\0132\025.struc" +
+      "ture.AttachmentH\000B\017\n\rattachmentBox\"]\n\rSt" +
+      "ructureNode\022\035\n\004part\030\001 \002(\0132\017.structure.Pa" +
+      "rt\022-\n\013attachments\030\002 \003(\0132\030.structure.Atta" +
+      "chmentBox\"?\n\tStructure\022\n\n\002id\030\001 \002(\005\022&\n\004tr" +
+      "ee\030\002 \002(\0132\030.structure.StructureNodeB$\n\"co" +
+      "m.jmpspace.contracts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8747,14 +9342,20 @@ public final class StructureOuterClass {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Attachment_descriptor,
         new java.lang.String[] { "Data", "Node", });
-    internal_static_structure_StructureNode_descriptor =
+    internal_static_structure_AttachmentBox_descriptor =
       getDescriptor().getMessageTypes().get(11);
+    internal_static_structure_AttachmentBox_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_structure_AttachmentBox_descriptor,
+        new java.lang.String[] { "Attachment", "AttachmentBox", });
+    internal_static_structure_StructureNode_descriptor =
+      getDescriptor().getMessageTypes().get(12);
     internal_static_structure_StructureNode_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_StructureNode_descriptor,
         new java.lang.String[] { "Part", "Attachments", });
     internal_static_structure_Structure_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_structure_Structure_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_structure_Structure_descriptor,

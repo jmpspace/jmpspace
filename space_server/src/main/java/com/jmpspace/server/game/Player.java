@@ -6,7 +6,6 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
 import com.jmpspace.contracts.SpaceServer.Game;
-import com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate;
 import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.PlayerClientActor;
@@ -19,7 +18,6 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -142,14 +140,18 @@ public class Player extends BasicActor<Player.Request, Void> {
 
         GameUpdate gameUpdate = (GameUpdate)message;
 
-        GameStateUpdate.Builder builder = GameStateUpdate.newBuilder();
+        Game.GameStateUpdate.Builder builder = Game.GameStateUpdate.newBuilder();
 
-        Optional<Integer> x = gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
-          builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeIds));
-          return 0;
-        });
+        if (gameUpdate._cryoTubeIds.isPresent()) {
 
-        _controller.send(new PlayerClientActor.GameSnapshot(builder.build()));
+          Optional<Integer> x = gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
+            builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeIds));
+            return 0;
+          });
+
+          _controller.send(new PlayerClientActor.GameStateUpdate(builder.build()));
+
+        }
 
       }
 
@@ -162,21 +164,24 @@ public class Player extends BasicActor<Player.Request, Void> {
 
         Stream<WorldOuterClass.Entity> entities = myVisibleObjecs.stream().map(ref -> ref.serializeEntityComponent().marshalEntity().build());
 
-        GameStateUpdate.Builder builder = GameStateUpdate.newBuilder();
+        Game.GameStateUpdate.Builder builder = Game.GameStateUpdate.newBuilder();
+
+        builder.setPlayerState(com.jmpspace.contracts.SpaceServer.Player.State
+                .newBuilder()
+                .setOnboard(com.jmpspace.contracts.SpaceServer.Player.Onboard
+                        .newBuilder()
+                        .setPlatformId(onBoard.ref.platform.id)
+                        .setStandingPosition(onBoard.ref.position)
+                        .setStandindOrientation(0)
+                )
+        );
 
         builder.setWorldChange(WorldOuterClass.World
                 .newBuilder()
-                .setPlayerState(com.jmpspace.contracts.SpaceServer.Player.State
-                        .newBuilder()
-                        .setOnboard(com.jmpspace.contracts.SpaceServer.Player.Onboard
-                                .newBuilder()
-                                .setPlatformId(onBoard.ref.platform.id)
-                                .setStandingPosition(onBoard.ref.position)
-                                .setStandindOrientation(0)
-                        )
-                )
                 .addAllEntities(entities.collect(Collectors.toList()))
         );
+
+        _controller.send(new PlayerClientActor.GameStateUpdate(builder.build()));
 
       }
 
