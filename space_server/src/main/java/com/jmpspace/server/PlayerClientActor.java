@@ -10,7 +10,6 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
 import com.jmpspace.contracts.SpaceServer.Game;
-import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
 import com.jmpspace.contracts.SpaceServer.Server;
 import com.jmpspace.contracts.SpaceServer.Session;
 import com.jmpspace.server.game.Instance;
@@ -300,7 +299,7 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
 
             GameSnapshot gameSnapshot = (GameSnapshot)message;
 
-            response.setGameResponse(Game.GameResponse.newBuilder().setSnapshot(gameSnapshot._snapshot));
+            response.setGameResponse(Game.GameResponse.newBuilder().setGameStateUpdate(gameSnapshot._snapshot));
             responseBuilt = true;
           }
 
@@ -383,9 +382,9 @@ public class PlayerClientActor extends BasicActor<Object, Void> {
 
   public static class GameSnapshot extends Request {
 
-    private Snapshot _snapshot;
+    private Game.GameStateUpdate _snapshot;
 
-    public GameSnapshot(Snapshot snapshot) {
+    public GameSnapshot(Game.GameStateUpdate snapshot) {
       _snapshot = snapshot;
     }
   }

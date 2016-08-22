@@ -5,6 +5,8 @@ package game;
 
 option java_package = "com.jmpspace.contracts.SpaceServer";
 
+import "world.proto";
+
 message GameRequest {
   oneof request {
     Spawn spawn = 1;
@@ -17,7 +19,7 @@ message Spawn {
 
 message GameResponse {
   oneof response {
-    Snapshot snapshot = 1;
+    GameStateUpdate gameStateUpdate = 1;
   }
 }
 
@@ -25,6 +27,7 @@ message CryoTubesChange {
   repeated int32 cryoTubeIds = 1;
 }
 
-message Snapshot {
+message GameStateUpdate {
   optional CryoTubesChange cryoTubesChange = 1;
+  optional world.World worldChange = 2;
 }

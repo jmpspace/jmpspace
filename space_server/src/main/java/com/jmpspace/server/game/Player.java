@@ -6,8 +6,9 @@ import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
 import com.jmpspace.contracts.SpaceServer.Game;
-import com.jmpspace.contracts.SpaceServer.Game.Snapshot;
+import com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate;
 import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
+import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
 import com.jmpspace.server.PlayerClientActor;
 import com.jmpspace.server.game.common.CommonRequest;
 import com.jmpspace.server.game.ecs.Entity.HashSerializeEntity;
@@ -21,6 +22,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 // TODO: potential refactor, merge this and PlayerClient? not if there are multiple Instance planned...
 
@@ -140,7 +142,7 @@ public class Player extends BasicActor<Player.Request, Void> {
 
         GameUpdate gameUpdate = (GameUpdate)message;
 
-        Snapshot.Builder builder = Snapshot.newBuilder();
+        GameStateUpdate.Builder builder = GameStateUpdate.newBuilder();
 
         Optional<Integer> x = gameUpdate._cryoTubeIds.map(cryoTubeIds -> {
           builder.setCryoTubesChange(Game.CryoTubesChange.newBuilder().addAllCryoTubeIds(cryoTubeIds));
@@ -158,7 +160,23 @@ public class Player extends BasicActor<Player.Request, Void> {
 
         Set<HashSerializeEntity> myVisibleObjecs = gameUpdate.allVisibleObjects.get(onBoard.ref.cameraComponent().id).keySet();
 
-        myVisibleObjecs.stream().map(ref -> ref);
+        Stream<WorldOuterClass.Entity> entities = myVisibleObjecs.stream().map(ref -> ref.serializeEntityComponent().marshalEntity().build());
+
+        GameStateUpdate.Builder builder = GameStateUpdate.newBuilder();
+
+        builder.setWorldChange(WorldOuterClass.World
+                .newBuilder()
+                .setPlayerState(com.jmpspace.contracts.SpaceServer.Player.State
+                        .newBuilder()
+                        .setOnboard(com.jmpspace.contracts.SpaceServer.Player.Onboard
+                                .newBuilder()
+                                .setPlatformId(onBoard.ref.platform.id)
+                                .setStandingPosition(onBoard.ref.position)
+                                .setStandindOrientation(0)
+                        )
+                )
+                .addAllEntities(entities.collect(Collectors.toList()))
+        );
 
       }
 
@@ -175,6 +193,8 @@ public class Player extends BasicActor<Player.Request, Void> {
           int cryoTubeId = spawn.getCryoTubeId();
 
           _instance.send(new Instance.Spawn(self(), cryoTubeId));
+
+          _state = new Player.SpawnPending();
 
         }
 

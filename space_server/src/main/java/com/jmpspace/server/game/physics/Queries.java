@@ -42,9 +42,10 @@ public class Queries {
     }
 
     @Override
-    public boolean joinElements(AABB b1, HasPhysics playerRef, AABB b2, HasPhysics other) {
-      boolean valid = (playerRef instanceof HasCamera) && (other instanceof HashSerializeEntity);
-      return valid;
+    public boolean joinElements(AABB b1, HasPhysics o1, AABB b2, HasPhysics o2) {
+      boolean cam1sees2 = (o1 instanceof HasCamera) && (o2 instanceof HashSerializeEntity);
+      boolean cam2sees1 = (o1 instanceof HashSerializeEntity) && (o2 instanceof HasCamera);
+      return cam2sees1 || cam1sees2;
     }
   }
 

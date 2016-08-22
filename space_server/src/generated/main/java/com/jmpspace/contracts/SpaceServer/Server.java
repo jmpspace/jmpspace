@@ -1849,6 +1849,12 @@ public final class Server {
           return false;
         }
       }
+      if (hasGameResponse()) {
+        if (!getGameResponse().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2137,6 +2143,12 @@ public final class Server {
         }
         if (hasBoundToPlayer()) {
           if (!getBoundToPlayer().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasGameResponse()) {
+          if (!getGameResponse().isInitialized()) {
             
             return false;
           }

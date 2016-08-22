@@ -14,7 +14,7 @@ public class Platform extends Entity implements Entity.HasPhysics, Entity.HasSta
 
   static AtomicInteger platformCounter = new AtomicInteger();
 
-  Integer id;
+  public Integer id;
   FloatingStructure floatingStructure;
   public StructureOuterClass.Platform platformPart;
   public AffineTransformation staticRelativeTransform;

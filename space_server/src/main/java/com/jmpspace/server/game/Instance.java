@@ -165,12 +165,13 @@ public class Instance extends BasicActor<Instance.Request, Void> {
           _spaceBase.queryForUpdate(new Queries.AllOfPhysicsStepType(stepType), new Visitors.PhysicsStep());
         }
 
-        // TODO: parallelism? Transaction?
-        // _spaceBase.joinAllPendingOperations();
+        _spaceBase.joinAllPendingOperations();
 
         ConcurrentMap<Integer, ConcurrentMap<Entity.HashSerializeEntity, Boolean>> visibleEntities = new ConcurrentHashMap<>();
 
         _spaceBase.join(new Queries.PlayerVisibility(), new Visitors.SaveVisibleEntities(visibleEntities));
+
+        _spaceBase.joinAllPendingOperations();
 
         // TODO: parallel?
 

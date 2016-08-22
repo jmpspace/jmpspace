@@ -3,31 +3,19 @@ package com.jmpspace.server.game;
 import co.paralleluniverse.actors.ActorRef;
 import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.SuspendExecution;
-import co.paralleluniverse.spacebase.AABB;
-import co.paralleluniverse.spacebase.ElementUpdater;
 import co.paralleluniverse.spacebase.SpaceBase;
 import co.paralleluniverse.spacebase.SpatialToken;
-import com.jmpspace.contracts.SpaceServer.Physics;
 import com.jmpspace.contracts.SpaceServer.Physics.Vector2;
-import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
-import com.jmpspace.contracts.SpaceServer.StructureOuterClass;
-import com.jmpspace.contracts.SpaceServer.StructureOuterClass.StructureNode;
 import com.jmpspace.server.game.common.CommonRequest;
-import com.jmpspace.server.game.ecs.*;
 import com.jmpspace.server.game.ecs.Entity;
 import com.jmpspace.server.game.entities.FloatingStructure;
 import com.jmpspace.server.game.entities.Platform;
 import com.jmpspace.server.game.entities.PlayerOnBoard;
-import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.util.AffineTransformation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.jmpspace.contracts.SpaceServer.WorldOuterClass.*;
 
 class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
@@ -35,8 +23,8 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
 
   private FloatingStructure _floatingStructureRef;
   private ActorRef<Instance.Request> _instanceRef;
-  private SpaceBase<Entity.HasPhysics> _playersBase;
-  private List<Platform> _platforms;
+  private SpaceBase<Entity.HasPhysics> spaceBase;
+  private List<Platform> platforms;
   private Map<Integer, CryoTubeAddress> cryoTubeAddresses = new HashMap<>();
 
 //  static class PlatformWrapper {
@@ -63,16 +51,19 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
     }
   }
 
-  StructureActor(FloatingStructure floatingStructureRef, ActorRef<Instance.Request> instanceRef, SpaceBase<Entity.HasPhysics> playersBase) {
+  StructureActor(FloatingStructure floatingStructureRef, ActorRef<Instance.Request> instanceRef, SpaceBase<Entity.HasPhysics> spaceBase) {
     _floatingStructureRef = floatingStructureRef;
     _instanceRef = instanceRef;
-    _playersBase = playersBase;
-    _platforms = StructureUtils.findPlatforms(floatingStructureRef);
+    this.spaceBase = spaceBase;
+    platforms = StructureUtils.findPlatforms(floatingStructureRef);
 
 //    List<CryoTubeAddress> cryoTubeAddresses = new ArrayList<>();
     AtomicInteger cryoTubeCounter = new AtomicInteger();
 
-    _platforms.forEach(platform -> {
+    platforms.forEach(platform -> {
+
+      spaceBase.insert(platform, platform.physicsComponent().calculateAABB());
+
       platform.platformPart
               .getPlacedItemsList().stream()
               .filter(placedItem -> placedItem.getItem().hasCryoTube())
@@ -80,6 +71,7 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
                 int id = cryoTubeCounter.getAndIncrement();
                 cryoTubeAddresses.put(id, new CryoTubeAddress(id, platform));
               });
+
     });
   }
 
@@ -119,7 +111,9 @@ class StructureActor extends BasicActor<StructureActor.Request, Void> {
         PlayerOnBoard playerOnBoard = new PlayerOnBoard(platform, position, player);
         _playersOnBoard.put(player, playerOnBoard);
 
-        SpatialToken playerOnBoardToken = _playersBase.insert(playerOnBoard, playerOnBoard.physicsComponent().calculateAABB());
+        SpatialToken playerOnBoardToken = spaceBase.insert(playerOnBoard, playerOnBoard.physicsComponent().calculateAABB());
+
+        player.send(new Player.Spawned(playerOnBoard));
 
         // TODO: send a message back to the Player? Or start a stream of messages to each player on board with position?
 

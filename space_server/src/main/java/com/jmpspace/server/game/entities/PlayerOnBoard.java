@@ -13,8 +13,8 @@ import static com.jmpspace.server.game.Constants.PlayerEntityDiameter;
 
 public class PlayerOnBoard extends Entity implements Entity.HasPhysics, Entity.HasCamera, Entity.HashSerializeEntity, Entity.HasStaticGeometry {
 
-  Platform platform;
-  Physics.Vector2 position;
+  public Platform platform;
+  public Physics.Vector2 position;
 
   PhysicsComponent physicsComponent;
   CameraComponent cameraComponent;

@@ -1006,17 +1006,17 @@ public final class Game {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .game.Snapshot snapshot = 1;</code>
+     * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
      */
-    boolean hasSnapshot();
+    boolean hasGameStateUpdate();
     /**
-     * <code>optional .game.Snapshot snapshot = 1;</code>
+     * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.Game.Snapshot getSnapshot();
+    com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate getGameStateUpdate();
     /**
-     * <code>optional .game.Snapshot snapshot = 1;</code>
+     * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
      */
-    com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder getSnapshotOrBuilder();
+    com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder getGameStateUpdateOrBuilder();
   }
   /**
    * Protobuf type {@code game.GameResponse}
@@ -1071,13 +1071,13 @@ public final class Game {
               break;
             }
             case 10: {
-              com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder subBuilder = null;
+              com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder subBuilder = null;
               if (responseCase_ == 1) {
-                subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_).toBuilder();
+                subBuilder = ((com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_).toBuilder();
               }
-              response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.Snapshot.PARSER, extensionRegistry);
+              response_ = input.readMessage(com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_);
+                subBuilder.mergeFrom((com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_);
                 response_ = subBuilder.buildPartial();
               }
               responseCase_ = 1;
@@ -1127,7 +1127,7 @@ public final class Game {
     private java.lang.Object response_;
     public enum ResponseCase
         implements com.google.protobuf.Internal.EnumLite {
-      SNAPSHOT(1),
+      GAMESTATEUPDATE(1),
       RESPONSE_NOT_SET(0);
       private int value = 0;
       private ResponseCase(int value) {
@@ -1135,7 +1135,7 @@ public final class Game {
       }
       public static ResponseCase valueOf(int value) {
         switch (value) {
-          case 1: return SNAPSHOT;
+          case 1: return GAMESTATEUPDATE;
           case 0: return RESPONSE_NOT_SET;
           default: throw new java.lang.IllegalArgumentException(
             "Value is undefined for this oneof enum.");
@@ -1152,30 +1152,30 @@ public final class Game {
           responseCase_);
     }
 
-    public static final int SNAPSHOT_FIELD_NUMBER = 1;
+    public static final int GAMESTATEUPDATE_FIELD_NUMBER = 1;
     /**
-     * <code>optional .game.Snapshot snapshot = 1;</code>
+     * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
      */
-    public boolean hasSnapshot() {
+    public boolean hasGameStateUpdate() {
       return responseCase_ == 1;
     }
     /**
-     * <code>optional .game.Snapshot snapshot = 1;</code>
+     * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.Game.Snapshot getSnapshot() {
+    public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate getGameStateUpdate() {
       if (responseCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
+         return (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_;
       }
-      return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
     }
     /**
-     * <code>optional .game.Snapshot snapshot = 1;</code>
+     * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
      */
-    public com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder getSnapshotOrBuilder() {
+    public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder getGameStateUpdateOrBuilder() {
       if (responseCase_ == 1) {
-         return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
+         return (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_;
       }
-      return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+      return com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
     }
 
     private void initFields() {
@@ -1186,6 +1186,12 @@ public final class Game {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (hasGameStateUpdate()) {
+        if (!getGameStateUpdate().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1194,7 +1200,7 @@ public final class Game {
                         throws java.io.IOException {
       getSerializedSize();
       if (responseCase_ == 1) {
-        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_);
+        output.writeMessage(1, (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1207,7 +1213,7 @@ public final class Game {
       size = 0;
       if (responseCase_ == 1) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_);
+          .computeMessageSize(1, (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1357,10 +1363,10 @@ public final class Game {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (responseCase_ == 1) {
-          if (snapshotBuilder_ == null) {
+          if (gameStateUpdateBuilder_ == null) {
             result.response_ = response_;
           } else {
-            result.response_ = snapshotBuilder_.build();
+            result.response_ = gameStateUpdateBuilder_.build();
           }
         }
         result.bitField0_ = to_bitField0_;
@@ -1381,8 +1387,8 @@ public final class Game {
       public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.GameResponse other) {
         if (other == com.jmpspace.contracts.SpaceServer.Game.GameResponse.getDefaultInstance()) return this;
         switch (other.getResponseCase()) {
-          case SNAPSHOT: {
-            mergeSnapshot(other.getSnapshot());
+          case GAMESTATEUPDATE: {
+            mergeGameStateUpdate(other.getGameStateUpdate());
             break;
           }
           case RESPONSE_NOT_SET: {
@@ -1394,6 +1400,12 @@ public final class Game {
       }
 
       public final boolean isInitialized() {
+        if (hasGameStateUpdate()) {
+          if (!getGameStateUpdate().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -1432,67 +1444,67 @@ public final class Game {
       private int bitField0_;
 
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Snapshot, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder, com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder> snapshotBuilder_;
+          com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder> gameStateUpdateBuilder_;
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public boolean hasSnapshot() {
+      public boolean hasGameStateUpdate() {
         return responseCase_ == 1;
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.Game.Snapshot getSnapshot() {
-        if (snapshotBuilder_ == null) {
+      public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate getGameStateUpdate() {
+        if (gameStateUpdateBuilder_ == null) {
           if (responseCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
+            return (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_;
           }
-          return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
         } else {
           if (responseCase_ == 1) {
-            return snapshotBuilder_.getMessage();
+            return gameStateUpdateBuilder_.getMessage();
           }
-          return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public Builder setSnapshot(com.jmpspace.contracts.SpaceServer.Game.Snapshot value) {
-        if (snapshotBuilder_ == null) {
+      public Builder setGameStateUpdate(com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate value) {
+        if (gameStateUpdateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
           response_ = value;
           onChanged();
         } else {
-          snapshotBuilder_.setMessage(value);
+          gameStateUpdateBuilder_.setMessage(value);
         }
         responseCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public Builder setSnapshot(
-          com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder builderForValue) {
-        if (snapshotBuilder_ == null) {
+      public Builder setGameStateUpdate(
+          com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder builderForValue) {
+        if (gameStateUpdateBuilder_ == null) {
           response_ = builderForValue.build();
           onChanged();
         } else {
-          snapshotBuilder_.setMessage(builderForValue.build());
+          gameStateUpdateBuilder_.setMessage(builderForValue.build());
         }
         responseCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public Builder mergeSnapshot(com.jmpspace.contracts.SpaceServer.Game.Snapshot value) {
-        if (snapshotBuilder_ == null) {
+      public Builder mergeGameStateUpdate(com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate value) {
+        if (gameStateUpdateBuilder_ == null) {
           if (responseCase_ == 1 &&
-              response_ != com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance()) {
-            response_ = com.jmpspace.contracts.SpaceServer.Game.Snapshot.newBuilder((com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_)
+              response_ != com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance()) {
+            response_ = com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.newBuilder((com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_)
                 .mergeFrom(value).buildPartial();
           } else {
             response_ = value;
@@ -1500,18 +1512,18 @@ public final class Game {
           onChanged();
         } else {
           if (responseCase_ == 1) {
-            snapshotBuilder_.mergeFrom(value);
+            gameStateUpdateBuilder_.mergeFrom(value);
           }
-          snapshotBuilder_.setMessage(value);
+          gameStateUpdateBuilder_.setMessage(value);
         }
         responseCase_ = 1;
         return this;
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public Builder clearSnapshot() {
-        if (snapshotBuilder_ == null) {
+      public Builder clearGameStateUpdate() {
+        if (gameStateUpdateBuilder_ == null) {
           if (responseCase_ == 1) {
             responseCase_ = 0;
             response_ = null;
@@ -1522,48 +1534,48 @@ public final class Game {
             responseCase_ = 0;
             response_ = null;
           }
-          snapshotBuilder_.clear();
+          gameStateUpdateBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder getSnapshotBuilder() {
-        return getSnapshotFieldBuilder().getBuilder();
+      public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder getGameStateUpdateBuilder() {
+        return getGameStateUpdateFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
-      public com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder getSnapshotOrBuilder() {
-        if ((responseCase_ == 1) && (snapshotBuilder_ != null)) {
-          return snapshotBuilder_.getMessageOrBuilder();
+      public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder getGameStateUpdateOrBuilder() {
+        if ((responseCase_ == 1) && (gameStateUpdateBuilder_ != null)) {
+          return gameStateUpdateBuilder_.getMessageOrBuilder();
         } else {
           if (responseCase_ == 1) {
-            return (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_;
+            return (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_;
           }
-          return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+          return com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
         }
       }
       /**
-       * <code>optional .game.Snapshot snapshot = 1;</code>
+       * <code>optional .game.GameStateUpdate gameStateUpdate = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.jmpspace.contracts.SpaceServer.Game.Snapshot, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder, com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder> 
-          getSnapshotFieldBuilder() {
-        if (snapshotBuilder_ == null) {
+          com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder> 
+          getGameStateUpdateFieldBuilder() {
+        if (gameStateUpdateBuilder_ == null) {
           if (!(responseCase_ == 1)) {
-            response_ = com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+            response_ = com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
           }
-          snapshotBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.jmpspace.contracts.SpaceServer.Game.Snapshot, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder, com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder>(
-                  (com.jmpspace.contracts.SpaceServer.Game.Snapshot) response_,
+          gameStateUpdateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder>(
+                  (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) response_,
                   getParentForChildren(),
                   isClean());
           response_ = null;
         }
         responseCase_ = 1;
-        return snapshotBuilder_;
+        return gameStateUpdateBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:game.GameResponse)
@@ -2048,8 +2060,8 @@ public final class Game {
     // @@protoc_insertion_point(class_scope:game.CryoTubesChange)
   }
 
-  public interface SnapshotOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:game.Snapshot)
+  public interface GameStateUpdateOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:game.GameStateUpdate)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2064,27 +2076,40 @@ public final class Game {
      * <code>optional .game.CryoTubesChange cryoTubesChange = 1;</code>
      */
     com.jmpspace.contracts.SpaceServer.Game.CryoTubesChangeOrBuilder getCryoTubesChangeOrBuilder();
+
+    /**
+     * <code>optional .world.World worldChange = 2;</code>
+     */
+    boolean hasWorldChange();
+    /**
+     * <code>optional .world.World worldChange = 2;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.World getWorldChange();
+    /**
+     * <code>optional .world.World worldChange = 2;</code>
+     */
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.WorldOrBuilder getWorldChangeOrBuilder();
   }
   /**
-   * Protobuf type {@code game.Snapshot}
+   * Protobuf type {@code game.GameStateUpdate}
    */
-  public static final class Snapshot extends
+  public static final class GameStateUpdate extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:game.Snapshot)
-      SnapshotOrBuilder {
-    // Use Snapshot.newBuilder() to construct.
-    private Snapshot(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:game.GameStateUpdate)
+      GameStateUpdateOrBuilder {
+    // Use GameStateUpdate.newBuilder() to construct.
+    private GameStateUpdate(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private Snapshot(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private GameStateUpdate(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final Snapshot defaultInstance;
-    public static Snapshot getDefaultInstance() {
+    private static final GameStateUpdate defaultInstance;
+    public static GameStateUpdate getDefaultInstance() {
       return defaultInstance;
     }
 
-    public Snapshot getDefaultInstanceForType() {
+    public GameStateUpdate getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -2094,7 +2119,7 @@ public final class Game {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private Snapshot(
+    private GameStateUpdate(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2130,6 +2155,19 @@ public final class Game {
               bitField0_ |= 0x00000001;
               break;
             }
+            case 18: {
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = worldChange_.toBuilder();
+              }
+              worldChange_ = input.readMessage(com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(worldChange_);
+                worldChange_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2144,28 +2182,28 @@ public final class Game {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_descriptor;
+      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_GameStateUpdate_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_fieldAccessorTable
+      return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_GameStateUpdate_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.jmpspace.contracts.SpaceServer.Game.Snapshot.class, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder.class);
+              com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.class, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<Snapshot> PARSER =
-        new com.google.protobuf.AbstractParser<Snapshot>() {
-      public Snapshot parsePartialFrom(
+    public static com.google.protobuf.Parser<GameStateUpdate> PARSER =
+        new com.google.protobuf.AbstractParser<GameStateUpdate>() {
+      public GameStateUpdate parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Snapshot(input, extensionRegistry);
+        return new GameStateUpdate(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<Snapshot> getParserForType() {
+    public com.google.protobuf.Parser<GameStateUpdate> getParserForType() {
       return PARSER;
     }
 
@@ -2191,8 +2229,30 @@ public final class Game {
       return cryoTubesChange_;
     }
 
+    public static final int WORLDCHANGE_FIELD_NUMBER = 2;
+    private com.jmpspace.contracts.SpaceServer.WorldOuterClass.World worldChange_;
+    /**
+     * <code>optional .world.World worldChange = 2;</code>
+     */
+    public boolean hasWorldChange() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional .world.World worldChange = 2;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.World getWorldChange() {
+      return worldChange_;
+    }
+    /**
+     * <code>optional .world.World worldChange = 2;</code>
+     */
+    public com.jmpspace.contracts.SpaceServer.WorldOuterClass.WorldOrBuilder getWorldChangeOrBuilder() {
+      return worldChange_;
+    }
+
     private void initFields() {
       cryoTubesChange_ = com.jmpspace.contracts.SpaceServer.Game.CryoTubesChange.getDefaultInstance();
+      worldChange_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2200,6 +2260,12 @@ public final class Game {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (hasWorldChange()) {
+        if (!getWorldChange().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2209,6 +2275,9 @@ public final class Game {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, cryoTubesChange_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, worldChange_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2223,6 +2292,10 @@ public final class Game {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, cryoTubesChange_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, worldChange_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -2235,53 +2308,53 @@ public final class Game {
       return super.writeReplace();
     }
 
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(byte[] data)
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(java.io.InputStream input)
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseDelimitedFrom(java.io.InputStream input)
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseDelimitedFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static com.jmpspace.contracts.SpaceServer.Game.Snapshot parseFrom(
+    public static com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2290,7 +2363,7 @@ public final class Game {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.Snapshot prototype) {
+    public static Builder newBuilder(com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -2302,25 +2375,25 @@ public final class Game {
       return builder;
     }
     /**
-     * Protobuf type {@code game.Snapshot}
+     * Protobuf type {@code game.GameStateUpdate}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:game.Snapshot)
-        com.jmpspace.contracts.SpaceServer.Game.SnapshotOrBuilder {
+        // @@protoc_insertion_point(builder_implements:game.GameStateUpdate)
+        com.jmpspace.contracts.SpaceServer.Game.GameStateUpdateOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_descriptor;
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_GameStateUpdate_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_fieldAccessorTable
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_GameStateUpdate_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.jmpspace.contracts.SpaceServer.Game.Snapshot.class, com.jmpspace.contracts.SpaceServer.Game.Snapshot.Builder.class);
+                com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.class, com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.Builder.class);
       }
 
-      // Construct using com.jmpspace.contracts.SpaceServer.Game.Snapshot.newBuilder()
+      // Construct using com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2333,6 +2406,7 @@ public final class Game {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getCryoTubesChangeFieldBuilder();
+          getWorldChangeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2347,6 +2421,12 @@ public final class Game {
           cryoTubesChangeBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        if (worldChangeBuilder_ == null) {
+          worldChange_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.getDefaultInstance();
+        } else {
+          worldChangeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -2356,23 +2436,23 @@ public final class Game {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_Snapshot_descriptor;
+        return com.jmpspace.contracts.SpaceServer.Game.internal_static_game_GameStateUpdate_descriptor;
       }
 
-      public com.jmpspace.contracts.SpaceServer.Game.Snapshot getDefaultInstanceForType() {
-        return com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance();
+      public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate getDefaultInstanceForType() {
+        return com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance();
       }
 
-      public com.jmpspace.contracts.SpaceServer.Game.Snapshot build() {
-        com.jmpspace.contracts.SpaceServer.Game.Snapshot result = buildPartial();
+      public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate build() {
+        com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.jmpspace.contracts.SpaceServer.Game.Snapshot buildPartial() {
-        com.jmpspace.contracts.SpaceServer.Game.Snapshot result = new com.jmpspace.contracts.SpaceServer.Game.Snapshot(this);
+      public com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate buildPartial() {
+        com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate result = new com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2383,30 +2463,47 @@ public final class Game {
         } else {
           result.cryoTubesChange_ = cryoTubesChangeBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (worldChangeBuilder_ == null) {
+          result.worldChange_ = worldChange_;
+        } else {
+          result.worldChange_ = worldChangeBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.Snapshot) {
-          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.Snapshot)other);
+        if (other instanceof com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) {
+          return mergeFrom((com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.Snapshot other) {
-        if (other == com.jmpspace.contracts.SpaceServer.Game.Snapshot.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate other) {
+        if (other == com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate.getDefaultInstance()) return this;
         if (other.hasCryoTubesChange()) {
           mergeCryoTubesChange(other.getCryoTubesChange());
+        }
+        if (other.hasWorldChange()) {
+          mergeWorldChange(other.getWorldChange());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (hasWorldChange()) {
+          if (!getWorldChange().isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
 
@@ -2414,11 +2511,11 @@ public final class Game {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.jmpspace.contracts.SpaceServer.Game.Snapshot parsedMessage = null;
+        com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.Snapshot) e.getUnfinishedMessage();
+          parsedMessage = (com.jmpspace.contracts.SpaceServer.Game.GameStateUpdate) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -2545,15 +2642,131 @@ public final class Game {
         return cryoTubesChangeBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:game.Snapshot)
+      private com.jmpspace.contracts.SpaceServer.WorldOuterClass.World worldChange_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.World, com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.WorldOrBuilder> worldChangeBuilder_;
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public boolean hasWorldChange() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.World getWorldChange() {
+        if (worldChangeBuilder_ == null) {
+          return worldChange_;
+        } else {
+          return worldChangeBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public Builder setWorldChange(com.jmpspace.contracts.SpaceServer.WorldOuterClass.World value) {
+        if (worldChangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          worldChange_ = value;
+          onChanged();
+        } else {
+          worldChangeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public Builder setWorldChange(
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.Builder builderForValue) {
+        if (worldChangeBuilder_ == null) {
+          worldChange_ = builderForValue.build();
+          onChanged();
+        } else {
+          worldChangeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public Builder mergeWorldChange(com.jmpspace.contracts.SpaceServer.WorldOuterClass.World value) {
+        if (worldChangeBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              worldChange_ != com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.getDefaultInstance()) {
+            worldChange_ =
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.newBuilder(worldChange_).mergeFrom(value).buildPartial();
+          } else {
+            worldChange_ = value;
+          }
+          onChanged();
+        } else {
+          worldChangeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public Builder clearWorldChange() {
+        if (worldChangeBuilder_ == null) {
+          worldChange_ = com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.getDefaultInstance();
+          onChanged();
+        } else {
+          worldChangeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.Builder getWorldChangeBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getWorldChangeFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      public com.jmpspace.contracts.SpaceServer.WorldOuterClass.WorldOrBuilder getWorldChangeOrBuilder() {
+        if (worldChangeBuilder_ != null) {
+          return worldChangeBuilder_.getMessageOrBuilder();
+        } else {
+          return worldChange_;
+        }
+      }
+      /**
+       * <code>optional .world.World worldChange = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.World, com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.WorldOrBuilder> 
+          getWorldChangeFieldBuilder() {
+        if (worldChangeBuilder_ == null) {
+          worldChangeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.jmpspace.contracts.SpaceServer.WorldOuterClass.World, com.jmpspace.contracts.SpaceServer.WorldOuterClass.World.Builder, com.jmpspace.contracts.SpaceServer.WorldOuterClass.WorldOrBuilder>(
+                  getWorldChange(),
+                  getParentForChildren(),
+                  isClean());
+          worldChange_ = null;
+        }
+        return worldChangeBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:game.GameStateUpdate)
     }
 
     static {
-      defaultInstance = new Snapshot(true);
+      defaultInstance = new GameStateUpdate(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:game.Snapshot)
+    // @@protoc_insertion_point(class_scope:game.GameStateUpdate)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -2577,10 +2790,10 @@ public final class Game {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_game_CryoTubesChange_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_game_Snapshot_descriptor;
+    internal_static_game_GameStateUpdate_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_game_Snapshot_fieldAccessorTable;
+      internal_static_game_GameStateUpdate_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2590,14 +2803,16 @@ public final class Game {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\ngame.proto\022\004game\"6\n\013GameRequest\022\034\n\005spa" +
-      "wn\030\001 \001(\0132\013.game.SpawnH\000B\t\n\007request\"\033\n\005Sp" +
-      "awn\022\022\n\ncryoTubeId\030\001 \002(\005\">\n\014GameResponse\022" +
-      "\"\n\010snapshot\030\001 \001(\0132\016.game.SnapshotH\000B\n\n\010r" +
-      "esponse\"&\n\017CryoTubesChange\022\023\n\013cryoTubeId" +
-      "s\030\001 \003(\005\":\n\010Snapshot\022.\n\017cryoTubesChange\030\001" +
-      " \001(\0132\025.game.CryoTubesChangeB$\n\"com.jmpsp" +
-      "ace.contracts.SpaceServer"
+      "\n\ngame.proto\022\004game\032\013world.proto\"6\n\013GameR" +
+      "equest\022\034\n\005spawn\030\001 \001(\0132\013.game.SpawnH\000B\t\n\007" +
+      "request\"\033\n\005Spawn\022\022\n\ncryoTubeId\030\001 \002(\005\"L\n\014" +
+      "GameResponse\0220\n\017gameStateUpdate\030\001 \001(\0132\025." +
+      "game.GameStateUpdateH\000B\n\n\010response\"&\n\017Cr" +
+      "yoTubesChange\022\023\n\013cryoTubeIds\030\001 \003(\005\"d\n\017Ga" +
+      "meStateUpdate\022.\n\017cryoTubesChange\030\001 \001(\0132\025" +
+      ".game.CryoTubesChange\022!\n\013worldChange\030\002 \001" +
+      "(\0132\014.world.WorldB$\n\"com.jmpspace.contrac" +
+      "ts.SpaceServer"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2610,6 +2825,7 @@ public final class Game {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.jmpspace.contracts.SpaceServer.WorldOuterClass.getDescriptor(),
         }, assigner);
     internal_static_game_GameRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -2628,19 +2844,20 @@ public final class Game {
     internal_static_game_GameResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_GameResponse_descriptor,
-        new java.lang.String[] { "Snapshot", "Response", });
+        new java.lang.String[] { "GameStateUpdate", "Response", });
     internal_static_game_CryoTubesChange_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_game_CryoTubesChange_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_game_CryoTubesChange_descriptor,
         new java.lang.String[] { "CryoTubeIds", });
-    internal_static_game_Snapshot_descriptor =
+    internal_static_game_GameStateUpdate_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_game_Snapshot_fieldAccessorTable = new
+    internal_static_game_GameStateUpdate_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_game_Snapshot_descriptor,
-        new java.lang.String[] { "CryoTubesChange", });
+        internal_static_game_GameStateUpdate_descriptor,
+        new java.lang.String[] { "CryoTubesChange", "WorldChange", });
+    com.jmpspace.contracts.SpaceServer.WorldOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

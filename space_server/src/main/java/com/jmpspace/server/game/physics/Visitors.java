@@ -43,17 +43,27 @@ public class Visitors {
       this.visibleEntities = visibleEntities;
     }
 
-    @Override
-    public void visit(HasPhysics playerRef, SpatialToken spatialToken, HasPhysics other, SpatialToken spatialToken1) {
-
-      // Unchecked
-      HasCamera cameraRef = (HasCamera) playerRef;
-      HashSerializeEntity targetRef = (HashSerializeEntity) other;
-
-      Integer cameraId = cameraRef.cameraComponent().id;
-
+    private void registerVisibleEntity(HasCamera cam, HashSerializeEntity visible) {
+      Integer cameraId = cam.cameraComponent().id;
       visibleEntities.putIfAbsent(cameraId, new ConcurrentHashMap<>());
-      visibleEntities.get(cameraId).put(targetRef, true);
+      visibleEntities.get(cameraId).put(visible, true);
+    }
+
+    @Override
+    public void visit(HasPhysics o1, SpatialToken spatialToken, HasPhysics o2, SpatialToken spatialToken1) {
+
+      boolean cam1sees2 = (o1 instanceof HasCamera) && (o2 instanceof HashSerializeEntity);
+
+      if (cam1sees2) {
+        registerVisibleEntity((HasCamera)o1, (HashSerializeEntity) o2);
+      }
+
+      boolean cam2sees1 = (o1 instanceof HashSerializeEntity) && (o2 instanceof HasCamera);
+
+      if (cam2sees1) {
+        registerVisibleEntity((HasCamera)o2, (HashSerializeEntity) o1);
+      }
+
     }
   }
 }
