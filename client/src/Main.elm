@@ -1,9 +1,11 @@
 import Binary.ArrayBuffer
-import Html exposing (..)
-import Html.App as Html
-import Html.Attributes exposing (..)
+import Html exposing (Html, br, button, div, input, text)
+import Html.App exposing (program)
+--import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Platform.Sub exposing (batch)
+import Svg exposing (circle, rect, svg)
+import Svg.Attributes exposing (cx, cy, fill, height, r, rx, ry, viewBox, width, x, y)
 import Time exposing (every, second)
 import WebSocket exposing (listen, send)
 import WebSocket.LowLevel exposing (MessageData(..))
@@ -31,7 +33,7 @@ import SpaceServer.Player as Player
 import SpaceServer.World as World
 
 main =
-  Html.program
+  program
     { init = init
     , view = view
     , update = update
@@ -217,8 +219,21 @@ gameView {username} gameState =
         ]
     Player.State_oneof_state_onboard onboard ->
       div []
-        [ text <| "On board the good ship " ++ toString onboard.platformId
+        [ svg
+          [ width "640", height "480", viewBox "-32 -24 64 48" ]
+          [ rect [ x "10", y "10", width "10", height "10", rx "1", ry "1" ] []
+          , circle [ cx "0", cy "0", r "1", fill "orange" ] []
+          ]
+        , br [] []
+        , text <| "On board the good ship " ++ toString onboard.platformId
         , br [] []
         , text <| "Visible entities: " ++ toString (List.length gameState.world.entities)
+        , br [] []
+        , text <| toString gameState.playerState
+        , br [] []
+        , text <| toString gameState.world
         ]
     Player.State_oneof_state_floating _ -> text "FLOATING AAAAH"
+
+--worldView : GameState -> List (Svg Msg)
+--worldView {playerState, world} =
