@@ -218,5 +218,7 @@ gameView {username} gameState =
     Player.State_oneof_state_onboard onboard ->
       div []
         [ text <| "On board the good ship " ++ toString onboard.platformId
+        , br [] []
+        , text <| "Visible entities: " ++ toString (List.length gameState.world.entities)
         ]
     Player.State_oneof_state_floating _ -> text "FLOATING AAAAH"
