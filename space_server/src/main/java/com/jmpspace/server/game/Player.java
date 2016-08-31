@@ -5,6 +5,7 @@ import co.paralleluniverse.actors.BasicActor;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.spacebase.AABB;
 import co.paralleluniverse.spacebase.ElementUpdater;
+import com.esotericsoftware.kryo.serializers.FieldSerializer;
 import com.jmpspace.contracts.SpaceServer.Game;
 import com.jmpspace.contracts.SpaceServer.Physics.PhysicsState;
 import com.jmpspace.contracts.SpaceServer.WorldOuterClass;
@@ -136,6 +137,14 @@ public class Player extends BasicActor<Player.Request, Void> {
     for(;;) {
       Request message = (Request)receive();
 
+      if (message instanceof BindNewController) {
+
+        BindNewController bind = (BindNewController) message;
+
+        this._controller = bind.controller;
+
+      }
+
       if (message instanceof GameUpdate && _state instanceof Unspawned) {
 
         GameUpdate gameUpdate = (GameUpdate)message;
@@ -218,6 +227,15 @@ public class Player extends BasicActor<Player.Request, Void> {
 
   public static abstract class Request extends CommonRequest {
 
+  }
+
+  static class BindNewController extends Request {
+
+    ActorRef<PlayerClientActor.Request> controller;
+
+    public BindNewController(ActorRef<PlayerClientActor.Request> controller) {
+      this.controller = controller;
+    }
   }
 
   static class Spawned extends Request {

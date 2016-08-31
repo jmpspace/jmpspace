@@ -109,15 +109,25 @@ public class Instance extends BasicActor<Instance.Request, Void> {
         ActorRef<PlayerClientActor.Request> playerClient = (ActorRef<PlayerClientActor.Request>) bind.getFrom();
         String playerName = bind._playerName;
 
-        logger.info("Binding player {}", playerName);
+        if (players.containsKey(playerName)) {
+          ActorRef<Player.Request> playerRef = players.get(playerName);
 
-        Player player = new Player(playerName, self(), playerClient);
+          logger.info("Binding player {} to existing instance {}", playerName, playerRef);
 
-        // TODO: initialize player state
-        ActorRef<Player.Request> playerRef = player.spawn();
+          playerRef.send(new Player.BindNewController(playerClient));
 
-        players.put(playerName, playerRef);
-        dirtyTable.playersNeedingRefresh.add(playerName);
+          dirtyTable.playersNeedingRefresh.add(playerName);
+        } else {
+          logger.info("Binding player {} to new instance", playerName);
+
+          Player player = new Player(playerName, self(), playerClient);
+
+          // TODO: initialize player state
+          ActorRef<Player.Request> playerRef = player.spawn();
+
+          players.put(playerName, playerRef);
+          dirtyTable.playersNeedingRefresh.add(playerName);
+        }
       }
 
       if (message instanceof PlayerNeedsRefresh) {
